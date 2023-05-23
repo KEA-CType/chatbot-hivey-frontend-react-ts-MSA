@@ -23,8 +23,7 @@ export const spaceState = atom<Space>({
   key: "space",
   default: {
     id: 0,
-    name: "",
-    img: ""
+    name: ""
   }
 });
 

@@ -61,7 +61,7 @@ const EnterSpaceComponent = () => {
 
           setMemberId(memberId);
           setSpace({
-              id: spaceId, img: space.img, name: space.name
+              id: spaceId, name: space.name
           });
         } else if (code === 2020) {
           setIsModalOpen(true);

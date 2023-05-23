@@ -1,6 +1,7 @@
 import instances from "../../utils";
 import {SPACE} from "../../config/constants";
 import {Space} from "../../commons/Interface";
+import {useEffect} from "react";
 
 /**
  * 3.1 스페이스 생성하기
@@ -82,6 +83,11 @@ const GetSpace = async (userId: number, spaceId: number) => {
  */
 export function fetchSpace(userId: number, spaceId: number) {
     let space: Space
+
+    useEffect(() => {
+        spaceService
+            .GetSpace
+    })
 
     const suspender = instances.AUTH_INSTANCE.get(`${SPACE}/${userId}/${spaceId}`)
         .then((response) => {

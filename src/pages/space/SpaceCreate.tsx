@@ -67,7 +67,7 @@ const CreateSpaceComponent = () => {
                     setIsModalOpen(true);
                     setMessage(accessCode);
                     setAccessCode(accessCode);
-                    setSpace({id: spaceId, name: spaceName, img: img});
+                    setSpace({id: spaceId, name: spaceName});
                     // handle login success
                 } else if (code === 2020) {
                     setIsModalOpen(true);

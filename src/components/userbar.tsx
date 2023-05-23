@@ -38,8 +38,10 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
                     const onClickSpace = () => {
 
                         setSpace({
-                            id: s.id, img: "", name: s.name
+                            id: s.spaceId, name: s.name
                         });
+
+                        console.log(`setSpace(${space.id}, ${space.name}`);
 
                         if (s.isManager) {
                             navigate("/space/leader");
