@@ -1,0 +1,76 @@
+.enterpage {
+    display: flex;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 5vw;
+    display: inline-block;
+    margin-bottom: 1vh;
+}
+
+.link-text {
+    font-size: 3vw;
+    margin-bottom: 1vh;
+    align-items: center;
+    display: inline-block;
+}
+
+.enterSpaceBar {
+    width: 80%;
+    display: inline-block;
+}
+
+.enterSpace-container {
+    position: fixed;
+    height: 100%;
+    width: 80vw;
+    background-color: #f9fdff;
+    text-align: center;
+}
+
+
+.enter-space {
+    margin-left: 20%;
+    margin-right: 20%;
+    border: solid;
+    border-radius: 20px;
+    background-color: white;
+    margin-top: 15vh;
+    padding-top: 5vh;
+    padding-bottom: 7vh;
+
+}
+
+.link {
+    width: 5vw;
+    margin-left: 2vw;
+}
+
+.enterSpace-button {
+    background-color: white;
+    border-radius: 40px;
+    color: black;
+    padding: 10px 20px;
+    width: 40%;
+    height: 5%;
+    font-size: 2vmin;
+    margin-top: 2vh;
+}
+
+.link-input {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    color: #000000;
+    padding: 10px;
+    border: 2px solid;
+    width: 60%;
+}
+
+.survey-input {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    color: #000000;
+    padding: 10px;
+    border: 2px solid;
+}

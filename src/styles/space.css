@@ -1,0 +1,11 @@
+.participant-page {
+    display: flex;
+    margin-left: 10%;
+    /* flex-direction: row; */
+}
+
+.survey-container {
+    padding: 20px;
+    height: 100vh;
+    width: 80vw;
+}

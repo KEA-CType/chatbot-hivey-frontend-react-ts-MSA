@@ -1,0 +1,135 @@
+.login-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #D4ECFF; /* 배경색 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    width: 800px;
+    height: 550px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-logo {
+    width: 20%;
+    height: 7%;
+}
+
+.logo-ment {
+    font-size: 20px;
+}
+
+.login-gather {
+    display: flex;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.login-box-form {
+    display: block;
+}
+
+.login-form {
+    float: left;
+    flex-direction: column;
+    /* align-items: center; */
+    width: 300px;
+    padding: 32px;
+    background-color: #fff;
+    border-radius: 16px;
+}
+
+.login-title {
+    font-size: 17px;
+    margin-bottom: auto;
+    text-align: center;
+}
+
+.login-input {
+    font-size: 13px;
+    text-align: left;
+}
+
+.login_inputs {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    width: 270px;
+    height: 20px;
+    color: #000000;
+    padding: 10px;
+    border: 1px solid #A6A6A6;
+}
+
+.login-forgot {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: underline;
+    padding: 0.6em;
+    text-align: right;
+
+}
+
+.social-login-container {
+    margin-top: 8px;
+
+    padding: 40px;
+    /* display: flex; */
+    border-right: 1px solid #A6A6A6;
+
+
+}
+
+.social-login-icons {
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.social-login-icon-gather {
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}
+
+.social-box {
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    color: black;
+    padding: 10px 20px;
+    width: 354px;
+    height: 50px;
+}
+
+.social-login-icon {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    border-radius: 8px;
+    /* border: 1px solid transparent; */
+    transition: border-color 0.2s ease-in-out;
+    display: block;
+    margin: auto auto 20px;
+
+}
+
+.social-login-icon:hover {
+    border-color: black;
+    cursor: pointer;
+}
+
+.social-login-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}

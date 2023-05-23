@@ -1,0 +1,67 @@
+.home-container {
+    background-color: #0e122d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    z-index: 0;
+}
+
+.home-logo {
+    width: 200px;
+    margin-bottom: 32px;
+    z-index: 1;
+}
+
+.home-box {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 70%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+
+    font-size: 2rem;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+
+
+.home-box button {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.background {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.HomeButtons {
+    background-color: #C2C2C2;
+    border-radius: 32px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    width: 30%;
+    height: 60%;
+    /* margin: auto;
+    align-items: center; */
+    margin: auto;
+    display: block;
+
+}

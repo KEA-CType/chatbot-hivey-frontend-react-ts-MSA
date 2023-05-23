@@ -1,0 +1,99 @@
+.userbar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    margin: 3rem;
+    width: 20%;
+    position: fixed;
+
+    height: 100%;
+    z-index: 1;
+}
+
+.logo{
+    margin-top: 2rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    background-color: #D4ECFF;
+    width: 80%;
+    height: 4rem;
+    border-radius: 10px;
+    background-image: url("../assets/ic_setting_gray.png");
+    background-repeat: no-repeat;
+    background-position: 95% 19%;
+}
+
+.profile{
+    margin-right: 0.3rem;
+}
+
+.user-profile .username {
+    color: #000000;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.user-spaces {
+    background-color: white;
+    color: aqua;
+    flex: 1;
+    width: 80%;
+}
+
+.label {
+    display: flex;
+    height: 2rem;
+    background-color: #6ABBFA;
+    align-items: center;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.label img{
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.spaces-list {
+
+    align-items: center;
+
+}
+.location{
+    margin-right: 0.5rem;
+}
+
+.space-item {
+    display: flex;
+    background-color:white;
+    font-size: 0.8rem;
+    margin-top: 0.7rem;
+    height: 2rem;
+    align-items: center;
+    cursor: pointer;
+    color: gray;
+    border-color: gray;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+}
+
+.space-item.active {
+    font-size: 0.8rem;
+    margin: 0.3rem;
+    color: black;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 10px;
+}
+.logout{
+    margin-top: 1rem;
+}

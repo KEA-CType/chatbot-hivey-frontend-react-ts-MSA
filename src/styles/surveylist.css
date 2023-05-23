@@ -1,0 +1,139 @@
+.container {
+    display: block;
+}
+
+.state-container {
+    display: flex;
+    text-align: center;
+}
+
+.state {
+    flex: 1;
+}
+
+.parent {
+    display: flex;
+    box-shadow: 0 0 3px gray;
+    /* width: 80%;
+    height: 40%; */
+}
+
+.continue {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+    align-items: end;
+}
+
+.finish {
+    flex: 1;
+    border-left: 1px solid black;
+    text-align: center;
+    justify-content: center;
+    align-items: end;
+}
+
+.yet {
+    flex: 1;
+    border-left: 1px solid black;
+    align-items: center;
+    text-align: center;
+
+}
+
+.continuesurv {
+    background-color: #D7E4FB;
+    margin: 20px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    font-size: large;
+}
+
+.finishsurv {
+    background-color: #D7E4FB;
+    margin: 20px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: large;
+}
+
+.yetsurv {
+    background-color: #D7E4FB;
+    margin: 20px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.continuebt {
+    background-color: #D7E4FB;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    position: relative;
+}
+
+.finishbt {
+    background-color: #D7E4FB;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+
+    justify-content: center;
+}
+
+.yetbt {
+    background-color: #D7E4FB;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    font-size: large;
+}
+
+.green_check {
+    height: 16px;
+    display: inline;
+
+    margin-left: 30px;
+}
+
+.check_document {
+    height: 23px;
+}
+
+.kebab {
+    display: inline;
+    margin-right: 10px;
+}
+
+.option {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.option:hover {
+    background-color: #f0f0f0;
+}
+
+.continue-select-box {
+    border: 1px solid black;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 2;
+    left: 12rem;
+    bottom: 7rem;
+
+}
+
+#participantion_status {
+    display: none;
+    margin-top: 3rem;
+
+}
+
+.member_status {
+    margin-bottom: 1rem;
+}

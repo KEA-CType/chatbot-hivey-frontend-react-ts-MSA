@@ -1,0 +1,10 @@
+.page {
+    display: flex;
+    margin-left: 10%;
+}
+
+.question-container {
+    padding: 20px;
+    height: 100vh;
+    width: 80vw;
+}
