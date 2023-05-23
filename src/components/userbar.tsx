@@ -45,7 +45,7 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
                             navigate("/space/leader");
 
                         } else {
-                            navigate("/space/main");
+                            navigate("/space/member");
                         }
 
                     };
