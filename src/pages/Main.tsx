@@ -6,15 +6,15 @@ import Chatbot from "../components/chatbot/chatbot";
 
 import {Link} from "react-router-dom";
 
-const MainPage = () => {
+const Main = () => {
     return (
         <div className="mainpage">
-            <p className="text">스페이스를 선택하세요</p>
+            <p className="text">스페이스를 선택하세요.</p>
             <div className="ButtonWrapper">
-                <Link to="/createSpace">
+                <Link to="/space/create">
                     <Button className="main-button" text="Create Space"/>
                 </Link>
-                <Link to="/enterSpace">
+                <Link to="/space/enter">
                     <Button className="main-button" text="Enter Space"/>
                 </Link>
             </div>
@@ -23,5 +23,4 @@ const MainPage = () => {
     );
 };
 
-
-export default MainPage;
+export default Main;

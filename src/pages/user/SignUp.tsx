@@ -1,15 +1,15 @@
-import "../styles/register.css";
+import "../../styles/register.css";
 
 import React, {useState} from "react";
-import Button from "../components/buttons";
-import Input from "../components/input";
-import logo from "../assets/ic_logo_hivey.png";
-import Modal from "../components/modals";
-import auth from "../services/user/auth";
+import Button from "../../components/buttons";
+import Input from "../../components/input";
+import logo from "../../assets/ic_logo_hivey.png";
+import Modal from "../../components/modals";
+import authService from "../../services/user/auth";
 import {useNavigate} from "react-router-dom";
-import {validateEmail} from "../utils/validateEmail";
+import {validateEmail} from "../../utils/validateEmail";
 
-const Register = () => {
+const SignUp = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [userName, setUserName] = useState("");
@@ -87,7 +87,7 @@ const Register = () => {
 
         console.log("email", email, "name", userName, "password", password);
 
-        auth
+        authService
             .Register(email, userName, password)
             .then((response) => {
                 console.log(response);
@@ -128,7 +128,7 @@ const Register = () => {
             <div className="register-box">
                 <img className="register-logo" src={logo} alt="Logo"/>
                 <div className="logo-ment">Create an account</div>
-                <div className="register-ment">Already have an account? <a href="/login">Log in</a></div>
+                <div className="register-ment">Already have an account? <a href="/user/Login">Log in</a></div>
                 <form className="register-form" onSubmit={handleSubmit}>
                     <p className="register-input">Name</p>
                     <Input
@@ -183,4 +183,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default SignUp;

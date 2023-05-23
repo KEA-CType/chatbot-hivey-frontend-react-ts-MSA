@@ -1,4 +1,4 @@
-import {instance} from "../../utils";
+import instances from "../../utils";
 import {SPACE} from "../../config/constants";
 
 /**
@@ -7,7 +7,7 @@ import {SPACE} from "../../config/constants";
 const GetAllGroupList = async (spaceId: number) => {
     try {
 
-        const response = await instance.get(`${SPACE}/${spaceId}/groups`);
+        const response = await instances.INSTANCE.get(`${SPACE}/${spaceId}/groups`);
         return response.data;
 
     } catch (error) {
@@ -24,7 +24,7 @@ const GetAllGroupList = async (spaceId: number) => {
 const GetAllGroupAndMemberList = async (spaceId: number) => {
     try {
 
-        const response = await instance.get(`${SPACE}/${spaceId}/groups/members`);
+        const response = await instances.INSTANCE.get(`${SPACE}/${spaceId}/groups/members`);
         return response.data;
 
     } catch (error) {
@@ -40,7 +40,7 @@ const GetAllGroupAndMemberList = async (spaceId: number) => {
 const GetMemberListByGroup = async (spaceId: number, groupId: number) => {
     try {
 
-        const response = await instance.get(`${SPACE}/${spaceId}/groups/${groupId}/members`);
+        const response = await instances.INSTANCE.get(`${SPACE}/${spaceId}/groups/${groupId}/members`);
         return response.data;
 
     } catch (error) {
@@ -57,7 +57,7 @@ const GetMemberListByGroup = async (spaceId: number, groupId: number) => {
 const GetGroupListExceptMember = async (spaceId: number, memberId: number) => {
     try {
 
-        const response = await instance.get(`${SPACE}/${spaceId}/groups/exclude?memberId=${memberId}`);
+        const response = await instances.INSTANCE.get(`${SPACE}/${spaceId}/groups/exclude?memberId=${memberId}`);
         return response.data;
 
     } catch (error) {
@@ -68,11 +68,11 @@ const GetGroupListExceptMember = async (spaceId: number, memberId: number) => {
     }
 }
 
-const spaceGroups = {
+const spaceGroupService = {
     GetAllGroupList,
     GetAllGroupAndMemberList,
     GetMemberListByGroup,
     GetGroupListExceptMember
 }
 
-export default spaceGroups;
+export default spaceGroupService;
