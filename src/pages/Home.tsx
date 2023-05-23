@@ -2,7 +2,7 @@ import '../styles/home.css';
 
 import React from 'react';
 import {Link} from 'react-router-dom';
-import Button from '../components/buttons';
+import Button from '../components/commons/buttons';
 
 import backgroundImage from '../assets/bg_triangles_top.png';
 

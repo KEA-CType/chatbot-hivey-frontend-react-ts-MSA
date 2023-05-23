@@ -3,46 +3,70 @@
  */
 
 import {useEffect, useState} from 'react';
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {useRecoilValue} from 'recoil';
 
 import spaceService from "../../services/space/space";
 import {spaceState, userState} from '../../commons/Atom';
-import {SpaceInformationResponse} from "../../commons/Interface";
 import PropTypes from "prop-types";
 
-const SpaceInformationComponent = ({currentSpace}: any) => {
-    const [space, setSpace] = useState({});
+import {
+    SpaceOnly,
+    FormListResponse,
+    GroupListResponse
+} from "../../commons/Interface";
+
+const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
 
     useEffect(() => {
 
-        if (currentSpace) {
+        if (spaceOnly || forms || groups) {
 
-            console.log(`currentSpace: ${currentSpace}`);
+            console.log(`currentSpace: ${JSON.stringify(spaceOnly)}`);
+            console.log(`forms: ${JSON.stringify(forms)}`);
+            console.log(`groups: ${JSON.stringify(groups)}`);
 
         }
 
-    }, [currentSpace])
+    }, [spaceOnly, forms, groups])
 
-    if (!currentSpace) {
+    if (!spaceOnly || !forms || !groups) {
         return <div>loading...</div>;
     }
 
-    return <>{currentSpace}</>;
+    return <>{}</>;
 }
 
 const SpaceForLeader = () => {
     const user = useRecoilValue(userState);
     const space = useRecoilValue(spaceState);
 
-    const [currentSpace, setCurrentSpace] = useState();
+    const [spaceOnly, setSpaceOnly] = useState<SpaceOnly | null>(null);
+    const [forms, setForms] = useState<FormListResponse | null>(null);
+    const [groups, setGroups] = useState<GroupListResponse | null>(null);
 
     useEffect(() => {
         spaceService
             .GetSpace(user.id, space.id)
             .then((response) => {
 
-                console.log(`user.id: ${user.id}, space.id: ${space.id}`);
-                console.log(`response.result: ${JSON.stringify(response)}`);
+                const result = JSON.parse(response).result;
+
+                setSpaceOnly({
+                    name: result.name, img: result.img, memberCount: result.memberCount
+                });
+                setForms(result.forms);
+                setGroups(result.groups);
+
+                return (
+                    <div>
+                        {/* 스페이스에 대한 정보 */}
+                        <div></div>
+                        {/* 스페이스의 설문 목록 (Component 호출) */}
+                        {/* 스페이스의 설문 참여 목록 (Component 호출) */}
+                        {/* 스페이스의 그룹 목록 (Component 호출) */}
+                        <div></div>
+                    </div>
+                )
 
             })
             .catch((error) => {
@@ -54,7 +78,7 @@ const SpaceForLeader = () => {
         <div className="participant-page">
             <div className='survey-container'>
                 <div className='space-name'>
-                    <SpaceInformationComponent currentSpace={currentSpace} />
+                    <SpaceInformationComponent spaceOnly={spaceOnly} forms={forms} groups={groups} />
                 </div>
             </div>
         </div>
@@ -62,7 +86,9 @@ const SpaceForLeader = () => {
 };
 
 SpaceForLeader.propTypes = {
-    currentSpace: PropTypes.object
+    spaceOnly: PropTypes.object,
+    forms: PropTypes.array,
+    groups: PropTypes.array,
 };
 
 export default SpaceForLeader;

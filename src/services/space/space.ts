@@ -1,7 +1,7 @@
 import instances from "../../utils";
 import {SPACE} from "../../config/constants";
-import {Space} from "../../commons/Interface";
-import {useEffect} from "react";
+import {Space, SpaceInformationResponse} from "../../commons/Interface";
+import {CommonResponse} from "../commonResponse";
 
 /**
  * 3.1 스페이스 생성하기
@@ -66,9 +66,8 @@ const GetSpaceListByPosition = async (userId: number, isManager: number) => {
 const GetSpace = async (userId: number, spaceId: number) => {
     try {
 
-        const response = await instances.AUTH_INSTANCE.get(`${SPACE}/${userId}/${spaceId}`);
-        console.log(`GetSpace/response.data.message: ${response.data.message}`);
-        return response.data;
+        const response = await instances.AUTH_INSTANCE.get<CommonResponse<SpaceInformationResponse>>(`${SPACE}/${userId}/${spaceId}`);
+        return JSON.stringify(response.data);
 
     } catch (error) {
 
@@ -83,11 +82,6 @@ const GetSpace = async (userId: number, spaceId: number) => {
  */
 export function fetchSpace(userId: number, spaceId: number) {
     let space: Space
-
-    useEffect(() => {
-        spaceService
-            .GetSpace
-    })
 
     const suspender = instances.AUTH_INSTANCE.get(`${SPACE}/${userId}/${spaceId}`)
         .then((response) => {

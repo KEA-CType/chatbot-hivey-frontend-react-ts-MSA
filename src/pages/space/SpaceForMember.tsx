@@ -23,7 +23,7 @@ const SpaceForMember = () => {
             .then((response) => {
 
                 if (response) {
-                    setCurrentSpace(response.result);
+                    // setCurrentSpace(response.result);
                 } else {
                     alert("스페이스 조회에 실패하였습니다.");
                 }

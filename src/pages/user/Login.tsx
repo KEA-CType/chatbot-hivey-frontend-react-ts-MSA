@@ -10,9 +10,9 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useRecoilState} from "recoil";
 
-import Button from "../../components/buttons";
-import Input from "../../components/input";
-import Modal from "../../components/modals";
+import Button from "../../components/commons/buttons";
+import Input from "../../components/commons/input";
+import Modal from "../../components/commons/modals";
 
 import {userState} from "../../commons/Atom";
 

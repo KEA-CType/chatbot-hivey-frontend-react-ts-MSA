@@ -9,6 +9,12 @@ export interface Space {
     name: String;
 }
 
+export interface SpaceOnly {
+    name: string;
+    img: string;
+    memberCount: number;
+}
+
 export interface SpaceInformationResponse {
     name: string;
     img: string;

@@ -41,8 +41,6 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
                             id: s.spaceId, name: s.name
                         });
 
-                        console.log(`setSpace(${space.id}, ${space.name}`);
-
                         if (s.isManager) {
                             navigate("/space/leader");
 
