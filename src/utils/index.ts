@@ -6,7 +6,7 @@ import axios from "axios";
 const axiosApi = (options: []) => {
 
     return axios.create({
-        baseURL: process.env.REACT_APP_BASE_URL,
+        baseURL: process.env.REACT_APP_DEV_URL,
         ...options
     });
 
@@ -19,7 +19,7 @@ const axiosAuthApi = (options: []) => {
     const jwtToken = localStorage.getItem('jwt-token') || '';
 
     return axios.create({
-        baseURL: process.env.REACT_APP_BASE_URL,
+        baseURL: process.env.REACT_APP_DEV_URL,
         headers: {
             'X-ACCESS-TOKEN': `${jwtToken}`
         },

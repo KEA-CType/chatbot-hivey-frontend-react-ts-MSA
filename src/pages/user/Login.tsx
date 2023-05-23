@@ -86,6 +86,7 @@ const Login = () => {
                     setUser({id: userIdx, name: name});
 
                     localStorage.setItem("jwt-token", jwtToken);
+
                     setIsModalOpen(true);
 
                     setTimeout(() => {
