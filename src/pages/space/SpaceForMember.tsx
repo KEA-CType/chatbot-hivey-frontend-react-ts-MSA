@@ -1,13 +1,16 @@
+/**
+ * 멤버(구성원)용 메인 스페이스 화면
+ */
+
 import "../../styles/space.css";
 
 import React, {useState, useEffect} from "react";
-import Userbar from "../../components/userbar";
 import Chatbot from "../../components/chatbot/chatbot";
 import {useRecoilValue} from "recoil";
 import {spaceState, userState} from "../../commons/Atom";
 import spaces from "../../services/space/space";
 
-const MainSpaceForMember = () => {
+const SpaceForMember = () => {
     const [currentSpace, setCurrentSpace] = useState("");
 
     const user = useRecoilValue(userState);
@@ -32,8 +35,6 @@ const MainSpaceForMember = () => {
     return (
         <div className="participant-page">
 
-            <Userbar />
-
             <div className="survey-container">
                 <div className="space-name">
                     {/*<h1>{currentSpace.name}</h1>*/}
@@ -47,4 +48,4 @@ const MainSpaceForMember = () => {
     );
 };
 
-export default MainSpaceForMember;
+export default SpaceForMember;

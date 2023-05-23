@@ -1,17 +1,17 @@
-import "../styles/enterspace.css";
+import "../../styles/enterspace.css";
 
 import React, { useState } from "react";
-import Button from "../components/buttons";
-import Input from "../components/input";
-import Modal from "../components/modals";
-import linkImg from "../assets/ic_link_brown.png";
-import Chatbot from "../components/chatbot/chatbot";
-import {userState, spaceState, memberIdState} from "../commons/Atom";
+import Button from "../../components/buttons";
+import Input from "../../components/input";
+import Modal from "../../components/modals";
+import linkImg from "../../assets/ic_link_brown.png";
+import Chatbot from "../../components/chatbot/chatbot";
+import {userState, spaceState, memberIdState} from "../../commons/Atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { Link } from "react-router-dom";
 
-import spaces from "../services/space/space";
+import spaces from "../../services/space/space";
 
 const EnterSpaceComponent = () => {
   const [link, setLink] = useState("");
@@ -106,9 +106,9 @@ const EnterSpaceComponent = () => {
 };
 
 // <Link to="/space" state={{ spaceId: spaceId, userId: memberId }}>
-// MainSpaceForMember.jsx, MainSpaceForLeader.tsx => 스페이스 역할 불러와서 판단후 정보 state로 넘겨주기
+// SpaceForMember.jsx, SpaceForLeader.tsx => 스페이스 역할 불러와서 판단후 정보 state로 넘겨주기
 
-const EnterSpace = () => {
+const SpaceEnter = () => {
   return (
     <div className="enterpage">
       <EnterSpaceComponent />
@@ -116,6 +116,6 @@ const EnterSpace = () => {
   );
 };
 
-export default EnterSpace;
+export default SpaceEnter;
 
 // space로 userId, spaceId,

@@ -1,15 +1,15 @@
-import "../styles/createspace.css";
+import "../../styles/createspace.css";
 
 import React, {useState} from "react";
 
-import Button from "../components/buttons";
-import Chatbot from "../components/chatbot/chatbot";
-import Input from "../components/input";
-import Modal from "../components/modals";
-import {userState, spaceState} from "../commons/Atom";
+import Button from "../../components/buttons";
+import Chatbot from "../../components/chatbot/chatbot";
+import Input from "../../components/input";
+import Modal from "../../components/modals";
+import {userState, spaceState} from "../../commons/Atom";
 import {useRecoilState} from "recoil";
 
-import spaces from "../services/space/space";
+import spaces from "../../services/space/space";
 
 const CreateSpaceComponent = () => {
     const [img, setImg] = useState("");
@@ -131,7 +131,7 @@ const CreateSpaceComponent = () => {
     );
 };
 
-const CreateSpace = () => {
+const SpaceCreate = () => {
     return (
         <div className="createpage">
             <CreateSpaceComponent/>
@@ -139,4 +139,4 @@ const CreateSpace = () => {
     );
 };
 
-export default CreateSpace;
+export default SpaceCreate;

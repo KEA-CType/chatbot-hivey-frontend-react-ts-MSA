@@ -1,4 +1,4 @@
-import {authInstance} from "../../utils";
+import instances from "../../utils";
 import {SPACE} from "../../config/constants";
 import {Space} from "../../commons/Interface";
 
@@ -8,7 +8,7 @@ import {Space} from "../../commons/Interface";
 const CreateSpace = async (userId: number, spaceName: string, img: string) => {
     try {
 
-        const response = await authInstance.post(`${SPACE}/${userId}/space`, {
+        const response = await instances.AUTH_INSTANCE.post(`${SPACE}/${userId}/space`, {
             name: spaceName,
             img: img,
         });
@@ -29,7 +29,7 @@ const CreateSpace = async (userId: number, spaceName: string, img: string) => {
 const GetSpaceList = async (userId: number) => {
     try {
 
-        const response = await authInstance.get(`${SPACE}/${userId}/spaces`);
+        const response = await instances.AUTH_INSTANCE.get(`${SPACE}/${userId}/spaces`);
         console.log(`GetSpaceList/response.data.message: ${response.data.message}`);
         return response.data;
 
@@ -47,7 +47,7 @@ const GetSpaceList = async (userId: number) => {
 const GetSpace = async (userId: number, spaceId: number) => {
     try {
 
-        const response = await authInstance.get(`${SPACE}/${userId}/${spaceId}`);
+        const response = await instances.AUTH_INSTANCE.get(`${SPACE}/${userId}/${spaceId}`);
         console.log(`GetSpace/response.data.message: ${response.data.message}`);
         return response.data;
 
@@ -65,7 +65,7 @@ const GetSpace = async (userId: number, spaceId: number) => {
 export function fetchSpace(userId: number, spaceId: number) {
     let space: Space
 
-    const suspender = authInstance.get(`${SPACE}/${userId}/${spaceId}`)
+    const suspender = instances.AUTH_INSTANCE.get(`${SPACE}/${userId}/${spaceId}`)
         .then((response) => {
             if (response.data) {
                 setTimeout(() => {
@@ -93,7 +93,7 @@ export function fetchSpace(userId: number, spaceId: number) {
 const EnterSpace = async (userId: number, accessCode: string) => {
     try {
 
-        const response = await authInstance.post(`${SPACE}/${userId}/members`, {
+        const response = await instances.AUTH_INSTANCE.post(`${SPACE}/${userId}/members`, {
             accessCode: accessCode
         });
 
@@ -107,11 +107,11 @@ const EnterSpace = async (userId: number, accessCode: string) => {
     }
 };
 
-const spaces = {
+const spaceService = {
     CreateSpace,
     GetSpaceList,
     GetSpace,
     EnterSpace
 }
 
-export default spaces;
+export default spaceService;

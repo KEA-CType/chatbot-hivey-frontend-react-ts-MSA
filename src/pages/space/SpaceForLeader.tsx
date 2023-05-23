@@ -1,10 +1,14 @@
+/**
+ * 리더(관리자)용 메인 스페이스 화면
+ */
+
 import {Suspense} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import {fetchSpace} from "../../services/space/space";
 import {spaceState, userState} from '../../commons/Atom';
 
-const MainSpaceForLeader = () => {
+const SpaceForLeader = () => {
 
     const user = useRecoilValue(userState);
     const space = useRecoilValue(spaceState);
@@ -30,4 +34,4 @@ const MainSpaceForLeader = () => {
     );
 };
 
-export default MainSpaceForLeader;
+export default SpaceForLeader;

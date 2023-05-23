@@ -1,4 +1,4 @@
-import {instance} from "../../utils";
+import instances from "../../utils";
 import {FORM} from "../../config/constants";
 
 /**
@@ -7,7 +7,7 @@ import {FORM} from "../../config/constants";
 const GetFormSubmissionList = async (formId: number) => {
     try {
 
-        const response = await instance.get(`${FORM}/${formId}/members`);
+        const response = await instances.INSTANCE.get(`${FORM}/${formId}/members`);
         return response.data;
 
     } catch (error) {
@@ -18,8 +18,8 @@ const GetFormSubmissionList = async (formId: number) => {
     }
 };
 
-const formAnswers = {
+const formAnswerService = {
     GetFormSubmissionList
 }
 
-export default formAnswers;
+export default formAnswerService;

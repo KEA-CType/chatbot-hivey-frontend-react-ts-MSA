@@ -28,5 +28,12 @@ const axiosAuthApi = (options: []) => {
 
 }
 
-export const instance = axiosApi([]);
-export const authInstance = axiosAuthApi([]);
+const INSTANCE = axiosApi([]);
+const AUTH_INSTANCE = axiosAuthApi([]);
+
+const instances = {
+    INSTANCE,
+    AUTH_INSTANCE
+}
+
+export default instances;
