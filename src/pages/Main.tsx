@@ -1,7 +1,7 @@
 import "../styles/mainpage.css";
 
 import React from "react";
-import Button from "../components/buttons";
+import Button from "../components/commons/buttons";
 import Chatbot from "../components/chatbot/chatbot";
 
 import {Link} from "react-router-dom";

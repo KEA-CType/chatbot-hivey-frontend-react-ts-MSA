@@ -1,10 +1,10 @@
 import "../../styles/register.css";
 
 import React, {useState} from "react";
-import Button from "../../components/buttons";
-import Input from "../../components/input";
+import Button from "../../components/commons/buttons";
+import Input from "../../components/commons/input";
 import logo from "../../assets/ic_logo_hivey.png";
-import Modal from "../../components/modals";
+import Modal from "../../components/commons/modals";
 import authService from "../../services/user/auth";
 import {useNavigate} from "react-router-dom";
 import {validateEmail} from "../../utils/validateEmail";

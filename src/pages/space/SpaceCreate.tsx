@@ -2,10 +2,10 @@ import "../../styles/createspace.css";
 
 import React, {useState} from "react";
 
-import Button from "../../components/buttons";
+import Button from "../../components/commons/buttons";
 import Chatbot from "../../components/chatbot/chatbot";
-import Input from "../../components/input";
-import Modal from "../../components/modals";
+import Input from "../../components/commons/input";
+import Modal from "../../components/commons/modals";
 import {userState, spaceState} from "../../commons/Atom";
 import {useRecoilState} from "recoil";
 
@@ -67,7 +67,7 @@ const CreateSpaceComponent = () => {
                     setIsModalOpen(true);
                     setMessage(accessCode);
                     setAccessCode(accessCode);
-                    setSpace({id: spaceId, name: spaceName, img: img});
+                    setSpace({id: spaceId, name: spaceName});
                     // handle login success
                 } else if (code === 2020) {
                     setIsModalOpen(true);

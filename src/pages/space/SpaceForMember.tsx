@@ -1,5 +1,5 @@
 /**
- * 멤버(구성원)용 메인 스페이스 화면
+ * 스페이스 (멤버/구성원용) 화면
  */
 
 import "../../styles/space.css";
@@ -23,7 +23,7 @@ const SpaceForMember = () => {
             .then((response) => {
 
                 if (response) {
-                    setCurrentSpace(response.result);
+                    // setCurrentSpace(response.result);
                 } else {
                     alert("스페이스 조회에 실패하였습니다.");
                 }

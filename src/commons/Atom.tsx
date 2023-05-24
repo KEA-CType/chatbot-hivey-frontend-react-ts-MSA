@@ -1,5 +1,8 @@
 import {atom} from "recoil";
 import {User, Space} from "./Interface";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 /**
  * 사용자
@@ -9,7 +12,8 @@ export const userState = atom<User>({
     default: {
         id: 0,
         name: ""
-    }
+    },
+    effects: [persistAtom]
 });
 
 /**
@@ -19,8 +23,7 @@ export const spaceState = atom<Space>({
   key: "space",
   default: {
     id: 0,
-    name: "",
-    img: ""
+    name: ""
   }
 });
 

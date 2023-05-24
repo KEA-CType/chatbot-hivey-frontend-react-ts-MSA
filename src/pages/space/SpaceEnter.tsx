@@ -1,9 +1,9 @@
 import "../../styles/enterspace.css";
 
 import React, { useState } from "react";
-import Button from "../../components/buttons";
-import Input from "../../components/input";
-import Modal from "../../components/modals";
+import Button from "../../components/commons/buttons";
+import Input from "../../components/commons/input";
+import Modal from "../../components/commons/modals";
 import linkImg from "../../assets/ic_link_brown.png";
 import Chatbot from "../../components/chatbot/chatbot";
 import {userState, spaceState, memberIdState} from "../../commons/Atom";
@@ -61,7 +61,7 @@ const EnterSpaceComponent = () => {
 
           setMemberId(memberId);
           setSpace({
-              id: spaceId, img: space.img, name: space.name
+              id: spaceId, name: space.name
           });
         } else if (code === 2020) {
           setIsModalOpen(true);
