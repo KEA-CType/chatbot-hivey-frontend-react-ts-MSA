@@ -1,4 +1,4 @@
-import {instance} from "../../utils";
+import instances from "../../utils";
 import {AUTH} from "../../config/constants";
 
 /**
@@ -6,7 +6,7 @@ import {AUTH} from "../../config/constants";
  */
 const Register = async (email: string, userName: string, password: string) => {
     try {
-        const response = await instance.post(`${process.env.REACT_APP_BASE_URL}${AUTH}`, {
+        const response = await instances.INSTANCE.post(`${AUTH}`, {
             email: email,
             name: userName,
             password: password,
@@ -27,7 +27,7 @@ const Register = async (email: string, userName: string, password: string) => {
  */
 const Login = async (email: string, password: string) => {
     try {
-        const response = await instance.post(`${process.env.REACT_APP_BASE_URL}${AUTH}/login`, {
+        const response = await instances.INSTANCE.post(`${AUTH}/login`, {
             email: email,
             password: password,
         });
@@ -42,9 +42,9 @@ const Login = async (email: string, password: string) => {
     }
 };
 
-const auths = {
+const authService = {
     Register,
     Login
 }
 
-export default auths;
+export default authService;

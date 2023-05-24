@@ -1,4 +1,4 @@
-import {authInstance} from "../../utils";
+import instances from "../../utils";
 import {SPACE} from "../../config/constants";
 
 /**
@@ -7,7 +7,7 @@ import {SPACE} from "../../config/constants";
 const ChangeMemberGroup = async (userId: number, requestBody: any) => {
     try {
 
-        const response = await authInstance.patch(`${SPACE}/${userId}/group`, {
+        const response = await instances.AUTH_INSTANCE.patch(`${SPACE}/${userId}/group`, {
             groupId: requestBody.groupId,
             memberId: requestBody.memberId
         });
@@ -22,8 +22,8 @@ const ChangeMemberGroup = async (userId: number, requestBody: any) => {
     }
 };
 
-const spaceMembers = {
+const spaceMemberService = {
     ChangeMemberGroup
 }
 
-export default spaceMembers;
+export default spaceMemberService;

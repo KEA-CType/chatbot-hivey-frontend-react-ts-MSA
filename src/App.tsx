@@ -1,25 +1,25 @@
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/user/Login";
+import SignUp from "./pages/user/SignUp";
 import Home from "./pages/Home";
-import MainPage from "./pages/MainPage";
-import EnterSpace from "./pages/EnterSpace";
-import CreateSpace from "./pages/CreateSpace";
+import Main from "./pages/Main";
+import SpaceEnter from "./pages/space/SpaceEnter";
+import SpaceCreate from "./pages/space/SpaceCreate";
 import Chatbot from "./components/chatbot/chatbot";
-import MainSpaceForMember from "./pages/space/MainSpaceForMember";
+import SpaceForMember from "./pages/space/SpaceForMember";
 import {RecoilRoot} from "recoil";
-import MainSpaceForLeader from "./pages/space/MainSpaceForLeader"
+import SpaceForLeader from "./pages/space/SpaceForLeader"
 import Userbar from "./components/userbar";
 
 function App() {
+
     return (
         <RecoilRoot>
             <Router>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
-                    <Route path="/register" element={<Register/>}/>
-                    {/* 유저바가 필요한 컴포넌트 */}
+                    <Route path="/signup" element={<SignUp/>}/>
                     <Route
                         path="/*"
                         element={
@@ -27,11 +27,11 @@ function App() {
                                 <Userbar />
                                 <div style={{flexGrow: 1, marginLeft: "200px"}}>
                                     <Routes>
-                                        <Route path="/enterspace" element={<EnterSpace/>}/>
-                                        <Route path="/createspace" element={<CreateSpace/>}/>
-                                        <Route path="/main" element={<MainPage/>}/>
-                                        <Route path="/space/member" element={<MainSpaceForMember/>}/>
-                                        <Route path="/space/leader" element={<MainSpaceForLeader/>}/>
+                                        <Route path="/space/enter" element={<SpaceEnter/>}/>
+                                        <Route path="/space/create" element={<SpaceCreate/>}/>
+                                        <Route path="/main" element={<Main/>}/>
+                                        <Route path="/space/member" element={<SpaceForMember/>}/>
+                                        <Route path="/space/leader" element={<SpaceForLeader/>}/>
                                     </Routes>
                                 </div>
                                 <Chatbot/>

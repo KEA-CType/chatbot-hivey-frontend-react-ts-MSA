@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 
-import TextInput from "./input";
-import BlackButton from "./buttons";
+import TextInput from "./commons/input";
+import BlackButton from "./commons/buttons";
 
 import iconEdit from "../assets/ic_edit_black.png";
 

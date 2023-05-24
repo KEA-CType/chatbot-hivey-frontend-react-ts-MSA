@@ -1,4 +1,4 @@
-import {instance, authInstance} from "../../utils";
+import instances from "../../utils";
 import {FORM} from "../../config/constants";
 
 /**
@@ -7,7 +7,7 @@ import {FORM} from "../../config/constants";
 const CreateSurvey = async (spaceId: number, userId: number) => {
     try {
 
-        const response = await authInstance.post(`${FORM}/${spaceId}/${userId}`);
+        const response = await instances.AUTH_INSTANCE.post(`${FORM}/${spaceId}/${userId}`);
         return response.data;
 
     } catch (error) {
@@ -24,7 +24,7 @@ const CreateSurvey = async (spaceId: number, userId: number) => {
 const CreateDetailedSurvey = async (formId: number, requestBody: any) => {
     try {
 
-        const response = await instance.patch(`${FORM}/${formId}`, {
+        const response = await instances.INSTANCE.patch(`${FORM}/${formId}`, {
             title: requestBody.title,
             content: requestBody.content,
             startDate: requestBody.startDate,
@@ -49,7 +49,7 @@ const CreateDetailedSurvey = async (formId: number, requestBody: any) => {
 const GetFormList = async (spaceId: number, userId: number) => {
     try {
 
-        const response = await authInstance.get(`${FORM}/${spaceId}/${userId}`);
+        const response = await instances.AUTH_INSTANCE.get(`${FORM}/${spaceId}/${userId}`);
         return response.data;
 
     } catch (error) {
@@ -60,10 +60,10 @@ const GetFormList = async (spaceId: number, userId: number) => {
     }
 };
 
-const forms = {
+const formService = {
     CreateSurvey,
     CreateDetailedSurvey,
     GetFormList
 };
 
-export default forms;
+export default formService;

@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 
-import Button from "./buttons";
+import Button from "./commons/buttons";
 
 import iconEdit from "../assets/ic_edit_black.png";
-import TextInput from "./input";
+import TextInput from "./commons/input";
 
 const StyledDiv = styled.div`
   background-color: white;

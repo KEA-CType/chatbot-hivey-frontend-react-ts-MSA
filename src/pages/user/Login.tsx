@@ -1,24 +1,24 @@
-import "../styles/login.css";
+import "../../styles/login.css";
 
-import logo from "../assets/ic_logo_hivey.png";
-import kakao from "../assets/btn_signup_kakao.png";
-import naver from "../assets/btn_signup_naver.png";
-import google from "../assets/btn_signup_google.png";
-import loginEmail from "../assets/btn_signup_email.png";
+import logo from "../../assets/ic_logo_hivey.png";
+import kakao from "../../assets/btn_signup_kakao.png";
+import naver from "../../assets/btn_signup_naver.png";
+import google from "../../assets/btn_signup_google.png";
+import loginEmail from "../../assets/btn_signup_email.png";
 
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useRecoilState} from "recoil";
 
-import Button from "../components/buttons";
-import Input from "../components/input";
-import Modal from "../components/modals";
+import Button from "../../components/commons/buttons";
+import Input from "../../components/commons/input";
+import Modal from "../../components/commons/modals";
 
-import {userState} from "../commons/Atom";
+import {userState} from "../../commons/Atom";
 
-import auths from "../services/user/auth";
+import authService from "../../services/user/auth";
 
-import {validateEmail} from "../utils/validateEmail";
+import {validateEmail} from "../../utils/validateEmail";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -71,7 +71,7 @@ const Login = () => {
         }
 
         // handle login submit
-        auths
+        authService
             .Login(email, password)
             .then((response) => {
                 // 위의 함수에서 response.data를 받아온다.
@@ -86,6 +86,7 @@ const Login = () => {
                     setUser({id: userIdx, name: name});
 
                     localStorage.setItem("jwt-token", jwtToken);
+
                     setIsModalOpen(true);
 
                     setTimeout(() => {
@@ -125,7 +126,7 @@ const Login = () => {
                                 <img className="social-login-icon" src={naver} alt="Naver"/>
                             </div>
                             <div className="social-login-icons">
-                                <a href="/register"><img className="social-login-icon" src={loginEmail} alt="Email"/>
+                                <a href="/src/pages/user/SignUp.tsx"><img className="social-login-icon" src={loginEmail} alt="Email"/>
                                 </a>
                             </div>
                         </div>

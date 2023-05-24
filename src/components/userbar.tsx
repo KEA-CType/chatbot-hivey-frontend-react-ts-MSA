@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import {userState, spaceState} from "../commons/Atom";
 import {useRecoilState, useRecoilValue} from "recoil";
 
-import spaces from "../services/space/space";
+import spaceService from "../services/space/space";
 
 import profile from "../assets/ic_profile.png";
 import logo from "../assets/ic_logo_hivey.png";
@@ -16,12 +16,15 @@ import location from "../assets/ic_logo_sample.png";
 import logout from "../assets/ic_logout_gray.png";
 
 const SpaceListComponent = ({spaces, isManager}: any) => {
-    const [space, setSpace] = useRecoilState(spaceState);
     const [spaceList, setSpaceList] = useState(Array);
     const navigate = useNavigate();
 
+    const [space, setSpace] = useRecoilState(spaceState);
+
     useEffect(() => {
-        if (spaces) {
+
+        if (spaceList) {
+
             const filteredList = Array.isArray(spaces) ? spaces.filter(
                 (s: any) => s.isManager === isManager
             ) : [];
@@ -35,27 +38,29 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
                     const onClickSpace = () => {
 
                         setSpace({
-                            id: s.id, img: "", name: s.name
+                            id: s.spaceId, name: s.name
                         });
 
                         if (s.isManager) {
-                            navigate("/man");
+                            navigate("/space/leader");
 
                         } else {
-                            navigate("/part");
+                            navigate("/space/member");
                         }
 
                     };
+
                     return (
-                        <div className={style} onClick={onClickSpace}>
-                            <img className="location" src={location} alt="location"/>{space.name}
+                        <div key={s.spaceId} className={style} onClick={onClickSpace}>
+                            <img className="location" src={location} alt="location"/>{s.name}
                         </div>
                     );
                 });
 
             setSpaceList(newList);
+
         }
-    }, [spaceList, isManager]);
+    }, [spaces]);
 
     if (!spaceList) {
         return null;
@@ -65,37 +70,29 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
 };
 
 const Userbar = () => {
-    const [message, setMessage] = useState("");
     const [spaceList, setSpaceList] = useState([]);
     const user = useRecoilValue(userState);
 
     useEffect(() => {
-        spaces
+        spaceService
             .GetSpaceList(user.id)
             .then((response) => {
-                const {code, message} = response;
+                const {code} = response;
 
                 setSpaceList(response.result);
 
-                setMessage(message);
-                console.log(`message: ${message}`);
-
                 if (code === 1000) {
-                    // handle login success
-                    setMessage(message);
                     console.log("스페이스 목록을 불러오는 데 성공했습니다.");
                 } else {
-                    // handle login failure
-                    setMessage(message);
                     console.log("스페이스 목록을 불러오는 데 실패하였습니다.");
                 }
 
             })
             .catch((error) => {
                 console.log(error);
-                setMessage("서버와의 연결에 실패하였습니다.");
             });
-    },); // spaceList 안의 값이 바뀔 때만 다시 불러오도록 한다.
+
+    }, []);
 
     return (
         <div className="userbar-container">
@@ -107,13 +104,13 @@ const Userbar = () => {
             <div className="user-spaces">
                 <div className="label"><img src={label} alt="label"/>MANAGER</div>
                 <div className="spaces-list">
-                    <SpaceListComponent spaces={spaces} isManager={1}/>
+                    <SpaceListComponent spaces={spaceList} isManager={1}/>
                 </div>
             </div>
             <div className="user-spaces">
                 <span className="label"><img src={label} alt="label"/>MEMBER</span>
                 <div>
-                    <SpaceListComponent spaces={spaces} isManager={0}/>
+                    <SpaceListComponent spaces={spaceList} isManager={0}/>
                 </div>
                 <img className="logout" src={logout} alt="logout"></img>
             </div>
