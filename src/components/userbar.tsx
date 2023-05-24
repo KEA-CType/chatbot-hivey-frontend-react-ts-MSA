@@ -3,12 +3,12 @@ import "../styles/userbar.css";
 import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
-
+import {Link} from "react-router-dom";
 import {userState, spaceState} from "../commons/Atom";
 import {useRecoilState, useRecoilValue} from "recoil";
 
 import spaceService from "../services/space/space";
-
+import setting from "../assets/ic_setting_gray.png";
 import profile from "../assets/ic_profile.png";
 import logo from "../assets/ic_logo_hivey.png";
 import label from "../assets/ic_label_white.png";
@@ -98,8 +98,11 @@ const Userbar = () => {
         <div className="userbar-container">
             <img className="logo" src={logo} alt="logo"/>
             <div className="user-profile">
-                <img className="profile" src={profile} alt="user profile"/>
-                <span className="username">{user.name}</span>
+                <div className="user-info"><img className="profile" src={profile} alt="user profile"/>
+                <span className="username">{user.name}</span></div>
+                
+                <div className="set"><img className="setting" src={setting} alt="setting"></img></div>
+                
             </div>
             <div className="user-spaces">
                 <div className="label"><img src={label} alt="label"/>MANAGER</div>

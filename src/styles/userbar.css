@@ -17,6 +17,7 @@
 
 .user-profile {
     display: flex;
+    position: relative;
     align-items: center;
     margin-top: 2rem;
     margin-bottom: 3rem;
@@ -24,11 +25,14 @@
     width: 80%;
     height: 4rem;
     border-radius: 10px;
-    background-image: url("../assets/ic_setting_gray.png");
+    /* background-image: url("../assets/ic_setting_gray.png");
     background-repeat: no-repeat;
-    background-position: 95% 19%;
+    background-position: 95% 19%; */
 }
-
+.user-info{
+    display: flex;
+    align-items: center;
+}
 .profile{
     margin-right: 0.3rem;
 }
@@ -37,6 +41,11 @@
     color: #000000;
     font-size: 1.2rem;
     font-weight: bold;
+}
+.set{
+    position:absolute;
+    right: 4%;
+    top: 10%;
 }
 
 .user-spaces {

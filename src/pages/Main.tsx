@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 const Main = () => {
     return (
         <div className="mainpage">
-            <p className="text">스페이스를 선택하세요.</p>
+            <p className="text">왼쪽 메뉴에서 스페이스를 선택하세요.</p>
             <div className="ButtonWrapper">
                 <Link to="/space/create">
                     <Button className="main-button" text="Create Space"/>
