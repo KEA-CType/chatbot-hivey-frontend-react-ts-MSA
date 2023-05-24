@@ -3,7 +3,7 @@ import "../styles/mainpage.css";
 import React from "react";
 import Button from "../components/commons/buttons";
 import Chatbot from "../components/chatbot/chatbot";
-
+import logo from "../assets/ic_logo_hivey.png";
 import {Link} from "react-router-dom";
 
 const Main = () => {

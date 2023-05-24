@@ -10,6 +10,7 @@ import SpaceForMember from "./pages/space/SpaceForMember";
 import {RecoilRoot} from "recoil";
 import SpaceForLeader from "./pages/space/SpaceForLeader"
 import Userbar from "./components/userbar";
+import FormCreate from "./pages/form/FormCreate";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/signup" element={<SignUp/>}/>
+                    <Route path="/form/create" element={<FormCreate/>}/>
                     <Route
                         path="/*"
                         element={

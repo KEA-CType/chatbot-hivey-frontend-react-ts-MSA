@@ -96,7 +96,7 @@ const Userbar = () => {
 
     return (
         <div className="userbar-container">
-            <img className="logo" src={logo} alt="logo"/>
+            <img className="userbar-logo" src={logo} alt="logo"/>
             <div className="user-profile">
                 <div className="user-info"><img className="profile" src={profile} alt="user profile"/>
                 <span className="username">{user.name}</span></div>

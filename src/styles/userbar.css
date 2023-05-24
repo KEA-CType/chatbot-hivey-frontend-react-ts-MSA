@@ -11,8 +11,9 @@
     z-index: 1;
 }
 
-.logo{
+.userbar-logo{
     margin-top: 2rem;
+    
 }
 
 .user-profile {
@@ -44,7 +45,7 @@
 }
 .set{
     position:absolute;
-    right: 4%;
+    right: 3%;
     top: 10%;
 }
 

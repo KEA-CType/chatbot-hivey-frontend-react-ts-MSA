@@ -1,0 +1,31 @@
+body{
+    background-color: #D4ECFF;
+    
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    background-color: white;
+    margin-top: 3rem;
+    height: 100vh;
+    margin-left: 10%;
+    margin-right: 10%;
+
+
+}
+.form-logo{
+    margin-top: 2rem;
+    width: 20%;
+    margin-bottom: 2rem;
+}
+.title{
+    background-color: #B9D3FF;
+    width: 80%;
+    
+  
+}
+.title-name{
+  
+}
