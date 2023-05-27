@@ -2,6 +2,7 @@
  * Styles
  */
 export const PRIMARY_COLOR_BLUE_4= "#D4ECFF";
+export const PRIMARY_COLOR_WHITE = "#FFFFFF";
 
 /**
  * API

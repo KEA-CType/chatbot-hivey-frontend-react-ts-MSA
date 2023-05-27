@@ -6,6 +6,7 @@ import {AUTH} from "../../config/constants";
  */
 const Register = async (email: string, userName: string, password: string) => {
     try {
+
         const response = await instances.INSTANCE.post(`${AUTH}`, {
             email: email,
             name: userName,

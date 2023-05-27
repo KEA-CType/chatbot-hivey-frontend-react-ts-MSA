@@ -24,6 +24,7 @@ export interface SpaceInformationResponse {
 }
 
 export interface FormListResponse {
+    formId: number;
     creator: string;
     title: string;
     startDate: Date;
@@ -39,4 +40,20 @@ export interface GroupMemberListResponse {
     memberId: number;
     name: string;
     position: string;
+}
+
+export interface SubmissionListResponse {
+    formId: number,
+    memberId: number,
+    email: string,
+    name: string,
+    groupId: number,
+    submit: boolean,
+    mandatory: boolean
+}
+
+export interface TargetGroupListResponse {
+    formId: number,
+    groupId: number,
+    groupName: number
 }

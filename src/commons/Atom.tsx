@@ -42,3 +42,11 @@ export const formIdState = atom<number>({
     key: "formId",
     default: 0,
 });
+
+/**
+ * 설문 식별 번호 (참여
+ */
+export const selectedFormIdState = atom<number>({
+    key: "selectedFormId",
+    default: 0,
+});

@@ -74,6 +74,7 @@ const Userbar = () => {
     const user = useRecoilValue(userState);
 
     useEffect(() => {
+
         spaceService
             .GetSpaceList(user.id)
             .then((response) => {
@@ -92,7 +93,7 @@ const Userbar = () => {
                 console.log(error);
             });
 
-    }, []);
+    }, [user.id]);
 
     return (
         <div className="userbar-container">

@@ -1,0 +1,485 @@
+/* Space */
+
+.space-container {
+    width: 80%;
+    height: 100%;
+
+    position: fixed;
+    top: 1rem;
+    left: 20%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.space-container .space-rectangle-white {
+    /*height: 5rem;*/
+    width: 85%;
+    height: 9vh;
+
+    background-color: #ffffff;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    /*position: relative;*/
+
+    margin-top: 2rem;
+    /*margin-left: 12rem;*/
+
+    padding: 0;
+}
+
+.space-rectangle-white .space-img-wrapper {
+    height: 50%;
+    width: auto;
+    overflow: hidden;
+
+    display: block;
+
+    margin-left: 2%;
+}
+
+.space-img-wrapper .space-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}
+
+.space-title {
+    height: auto;
+    width: fit-content;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    font-size: 1.5rem;
+    font-weight: bolder;
+    font-family: Archivo, sans-serif;
+
+    cursor: default;
+
+    margin-left: 2%;
+}
+
+.space-membercount {
+    height: auto;
+    overflow: hidden;
+    width: fit-content;
+
+    box-sizing: border-box;
+
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: darkgray;
+
+    margin-left: 2%;
+}
+
+.space-edit-wrapper {
+    height: 35%;
+    width: auto;
+    overflow: hidden;
+
+    display: block;
+
+    margin-left: 2%;
+}
+
+.space-edit-wrapper .space-edit-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+
+    cursor: pointer;
+}
+
+/* Formboard */
+
+.space-container .formboard-rectangle-white {
+    width: 85%;
+    height: 50vh;
+
+    background-color: #ffffff;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /*align-items: stretch;*/
+
+    /*position: relative;*/
+
+    margin-top: 1rem;
+    /*margin-left: 12rem;*/
+
+    padding: 0;
+}
+
+.formboard-rectangle-white .formboard-title {
+    height: 1.5rem;
+    width: fit-content;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    /*flex: 1;*/
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: Archivo, sans-serif;
+
+    cursor: default;
+
+    margin-top: 3%;
+    margin-left: 3%;
+}
+
+.formboard-rectangle-white .formboard-box {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.formboard-box .formboard-status-container {
+    height: auto;
+    width: auto;
+
+    /*float: left;*/
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-between;*/
+    align-items: center;
+
+    margin-top: 3%;
+    margin-bottom: 2%;
+
+    padding: 0;
+}
+
+.formboard-status-container .formboard-status-title-wrapper {
+    width: auto;
+    height: auto;
+
+    margin-bottom: 1.5%;
+
+    display: block;
+}
+
+.formboard-status-container .formboard-status-title {
+    width: 60%;
+    height: auto;
+    aspect-ratio: auto;
+
+    margin-left: 20%;
+    margin-right: 20%;
+
+    display: block;
+}
+
+.formboard-status-container .formboard-status-box {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+
+    border-radius: 0.15rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #E8EFFA;
+}
+
+.formboard-status-box .formboard-form {
+    width: 90%;
+    height: 7vh;
+
+    border-radius: 1.3rem;
+    box-shadow: 0.1rem 0.1rem gainsboro;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    cursor: pointer;
+
+    margin-top: 1rem;
+
+    background-color: #ffffff;
+}
+
+.formboard-form .formboard-form-icon-wrapper {
+    width: auto;
+    height: 30%;
+
+    display: block;
+
+    margin-left: 5%;
+}
+
+.formboard-form-icon-wrapper .formboard-form-icon-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}
+
+.formboard-form .formboard-form-information {
+    width: 80%;
+    height: 60%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-left: 5%;
+}
+
+.formboard-form-information-title {
+    font-size: 20px;
+    font-family: Pretendard sans-serif;
+}
+
+.formboard-form-information-date {
+    font-size: 5px;
+}
+
+.formboard-box .formboard-form-kebab-wrapper {
+    width: auto;
+    height: 28%;
+    overflow: hidden;
+
+    background-color: #ffffff;
+    border-radius: 10rem;
+
+    display: block;
+
+    cursor: auto;
+
+    padding: 1% 3%;
+
+    margin-right: 3%;
+}
+
+.formboard-form-kebab-wrapper:hover {
+    background-color: #edeef2;
+}
+
+.formboard-form-kebab-wrapper .formboard-form-kebab-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto 1/1;
+
+    /*background: url("../assets/ic_kebab_black.png");*/
+
+    display: block;
+}
+
+.formboard-form-kebab-menu {
+    overflow: hidden;
+
+    background-color: #ffffff;
+
+    border: 0.03rem solid #edeef2;
+    border-radius: 0.6rem;
+
+    position: absolute;
+    z-index: 1;
+}
+
+.formboard-form-kebab-menu .formboard-form-kebab-menu-item {
+    display: block;
+
+    font-size: 12px;
+    text-decoration: none;
+
+    padding: 0.8rem;
+}
+
+.formboard-form-kebab-menu .formboard-form-kebab-menu-item:hover {
+    background-color: #edeef2;
+
+    color: black;
+    text-decoration: none;
+}
+
+/* Submission list */
+
+.space-container .submission-rectangle-white {
+    width: 85%;
+    height: 25vh;
+
+    background-color: #ffffff;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin-top: 1rem;
+
+    padding: 0;
+}
+
+.submission-rectangle-white .submission-title {
+    height: 1.5rem;
+    width: fit-content;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: Archivo, sans-serif;
+
+    cursor: default;
+
+    margin-top: 3%;
+    margin-left: 3%;
+    margin-bottom: 3%;
+}
+
+.submission-rectangle-white .submission-members-container {
+    height: auto;
+    width: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    cursor: default;
+
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 5%;
+
+    padding-right: 20%;
+}
+
+.submission-members-container .submission-members-profile-wrapper {
+    height: auto;
+    width: 5%;
+    overflow: hidden;
+
+    display: block;
+}
+
+.submission-members-profile-wrapper .submission-members-profile-img {
+    width: auto;
+    height: 20px;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}
+
+.submission-members-container .submission-members-id {
+    height: auto;
+    width: 2rem;
+
+    box-sizing: border-box;
+
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 1%;
+}
+
+.submission-members-container .submission-members-name {
+    height: auto;
+    width: 3rem;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 1%;
+}
+
+.submission-members-container .submission-members-email {
+    height: auto;
+    width: 12rem;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    color: gray;
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 1%;
+}
+
+.submission-members-container .submission-members-status-wrapper {
+    height: auto;
+    width: auto;
+    overflow: hidden;
+
+    display: block;
+
+    margin-left: 1%;
+}
+
+.submission-members-status-wrapper .submission-members-status-img {
+    width: auto;
+    height: 20px;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}
+
+.submission-rectangle-white .submission-members-line {
+    width: auto;
+    height: 0.05rem;
+
+    background-color: lightgray;
+
+    margin: 0.5% 5%;
+}
