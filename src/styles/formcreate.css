@@ -9,9 +9,10 @@ body{
     align-items: center;
     background-color: white;
     margin-top: 3rem;
-    height: 100vh;
-    margin-left: 10%;
-    margin-right: 10%;
+    /* height: 70vh; */
+    margin-left: 17%;
+    margin-right: 17%;
+ 
 
 
 }
@@ -23,9 +24,139 @@ body{
 .title{
     background-color: #B9D3FF;
     width: 80%;
+    border: black solid;
     
   
 }
-.title-name{
-  
+.survey-explain{
+    margin-top: 1rem;
+    width: 40%;
+    border-bottom: solid gray;
+    font-size: 2rem;
+    color: gray;
 }
+.option-container{
+    width: 100%;
+    display: flex;
+    margin-top: 1rem;
+}
+.left-option{
+    flex: 1;
+    display: block;
+    text-align: left;
+    align-items: center;
+    margin-left: 1rem;
+ 
+}
+
+.start-date-container{
+    width: 50%;
+    display: flex;
+    align-items: center; 
+    margin-top: 1rem;
+    
+    /*align-items- 가로 요소들 줄 안 맞을 떄 */
+}
+
+
+   
+
+.endDatePicker{
+    box-shadow:0px 8px 5px -2px ;
+}
+.end-date-container{
+    width: 30%;
+    display: flex;
+    align-items: center; 
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    /*align-items- 가로 요소들 줄 안 맞을 떄 */
+}
+
+.startDatePicker{
+    box-shadow:0px 8px 5px -2px;
+}
+.right-option{
+    flex: 1;
+}
+.check-participant{
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.choose-group{
+    display: flex;
+    
+}
+.group-name-container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    
+}
+.group-name-container::-webkit-scrollbar{
+    display: none;
+  }
+.group-name-btn{
+    border-radius: 10px;
+    background-color: white;
+    margin: 0.3rem;
+}
+.group-member-container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+.member-name-btn{
+    border-radius: 10px;
+    background-color: white;
+    margin: 0.3rem;
+    
+}
+.group-member-container::-webkit-scrollbar{
+    display: none;
+  }
+  .question-create-container{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    margin-top:3rem;
+    margin-left: 19%;
+    margin-bottom: 1rem;
+  }
+  .questions{
+    flex: 1;
+    width: 60%;
+  }
+  .qusetion-container{
+  
+    text-align: center;
+    align-items: center;
+  }
+  .question-title{
+    background-color: #C4E3FB;
+  }
+  
+  .create-menu-container{
+    flex: 1;
+    top:50%;
+   bottom: 15%;
+    height: 30%;
+    position: sticky;
+    
+  }
+  .create-menu{
+    text-align: center;
+    background-color: #C4E3FB;
+    width: 10%;
+    height: 30%;
+    margin-top: 1rem;
+    margin-left: 5rem;
+    
+  }
+  
+  
