@@ -60,7 +60,7 @@ const Chatbot = () => {
                 const {isSuccess, code, message} = response;
                 setMessage(message);
 
-                const {formId} = response.result;
+                setFormId(response.result);
 
                 if (code === 1000) {
                     // 성공적으로 요청이 된 경우
