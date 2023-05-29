@@ -28,6 +28,8 @@ import check_mem from "../../assets/ic_check_member.png";
 import multipleChoice from "../../assets/btn_multiple_choice.png";
 import shortAnswer from "../../assets/btn_short_answer.png";
 import longAnswer from "../../assets/btn_long_answer.png";
+import remove_btn from "../../assets/btn_remove_question.png";
+import radio_btn from "../../assets/btn_radio.png";
 
 
 
@@ -42,7 +44,7 @@ const FormCreate = () => {
     const [participationStatus,setParticipationStatus]=useState(0);
     const [requireModalIsOpen, setRequireModalIsOpen] = useState(false);
     const [chooseGroupModalIsOpen, setChooseGroupModalIsOpen]=useState(false);
-    const [questionId,setQuestionId]=useState(0);
+    
     
     const anoyClick = () => {
         console.log("1",isClicked,imgSrc)
@@ -78,15 +80,41 @@ const FormCreate = () => {
    
     
     const MakeMultipleChoiceQuestion=()=>{
-        
+        const [radioOptions, setRadioOptions] = useState<string[]>([]);
+
+        const handleAddRadioOption = () => {
+            setRadioOptions((prevOptions) => [...prevOptions, '']);
+        };
+        const handleRadioOptionChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+            const updatedOptions = [...radioOptions];
+            updatedOptions[index] = event.target.value;
+            setRadioOptions(updatedOptions);
+          };
         return(
             <div className="qusetion-container">
                    <div className="question-title-containter">
                         <div className="question-title"><input className="title-input" placeholder="질문 제목을 입력해주세요"/></div>
                         <div className="question-explain"><input className="explain-input" placeholder="질문 설명을 입력해주세요"/></div>
                     </div>
-                    ddd
+                    <div className="radio-container">
+                {radioOptions.map((option, index) => (
+                <div className="radio-line" key={index}>
+                    <img src={radio_btn} className="radio-btn" alt="radio" />
+                    <input
+                    className="radio-option"
+                    type="text"
+                    value={option}
+                    onChange={(event) => handleRadioOptionChange(index, event)}
+                    placeholder="질문 제목을 입력해주세요"
+                    />
                 </div>
+                ))}
+                <div className="add-radio-option" onClick={handleAddRadioOption}>
+                질문 추가
+                </div>
+                </div>
+                
+    </div>
             
         )
     }
@@ -97,23 +125,36 @@ const FormCreate = () => {
         const onInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
             setInputCount(event.target.value.length);
         };
+        const handleRemoveQuestion = () => {
+            // Find the parent div and remove it
+            console.log("remove");
+            const questionContainer = document.querySelector('.question-container');
+            // if (questionContainer && questionContainer.parentNode) {
+            //     console.log("removed");
+            //   questionContainer.parentNode.removeChild(questionContainer);
+            // }
+
+          };
         
         return(
-            <div className="qusetion-container">
+            
+            <div  className="qusetion-container">
                     <div className="question-title-containter">
                         <div className="question-title"><input className="title-input" placeholder="질문 제목을 입력해주세요"/></div>
                         <div className="question-explain"><input className="explain-input" placeholder="질문 설명을 입력해주세요"/></div>
                     </div>
                     <div className="text-answer">
                         <div className="write-here">
+                        <div className="text-counter">{inputCount}/50 </div>
                         <input className="text-answer-input" type="text" onChange={onInputHandler} maxLength={50}/>
-                        <div className="text-counter">{inputCount}/50</div>
+                        <img src={remove_btn} alt="remove" onClick={handleRemoveQuestion}/>
                         </div>
-
+                       
 
                     </div>
                     
                 </div>
+            
             
         )
     }
@@ -124,8 +165,9 @@ const FormCreate = () => {
         const onInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
             setInputCount(event.target.value.length);
         };
+        
         return(
-            <div className="qusetion-container">
+            <div  className="qusetion-container">
                     <div className="question-title-containter">
                         <div className="question-title"><input className="title-input" placeholder="질문 제목을 입력해주세요"/></div>
                         <div className="question-explain"><input className="explain-input" placeholder="질문 설명을 입력해주세요"/></div>
@@ -154,6 +196,7 @@ const FormCreate = () => {
           rootDiv.appendChild(newQuestionNode);
         }
       };
+      //question 삭제
   
     
     return(
@@ -232,7 +275,7 @@ const FormCreate = () => {
             <div className="question-create-container">
                 <div className="questions">
                 {MakeShortAnswerQuestion()}
-                
+                {MakeMultipleChoiceQuestion()}
                 </div>
                 <div className="create-menu-container">
                     <div className="create-menu">
