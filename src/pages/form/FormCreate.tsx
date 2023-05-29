@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import {userState, spaceState} from "../../commons/Atom";
 import {useRecoilState, useRecoilValue} from "recoil";
 import Modal from  "../../components/commons/modals";
-
+import ReactDOM from "react-dom";
 
 
 // 달력을 위해서
@@ -28,8 +28,8 @@ import check_mem from "../../assets/ic_check_member.png";
 import multipleChoice from "../../assets/btn_multiple_choice.png";
 import shortAnswer from "../../assets/btn_short_answer.png";
 import longAnswer from "../../assets/btn_long_answer.png";
-import ReactDOM from "react-dom";
-import ShortAnswerQuestion from "../../components/ShortAnswerQuestion";
+
+
 
 
 const FormCreate = () => {
@@ -82,8 +82,8 @@ const FormCreate = () => {
         return(
             <div className="qusetion-container">
                    <div className="question-title-containter">
-                        <div className="question-title">객관식</div>
-                        <div className="question-explain">질문 설명</div>
+                        <div className="question-title"><input className="title-input" placeholder="질문 제목을 입력해주세요"/></div>
+                        <div className="question-explain"><input className="explain-input" placeholder="질문 설명을 입력해주세요"/></div>
                     </div>
                     ddd
                 </div>
@@ -101,8 +101,8 @@ const FormCreate = () => {
         return(
             <div className="qusetion-container">
                     <div className="question-title-containter">
-                        <div className="question-title">단답식</div>
-                        <div className="question-explain">질문 설명</div>
+                        <div className="question-title"><input className="title-input" placeholder="질문 제목을 입력해주세요"/></div>
+                        <div className="question-explain"><input className="explain-input" placeholder="질문 설명을 입력해주세요"/></div>
                     </div>
                     <div className="text-answer">
                         <div className="write-here">
@@ -162,15 +162,15 @@ const FormCreate = () => {
                 <img className="form-logo" src={logo} alt="logo"/>
                 <div></div>
                 <div className="title">
-                <span className="title-name">설문지 제목</span>
+                <span className="title-name"><input className="survey-title-input" placeholder="설문지 제목을 입력하세요"/></span>
                 </div>
                 <div className="survey-explain">
-                설명
+                <input className="survey-explain-input" placeholder="설문지 설명을 입력하세요"/>
                 </div>
                 <div className="option-container">
                     
                     <div className="left-option">                    
-                    <img className="anoy" src={before} onClick={anoyClick} alt="anoy"/>
+                    <img className="anoy" src={imgSrc} onClick={anoyClick} alt="anoy"/>
                         <div className="start-date-container">
                             <img src={start_date} alt="startDate"></img>
                             <DatePicker className="startDatePicker"
@@ -190,10 +190,11 @@ const FormCreate = () => {
                                     locale={ko}
                                     dateFormat="yyyy.MM.dd"
                                     selected={endDate}
+                                    startDate={startDate}
                                     onChange={(date:Date) => setEndDate(date)}
                                     selectsEnd
-                                    minDate={startDate}
-                                    // startDate={startDate}
+                                    minDate={startDate ? new Date(startDate.getTime() + 24 * 60 * 60 * 1000) : null}
+                                    
                                     endDate={endDate}  
                                 />
                         </div>
@@ -246,5 +247,6 @@ const FormCreate = () => {
         </div>
     )
 }
+//startdate enddate 비교해서 경고 날리기
 
 export default FormCreate;
