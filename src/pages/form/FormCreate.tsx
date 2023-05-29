@@ -35,12 +35,22 @@ import radio_btn from "../../assets/btn_radio.png";
 
 
 const FormCreate = () => {
+    //api 6.2에 필요한 것
+    const [title,setTitle]=useState("");
+    const [content,setContent]=useState("");
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [isAnonymous,setIsAnonymous]=useState(false);
+    const [isMandatory,setIsMandatory]=useState(false);
+    const [questionGroups,setQuestionGroups]=useState([]);
+    const [questionRequests,setQuestionRequests]=useState([]);
+
     const [imgSrc,setImgSrc]=useState(before);
     const [isClicked, setIsClicked] = useState(false);
     const dateNow = new Date();
     const today = dateNow.toISOString().slice(0, 10);
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    
+    
     const [participationStatus,setParticipationStatus]=useState(0);
     const [requireModalIsOpen, setRequireModalIsOpen] = useState(false);
     const [chooseGroupModalIsOpen, setChooseGroupModalIsOpen]=useState(false);

@@ -31,6 +31,7 @@ const CreateDetailedSurvey = async (formId: number, requestBody: any) => {
             endDate: requestBody.endDate,
             isAnonymous: requestBody.isAnonymous,
             isMandatory: requestBody.isMandatory,
+            questionGroups:requestBody.questionGroups,
             questionRequests: requestBody.questionRequests,
         });
         return response.data;
