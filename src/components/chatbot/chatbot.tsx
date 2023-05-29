@@ -67,7 +67,7 @@ const Chatbot = () => {
                     setFormId(formId);
 
                     // <Link to="/createSurvey" />
-                    navigate("/createSurvey");
+                    navigate("/form/create");
                 } else {
                     // FIXME: 이후 남은 예외 처리를 모두 분기 처리해주어야 한다.
                     console.log(code);
