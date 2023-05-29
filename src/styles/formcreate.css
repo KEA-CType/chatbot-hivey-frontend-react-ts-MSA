@@ -278,10 +278,31 @@ body{
     flex-direction: column;
     background-color: #C4E3FB;
     width: 15%;
-    
     margin-top: 1rem;
     margin-left: 5rem;
     
   }
+  .button-container{
+    text-align: center;
+  }
   
+  .finish-btn{
+    margin-right: 2rem;
+    margin-bottom: 3rem;
+    background-color: #78A5F0;
+    border-style: none;
+    border-radius: 20px;
+    color: white;
+    width: 15%;
+    height: 2.5rem;
+  }
+  .cancel-btn{
+    margin-bottom: 3rem;
+    background-color: lightgray;
+    border-style: none;
+    border-radius: 20px;
+    color: white;
+    width: 15%;
+    height: 2.5rem;
+  }
   

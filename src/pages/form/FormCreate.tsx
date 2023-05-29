@@ -285,8 +285,10 @@ const FormCreate = () => {
                     </div>
                 </div>
             </div>
-            
-
+            <div className="button-container">
+                <button className="finish-btn">완료</button>
+                <button className="cancel-btn">취소</button>
+            </div>
         </div>
     )
 }
