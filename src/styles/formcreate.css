@@ -127,33 +127,104 @@ body{
     margin-top:3rem;
     margin-left: 19%;
     margin-bottom: 1rem;
+ 
   }
   .questions{
     flex: 1;
-    width: 60%;
+    
   }
   .qusetion-container{
   
     text-align: center;
     align-items: center;
+    height: 50%;
+    margin-bottom: 3rem;
+    
+  }
+  .question-title-containter{
+    background-color: #C4E3FB;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: left;
   }
   .question-title{
+    padding-top: 1.5rem;
+    padding-left: 2rem;
+    
+  }
+  .title-input{
+    border-style: none;
+    font-weight: bold;
+    font-size: 1.2rem;
     background-color: #C4E3FB;
   }
-  
+  .title-input::placeholder{
+    font-size: 1.2rem;
+    
+  }
+.question-explain{
+  padding-left: 2rem;
+  padding-bottom: 0.5rem;
+
+}
+.explain-input{
+  border-style: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: gray;
+  background-color: #C4E3FB;
+}
+
+  .text-answer{
+    text-align: center;
+    background-color: lightgray;
+
+ 
+  }
+  .write-here{
+    text-align: center;
+    height: 8rem;
+    background-color: white;
+  }
+  .text-answer-input{
+    text-align: center;
+    background-color: lightgray;
+    border-style: none;
+    width: 80%;
+    height: 50%;
+    margin-top: 1.3rem;
+  }
+  .long-text-answer-input{
+    text-align: center;
+    background-color: lightgray;
+    border-style: none;
+    width: 80%;
+    height: 50%;
+    margin-top: 1.3rem;
+  }
+  .text-counter{
+ 
+    color: gray;
+    text-align: right;
+    margin-right: 1rem;
+ }
+
   .create-menu-container{
     flex: 1;
-    top:50%;
-   bottom: 15%;
-    height: 30%;
+    width: 20%;
+    top:30%;
+    bottom: 10%;
     position: sticky;
     
   }
   .create-menu{
     text-align: center;
+    display:flex;
+    flex-direction: column;
     background-color: #C4E3FB;
-    width: 10%;
-    height: 30%;
+    width: 15%;
+    
     margin-top: 1rem;
     margin-left: 5rem;
     

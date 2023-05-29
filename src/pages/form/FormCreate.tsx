@@ -1,6 +1,6 @@
 import "../../styles/formcreate.css"
 
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, ReactElement} from "react";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
@@ -25,6 +25,12 @@ import must_btn from "../../assets/btn_must_participation.png";
 import check_btn from "../../assets/btn_check_participation.png";
 import every_mem from "../../assets/ic_every_member.png";
 import check_mem from "../../assets/ic_check_member.png";
+import multipleChoice from "../../assets/btn_multiple_choice.png";
+import shortAnswer from "../../assets/btn_short_answer.png";
+import longAnswer from "../../assets/btn_long_answer.png";
+import ReactDOM from "react-dom";
+import ShortAnswerQuestion from "../../components/ShortAnswerQuestion";
+
 
 const FormCreate = () => {
     const [imgSrc,setImgSrc]=useState(before);
@@ -37,7 +43,7 @@ const FormCreate = () => {
     const [requireModalIsOpen, setRequireModalIsOpen] = useState(false);
     const [chooseGroupModalIsOpen, setChooseGroupModalIsOpen]=useState(false);
     const [questionId,setQuestionId]=useState(0);
-    let [inputCount, setInputCount] = useState(0);
+    
     const anoyClick = () => {
         console.log("1",isClicked,imgSrc)
         if(isClicked) //
@@ -68,65 +74,87 @@ const FormCreate = () => {
         }
         
     }
+
+   
     
-    const makeMultipleChoiceQuestion=()=>{
+    const MakeMultipleChoiceQuestion=()=>{
+        
         return(
             <div className="qusetion-container">
-                    <div className="question-title">
-                        객관식
-                        <span className="question-explain">질문 설명</span>
+                   <div className="question-title-containter">
+                        <div className="question-title">객관식</div>
+                        <div className="question-explain">질문 설명</div>
                     </div>
                     ddd
                 </div>
             
         )
     }
-    const makeShortAnswerQuestion=()=>{
+    const MakeShortAnswerQuestion=()=>{
+        console.log("ShortQuestion")
+        const [inputCount, setInputCount] = useState(0);
+
+        const onInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setInputCount(event.target.value.length);
+        };
+        
         return(
             <div className="qusetion-container">
-                    <div className="question-title">
-                        <p>단답식</p>
-                        <span className="question-explain">질문 설명</span>
+                    <div className="question-title-containter">
+                        <div className="question-title">단답식</div>
+                        <div className="question-explain">질문 설명</div>
                     </div>
-                    <div>
-                    <input type="text" onChange={onInputHandler} maxLength={50} />
-                    <p>
-                        <span>{inputCount}</span> 
-                        <span>/50</span>
-                    </p>
-        
-                    ddd
+                    <div className="text-answer">
+                        <div className="write-here">
+                        <input className="text-answer-input" type="text" onChange={onInputHandler} maxLength={50}/>
+                        <div className="text-counter">{inputCount}/50</div>
+                        </div>
+
+
                     </div>
+                    
                 </div>
             
         )
     }
 
-    const makeLongAnswerQuestion=()=>{
+    const MakeLongAnswerQuestion=()=>{
+        const [inputCount, setInputCount] = useState(0);
+
+        const onInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setInputCount(event.target.value.length);
+        };
         return(
             <div className="qusetion-container">
-                    <div className="question-title">
-                        <p>주관식</p>
-                        <span className="question-explain">질문 설명</span>
+                    <div className="question-title-containter">
+                        <div className="question-title"><input className="title-input" placeholder="질문 제목을 입력해주세요"/></div>
+                        <div className="question-explain"><input className="explain-input" placeholder="질문 설명을 입력해주세요"/></div>
                     </div>
-                    <div>
-                    <input type="text" onChange={onInputHandler} maxLength={500} />
-                    <p>
-                        <span>{inputCount}</span>
-                        <span>/500</span>
-                    </p>
-        
-                    ddd
+                    <div className="text-answer">
+                        <div className="write-here">
+                        <input className="long-text-answer-input" type="text" onChange={onInputHandler} maxLength={500}/>
+                        <div className="text-counter">{inputCount}/500</div>
+                        </div>
+
+
                     </div>
                 </div>
             
         )
     }
+    //react 요소인 질문 유형을 props로 받아서 복사 후 div 추가
+    const handleAddQuestion = (questionType: ReactElement) => {
+        const rootDiv = document.querySelector('.questions');
     
-    const onInputHandler = (e: React.ChangeEvent<any>) => {
-        setInputCount(e.target.value.length);
+        if (rootDiv) {
+          const newQuestion = React.cloneElement(questionType);
+          const newQuestionNode = document.createElement('div');
+    
+          ReactDOM.render(newQuestion, newQuestionNode);
+          rootDiv.appendChild(newQuestionNode);
+        }
       };
-
+  
     
     return(
         <div>
@@ -202,20 +230,14 @@ const FormCreate = () => {
             </div>
             <div className="question-create-container">
                 <div className="questions">
-                {makeShortAnswerQuestion()}
-                {makeShortAnswerQuestion()}
-                {makeLongAnswerQuestion()}
-                {makeLongAnswerQuestion()}
-                {makeLongAnswerQuestion()}
-                {makeLongAnswerQuestion()}
-                {makeLongAnswerQuestion()}
-                {makeLongAnswerQuestion()}
-                {makeLongAnswerQuestion()}
-                {makeLongAnswerQuestion()}
+                {MakeShortAnswerQuestion()}
+                
                 </div>
                 <div className="create-menu-container">
                     <div className="create-menu">
-                        ddddd
+                        <img src={multipleChoice} alt="multipleChoice" onClick={()=>handleAddQuestion(<MakeMultipleChoiceQuestion/>)}/>
+                        <img src={shortAnswer} alt="short" onClick={()=>handleAddQuestion(<MakeShortAnswerQuestion/>)} />
+                        <img src={longAnswer} alt="long" onClick={()=>handleAddQuestion(<MakeLongAnswerQuestion/>)} />
                     </div>
                 </div>
             </div>
