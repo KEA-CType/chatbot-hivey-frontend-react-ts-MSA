@@ -15,21 +15,23 @@ import icProfile from "../../assets/ic_profile.png";
 const MandatoryFormSubmissionList = ({submissions}: any) => {
     const [submissionsByMandatoryForm, setSubmissionsByMandatoryForm] = useState(Array);
 
+    console.log(`submissions.length: ${submissions.length}`);
+
     useEffect(() => {
 
         const submissionList = submissions.map(
             (s: any, i: number) => {
 
                 return (
-                    <div key={s.memberId}>
-
-                        <div className="submission-members-container">
+                    <>
+                        <div key={s.memberId} className="submission-members-container"
+                             style={{borderBottomWidth: i === submissions.length - 1 ? "0rem" : "0.05rem"}}>
 
                             <div className="submission-members-profile-wrapper">
                                 <img className="submission-members-profile-img" src={icProfile} alt=""/>
                             </div>
 
-                            <div className="submission-members-id">{s.memberId}</div>
+                            <div className="submission-members-id">#{s.memberId}</div>
 
                             <div className="submission-members-name">{s.name}</div>
 
@@ -43,9 +45,10 @@ const MandatoryFormSubmissionList = ({submissions}: any) => {
 
                         </div>
 
-                        {i < (submissions.length - 1) && <div className="submission-members-line"></div>}
+                        {/*{i < (submissions.length - 1) && <div className="submission-members-line"></div>}*/}
 
-                    </div>
+                    </>
+
                 );
             });
 
@@ -57,26 +60,34 @@ const MandatoryFormSubmissionList = ({submissions}: any) => {
 }
 
 /**
- * 선택 설문에 대한 참여 현황 목록 불러오기
+ * 선택 참여 설문에서 각각의 타겟 그룹을 선택했을 때 참여 현황 목록 불러오기
  */
-const NotMandatoryFormSubmissionList = ({targetGroups, submissions}: any) => {
-    const [submissionsByNotMandatoryForm, setSubmissionsByNotMandatoryForm] = useState(Array);
+const SubmissionListByTargetGroup = ({groupId, submissions}: any) => {
+    const [submissionsByTargetGroup, setSubmissionsByTargetGroup] = useState(Array);
 
     useEffect(() => {
 
-        const submissionList = submissions.map(
+        // 1. 그룹 식별 번호를 통해 해당 그룹의 멤버들만 필터링한다.
+        // 2. 해당 멤버들의 참여 현황 목록을 보여준다.
+
+        const membersByTargetGroup = Array.isArray(submissions) ? submissions.filter(
+            (s: any) => s.groupId === groupId
+        ) : [];
+
+        console.log(`membersByTargetGroup: ${membersByTargetGroup}`);
+
+        const updatedSubmissions = membersByTargetGroup.map(
             (s: any, i: number) => {
 
                 return (
-                    <div key={s.memberId}>
-
-                        <div className="submission-members-container">
-
+                    <>
+                        <div key={s.memberId} className="submission-members-container"
+                             style={{borderBottomWidth: i === submissions.length - 1 ? "0rem" : "0.05rem"}}>
                             <div className="submission-members-profile-wrapper">
                                 <img className="submission-members-profile-img" src={icProfile} alt=""/>
                             </div>
 
-                            <div className="submission-members-id">{s.memberId}</div>
+                            <div className="submission-members-id">#{s.memberId}</div>
 
                             <div className="submission-members-name">{s.name}</div>
 
@@ -92,15 +103,79 @@ const NotMandatoryFormSubmissionList = ({targetGroups, submissions}: any) => {
 
                         {i < (submissions.length - 1) && <div className="submission-members-line"></div>}
 
-                    </div>
+                    </>
                 );
             });
 
-        setSubmissionsByNotMandatoryForm(submissionList);
+        setSubmissionsByTargetGroup(updatedSubmissions);
+
+    }, [groupId, submissions]);
+
+    return <>{submissionsByTargetGroup}</>;
+}
+
+/**
+ * 선택 참여 설문에 대한 참여 현황 목록 불러오기
+ */
+const NotMandatoryFormSubmissionList = ({targetGroups, submissions, getSelectedGroupId}: any) => {
+    const [targetGroupsByNotMandatoryForm, setTargetGroupsByNotMandatoryForm] = useState(Array);
+
+    const setSelectedGroupId = (groupId: number) => {
+        getSelectedGroupId(groupId);
+    }
+
+    useEffect(() => {
+
+        let groups = document.getElementsByClassName("submission-groups-box");
+
+        const updatedTargetGroups = targetGroups.map(
+            (t: any) => {
+
+                /**
+                 * 그룹 목록을 클릭했을 때
+                 */
+                const onClickGroup = (e: any) => {
+                    e.preventDefault();
+
+                    if (e.target.classList[1] === "submission-groups-box-clicked") {
+
+                        e.target.classList.remove("submission-groups-box-clicked");
+                        e.target.classList.add("submission-groups-box");
+                        setSelectedGroupId(0);
+
+                    } else {
+
+                        for (let i = 0; i < groups.length; i++) {
+                            groups[i].classList.remove("submission-groups-box-clicked");
+                            groups[i].classList.add("submission-groups-box");
+                        }
+
+                        e.target.classList.remove("submission-groups-box-clicked");
+                        e.target.classList.add("submission-groups-box-clicked");
+                        setSelectedGroupId(t.groupId);
+                    }
+                }
+
+                // 1. 설문에 참여해야 하는 타겟 그룹의 목록을 보여준다.
+                // 2. 특정 타겟 그룹을 클릭했을 때 해당 그룹의 멤버들의 참여 현황을 보여준다.
+
+                return (
+                    <div key={t.groupId} id="submission-groups-box" className="submission-groups-box"
+                         onClick={onClickGroup}>
+
+                        {t.groupName}
+                        {/*<div className="submission-groups-box-name">{t.groupName}</div>*/}
+
+                    </div>
+                );
+
+            });
+
+        setTargetGroupsByNotMandatoryForm(updatedTargetGroups);
 
     }, [targetGroups, submissions]);
 
-    return <>{submissionsByNotMandatoryForm}</>;
+    return <>{targetGroupsByNotMandatoryForm}</>;
 }
 
 const SubmissionStatus = () => {
@@ -110,8 +185,13 @@ const SubmissionStatus = () => {
     const [isMandatory, setIsMandatory] = useState(0);
     const [submissions, setSubmissions] = useState<SubmissionListResponse[] | null>([]);
     const [targetGroups, setTargetGroups] = useState<TargetGroupListResponse[] | null>([]);
+    const [selectedGroupId, setSelectedGroupId] = useState(0);
 
     const isSubmissionListDisplay = selectedFormId === 0 ? "none" : "flex";
+
+    const getSelectedGroupId = (groupId: number) => {
+        setSelectedGroupId(groupId);
+    }
 
     useEffect(() => {
 
@@ -178,55 +258,32 @@ const SubmissionStatus = () => {
     return (
         <div className="submission-rectangle-white" style={{display: isSubmissionListDisplay}}>
 
-            {/* FIXME: formTitle 가져오는 부분 수정할 수 있으면 수정하기 */}
-            <div className="submission-title">설문 참여 현황 목록
+            <div className="submission-title"><span style={{color: "#6ABBFA"}}>{formTitle}</span> 참여 현황 목록
                 {isMandatory === 0
                     ? <span style={{color: "gray", fontSize: "0.8rem"}}>&nbsp;&nbsp; (선택 참여)</span>
                     : <span style={{color: "gray", fontSize: "0.8rem"}}>&nbsp;&nbsp; (필수 참여)</span>}
             </div>
 
-            {/* 만약 필수 설문인 경우 멤버들을 목록만 보여주고, 선택 설문인 경우 그룹과 함께 보여준다. */}
-            {isMandatory === 0
-                ? <NotMandatoryFormSubmissionList targetGroups={targetGroups} submissions={submissions}/>
-                : <MandatoryFormSubmissionList submissions={submissions}/>}
+            {/* 만약 선택 참여 설문인 경우 그룹과 함께 보여준다. */}
+            {isMandatory === 0 &&
+                <div className="submission-groups-and-members-container">
 
-            {/*<div className="submission-members-container">*/}
+                    <div className="submission-groups-container">
+                        <NotMandatoryFormSubmissionList targetGroups={targetGroups} submissions={submissions}
+                                                        getSelectedGroupId={getSelectedGroupId}/>
+                    </div>
 
-            {/*    <div className="submission-members-profile-wrapper">*/}
-            {/*        <img className="submission-members-profile-img" src={icProfile} alt=""/>*/}
-            {/*    </div>*/}
+                    <div className="submission-members-container-by-group">
+                        <SubmissionListByTargetGroup groupId={selectedGroupId} submissions={submissions}/>
+                    </div>
 
-            {/*    <div className="submission-members-id">#1</div>*/}
+                </div>
+            }
 
-            {/*    <div className="submission-members-name">레몬이</div>*/}
-
-            {/*    <div className="submission-members-email">ska2870ghk@gachon.ac.kr</div>*/}
-
-            {/*    <div className="submission-members-status-wrapper">*/}
-            {/*        <img className="submission-members-status-img" src={icCheckCircleGreen} alt=""/>*/}
-            {/*    </div>*/}
-
-            {/*</div>*/}
-
-            {/*<div className="submission-members-line"></div>*/}
-
-            {/*<div className="submission-members-container">*/}
-
-            {/*    <div className="submission-members-profile-wrapper">*/}
-            {/*        <img className="submission-members-profile-img" src={icProfile} alt=""/>*/}
-            {/*    </div>*/}
-
-            {/*    <div className="submission-members-id">#2</div>*/}
-
-            {/*    <div className="submission-members-name">남선우</div>*/}
-
-            {/*    <div className="submission-members-email">rudghk3352@naver.com</div>*/}
-
-            {/*    <div className="submission-members-status-wrapper">*/}
-            {/*        <img className="submission-members-status-img" src={icCheckCircleGreen} alt=""/>*/}
-            {/*    </div>*/}
-
-            {/*</div>*/}
+            {/* 만약 필수 설문인 경우 멤버들을 목록만 보여준다. */}
+            {isMandatory === 1 &&
+                <MandatoryFormSubmissionList submissions={submissions}/>
+            }
 
         </div>
     );

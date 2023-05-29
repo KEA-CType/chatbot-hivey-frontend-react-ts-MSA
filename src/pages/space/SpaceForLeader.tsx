@@ -73,7 +73,7 @@ const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
             { selectedFormId !== 0 && <SubmissionStatus /> }
 
             {/* 스페이스의 그룹 목록 (Component 호출) */}
-            <GroupMemberList/>
+            <GroupMemberList groups={groups} />
         </div>
     );
 

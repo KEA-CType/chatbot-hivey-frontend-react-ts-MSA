@@ -380,6 +380,10 @@
     height: auto;
     width: auto;
 
+    border-bottom-width: 0.05rem;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -391,12 +395,12 @@
     margin-bottom: 1%;
     margin-left: 5%;
 
-    padding-right: 20%;
+    padding-bottom: 0.8rem;
 }
 
 .submission-members-container .submission-members-profile-wrapper {
     height: auto;
-    width: 5%;
+    width: 2rem;
     overflow: hidden;
 
     display: block;
@@ -404,7 +408,7 @@
 
 .submission-members-profile-wrapper .submission-members-profile-img {
     width: auto;
-    height: 20px;
+    height: 1.5rem;
     aspect-ratio: auto 1/1;
 
     display: block;
@@ -412,19 +416,19 @@
 
 .submission-members-container .submission-members-id {
     height: auto;
-    width: 2rem;
+    width: 3rem;
 
     box-sizing: border-box;
 
     font-size: 0.9rem;
     font-family: Pretendard, sans-serif;
 
-    margin-left: 1%;
+    margin-left: 2%;
 }
 
 .submission-members-container .submission-members-name {
     height: auto;
-    width: 3rem;
+    width: 4rem;
 
     box-sizing: border-box;
 
@@ -436,12 +440,12 @@
     font-size: 0.9rem;
     font-family: Pretendard, sans-serif;
 
-    margin-left: 1%;
+    margin-left: 2%;
 }
 
 .submission-members-container .submission-members-email {
     height: auto;
-    width: 12rem;
+    width: 15rem;
 
     box-sizing: border-box;
 
@@ -454,7 +458,7 @@
     font-size: 0.9rem;
     font-family: Pretendard, sans-serif;
 
-    margin-left: 1%;
+    margin-left: 2%;
 }
 
 .submission-members-container .submission-members-status-wrapper {
@@ -464,12 +468,12 @@
 
     display: block;
 
-    margin-left: 1%;
+    margin-left: 2%;
 }
 
 .submission-members-status-wrapper .submission-members-status-img {
     width: auto;
-    height: 20px;
+    height: 1rem;
     aspect-ratio: auto 1/1;
 
     display: block;
@@ -482,4 +486,319 @@
     background-color: lightgray;
 
     margin: 0.5% 5%;
+}
+
+.submission-rectangle-white .submission-groups-and-members-container {
+    width: auto;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    cursor: default;
+}
+
+.submission-groups-and-members-container .submission-groups-container {
+    width: 40%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-left: 3%;
+}
+
+.submission-groups-and-members-container .submission-members-container-by-group {
+    width: 60%;
+    height: auto;
+
+    /*border-style: solid;*/
+    /*border-color: black;*/
+    /*border-radius: 0.5rem;*/
+    /*border-width: 0.01rem;*/
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    /*padding-left: 5%;*/
+    /*padding-top: 1%;*/
+    /*padding-bottom: 1%;*/
+
+    margin-left: 3%;
+    margin-right: 5%;
+}
+
+.submission-groups-container .submission-groups-box {
+    width: 100%;
+    height: auto;
+
+    background-color: white;
+
+    border-style: solid;
+    border-color: black;
+    border-radius: 0.5rem;
+    border-width: 0.01rem;
+
+    color: black;
+    font-size: 0.9rem;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 3%;
+}
+
+.submission-groups-container .submission-groups-box-clicked {
+    width: 100%;
+    height: auto;
+
+    background-color: #4BC86E;
+
+    border-radius: 0.5rem;
+    border-width: 0.01rem;
+
+    color: white;
+    font-size: 0.9rem;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 3%;
+}
+
+.submission-members-container-by-group .submission-members-container {
+    height: auto;
+    width: auto;
+
+    border-bottom-width: 0.05rem;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-bottom: 0.8rem;
+
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.space-container .group-rectangle-white {
+    width: 85%;
+    height: 25vh;
+
+    background-color: #ffffff;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin-top: 1rem;
+
+    padding: 0;
+}
+
+.group-rectangle-white .group-title {
+    height: 1.5rem;
+    width: fit-content;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: Archivo, sans-serif;
+
+    cursor: default;
+
+    margin-top: 3%;
+    margin-left: 3%;
+}
+
+.group-rectangle-white .groups-members-container {
+    width: auto;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    cursor: default;
+}
+
+.groups-members-container .group-container {
+    width: 40%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-left: 3%;
+}
+
+.groups-members-container .group-member-container {
+    width: 60%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1%;
+}
+
+.group-container .group-box {
+    width: 100%;
+    height: auto;
+
+    background-color: white;
+
+    border-style: solid;
+    border-color: black;
+    border-radius: 0.5rem;
+    border-width: 0.01rem;
+
+    color: black;
+    font-size: 0.9rem;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 5%;
+
+    margin-top: 3%;
+}
+
+.group-container .group-box-clicked {
+    width: 100%;
+    height: auto;
+
+    background-color: #0077FF;
+
+    border-radius: 0.5rem;
+    border-width: 0.01rem;
+
+    color: white;
+    font-size: 0.9rem;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 5%;
+
+    margin-top: 3%;
+}
+
+.group-member-container .group-member-container-by-group {
+    height: auto;
+    width: 80%;
+
+    border-bottom-width: 0;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-bottom: 0.3rem;
+
+    margin-bottom: 1%;
+}
+
+.group-member-container-by-group .group-member-profile-wrapper {
+    height: auto;
+    width: 2rem;
+    overflow: hidden;
+
+    display: block;
+}
+
+.group-member-profile-wrapper .group-member-profile-img {
+    width: auto;
+    height: 1.5rem;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}
+
+.group-member-container-by-group .group-member-id {
+    height: auto;
+    width: 3rem;
+
+    box-sizing: border-box;
+
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 2%;
+}
+
+.group-member-container-by-group .group-member-name {
+    height: auto;
+    width: 4rem;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 2%;
+}
+
+.group-member-container-by-group .group-member-email {
+    height: auto;
+    width: 15rem;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    color: gray;
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 2%;
+}
+
+.group-member-container-by-group .group-member-kebab-wrapper {
+    height: auto;
+    width: 2rem;
+    overflow: hidden;
+
+    display: block;
+}
+
+.group-member-kebab-wrapper .group-member-kebab-img {
+    width: auto;
+    height: 1rem;
+    aspect-ratio: auto 1/1;
+
+    display: block;
 }
