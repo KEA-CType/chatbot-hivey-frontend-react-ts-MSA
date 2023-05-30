@@ -9,7 +9,7 @@ import Chatbot from "./components/chatbot/chatbot";
 import SpaceForMember from "./pages/space/SpaceForMember";
 import {RecoilRoot} from "recoil";
 import SpaceForLeader from "./pages/space/SpaceForLeader"
-import Userbar from "./components/userbar";
+import Userbar from "./components/Userbar";
 
 function App() {
 

@@ -30,30 +30,13 @@ const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
 
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //
-    //     const renderInformation = () => {
-    //
-    //         if (spaceOnly && forms && groups) {
-    //
-    //             console.log(`currentSpace: ${JSON.stringify(spaceOnly)}`);
-    //             console.log(`forms: ${JSON.stringify(forms)}`);
-    //             console.log(`groups: ${JSON.stringify(groups)}`);
-    //
-    //         }
-    //     }
-    //
-    //     renderInformation();
-    //
-    // }, [spaceOnly, forms, groups]);
-
     if (!spaceOnly || !forms || !groups) {
         navigate("/main")
         return <></>;
     }
 
     return (
-        <div className="space-container">
+        <div id="space-container" className="space-container">
             {/* 스페이스에 대한 정보 */}
             <div className="space-rectangle-white">
                 <div className="space-img-wrapper">
@@ -66,14 +49,20 @@ const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
                 </div>
             </div>
 
-            {/* 스페이스의 설문 목록 (Component 호출) */}
-            <FormBoardForLeader forms={forms}/>
+            <div className="space-content-container">
 
-            {/* 스페이스의 설문 참여 목록 (Component 호출) */}
-            { selectedFormId !== 0 && <SubmissionStatus /> }
+                {/* 스페이스의 설문 목록 (Component 호출) */}
+                <FormBoardForLeader forms={forms}/>
 
-            {/* 스페이스의 그룹 목록 (Component 호출) */}
-            <GroupMemberList groups={groups} />
+                {/* 스페이스의 설문 참여 목록 (Component 호출) */}
+                {selectedFormId !== 0 && <SubmissionStatus/>}
+
+                {/* 스페이스의 그룹 목록 (Component 호출) */}
+                <GroupMemberList groups={groups}/>
+
+            </div>
+
+
         </div>
     );
 

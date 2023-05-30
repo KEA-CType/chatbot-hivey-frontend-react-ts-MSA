@@ -78,14 +78,19 @@ const FormListComponent = ({forms}: any) => {
                         </div>
 
                         <div className="formboard-form-kebab-wrapper" onClick={onClickKebab}>
+
                             <img className="formboard-form-kebab-img" src={icKebabBlack} alt=""/>
+
                             <div id="formboard-form-kebab-menu" className="formboard-form-kebab-menu"
                                  style={{display: "none"}}>
-                                <div className="formboard-form-kebab-menu-item" onClick={onClickFirstMenuItem}>참여 현황 보기</div>
+                                <div className="formboard-form-kebab-menu-item" onClick={onClickFirstMenuItem}>참여 현황
+                                    보기
+                                </div>
                                 <Link to="/form/response">
                                     <div className="formboard-form-kebab-menu-item">설문 결과 보기</div>
                                 </Link>
                             </div>
+
                         </div>
                     </div>
 

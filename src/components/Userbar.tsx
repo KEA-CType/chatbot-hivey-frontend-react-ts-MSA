@@ -14,6 +14,7 @@ import logo from "../assets/ic_logo_hivey.png";
 import label from "../assets/ic_label_white.png";
 import location from "../assets/ic_logo_sample.png";
 import logout from "../assets/ic_logout_gray.png";
+import icSettingGray from "../assets/ic_setting_gray.png";
 
 const SpaceListComponent = ({spaces, isManager}: any) => {
     const [spaceList, setSpaceList] = useState(Array);
@@ -31,11 +32,9 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
 
             const newList = filteredList.map(
                 (s: any) => {
-                    const style =
-                        s.spaceId === space.id ? "space-item active" : "space-item";
 
                     // 목록에 있는 각 스페이스를 클릭했을 때 해당 스페이스로 이동하도록 한다.
-                    const onClickSpace = () => {
+                    const onClickSpace = (e: any) => {
 
                         setSpace({
                             id: s.spaceId, name: s.name
@@ -51,8 +50,9 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
                     };
 
                     return (
-                        <div key={s.spaceId} className={style} onClick={onClickSpace}>
-                            <img className="location" src={location} alt="location"/>{s.name}
+                        <div key={s.spaceId} className="space-item" onClick={onClickSpace}>
+                            <img className="space-item-location" src={location} alt="location"/>
+                            <div className="space-item-name">{s.name}</div>
                         </div>
                     );
                 });
@@ -78,15 +78,8 @@ const Userbar = () => {
         spaceService
             .GetSpaceList(user.id)
             .then((response) => {
-                const {code} = response;
 
                 setSpaceList(response.result);
-
-                if (code === 1000) {
-                    console.log("스페이스 목록을 불러오는 데 성공했습니다.");
-                } else {
-                    console.log("스페이스 목록을 불러오는 데 실패하였습니다.");
-                }
 
             })
             .catch((error) => {
@@ -98,16 +91,20 @@ const Userbar = () => {
     return (
         <div className="userbar-container">
             <img className="logo" src={logo} alt="logo"/>
+
             <div className="user-profile">
-                <img className="profile" src={profile} alt="user profile"/>
-                <span className="username">{user.name}</span>
+                <img className="user-profile-img" src={profile} alt="user profile"/>
+                <div className="username">{user.name}</div>
+                <img className="user-profile-setting" src={icSettingGray} alt="setting" />
             </div>
+
             <div className="user-spaces">
                 <div className="label"><img src={label} alt="label"/>MANAGER</div>
                 <div className="spaces-list">
                     <SpaceListComponent spaces={spaceList} isManager={1}/>
                 </div>
             </div>
+
             <div className="user-spaces">
                 <span className="label"><img src={label} alt="label"/>MEMBER</span>
                 <div>

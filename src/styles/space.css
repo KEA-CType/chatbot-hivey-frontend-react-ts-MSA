@@ -1,8 +1,9 @@
 /* Space */
 
+/* 스페이스 전체 컨테이너 */
 .space-container {
     width: 80%;
-    height: 100%;
+    height: 100vh;
 
     position: fixed;
     top: 1rem;
@@ -10,31 +11,39 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.space-container .space-rectangle-white {
-    /*height: 5rem;*/
-    width: 85%;
-    height: 9vh;
+/* 스페이스에 대한 정보(아이콘, 이름, 인원수 등)를 보여주는 박스 */
+.space-rectangle-white {
+    width: 79%;
+    height: 5rem;
 
     background-color: #ffffff;
 
     border: 0.05rem solid #edeef2;
     border-radius: 0.5rem;
 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
 
-    /*position: relative;*/
+    position: relative;
+    left: 10%;
 
     margin-top: 2rem;
-    /*margin-left: 12rem;*/
 
     padding: 0;
+}
+
+.space-rectangle-white:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    z-index: 1;
 }
 
 .space-rectangle-white .space-img-wrapper {
@@ -109,28 +118,45 @@
     cursor: pointer;
 }
 
-/* Formboard */
+/* 스페이스 안의 컴포넌트들을 담는 컨테이너 */
+.space-content-container {
+    width: 100%;
+    height: 100vh;
 
-.space-container .formboard-rectangle-white {
-    width: 85%;
-    height: 50vh;
+    position: relative;
+    top: 1rem;
+    left: 10%;
+
+    border-radius: 0.5rem;
+
+    overflow-y: scroll;
+
+    padding-bottom: 3rem;
+}
+
+/* Formboard */
+.formboard-rectangle-white {
+    width: 80%;
+    height: 31rem;
 
     background-color: #ffffff;
 
     border: 0.05rem solid #edeef2;
     border-radius: 0.5rem;
 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /*align-items: stretch;*/
-
-    /*position: relative;*/
 
     margin-top: 1rem;
-    /*margin-left: 12rem;*/
+}
 
-    padding: 0;
+.formboard-rectangle-white:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    z-index: 1;
 }
 
 .formboard-rectangle-white .formboard-title {
@@ -143,8 +169,6 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-
-    /*flex: 1;*/
 
     font-size: 1.1rem;
     font-weight: bold;
@@ -169,18 +193,15 @@
     height: auto;
     width: auto;
 
-    /*float: left;*/
     flex: 1;
 
     display: flex;
     flex-direction: column;
-    /*justify-content: space-between;*/
     align-items: center;
 
-    margin-top: 3%;
-    margin-bottom: 2%;
-
     padding: 0;
+
+    margin-top: 3%;
 }
 
 .formboard-status-container .formboard-status-title-wrapper {
@@ -205,9 +226,14 @@
 
 .formboard-status-container .formboard-status-box {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    overflow-y: auto;
+    height: 20rem;
+
+    background-color: #E8EFFA;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-x: hidden;
 
     border-radius: 0.15rem;
 
@@ -215,31 +241,39 @@
     flex-direction: column;
     align-items: center;
 
-    background-color: #E8EFFA;
+    padding-bottom: 2rem;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
 }
 
-.formboard-status-box .formboard-form {
-    width: 90%;
-    height: 7vh;
+.formboard-status-box::-webkit-scrollbar {
+    display: none;
+}
 
-    border-radius: 1.3rem;
+.formboard-form {
+    width: 90%;
+    height: 50px;
+
+    background-color: #ffffff;
+
+    border-radius: 1rem;
     box-shadow: 0.1rem 0.1rem gainsboro;
 
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 
     cursor: pointer;
 
     margin-top: 1rem;
-
-    background-color: #ffffff;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .formboard-form .formboard-form-icon-wrapper {
     width: auto;
-    height: 30%;
+    height: 1rem;
 
     display: block;
 
@@ -247,7 +281,7 @@
 }
 
 .formboard-form-icon-wrapper .formboard-form-icon-img {
-    width: 100%;
+    width: auto;
     height: 100%;
     aspect-ratio: auto 1/1;
 
@@ -255,24 +289,26 @@
 }
 
 .formboard-form .formboard-form-information {
-    width: 80%;
-    height: 60%;
+    width: auto;
+    height: 5rem;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 
+    flex: 1;
+
     margin-left: 5%;
 }
 
 .formboard-form-information-title {
-    font-size: 20px;
+    font-size: 16px;
     font-family: Pretendard sans-serif;
 }
 
 .formboard-form-information-date {
-    font-size: 5px;
+    font-size: 4px;
 }
 
 .formboard-box .formboard-form-kebab-wrapper {
@@ -288,8 +324,9 @@
     cursor: auto;
 
     padding: 1% 3%;
-
     margin-right: 3%;
+
+    position: relative;
 }
 
 .formboard-form-kebab-wrapper:hover {
@@ -301,21 +338,17 @@
     height: 100%;
     aspect-ratio: auto 1/1;
 
-    /*background: url("../assets/ic_kebab_black.png");*/
-
     display: block;
 }
 
 .formboard-form-kebab-menu {
-    overflow: hidden;
-
     background-color: #ffffff;
 
     border: 0.03rem solid #edeef2;
     border-radius: 0.6rem;
 
     position: absolute;
-    z-index: 1;
+    z-index: 3;
 }
 
 .formboard-form-kebab-menu .formboard-form-kebab-menu-item {
@@ -336,22 +369,24 @@
 
 /* Submission list */
 
-.space-container .submission-rectangle-white {
-    width: 85%;
-    height: 25vh;
+.submission-rectangle-white {
+    width: 80%;
+    height: 5rem;
 
     background-color: #ffffff;
 
     border: 0.05rem solid #edeef2;
     border-radius: 0.5rem;
 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 
-    margin-top: 1rem;
-
     padding: 0;
+
+    margin-top: 1rem;
 }
 
 .submission-rectangle-white .submission-title {
@@ -378,9 +413,9 @@
 
 .submission-rectangle-white .submission-members-container {
     height: auto;
-    width: auto;
+    width: 80%;
 
-    border-bottom-width: 0.05rem;
+    border-bottom-width: 0;
     border-bottom-style: solid;
     border-bottom-color: lightgray;
 
@@ -391,11 +426,11 @@
 
     cursor: default;
 
-    margin-top: 1%;
+    /*margin-top: 1%;*/
+    margin-left: 3%;
     margin-bottom: 1%;
-    margin-left: 5%;
 
-    padding-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
 }
 
 .submission-members-container .submission-members-profile-wrapper {
@@ -463,7 +498,7 @@
 
 .submission-members-container .submission-members-status-wrapper {
     height: auto;
-    width: auto;
+    width: 2rem;
     overflow: hidden;
 
     display: block;
@@ -589,9 +624,9 @@
     margin-bottom: 1%;
 }
 
-.space-container .group-rectangle-white {
-    width: 85%;
-    height: 25vh;
+.group-rectangle-white {
+    width: 80%;
+    height: 15rem;
 
     background-color: #ffffff;
 
@@ -605,6 +640,12 @@
     margin-top: 1rem;
 
     padding: 0;
+}
+
+.group-rectangle-white:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    z-index: 1;
 }
 
 .group-rectangle-white .group-title {
@@ -649,21 +690,38 @@
     justify-content: center;
     align-items: flex-start;
 
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    padding-right: 3%;
+
     margin-left: 3%;
+}
+
+.group-container::-webkit-scrollbar {
+    display: none;
 }
 
 .groups-members-container .group-member-container {
     width: 60%;
-    height: auto;
+    height: 10rem;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
 
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
     margin-left: 5%;
-    margin-right: 5%;
+    margin-right: 3%;
     margin-top: 1%;
+}
+
+.group-member-container::-webkit-scrollbar {
+    display: none;
 }
 
 .group-container .group-box {

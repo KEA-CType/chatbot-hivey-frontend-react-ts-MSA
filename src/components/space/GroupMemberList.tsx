@@ -33,9 +33,9 @@ const MemberListByGroup = ({groupId, groups}: any) => {
 
                         <div className="group-member-email">{m.email}</div>
 
-                        <div className="group-member-kebab-wrapper">
-                            <img className="group-member-kebab-img" src={icKebabBlack} alt=""/>
-                        </div>
+                        {/*<div className="group-member-kebab-wrapper">*/}
+                        {/*    <img className="group-member-kebab-img" src={icKebabBlack} alt=""/>*/}
+                        {/*</div>*/}
 
                     </div>
                 );
@@ -69,23 +69,15 @@ const GroupList = ({groups, getSelectedGroupId}: any) => {
 
                     if (e.target.classList[1] === "group-box-clicked") {
 
-                        // for (let i = 0; i < groupBoxes.length; i++) {
-                        //     groupBoxes[i].classList.remove("group-box-clicked");
-                        //     groupBoxes[i].classList.add("group-box");
-                        // }
-
                         e.target.classList.remove("group-box-clicked");
-                        // e.target.classList.add("group-box");
                         setSelectedGroupId(0);
 
                     } else {
 
                         for (let i = 0; i < groupBoxes.length; i++) {
                             groupBoxes[i].classList.remove("group-box-clicked");
-                            // groupBoxes[i].classList.add("group-box");
                         }
 
-                        // e.target.classList.remove("group-box");
                         e.target.classList.add("group-box-clicked");
                         setSelectedGroupId(g.groupId);
                     }
