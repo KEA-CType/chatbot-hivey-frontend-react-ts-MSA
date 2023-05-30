@@ -32,6 +32,7 @@ export interface FormListResponse {
 }
 
 export interface GroupListResponse {
+    groupId: number;
     name: string;
     members: GroupMemberListResponse[];
 }

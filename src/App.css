@@ -1,4 +1,3 @@
-
 .App {
     text-align: center;
 }
@@ -43,6 +42,6 @@
     src: url("./font/Pretendard-Regular.otf");
 }
 
-body {
-    background-color: #D4ECFF;
+.content {
+    overflow-y: auto;
 }
