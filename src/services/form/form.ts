@@ -61,10 +61,64 @@ const GetFormList = async (spaceId: number, userId: number) => {
     }
 };
 
+/**
+ * 6.6 특정 설문 참여 현황 목록 불러오기
+ */
+const GetSubmissionListByForm = async (formId: number) => {
+    try {
+
+        const response = await instances.INSTANCE.get(`${FORM}/${formId}/members`);
+        return response.data;
+
+    } catch (error) {
+
+        console.error(error);
+        throw new Error("설문 참여 현황 목록 불러오기에 실패하였습니다.");
+
+    }
+};
+
+/**
+ * 6.8 특정 설문의 타겟 그룹 목록 불러오기
+ */
+const GetTargetGroupsByForm = async (formId: number) => {
+    try {
+
+        const response = await instances.INSTANCE.get(`${FORM}/${formId}/groups`);
+        return response.data;
+
+    } catch (error) {
+
+        console.error(error);
+        throw new Error("특정 설문의 타겟 그룹 목록 불러오기에 실패하였습니다.");
+
+    }
+};
+
+/**
+ * 6.9 특정 설문의 필수 여부 정보 가져오기
+ */
+const GetMandatoryOrNotByForm = async (formId: number) => {
+    try {
+
+        const response = await instances.INSTANCE(`${FORM}/${formId}/option`);
+        return response.data;
+
+    } catch (error) {
+
+        console.error(error);
+        throw new Error("특정 설문의 필수 여부 정보 가져오기에 실패하였습니다.");
+
+    }
+};
+
 const formService = {
     CreateSurvey,
     CreateDetailedSurvey,
-    GetFormList
+    GetFormList,
+    GetSubmissionListByForm,
+    GetTargetGroupsByForm,
+    GetMandatoryOrNotByForm
 };
 
 export default formService;

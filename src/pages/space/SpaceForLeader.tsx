@@ -4,10 +4,20 @@
 
 import {useEffect, useState} from 'react';
 import {useRecoilValue} from 'recoil';
+import {useNavigate} from "react-router-dom";
 
 import spaceService from "../../services/space/space";
-import {spaceState, userState} from '../../commons/Atom';
+import {selectedFormIdState, spaceState, userState} from '../../commons/Atom';
 import PropTypes from "prop-types";
+
+import FormBoardForLeader from "../../components/space/FormBoardForLeader";
+import SubmissionStatus from "../../components/space/SubmissionStatus";
+import GroupMemberList from "../../components/space/GroupMemberList";
+
+import "../../styles/space.css";
+
+import icLogoSample from "../../assets/ic_logo_sample.png";
+import icEditGray from "../../assets/ic_edit_gray.png";
 
 import {
     SpaceOnly,
@@ -16,24 +26,46 @@ import {
 } from "../../commons/Interface";
 
 const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
+    const selectedFormId = useRecoilValue(selectedFormIdState);
 
-    useEffect(() => {
-
-        if (spaceOnly || forms || groups) {
-
-            console.log(`currentSpace: ${JSON.stringify(spaceOnly)}`);
-            console.log(`forms: ${JSON.stringify(forms)}`);
-            console.log(`groups: ${JSON.stringify(groups)}`);
-
-        }
-
-    }, [spaceOnly, forms, groups])
+    const navigate = useNavigate();
 
     if (!spaceOnly || !forms || !groups) {
-        return <div>loading...</div>;
+        navigate("/main")
+        return <></>;
     }
 
-    return <>{}</>;
+    return (
+        <div id="space-container" className="space-container">
+            {/* 스페이스에 대한 정보 */}
+            <div className="space-rectangle-white">
+                <div className="space-img-wrapper">
+                    <img className="space-img" src={icLogoSample} alt=""/>
+                </div>
+                <div className="space-title">{spaceOnly.name}</div>
+                <div className="space-membercount">{spaceOnly.memberCount} / 50</div>
+                <div className="space-edit-wrapper">
+                    <img className="space-edit-img" src={icEditGray} alt=""/>
+                </div>
+            </div>
+
+            <div className="space-content-container">
+
+                {/* 스페이스의 설문 목록 (Component 호출) */}
+                <FormBoardForLeader forms={forms}/>
+
+                {/* 스페이스의 설문 참여 목록 (Component 호출) */}
+                {selectedFormId !== 0 && <SubmissionStatus/>}
+
+                {/* 스페이스의 그룹 목록 (Component 호출) */}
+                <GroupMemberList groups={groups}/>
+
+            </div>
+
+
+        </div>
+    );
+
 }
 
 const SpaceForLeader = () => {
@@ -57,30 +89,15 @@ const SpaceForLeader = () => {
                 setForms(result.forms);
                 setGroups(result.groups);
 
-                return (
-                    <div>
-                        {/* 스페이스에 대한 정보 */}
-                        <div></div>
-                        {/* 스페이스의 설문 목록 (Component 호출) */}
-                        {/* 스페이스의 설문 참여 목록 (Component 호출) */}
-                        {/* 스페이스의 그룹 목록 (Component 호출) */}
-                        <div></div>
-                    </div>
-                )
-
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, [])
+    }, []);
 
     return (
-        <div className="participant-page">
-            <div className='survey-container'>
-                <div className='space-name'>
-                    <SpaceInformationComponent spaceOnly={spaceOnly} forms={forms} groups={groups} />
-                </div>
-            </div>
+        <div>
+            <SpaceInformationComponent spaceOnly={spaceOnly} forms={forms} groups={groups}/>
         </div>
     );
 };
