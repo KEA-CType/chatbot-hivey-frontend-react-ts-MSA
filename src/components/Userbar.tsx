@@ -1,7 +1,7 @@
 import "../styles/userbar.css";
 
 import React, {useState, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 
 import {userState, spaceState} from "../commons/Atom";
@@ -23,6 +23,7 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
     const [space, setSpace] = useRecoilState(spaceState);
 
     useEffect(() => {
+        let spaceListElements = document.getElementsByClassName("space-item");
 
         if (spaceList) {
 
@@ -35,21 +36,34 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
 
                     // 목록에 있는 각 스페이스를 클릭했을 때 해당 스페이스로 이동하도록 한다.
                     const onClickSpace = (e: any) => {
+                        e.preventDefault();
 
-                        setSpace({
-                            id: s.spaceId, name: s.name
-                        });
+                        if (e.target.classList[0] === "space-item-clicked") {
 
-                        if (s.isManager) {
-                            navigate("/space/leader");
+                            e.target.classList.add("space-item-clicked")
+                            setSpace({id: 0, name: ""});
 
                         } else {
-                            navigate("/space/member");
+
+                            for (let i = 0; i < spaceListElements.length; i++) {
+                                spaceListElements[i].classList.remove("space-item-clicked");
+                            }
+
+                            e.target.classList[0].add("space-item-clicked");
+                            setSpace({id: s.spaceId, name: s.name});
                         }
 
+                        if (s.isManager) {
+                            // window.location.reload();
+                            // window.location.replace("/space/leader");
+                        } else {
+                            // window.location.reload();
+                            // window.location.replace("/space/member")l
+                        }
                     };
 
                     return (
+
                         <div key={s.spaceId} className="space-item" onClick={onClickSpace}>
                             <img className="space-item-location" src={location} alt="location"/>
                             <div className="space-item-name">{s.name}</div>
@@ -107,7 +121,7 @@ const Userbar = () => {
 
             <div className="user-spaces">
                 <span className="label"><img src={label} alt="label"/>MEMBER</span>
-                <div>
+                <div className="spaces-list">
                     <SpaceListComponent spaces={spaceList} isManager={0}/>
                 </div>
                 <img className="logout" src={logout} alt="logout"></img>
