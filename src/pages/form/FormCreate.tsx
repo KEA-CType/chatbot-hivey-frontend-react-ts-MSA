@@ -1,10 +1,14 @@
 import "../../styles/formcreate.css"
 
+import form from "../../services/form/form";
+import spaceGroup from "../../services/space/spaceGroup";
+import groupMember from "../../services/space/spaceMember";
+
 import React, {useState, useEffect, ReactElement} from "react";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {userState, spaceState} from "../../commons/Atom";
+import {formIdState,userState, spaceState} from "../../commons/Atom";
 import {useRecoilState, useRecoilValue} from "recoil";
 import Modal from  "../../components/commons/modals";
 import ReactDOM from "react-dom";
@@ -14,8 +18,9 @@ import ReactDOM from "react-dom";
 import DatePicker from "react-datepicker";
 import { ko } from 'date-fns/esm/locale';
 import "react-datepicker/dist/react-datepicker.css"
-import logo from "../../assets/ic_logo_hivey.png";
 
+//img
+import logo from "../../assets/ic_logo_hivey.png"
 import before from "../../assets/btn_anonymous_before_click.png";
 import after from "../../assets/btn_anonymous_after_click.png";
 import start_date from "../../assets/ic_form_start_date.png";
@@ -35,15 +40,21 @@ import radio_btn from "../../assets/btn_radio.png";
 
 
 const FormCreate = () => {
+    const formId=useRecoilValue(formIdState)
+    console.log(`formId: ${formId}`)
     //api 6.2에 필요한 것
     const [title,setTitle]=useState("");
     const [content,setContent]=useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const [isAnonymous,setIsAnonymous]=useState(false);
-    const [isMandatory,setIsMandatory]=useState(false);
+    const [isAnonymous,setIsAnonymous]=useState('N'); //익명 아닌게 디폴트
+    const [isMandatory,setIsMandatory]=useState('N');
     const [questionGroups,setQuestionGroups]=useState([]);
     const [questionRequests,setQuestionRequests]=useState([]);
+    const [questionType,setQuestionType]=useState("");
+    const [questionTitle,setQuestionTitle]=useState("");
+    const [questionContent,setQuestionContent]=useState("");
+    const [questionOptions,setQuestionOptions]=useState([]);
 
     const [imgSrc,setImgSrc]=useState(before);
     const [isClicked, setIsClicked] = useState(false);
@@ -55,6 +66,38 @@ const FormCreate = () => {
     const [requireModalIsOpen, setRequireModalIsOpen] = useState(false);
     const [chooseGroupModalIsOpen, setChooseGroupModalIsOpen]=useState(false);
     
+    //그룹 목록 불러오기
+    const [groupList,setGroupList]=useState([]);
+    const space=useRecoilValue(spaceState);
+    useEffect(()=>{
+        spaceGroup
+        .GetAllGroupList(space.id)
+        .then((response) => {
+            const {code} = response;
+
+            setGroupList(response.result);
+            console.log("그룹",response.result)
+
+            if (code === 1000) {
+                console.log(groupList);
+                console.log("그룹 목록을 불러오는 데 성공했습니다.");
+                groupList.map(function(g:any,i){
+                    g=g.name;
+                    console.log(i,g);
+                })
+            } else {
+                console.log("그룹 목록을 불러오는 데 실패하였습니다.");
+            }
+
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+       
+    },[]);
+
+
     
     const anoyClick = () => {
         console.log("1",isClicked,imgSrc)
@@ -62,32 +105,45 @@ const FormCreate = () => {
         {   console.log("2-1",isClicked,imgSrc)
             setImgSrc(before);
             setIsClicked(false);
+            setIsAnonymous('N')
             console.log("2-2",isClicked,imgSrc)
         } else{//초기 상태는 거짓 else 실행
             console.log("3-1",isClicked,imgSrc)
             setImgSrc(after);
             setIsClicked(true);
+            setIsAnonymous('Y');
             console.log("3-2",isClicked)
         }
         console.log("DDD",isClicked);
     };
-    const  checkParticipationStatus=(participationStatus: number | boolean)=>{
+    const checkParticipationStatus=(participationStatus: number | boolean)=>{
 
         let  imgPath="";
         if(participationStatus===0){
             return require_member
         }
         if(participationStatus===1){
-            
+                setIsMandatory('Y');
                 return every_mem
         }
         if(participationStatus===2){
+            setIsMandatory('N');
             return check_mem
         }
         
     }
 
-   
+    const showGroupList=(groupList: any)=>{
+            groupList.map(function(g:any,i:any){
+                return(
+                    <button key={i} className="group-button">{g}</button>
+                )
+            })
+   }
+
+//    const showGroupMember=(groupId)=>{
+
+//    }
     
     const MakeMultipleChoiceQuestion=()=>{
         const [radioOptions, setRadioOptions] = useState<string[]>([]);
@@ -103,7 +159,7 @@ const FormCreate = () => {
         return(
             <div className="qusetion-container">
                    <div className="question-title-containter">
-                        <div className="question-title"><input className="title-input" placeholder="질문 제목을 입력해주세요"/></div>
+                        <div className="question-title"><input className="title-input" placeholder="질문 제목을 입력해주세요" onChange={e => setTitle(e.target.value)}/></div>
                         <div className="question-explain"><input className="explain-input" placeholder="질문 설명을 입력해주세요"/></div>
                     </div>
                     <div className="radio-container">
@@ -208,17 +264,31 @@ const FormCreate = () => {
       };
       //question 삭제
   
-    
+      //patch 하기
+
+    //   form
+    //     .CreateDetailedSurvey(formId,questionRequests)
+
+
+    const clickFinishBtn=()=>{
+
+    }
+
+
+
+
+
+
     return(
         <div>
             <div className="form-container">
                 <img className="form-logo" src={logo} alt="logo"/>
                 <div></div>
                 <div className="title">
-                <span className="title-name"><input className="survey-title-input" placeholder="설문지 제목을 입력하세요"/></span>
+                <span className="title-name"><input className="survey-title-input" placeholder="설문지 제목을 입력하세요" onChange={(e) => {{setTitle(e.target.value);}}}/></span>
                 </div>
                 <div className="survey-explain">
-                <input className="survey-explain-input" placeholder="설문지 설명을 입력하세요"/>
+                <input className="survey-explain-input" placeholder="설문지 설명을 입력하세요" onChange={(e) => {{setContent(e.target.value);}}}/>
                 </div>
                 <div className="option-container">
                     
@@ -266,6 +336,7 @@ const FormCreate = () => {
                         {/* 그룹이름 나오게 하는 건 list 사용할 듯 */}
                         <div className="choose-group">
                             <div className="group-name-container">
+                                {/* <div>{showGroupList()}</div> */}
                                 <button className="group-name-btn">default group</button>
                                 <button className="group-name-btn">group name</button>
                             </div>
@@ -296,7 +367,7 @@ const FormCreate = () => {
                 </div>
             </div>
             <div className="button-container">
-                <button className="finish-btn">완료</button>
+                <button className="finish-btn" onClick={clickFinishBtn}>완료</button>
                 <button className="cancel-btn">취소</button>
             </div>
         </div>

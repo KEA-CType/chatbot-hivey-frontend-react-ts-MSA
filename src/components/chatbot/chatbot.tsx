@@ -20,7 +20,6 @@ const Chatbot = () => {
 
     const [message, setMessage] = useState("");
     const [formId, setFormId] = useRecoilState(formIdState);
-
     const space = useRecoilValue(spaceState);
     const user = useRecoilValue(userState);
 
@@ -54,26 +53,10 @@ const Chatbot = () => {
             .then((response) => {
                 // 위의 함수에서 response.data를 받아온다.
 
-                console.log(response);
-                console.log(response.result);
+                setFormId(response.result.formId);
+                navigate("/form/create");
 
-                const {isSuccess, code, message} = response;
-                setMessage(message);
-
-                setFormId(response.result);
-
-                if (code === 1000) {
-                    // 성공적으로 요청이 된 경우
-                    setFormId(formId);
-
-                    // <Link to="/createSurvey" />
-                    navigate("/form/create");
-                } else {
-                    // FIXME: 이후 남은 예외 처리를 모두 분기 처리해주어야 한다.
-                    console.log(code);
-                }
-
-                console.log("formIdState.formId: " + formIdState.key);
+                console.log("formIdState.formId: " + formId);
             })
             .catch((error) => {
                 console.log(error);
