@@ -5,7 +5,7 @@ import React, {useState} from "react";
 import Button from "../../components/commons/buttons";
 import Chatbot from "../../components/chatbot/chatbot";
 import Input from "../../components/commons/input";
-import Modal from "../../components/commons/modals";
+import Modal from "../../components/commons/Modal";
 import {userState, spaceState} from "../../commons/Atom";
 import {useRecoilState} from "recoil";
 
@@ -59,7 +59,6 @@ const CreateSpaceComponent = () => {
             .CreateSpace(user.id, spaceName, img)
             .then((response) => {
                 const {code, message} = response;
-                console.log(`response: ${JSON.stringify(response)}`);
 
                 const {spaceId, accessCode} = response.result;
 
@@ -76,7 +75,7 @@ const CreateSpaceComponent = () => {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 setIsModalOpen(true);
                 setMessage("스페이스 생성에 실패하였습니다.");
             });

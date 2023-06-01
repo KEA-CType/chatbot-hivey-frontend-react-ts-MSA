@@ -29,4 +29,13 @@
     border: none;
     background: transparent;
 }
-  
+
+.formboard-form-kebab-wrapper .kebab-modal-container {
+    height: auto;
+    width: auto;
+
+    position: relative;
+
+    background-color: transparent;
+    z-index: 999;
+}

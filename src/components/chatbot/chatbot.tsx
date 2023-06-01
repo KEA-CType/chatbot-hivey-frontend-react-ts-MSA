@@ -46,7 +46,7 @@ const Chatbot = () => {
         e.preventDefault();
 
         // 콘솔로 전역 상태 관리 변수 값이 잘 들어가 있는지 확인하기
-        console.log(`userId: ${user.id}`);
+        // console.log(`userId: ${user.id}`);
 
         // API 6.1 설문지 생성하기 (+ 버튼)
         form
@@ -54,8 +54,8 @@ const Chatbot = () => {
             .then((response) => {
                 // 위의 함수에서 response.data를 받아온다.
 
-                console.log(response);
-                console.log(response.result);
+                // console.log(response);
+                // console.log(response.result);
 
                 const {isSuccess, code, message} = response;
                 setMessage(message);
@@ -70,13 +70,14 @@ const Chatbot = () => {
                     navigate("/createSurvey");
                 } else {
                     // FIXME: 이후 남은 예외 처리를 모두 분기 처리해주어야 한다.
-                    console.log(code);
+                    // console.log(code);
                 }
 
-                console.log("formIdState.formId: " + formIdState.key);
+                // console.log("formIdState.formId: " + formIdState.key);
+
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 setMessage("설문 생성에 실패하였습니다.");
             });
     };

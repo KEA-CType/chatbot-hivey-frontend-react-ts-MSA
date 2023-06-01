@@ -30,8 +30,8 @@ function App() {
                                         <Route path="/space/enter" element={<SpaceEnter/>}/>
                                         <Route path="/space/create" element={<SpaceCreate/>}/>
                                         <Route path="/main" element={<Main/>}/>
-                                        <Route path="/space/member" element={<SpaceForMember/>}/>
-                                        <Route path="/space/leader" element={<SpaceForLeader/>}/>
+                                        <Route path="/space/member/:spaceId" element={<SpaceForMember/>}/>
+                                        <Route path="/space/leader/:spaceId" element={<SpaceForLeader/>}/>
                                     </Routes>
                                 </div>
                                 <Chatbot/>

@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import icProfile from "../../assets/ic_profile.png";
 import icKebabBlack from "../../assets/ic_kebab_black.png";
+import icEditGray from "../../assets/ic_edit_gray.png";
+import icLogoSample from "../../assets/ic_logo_sample.png";
 
 const MemberListByGroup = ({groupId, groups}: any) => {
     const [membersByGroup, setMembersByGroup] = useState(Array);
@@ -114,8 +116,14 @@ const GroupMemberList = ({groups}: any) => {
     return (
         <div className="group-rectangle-white">
 
-            <div className="group-title">
-                Group & Member
+            <div className="group-top-bar">
+                <div className="group-title">
+                    Group & Member
+                </div>
+
+                <div className="group-edit-wrapper">
+                    <img className="group-edit-img" src={icEditGray} alt=""/>
+                </div>
             </div>
 
             <div className="groups-members-container">

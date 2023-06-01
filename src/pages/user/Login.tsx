@@ -12,7 +12,7 @@ import {useRecoilState} from "recoil";
 
 import Button from "../../components/commons/buttons";
 import Input from "../../components/commons/input";
-import Modal from "../../components/commons/modals";
+import Modal from "../../components/commons/Modal";
 
 import {userState} from "../../commons/Atom";
 
@@ -101,7 +101,7 @@ const Login = () => {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 setIsModalOpen(true);
                 setMessage("로그인에 실패하였습니다.");
             });
