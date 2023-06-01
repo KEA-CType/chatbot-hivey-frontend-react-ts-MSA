@@ -7,6 +7,8 @@
     width: 20%;
     position: fixed;
 
+    border-radius: 2rem;
+
     height: 100%;
     z-index: 1;
 }
@@ -112,11 +114,16 @@
     height: 2rem;
 
     background-color: white;
+    background-image: url("../assets/ic_logo_sample.png");
+    background-repeat: no-repeat;
+    background-position: 0.4rem;
 
     border: 0.1rem solid #edeef2;
     border-radius: 0.5rem;
 
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 
     color: gray;
@@ -124,29 +131,38 @@
 
     cursor: pointer;
 
-    padding: 0.2rem;
+    padding-left: 3rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
 
     margin-top: 0.7rem;
-}
-
-.space-item-location {
-    margin: 0.5rem;
 }
 
 .space-item-clicked {
     height: 2rem;
 
     background-color: white;
+    background-image: url("../assets/ic_logo_sample.png"), url("../assets/ic_arrow_blue.png");
+    background-repeat: no-repeat;
+    background-size: 2rem 2rem, 2rem 2rem;
+    background-position: 0.4rem, 12rem;
 
-    border: 0.1rem solid #edeef2;
+    border: 0.1rem solid black;
     border-radius: 0.5rem;
 
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+
+    color: black;
+    font-size: 0.8rem;
 
     cursor: pointer;
 
-    padding: 0.2rem;
+    padding-left: 3rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
 
     margin-top: 0.7rem;
 }
@@ -160,7 +176,4 @@
     margin-bottom: 3rem;
 }
 
-.space-item-name {
-    font-size: 0.8rem;
-    color: black;
-}
+

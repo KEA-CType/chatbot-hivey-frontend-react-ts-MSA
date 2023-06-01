@@ -4,7 +4,7 @@
 
 import {useEffect, useState} from 'react';
 import {useRecoilValue} from 'recoil';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 import spaceService from "../../services/space/space";
 import {spaceState, userState} from '../../commons/Atom';
@@ -43,19 +43,20 @@ const SpaceInformationComponent = ({spaceOnly, forms}: any) => {
             <FormBoardForMember forms={forms}/>
         </div>
     );
-
 }
 
 const SpaceForMember = () => {
     const user = useRecoilValue(userState);
     const space = useRecoilValue(spaceState);
 
+    const {spaceId} = useParams();
+
     const [spaceOnly, setSpaceOnly] = useState<SpaceOnly | null>(null);
     const [forms, setForms] = useState<FormListResponse | null>(null);
 
     useEffect(() => {
         spaceService
-            .GetSpace(user.id, space.id)
+            .GetSpace(user.id, spaceId !== undefined ? spaceId : (space.id).toString())
             .then((response) => {
 
                 const result = JSON.parse(response).result;
@@ -67,9 +68,9 @@ const SpaceForMember = () => {
 
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             });
-    }, []);
+    }, [spaceId]);
 
     return (
         <div>

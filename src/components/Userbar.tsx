@@ -1,7 +1,7 @@
 import "../styles/userbar.css";
 
 import React, {useState, useEffect} from "react";
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 
 import {userState, spaceState} from "../commons/Atom";
@@ -10,9 +10,8 @@ import {useRecoilState, useRecoilValue} from "recoil";
 import spaceService from "../services/space/space";
 
 import profile from "../assets/ic_profile.png";
-import logo from "../assets/ic_logo_hivey.png";
+import icLogoHiVey from "../assets/ic_logo_hivey.png";
 import label from "../assets/ic_label_white.png";
-import location from "../assets/ic_logo_sample.png";
 import logout from "../assets/ic_logout_gray.png";
 import icSettingGray from "../assets/ic_setting_gray.png";
 
@@ -49,24 +48,21 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
                                 spaceListElements[i].classList.remove("space-item-clicked");
                             }
 
-                            e.target.classList[0].add("space-item-clicked");
+                            e.target.classList.add("space-item-clicked");
                             setSpace({id: s.spaceId, name: s.name});
                         }
 
                         if (s.isManager) {
-                            // window.location.reload();
-                            // window.location.replace("/space/leader");
+                            navigate(`space/leader/${s.spaceId}`);
                         } else {
-                            // window.location.reload();
-                            // window.location.replace("/space/member")l
+                            navigate(`space/member/${s.spaceId}`);
                         }
                     };
 
                     return (
 
                         <div key={s.spaceId} className="space-item" onClick={onClickSpace}>
-                            <img className="space-item-location" src={location} alt="location"/>
-                            <div className="space-item-name">{s.name}</div>
+                            {s.name}
                         </div>
                     );
                 });
@@ -97,19 +93,18 @@ const Userbar = () => {
 
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             });
-
-    }, [user.id]);
+    }, []);
 
     return (
         <div className="userbar-container">
-            <img className="logo" src={logo} alt="logo"/>
+            <img className="logo" src={icLogoHiVey} alt="logo"/>
 
             <div className="user-profile">
                 <img className="user-profile-img" src={profile} alt="user profile"/>
                 <div className="username">{user.name}</div>
-                <img className="user-profile-setting" src={icSettingGray} alt="setting" />
+                <img className="user-profile-setting" src={icSettingGray} alt="setting"/>
             </div>
 
             <div className="user-spaces">

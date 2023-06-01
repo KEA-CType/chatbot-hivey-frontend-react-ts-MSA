@@ -4,7 +4,7 @@
 
 import {useEffect, useState} from 'react';
 import {useRecoilValue} from 'recoil';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 import spaceService from "../../services/space/space";
 import {selectedFormIdState, spaceState, userState} from '../../commons/Atom';
@@ -18,6 +18,8 @@ import "../../styles/space.css";
 
 import icLogoSample from "../../assets/ic_logo_sample.png";
 import icEditGray from "../../assets/ic_edit_gray.png";
+
+import { motion } from "framer-motion"
 
 import {
     SpaceOnly,
@@ -38,7 +40,7 @@ const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
     return (
         <div id="space-container" className="space-container">
             {/* 스페이스에 대한 정보 */}
-            <div className="space-rectangle-white">
+            <motion.div className="space-rectangle-white" style={{ y: 100 }} animate={{ y: 0 }}>
                 <div className="space-img-wrapper">
                     <img className="space-img" src={icLogoSample} alt=""/>
                 </div>
@@ -47,9 +49,9 @@ const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
                 <div className="space-edit-wrapper">
                     <img className="space-edit-img" src={icEditGray} alt=""/>
                 </div>
-            </div>
+            </motion.div>
 
-            <div className="space-content-container">
+            <motion.div className="space-content-container" style={{ y: 100 }} animate={{ y: 0 }}>
 
                 {/* 스페이스의 설문 목록 (Component 호출) */}
                 <FormBoardForLeader forms={forms}/>
@@ -60,8 +62,7 @@ const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
                 {/* 스페이스의 그룹 목록 (Component 호출) */}
                 <GroupMemberList groups={groups}/>
 
-            </div>
-
+            </motion.div>
 
         </div>
     );
@@ -72,13 +73,15 @@ const SpaceForLeader = () => {
     const user = useRecoilValue(userState);
     const space = useRecoilValue(spaceState);
 
+    const {spaceId} = useParams();
+
     const [spaceOnly, setSpaceOnly] = useState<SpaceOnly | null>(null);
     const [forms, setForms] = useState<FormListResponse | null>(null);
     const [groups, setGroups] = useState<GroupListResponse | null>(null);
 
     useEffect(() => {
         spaceService
-            .GetSpace(user.id, space.id)
+            .GetSpace(user.id, spaceId !== undefined ? spaceId : (space.id).toString())
             .then((response) => {
 
                 const result = JSON.parse(response).result;
@@ -91,9 +94,9 @@ const SpaceForLeader = () => {
 
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             });
-    }, []);
+    }, [spaceId]);
 
     return (
         <div>

@@ -2,16 +2,21 @@
  * 스페이스의 모든 설문 목록을 보여주는 부분
  */
 
-import {useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useSetRecoilState} from "recoil";
+import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
+
+import * as moment from 'moment';
 
 import icFormboardDone from "../../assets/ic_formboard_done.png";
 import icFormboardInprogress from "../../assets/ic_formboard_inprogress.png";
 import icFormboardNotstarted from "../../assets/ic_formboard_notstarted.png";
 import icCheckCircleGreen from "../../assets/ic_check_circle_green.png";
-import icKebabBlack from "../../assets/ic_kebab_black.png";
-import {useSetRecoilState} from "recoil";
+import icUsersGray from "../../assets/ic_users_gray.png";
+import icChartPieSliceGray from "../../assets/ic_chart_pie_slice_gray.png";
+
+
 import {formIdState, selectedFormIdState} from "../../commons/Atom";
 
 const FormListComponent = ({forms}: any) => {
@@ -22,8 +27,6 @@ const FormListComponent = ({forms}: any) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-
-        console.log(`FormListComponent/forms: ${JSON.stringify(forms)}`);
 
         const formList = forms.map(
             (f: any) => {
@@ -39,29 +42,20 @@ const FormListComponent = ({forms}: any) => {
                 };
 
                 /**
-                 * 설문 설정 버튼을 클릭했을 때 설정을 띄워준다.
-                 * 설정으로는 참여 현황 보기, 설문 결과 보기가 있다.
+                 * 참여 현황 보기 아이콘을 클릭했을 때 클릭한 설문 식별 번호를 저장한다.
                  */
-                const onClickKebab = (e: any) => {
-                    // 아래 함수를 실행시켜야 제대로 드롭 다운 메뉴가 열리는 걸 확인할 수 있다.
+                const handleSubmissionList = (e: any) => {
                     e.stopPropagation();
 
-                    let kebab = document.getElementById("formboard-form-kebab-menu") as HTMLElement;
-
-                    if (kebab.style.display === "none") {
-                        kebab.style.display = "block";
-                    } else {
-                        kebab.style.display = "none";
-                    }
+                    setSelectedFormId(f.formId);
                 }
 
                 /**
-                 * 참여 현황 보기를 클릭했을 때 클릭한 설문 식별 번호를 저장한다.
+                 * 설문 결과 보기 아이콘을 클릭했을 때 설문 결과 페이지로 이동한다.
                  */
-                const onClickFirstMenuItem = (e: any) => {
-                    e.preventDefault();
-                    setSelectedFormId(f.formId);
-                    console.log(`선택한 설문 식별 번호: ${f.formId}`);
+                const handleFormResult = (e: any) => {
+                    e.stopPropagation();
+                    navigate("/form/result");
                 }
 
                 return (
@@ -72,28 +66,21 @@ const FormListComponent = ({forms}: any) => {
                             <img className="formboard-form-icon-img" src={icCheckCircleGreen} alt=""/>
                         </div>
 
-                        <div className="formboard-form-information">
-                            <div className="formboard-form-information-title">설문 제목</div>
-                            <div className="formboard-form-information-date">~ 2023.05.27 (토)</div>
+                        <div className="formboard-form-information" style={{marginLeft: "0.1rem"}}>
+                            <div className="formboard-form-information-title">{f.title}</div>
+                            <div
+                                className="formboard-form-information-date">~{(moment(f.endDate)).format('YYYY.MM.DD')}</div>
                         </div>
 
-                        <div className="formboard-form-kebab-wrapper" onClick={onClickKebab}>
-
-                            <img className="formboard-form-kebab-img" src={icKebabBlack} alt=""/>
-
-                            <div id="formboard-form-kebab-menu" className="formboard-form-kebab-menu"
-                                 style={{display: "none"}}>
-                                <div className="formboard-form-kebab-menu-item" onClick={onClickFirstMenuItem}>참여 현황
-                                    보기
-                                </div>
-                                <Link to="/form/response">
-                                    <div className="formboard-form-kebab-menu-item">설문 결과 보기</div>
-                                </Link>
-                            </div>
-
+                        <div className="formboard-form-icon-wrapper" onClick={handleSubmissionList} style={{marginLeft: "1rem"}}>
+                            <img className="formboard-form-right-icon-img" src={icUsersGray} alt=""/>
                         </div>
+
+                        <div className="formboard-form-icon-wrapper" onClick={handleFormResult} style={{marginLeft: "0rem"}}>
+                            <img className="formboard-form-right-icon-img" src={icChartPieSliceGray} alt=""/>
+                        </div>
+
                     </div>
-
                 );
             });
 
@@ -125,7 +112,7 @@ const FormBoardForLeader = ({forms}: any) => {
             }) : [];
 
         setInProgressForms(filteredForms);
-        console.log(`inProgress: ${JSON.stringify(filteredForms)}`);
+        // console.log(`inProgress: ${JSON.stringify(filteredForms)}`);
 
         // Not started
         filteredForms = Array.isArray(forms) ? forms.filter(

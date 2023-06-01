@@ -3,7 +3,7 @@ import "../../styles/enterspace.css";
 import React, { useState } from "react";
 import Button from "../../components/commons/buttons";
 import Input from "../../components/commons/input";
-import Modal from "../../components/commons/modals";
+import Modal from "../../components/commons/Modal";
 import linkImg from "../../assets/ic_link_brown.png";
 import Chatbot from "../../components/chatbot/chatbot";
 import {userState, spaceState, memberIdState} from "../../commons/Atom";
@@ -49,9 +49,9 @@ const EnterSpaceComponent = () => {
       .then((response: any) => {
         // 위의 함수에서 response.data를 받아온다.
         const { isSuccess, code, message } = response;
-        console.log(`response: ${JSON.stringify(response)}`);
+        // console.log(`response: ${JSON.stringify(response)}`);
         const { memberId, spaceId } = response.result;
-        console.log(`response: ${JSON.stringify(response.result)}`);
+        // console.log(`response: ${JSON.stringify(response.result)}`);
 
         if (code === 1000) {
           var msg = `Space에 ${memberId}로 입장하셨습니다.`;
@@ -70,7 +70,7 @@ const EnterSpaceComponent = () => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         setIsModalOpen(true);
         setMessage("스페이스 가입에 실패하였습니다.");
       });
