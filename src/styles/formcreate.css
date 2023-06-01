@@ -104,38 +104,8 @@ body{
 }
 .choose-group{
     display: flex;
-    
 }
-.group-name-container{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    
-}
-.group-name-container::-webkit-scrollbar{
-    display: none;
-  }
-.group-name-btn{
-    border-radius: 10px;
-    background-color: white;
-    margin: 0.3rem;
-}
-.group-member-container{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-}
-.member-name-btn{
-    border-radius: 10px;
-    background-color: white;
-    margin: 0.3rem;
-    
-}
-.group-member-container::-webkit-scrollbar{
-    display: none;
-  }
+
   .question-create-container{
     display: flex;
     flex-direction: row;
@@ -158,7 +128,21 @@ body{
     margin-bottom: 3rem;
     
   }
-  .question-title-containter{
+  .question-title-containter-multiple{
+    background-color: #C4E3FB;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: left;
+  }
+  .question-title-containter-short{
+    background-color: #C4E3FB;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: left;
+  }
+  .question-title-containter-long{
     background-color: #C4E3FB;
 
     border-top-left-radius: 20px;
@@ -306,3 +290,83 @@ body{
     height: 2.5rem;
   }
   
+ .group-name-container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    
+}
+.group-name-container::-webkit-scrollbar{
+    display: none;
+  }
+.group-name-btn{
+    border-radius: 10px;
+    background-color: white;
+    margin: 0.3rem;
+}
+.groups-members-container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    width: 70%;
+}
+.member-name-btn{
+    border-radius: 10px;
+    background-color: white;
+    margin: 0.3rem;
+    
+}
+
+
+
+
+/* 모달 그룹선택 */
+.choose-group .group-rectangle-white{
+  width: 500px;
+}
+
+.choose-group .group-name-container{
+  width: 60%;
+    height: 10rem;
+    display: block;
+}
+.group-member-container::-webkit-scrollbar{
+  display: none;
+}
+
+
+.group-member-container .group-member-container-by-group {
+    height: auto;
+    width: 100%;
+    background-color: blue;
+    border-bottom-width: 0;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+
+    display: flex;
+    flex-direction: row;
+    /* justify-content: flex-start; */
+    align-items: center;
+
+    padding-bottom: 0.3rem;
+    padding: 0px,0px,0px,0px;
+    margin-bottom: 1%;
+}
+
+
+ .group-member-name {
+  height: auto;
+  width: 100px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+
+
+  font-size: 0.8rem;
+  font-family: Pretendard, sans-serif;
+  padding: 0px,0px,0px,0px;
+  margin-left: 2%;
+}

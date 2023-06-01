@@ -1,11 +1,9 @@
 import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import icProfile from "../../assets/ic_profile.png";
-import icKebabBlack from "../../assets/ic_kebab_black.png";
 
 const MemberListByGroup = ({groupId, groups}: any) => {
     const [membersByGroup, setMembersByGroup] = useState(Array);
-
+    console.log("memberList groupId, groups",groupId,groups);
     useEffect(() => {
 
         let members = [];
@@ -15,7 +13,7 @@ const MemberListByGroup = ({groupId, groups}: any) => {
                 members = groups[i].members;
             }
         }
-
+        console.log("memberList members",members);
         const updatedMembers = members.map(
             (m: any, i: number) => {
 
@@ -23,9 +21,6 @@ const MemberListByGroup = ({groupId, groups}: any) => {
                     <div key={m.memberId} className="group-member-container-by-group"
                          style={{borderBottomWidth: i === members.length - 1 || members.length === 0 ? "0" : "0.05rem"}}>
 
-                        <div className="group-member-profile-wrapper">
-                            <img className="group-member-profile-img" src={icProfile} alt=""/>
-                        </div>
 
                         <div className="group-member-id">#{m.memberId}</div>
 
@@ -57,7 +52,7 @@ const GroupList = ({groups, getSelectedGroupId}: any) => {
 
     useEffect(() => {
         let groupBoxes = document.getElementsByClassName("group-box");
-
+        console.log("groupList groups",groups);
         const updatedGroups = groups.map(
             (g: any) => {
 
@@ -101,42 +96,37 @@ const GroupList = ({groups, getSelectedGroupId}: any) => {
     return <>{groupsBySpace}</>
 }
 
-const GroupMemberList = ({groups}: any) => {
+
+const SelectGroupForForm= (  { groups}:any )=>{
     console.log("groups",groups);
     const [selectedGroupId, setSelectedGroupId] = useState(0);
 
     const getSelectedGroupId = (groupId: number) => {
         setSelectedGroupId(groupId);
     }
+    return(<div className="group-rectangle-white">
 
-    // 1. 스페이스의 모든 그룹을 가져온다.
-    // 2. 각 스페이스의 그룹을 클릭하면 해당 그룹의 멤버 목록을 보여준다.
+    <div className="group-title">
+        Group & Member
+    </div>
 
-    return (
-        <div className="group-rectangle-white">
+    <div className="groups-members-container">
 
-            <div className="group-title">
-                Group & Member
-            </div>
-
-            <div className="groups-members-container">
-
-                <div className="group-container">
-                    <GroupList groups={groups} getSelectedGroupId={getSelectedGroupId}/>
-                </div>
-
-                <div className="group-member-container">
-                    <MemberListByGroup groupId={selectedGroupId} groups={groups}/>
-                </div>
-
-            </div>
-
+        <div className="group-container">
+            <GroupList groups={groups} getSelectedGroupId={getSelectedGroupId}/>
         </div>
-    );
+
+        <div className="group-member-container">
+            <MemberListByGroup groupId={selectedGroupId} groups={groups}/>
+        </div>
+
+    </div>
+
+</div>
+);
 }
 
-GroupMemberList.propTypes = {
+SelectGroupForForm.propTypes={
     groups: PropTypes.array
 }
-
-export default GroupMemberList;
+export default SelectGroupForForm;

@@ -10,7 +10,7 @@ import SpaceForMember from "./pages/space/SpaceForMember";
 import {RecoilRoot} from "recoil";
 import SpaceForLeader from "./pages/space/SpaceForLeader"
 
-import Userbar from "./components/userbar";
+import Userbar from "./components/Userbar";
 import FormCreate from "./pages/form/FormCreate";
 
 function App() {
