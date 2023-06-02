@@ -27,6 +27,10 @@ const CreateSpaceComponent = () => {
     const [spaceName, setSpaceName] = useState("");
     const [membership, setMembership] = useState("");
 
+    const [isValidName, setIsValidName] = useState(false);
+    const [isValidMembership, setIsValidMembership] = useState(false);
+    const [isValidAll, setIsValidAll] = useState(false);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [message, setMessage] = useState("");
     const [accessCode, setAccessCode] = useState("");
@@ -36,6 +40,30 @@ const CreateSpaceComponent = () => {
         console.log(`spaceImgUrl: ${spaceImgUrl}`);
 
     }, [spaceImgUrl])
+
+    useEffect(() => {
+
+        if (membership !== "") {
+            setIsValidMembership(true);
+        } else {
+            setIsValidMembership(false);
+        }
+
+    }, [membership])
+
+    useEffect(() => {
+
+        if (isValidName && isValidMembership) {
+            setIsValidAll(true);
+        } else {
+            setIsValidAll(false);
+        }
+
+        console.log(`isValidName: ${isValidName}`);
+        console.log(`isValidMembership: ${isValidMembership}`);
+        console.log(`isValidAll: ${isValidAll}`);
+
+    }, [isValidName, isValidMembership])
 
     /**
      * 하위 컴포넌트로부터 설정한 이미지 URL을 가져온다.
@@ -48,9 +76,11 @@ const CreateSpaceComponent = () => {
      * 스페이스의 이름 작성에 대한 이벤트 함수
      */
     const handleSpaceNameChange = (e: any) => {
-        e.preventDefault();
+        const regex = /^[a-zA-z0-9]{4,20}$/;
+        const value = e.target.value;
 
-        setSpaceName(e.target.value);
+        setIsValidName(regex.test(value));
+        setSpaceName(value);
     };
 
     const onClickMembershipButton = (e: any, selectedMembership: string) => {
@@ -205,7 +235,7 @@ const CreateSpaceComponent = () => {
 
                 {/* 스페이스 생성 버튼 */}
                 <Button
-                    className="create-space-btn"
+                    className={isValidAll ? "create-space-btn-active" : "create-space-btn"}
                     text="Create a space"
                     onClick={handleSubmit}/>
 
