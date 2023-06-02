@@ -1,5 +1,5 @@
-import instances from "../../utils";
-import {FORM} from "../../config/constants";
+import instances from "../axiosInstance";
+import {FORM} from "../../commons/constants";
 
 /**
  * 6.5 특정 설문 참여 현황 목록 불러오기

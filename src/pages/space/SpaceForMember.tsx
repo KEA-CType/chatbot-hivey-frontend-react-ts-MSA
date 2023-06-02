@@ -1,5 +1,5 @@
 /**
- * 스페이스 (멤버/구성원용) 화면
+ * 스페이스 (리더/관리자용) 화면
  */
 
 import {useEffect, useState} from 'react';
@@ -10,16 +10,17 @@ import spaceService from "../../services/space/space";
 import {spaceState, userState} from '../../commons/Atom';
 import PropTypes from "prop-types";
 
-import FormBoardForMember from "../../components/space/FormBoardForMember";
-
 import "../../styles/space.css";
 
 import icLogoSample from "../../assets/ic_logo_sample.png";
+
+import {motion} from "framer-motion"
 
 import {
     SpaceOnly,
     FormListResponse
 } from "../../commons/Interface";
+import FormBoardForMember from "../../components/space/FormBoardForMember";
 
 const SpaceInformationComponent = ({spaceOnly, forms}: any) => {
     const navigate = useNavigate();
@@ -30,19 +31,26 @@ const SpaceInformationComponent = ({spaceOnly, forms}: any) => {
     }
 
     return (
-        <div className="space-container">
+        <div id="space-container" className="space-container">
             {/* 스페이스에 대한 정보 */}
-            <div className="space-rectangle-white">
+            <motion.div className="space-rectangle-white" style={{y: 100}} animate={{y: 0}}>
                 <div className="space-img-wrapper">
                     <img className="space-img" src={icLogoSample} alt=""/>
                 </div>
                 <div className="space-title">{spaceOnly.name}</div>
-            </div>
+                <div className="space-membercount">{spaceOnly.memberCount} / 50</div>
+            </motion.div>
 
-            {/* 스페이스의 설문 목록 (Component 호출) */}
-            <FormBoardForMember forms={forms}/>
+            <motion.div className="space-content-container" style={{y: 100}} animate={{y: 0}}>
+
+                {/* 스페이스의 설문 목록 (Component 호출) */}
+                <FormBoardForMember forms={forms}/>
+
+            </motion.div>
+
         </div>
     );
+
 }
 
 const SpaceForMember = () => {
@@ -68,7 +76,7 @@ const SpaceForMember = () => {
 
             })
             .catch((error) => {
-                // console.log(error);
+                console.log(error);
             });
     }, [spaceId]);
 

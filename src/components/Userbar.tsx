@@ -16,13 +16,37 @@ import logout from "../assets/ic_logout_gray.png";
 import icSettingGray from "../assets/ic_setting_gray.png";
 
 const SpaceListComponent = ({spaces, isManager}: any) => {
-    const [spaceList, setSpaceList] = useState(Array);
-    const navigate = useNavigate();
-
     const [space, setSpace] = useRecoilState(spaceState);
 
+    const [spaceList, setSpaceList] = useState(Array);
+
+    const navigate = useNavigate();
+
+    let spaceListElements = document.getElementsByClassName("space-item");
+
+    // useEffect(() => {
+    //
+    //     const newList = spaces.map(
+    //         (s: any, currentIdx: number) => {
+    //
+    //             console.log(`s.id: ${s.id}, space.id: ${space.id}`);
+    //
+    //             if (s.id === space.id) {
+    //
+    //                 for (let i = 0; i < spaceListElements.length; i++) {
+    //                     spaceListElements[i].classList.remove("space-item-clicked");
+    //                 }
+    //
+    //                 spaceListElements[currentIdx].classList.add("space-item-clicked")
+    //             }
+    //         }
+    //     );
+    //
+    //     setSpaceList(newList);
+    //
+    // }, [spaces, space.id])
+
     useEffect(() => {
-        let spaceListElements = document.getElementsByClassName("space-item");
 
         if (spaceList) {
 
@@ -54,8 +78,10 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
 
                         if (s.isManager) {
                             navigate(`space/leader/${s.spaceId}`);
+                            // window.location.reload();
                         } else {
                             navigate(`space/member/${s.spaceId}`);
+                            // window.location.reload();
                         }
                     };
 
@@ -83,6 +109,10 @@ const Userbar = () => {
     const [spaceList, setSpaceList] = useState([]);
     const user = useRecoilValue(userState);
 
+    const handleClickLogo = () => {
+        window.location.replace("/main");
+    }
+
     useEffect(() => {
 
         spaceService
@@ -93,13 +123,13 @@ const Userbar = () => {
 
             })
             .catch((error) => {
-                // console.log(error);
+                console.log(error);
             });
     }, []);
 
     return (
         <div className="userbar-container">
-            <img className="logo" src={icLogoHiVey} alt="logo"/>
+            <img className="logo" src={icLogoHiVey} alt="logo" onClick={handleClickLogo}/>
 
             <div className="user-profile">
                 <img className="user-profile-img" src={profile} alt="user profile"/>
@@ -130,4 +160,4 @@ Userbar.propTypes = {
     spaces: PropTypes.array,
 };
 
-export default Userbar;
+export default React.memo(Userbar);

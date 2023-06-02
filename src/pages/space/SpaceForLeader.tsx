@@ -1,5 +1,5 @@
 /**
- * 스페이스 (리더/관리자용) 화면
+ * 스페이스 (멤버/구성원용) 화면
  */
 
 import {useEffect, useState} from 'react';
@@ -19,7 +19,7 @@ import "../../styles/space.css";
 import icLogoSample from "../../assets/ic_logo_sample.png";
 import icEditGray from "../../assets/ic_edit_gray.png";
 
-import { motion } from "framer-motion"
+import {motion} from "framer-motion"
 
 import {
     SpaceOnly,
@@ -28,19 +28,18 @@ import {
 } from "../../commons/Interface";
 
 const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
+    const navigate = useNavigate();
     const selectedFormId = useRecoilValue(selectedFormIdState);
 
-    const navigate = useNavigate();
-
     if (!spaceOnly || !forms || !groups) {
-        navigate("/main")
+        navigate("/main");
         return <></>;
     }
 
     return (
         <div id="space-container" className="space-container">
             {/* 스페이스에 대한 정보 */}
-            <motion.div className="space-rectangle-white" style={{ y: 100 }} animate={{ y: 0 }}>
+            <motion.div className="space-rectangle-white" style={{y: 100}} animate={{y: 0}}>
                 <div className="space-img-wrapper">
                     <img className="space-img" src={icLogoSample} alt=""/>
                 </div>
@@ -51,7 +50,7 @@ const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
                 </div>
             </motion.div>
 
-            <motion.div className="space-content-container" style={{ y: 100 }} animate={{ y: 0 }}>
+            <motion.div className="space-content-container" style={{y: 100}} animate={{y: 0}}>
 
                 {/* 스페이스의 설문 목록 (Component 호출) */}
                 <FormBoardForLeader forms={forms}/>
@@ -94,7 +93,7 @@ const SpaceForLeader = () => {
 
             })
             .catch((error) => {
-                // console.log(error);
+                console.log(error);
             });
     }, [spaceId]);
 

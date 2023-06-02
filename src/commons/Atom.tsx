@@ -44,9 +44,22 @@ export const formIdState = atom<number>({
 });
 
 /**
- * 설문 식별 번호 (참여
+ * 설문 식별 번호
  */
 export const selectedFormIdState = atom<number>({
     key: "selectedFormId",
     default: 0,
+});
+
+/**
+ * 챗봇을 띄우는 것과 관련된 전역 변수
+ *
+ * <floatingType>
+ * - 0: 챗봇을 아예 띄우지 않는 상태
+ * - 1: 챗봇만 띄우는 상태
+ * - 2: 챗봇과 스페이스 생성 버튼까지 같이 띄우는 상태
+ */
+export const floatingTypeWithChatbotState = atom<number>( {
+    key: "floatingType",
+    default: 2,
 });

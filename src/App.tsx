@@ -5,11 +5,11 @@ import Home from "./pages/Home";
 import Main from "./pages/Main";
 import SpaceEnter from "./pages/space/SpaceEnter";
 import SpaceCreate from "./pages/space/SpaceCreate";
-import Chatbot from "./components/chatbot/chatbot";
 import SpaceForMember from "./pages/space/SpaceForMember";
-import {RecoilRoot} from "recoil";
+import {RecoilRoot, useRecoilValue} from "recoil";
 import SpaceForLeader from "./pages/space/SpaceForLeader"
 import Userbar from "./components/Userbar";
+import {floatingTypeWithChatbotState} from "./commons/Atom";
 
 function App() {
 
@@ -24,7 +24,7 @@ function App() {
                         path="/*"
                         element={
                             <div style={{display: "flex"}}>
-                                <Userbar />
+                                <Userbar/>
                                 <div style={{flexGrow: 1, marginLeft: "200px"}}>
                                     <Routes>
                                         <Route path="/space/enter" element={<SpaceEnter/>}/>
@@ -34,7 +34,6 @@ function App() {
                                         <Route path="/space/leader/:spaceId" element={<SpaceForLeader/>}/>
                                     </Routes>
                                 </div>
-                                <Chatbot/>
                             </div>
                         }
                     />

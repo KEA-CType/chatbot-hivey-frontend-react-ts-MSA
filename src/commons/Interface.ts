@@ -58,3 +58,8 @@ export interface TargetGroupListResponse {
     groupId: number,
     groupName: number
 }
+
+export interface Image {
+    file: string,
+    url: string
+}

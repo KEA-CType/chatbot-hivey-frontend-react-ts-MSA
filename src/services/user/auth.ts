@@ -1,5 +1,5 @@
-import instances from "../../utils";
-import {AUTH} from "../../config/constants";
+import instances from "../axiosInstance";
+import {AUTH} from "../../commons/constants";
 
 /**
  * 2.1 회원가입

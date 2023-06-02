@@ -1,5 +1,5 @@
-import instances from "../../utils";
-import {SPACE} from "../../config/constants";
+import instances from "../axiosInstance";
+import {SPACE} from "../../commons/constants";
 import {Space, SpaceInformationResponse} from "../../commons/Interface";
 import {CommonResponse} from "../commonResponse";
 
