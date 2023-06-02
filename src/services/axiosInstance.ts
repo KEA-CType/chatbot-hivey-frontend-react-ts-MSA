@@ -28,12 +28,23 @@ const axiosAuthApi = (options: []) => {
 
 }
 
+/**
+ * Multer를 이용한 이미지를 업로드할 때 사용하는 인스턴스
+ */
+const axiosLocalhostApi = () => {
+    return axios.create({
+        baseURL: process.env.REACT_APP_IMG_SERVER_URL
+    });
+}
+
 const INSTANCE = axiosApi([]);
 const AUTH_INSTANCE = axiosAuthApi([]);
+const IMG_INSTANCE = axiosLocalhostApi();
 
 const instances = {
     INSTANCE,
-    AUTH_INSTANCE
+    AUTH_INSTANCE,
+    IMG_INSTANCE
 }
 
 export default instances;

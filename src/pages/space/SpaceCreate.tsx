@@ -1,45 +1,63 @@
 import "../../styles/createspace.css";
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+
+import {userState, spaceState} from "../../commons/Atom";
+import {useRecoilValue, useSetRecoilState} from "recoil";
 
 import Button from "../../components/commons/buttons";
-import Chatbot from "../../components/chatbot/chatbot";
 import Input from "../../components/commons/input";
 import Modal from "../../components/commons/Modal";
-import {userState, spaceState} from "../../commons/Atom";
-import {useRecoilState} from "recoil";
+import ChatbotForMember from "../../components/chatbot/ChatbotForMember";
 
-import spaces from "../../services/space/space";
+import icLogoHivey from "../../assets/ic_logo_hivey.png";
+import imgSampleWhite from "../../assets/img_sample_white.png";
 
+import uploadImgService from "../../services/file/uploadFileService";
+import spaceService from "../../services/space/space";
+
+/**
+ * 스페이스 생성 시 사용하는 입력 양식 컴포넌트
+ */
 const CreateSpaceComponent = () => {
-    const [img, setImg] = useState("");
+    const user = useRecoilValue(userState);
+    const setSpace = useSetRecoilState(spaceState);
+
+    const [spaceImgUrl, setSpaceImgUrl] = useState("");
     const [spaceName, setSpaceName] = useState("");
-    const [nameError, setNameError] = useState(""); // 이름이 중복될 때 출력할 경고문구
-    const [invitation, setInvitation] = useState("");
-    const [invitationError, setInvitationError] = useState("");
+    const [membership, setMembership] = useState("");
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [message, setMessage] = useState("");
     const [accessCode, setAccessCode] = useState("");
 
-    // Recoil
-    const [user, setUser] = useRecoilState(userState);
-    const [space, setSpace] = useRecoilState(spaceState);
+    useEffect(() => {
+
+        console.log(`spaceImgUrl: ${spaceImgUrl}`);
+
+    }, [spaceImgUrl])
+
+    /**
+     * 하위 컴포넌트로부터 설정한 이미지 URL을 가져온다.
+     */
+    const getSpaceImgUrl = (imgUrl: string) => {
+        setSpaceImgUrl(imgUrl);
+    }
 
     /**
      * 스페이스의 이름 작성에 대한 이벤트 함수
      */
     const handleSpaceNameChange = (e: any) => {
-        const inputSpaceName = e.target.value;
-        setSpaceName(inputSpaceName);
+        e.preventDefault();
+
+        setSpaceName(e.target.value);
     };
 
-    /**
-     * 스페이스 초대에 대한 이벤트 함수
-     */
-    const handleInvitationsChange = (e: any) => {
-        const inputInvitations = e.target.value;
-        setInvitation(inputInvitations);
-    };
+    const onClickMembershipButton = (e: any, selectedMembership: string) => {
+        e.preventDefault();
+
+        setMembership(selectedMembership);
+    }
 
     /**
      * 스페이스 생성에 대한 이벤트 함수
@@ -47,37 +65,23 @@ const CreateSpaceComponent = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
-        // 일단 프로토타입에서는 img를 null로 초기화한다.
-        setImg("null");
-
-        if (nameError) {
-            return;
-        }
-
-        // handle login submit
-        spaces
-            .CreateSpace(user.id, spaceName, img)
+        spaceService
+            .CreateSpace(user.id, spaceName, spaceImgUrl)
             .then((response) => {
-                const {code, message} = response;
-
                 const {spaceId, accessCode} = response.result;
 
-                if (code === 1000) {
-                    setIsModalOpen(true);
-                    setMessage(accessCode);
-                    setAccessCode(accessCode);
-                    setSpace({id: spaceId, name: spaceName});
-                    // handle login success
-                } else if (code === 2020) {
-                    setIsModalOpen(true);
-                    setMessage(message);
-                    // handle login failure
-                }
+                setIsModalOpen(true);
+                setMessage(accessCode);
+                setAccessCode(accessCode);
+                setSpace({id: spaceId, name: spaceName});
+
             })
             .catch((error) => {
-                // console.log(error);
+
+                console.log(error);
                 setIsModalOpen(true);
                 setMessage("스페이스 생성에 실패하였습니다.");
+
             });
     };
 
@@ -93,47 +97,145 @@ const CreateSpaceComponent = () => {
         }
     };
 
-    /**
-     * View
-     */
+    const handlePreviewImgOnChange = (e: any) => {
+        e.preventDefault();
+
+        uploadImgService(e)
+            .then((response) => {
+                console.log(`response: ${JSON.stringify(response)}`);
+
+                if (response.data.success) {
+
+                    const file = `${process.env.PUBLIC_URL}/images/${response.data.fileName}`;
+                    console.log(`file: ${file}`);
+                    setSpaceImgUrl(file);
+                    getSpaceImgUrl(file);
+
+                } else {
+                    throw new Error("이미지 업로드에 실패하였습니다.");
+                }
+
+            });
+    }
+
+    const handlePreviewImgOnDelete = (e: any) => {
+        e.preventDefault();
+
+        if (spaceImgUrl !== "") {
+            // 이미지 URL을 무효화시킨다.
+            URL.revokeObjectURL(spaceImgUrl);
+
+            // 이미지 URL을 먼저 빈 문자열로 설정한다.
+            setSpaceImgUrl("");
+        }
+    }
+
     return (
-        <div className="createSpace-container">
-            <form className="create-space" onSubmit={handleSubmit}>
-                <div className="title">Create Space</div>
-                <div className="space-input">
-                    Space Name :
-                    <Input
-                        className="create-space-input"
-                        placeholder="My Space"
-                        value={spaceName}
-                        onChange={handleSpaceNameChange}
-                    />
-                </div>
-                <div className="space-input">
-                    Space Invite :
-                    <Input
-                        className="create-space-input"
-                        placeholder="user email"
-                        value={invitation}
-                        onChange={handleInvitationsChange}
-                    />
+        <div className="create-space-container">
+
+            {/* 스페이스 이름과 옵션(멤버십)을 지정하는 부분 */}
+            <form encType="multipart/form-data" className="create-space-form-container" onSubmit={handleSubmit}>
+
+                <div className="create-space-img-container">
+
+                    <img id="space-preview-img"
+                         className="create-space-preview-img"
+                         src={spaceImgUrl ? spaceImgUrl : imgSampleWhite}
+                         alt=""/>
+
+                    <div className="create-space-img-btn-container">
+
+                        {/* Upload 버튼(<label></label>)을 누르면 장치 관리자 창이 열리도록 한다. */}
+
+                        <label htmlFor="create-space-img-upload-btn"
+                               className="create-space-img-upload-btn">Upload</label>
+
+                        <input
+                            id="create-space-img-upload-btn"
+                            type="file"
+                            accept="image/*"
+                            name="file"
+                            onChange={handlePreviewImgOnChange}
+                            key={spaceImgUrl}
+                            style={{display: "none"}}
+                        />
+
+                        {/* 업로드한 이미지를 삭제한다. */}
+                        <button className="create-space-img-remove-btn" onClick={handlePreviewImgOnDelete}>
+                            Remove
+                        </button>
+
+                    </div>
+
                 </div>
 
-                <Button text="Create Space" className="create-space-btn"/>
+                <div className="create-space-input-name-container">
+
+                    Space name
+
+                    <Input
+                        className="create-space-input-name"
+                        placeholder="Enter your space name"
+                        value={spaceName}
+                        onChange={handleSpaceNameChange}/>
+
+                </div>
+
+                <div className="create-space-input-membership-container">
+
+                    Space membership
+
+                    <div className="create-space-membership-btn-container">
+
+                        <button
+                            className={membership === "F" ? "create-space-membership-btn-clicked" : "create-space-membership-btn"}
+                            onClick={(e) => onClickMembershipButton(e, "F")}>
+                            Free (up to 50 members)
+                        </button>
+
+                        <button
+                            className={membership === "P" ? "create-space-membership-btn-clicked" : "create-space-membership-btn"}
+                            onClick={(e) => onClickMembershipButton(e, "P")}>
+                            Premium (no limits)
+                        </button>
+
+                    </div>
+
+                </div>
+
+                {/* 스페이스 생성 버튼 */}
+                <Button
+                    className="create-space-btn"
+                    text="Create a space"
+                    onClick={handleSubmit}/>
+
             </form>
+
+            {/* 스페이스 생성 완료 혹은 실패 시 올라오는 모달 */}
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <p>{message}</p>
                 <button onClick={() => handleCopyClipBoard(message)}>Copy</button>
             </Modal>
-            <Chatbot/>
+
         </div>
     );
 };
 
+/**
+ * 스페이스 생성 페이지 컴포넌트
+ */
 const SpaceCreate = () => {
     return (
-        <div className="createpage">
+        <div className="create-space-rectangle-white">
+
+            <img className="create-space-logo" src={icLogoHivey} alt=""/>
+
+            <div className="title">Create your own space!</div>
+
             <CreateSpaceComponent/>
+
+            <ChatbotForMember/>
+
         </div>
     );
 };

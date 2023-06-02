@@ -1,5 +1,5 @@
-import instances from "../../utils";
-import {FORM} from "../../config/constants";
+import instances from "../axiosInstance";
+import {FORM} from "../../commons/constants";
 
 /**
  * 6.1 설문 생성하기 : 아이디
