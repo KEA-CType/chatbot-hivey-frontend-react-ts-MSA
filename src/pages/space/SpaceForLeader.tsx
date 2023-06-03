@@ -79,6 +79,7 @@ const SpaceForLeader = () => {
     const [groups, setGroups] = useState<GroupListResponse | null>(null);
 
     useEffect(() => {
+
         spaceService
             .GetSpace(user.id, spaceId !== undefined ? spaceId : (space.id).toString())
             .then((response) => {
@@ -95,6 +96,7 @@ const SpaceForLeader = () => {
             .catch((error) => {
                 console.log(error);
             });
+
     }, [spaceId]);
 
     return (

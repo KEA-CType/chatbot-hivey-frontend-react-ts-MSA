@@ -92,7 +92,7 @@ const CreateSpaceComponent = () => {
         setIsValidName(validateSpaceName(value));
 
         if (!isValidName) {
-            setNotValidNameMessage("Please write 4 to 20 characters including Korean, English, and space.");
+            setNotValidNameMessage("Please write 4 to 20 characters including korean, english, and space.");
         } else {
             setNotValidNameMessage("");
         }
@@ -144,10 +144,7 @@ const CreateSpaceComponent = () => {
             console.log(`accessCode: ${accessCode}`);
             navigator.clipboard.writeText(accessCode).then(r => {
                 alert("클립보드에 복사되었습니다.");
-                // navigate("/main");
-                // window.location.replace(`/space/leader/${space.id}`);
-                navigate(`/space/leader/${space.id}`);
-                window.location.reload();
+                navigate(`/refresh?destination=/space/leader/${space.id}`, {replace: true});
             });
         } catch (error) {
             alert("클립보드 복사에 실패하였습니다.");
@@ -281,7 +278,7 @@ const CreateSpaceComponent = () => {
             </form>
 
             {/* 스페이스 생성 완료 혹은 실패 시 올라오는 모달 */}
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={message}>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} header={message}>
                 <p>참여 코드: {accessCode}</p>
                 <button className="create-space-copy-btn" onClick={handleCopyClipBoard}>Copy</button>
             </Modal>

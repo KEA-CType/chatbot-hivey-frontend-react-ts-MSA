@@ -6,10 +6,11 @@ import Main from "./pages/Main";
 import SpaceEnter from "./pages/space/SpaceEnter";
 import SpaceCreate from "./pages/space/SpaceCreate";
 import SpaceForMember from "./pages/space/SpaceForMember";
-import {RecoilRoot, useRecoilValue} from "recoil";
+import {RecoilRoot} from "recoil";
 import SpaceForLeader from "./pages/space/SpaceForLeader"
 import Userbar from "./components/Userbar";
-import {floatingTypeWithChatbotState} from "./commons/Atom";
+import React from "react";
+import Refresh from "./components/Refresh";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                                         <Route path="/main" element={<Main/>}/>
                                         <Route path="/space/member/:spaceId" element={<SpaceForMember/>}/>
                                         <Route path="/space/leader/:spaceId" element={<SpaceForLeader/>}/>
+                                        <Route path="/refresh" element={<Refresh />}/>
                                     </Routes>
                                 </div>
                             </div>
