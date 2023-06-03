@@ -1,9 +1,10 @@
 import "../../styles/createspace.css";
 
 import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import {userState, spaceState} from "../../commons/Atom";
-import {useRecoilValue, useSetRecoilState} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 
 import Button from "../../components/commons/buttons";
 import Input from "../../components/commons/input";
@@ -15,27 +16,64 @@ import imgSampleWhite from "../../assets/img_sample_white.png";
 
 import uploadImgService from "../../services/file/uploadFileService";
 import spaceService from "../../services/space/space";
+import {validateSpaceName} from "../../utils/validationTest";
 
 /**
  * 스페이스 생성 시 사용하는 입력 양식 컴포넌트
  */
 const CreateSpaceComponent = () => {
+    const navigate = useNavigate();
+
     const user = useRecoilValue(userState);
-    const setSpace = useSetRecoilState(spaceState);
+    const [space, setSpace] = useRecoilState(spaceState);
 
     const [spaceImgUrl, setSpaceImgUrl] = useState("");
     const [spaceName, setSpaceName] = useState("");
     const [membership, setMembership] = useState("");
 
+    const [isValidName, setIsValidName] = useState(false);
+    const [notValidNameMessage, setNotValidNameMessage] = useState("");
+    const [isValidMembership, setIsValidMembership] = useState(false);
+    const [isValidAll, setIsValidAll] = useState(false);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [message, setMessage] = useState("");
     const [accessCode, setAccessCode] = useState("");
 
+    /**
+     * 스페이스 이미지 업로드 업데이트
+     */
     useEffect(() => {
 
         console.log(`spaceImgUrl: ${spaceImgUrl}`);
 
     }, [spaceImgUrl])
+
+    /**
+     * 스페이스 멤버십 버튼 클릭 효과
+     */
+    useEffect(() => {
+
+        if (membership !== "") {
+            setIsValidMembership(true);
+        } else {
+            setIsValidMembership(false);
+        }
+
+    }, [membership])
+
+    /**
+     * 입력한 값이 유효한지를 확인한 후 버튼 활성화 여부를 결정한다.
+     */
+    useEffect(() => {
+
+        if (isValidName && isValidMembership) {
+            setIsValidAll(true);
+        } else {
+            setIsValidAll(false);
+        }
+
+    }, [isValidName, isValidMembership])
 
     /**
      * 하위 컴포넌트로부터 설정한 이미지 URL을 가져온다.
@@ -48,11 +86,21 @@ const CreateSpaceComponent = () => {
      * 스페이스의 이름 작성에 대한 이벤트 함수
      */
     const handleSpaceNameChange = (e: any) => {
-        e.preventDefault();
+        const value = e.target.value;
+        setSpaceName(value);
 
-        setSpaceName(e.target.value);
+        setIsValidName(validateSpaceName(value));
+
+        if (!isValidName) {
+            setNotValidNameMessage("Please write 4 to 20 characters including Korean, English, and space.");
+        } else {
+            setNotValidNameMessage("");
+        }
     };
 
+    /**
+     * 스페이스 멤버십을 선택하는 버튼에 대한 클릭 이벤트 함수
+     */
     const onClickMembershipButton = (e: any, selectedMembership: string) => {
         e.preventDefault();
 
@@ -68,17 +116,20 @@ const CreateSpaceComponent = () => {
         spaceService
             .CreateSpace(user.id, spaceName, spaceImgUrl)
             .then((response) => {
-                const {spaceId, accessCode} = response.result;
 
-                setIsModalOpen(true);
-                setMessage(accessCode);
-                setAccessCode(accessCode);
+                const {spaceId, accessCode} = response.result;
                 setSpace({id: spaceId, name: spaceName});
+                setAccessCode(accessCode);
+
+                // 생성이 완료되면 완료되었다는 메시지와 함께 스페이스의 access code를 띄워준다.
+                setIsModalOpen(true);
+                setMessage("스페이스 생성에 성공하였습니다.");
 
             })
             .catch((error) => {
 
                 console.log(error);
+
                 setIsModalOpen(true);
                 setMessage("스페이스 생성에 실패하였습니다.");
 
@@ -88,15 +139,24 @@ const CreateSpaceComponent = () => {
     /**
      * 생성한 스페이스 초대 코드를 복사할 수 있도록 한다.
      */
-    const handleCopyClipBoard = (text: string) => {
+    const handleCopyClipBoard = () => {
         try {
-            navigator.clipboard.writeText(text);
-            alert("클립보드에 복사되었습니다.");
+            console.log(`accessCode: ${accessCode}`);
+            navigator.clipboard.writeText(accessCode).then(r => {
+                alert("클립보드에 복사되었습니다.");
+                // navigate("/main");
+                // window.location.replace(`/space/leader/${space.id}`);
+                navigate(`/space/leader/${space.id}`);
+                window.location.reload();
+            });
         } catch (error) {
             alert("클립보드 복사에 실패하였습니다.");
         }
     };
 
+    /**
+     * 스페이스 커버 이미지를 장치 관리자로부터 받아와 저장하는 함수
+     */
     const handlePreviewImgOnChange = (e: any) => {
         e.preventDefault();
 
@@ -118,6 +178,9 @@ const CreateSpaceComponent = () => {
             });
     }
 
+    /**
+     * 등록한 이미지를 삭제하는 함수
+     */
     const handlePreviewImgOnDelete = (e: any) => {
         e.preventDefault();
 
@@ -150,6 +213,7 @@ const CreateSpaceComponent = () => {
                         <label htmlFor="create-space-img-upload-btn"
                                className="create-space-img-upload-btn">Upload</label>
 
+                        {/* 아래 <input> 요소가 위의 label htmlFor=""을 통해 위의 label로 연결된다. 따라서 아래 <input> 요소는 보이지 않도록 처리한다. */}
                         <input
                             id="create-space-img-upload-btn"
                             type="file"
@@ -169,6 +233,7 @@ const CreateSpaceComponent = () => {
 
                 </div>
 
+                {/* 스페이스 이름 입력 */}
                 <div className="create-space-input-name-container">
 
                     Space name
@@ -179,8 +244,12 @@ const CreateSpaceComponent = () => {
                         value={spaceName}
                         onChange={handleSpaceNameChange}/>
 
+                    {!isValidName &&
+                        <div className="error-message">{notValidNameMessage}</div>}
+
                 </div>
 
+                {/* 스페이스 멤버십 선택 */}
                 <div className="create-space-input-membership-container">
 
                     Space membership
@@ -205,16 +274,16 @@ const CreateSpaceComponent = () => {
 
                 {/* 스페이스 생성 버튼 */}
                 <Button
-                    className="create-space-btn"
+                    className={isValidAll ? "create-space-btn-active" : "create-space-btn"}
                     text="Create a space"
                     onClick={handleSubmit}/>
 
             </form>
 
             {/* 스페이스 생성 완료 혹은 실패 시 올라오는 모달 */}
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <p>{message}</p>
-                <button onClick={() => handleCopyClipBoard(message)}>Copy</button>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={message}>
+                <p>참여 코드: {accessCode}</p>
+                <button className="create-space-copy-btn" onClick={handleCopyClipBoard}>Copy</button>
             </Modal>
 
         </div>

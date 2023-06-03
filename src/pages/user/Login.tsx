@@ -18,7 +18,7 @@ import {userState} from "../../commons/Atom";
 
 import authService from "../../services/user/auth";
 
-import {validateEmail} from "../../utils/validateEmail";
+import {validateEmail} from "../../utils/validationTest";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -83,7 +83,7 @@ const Login = () => {
                     setMessage(message);
 
                     // 받아온 result 값을 파싱해서 전역 상태 관리 변수에 대입한다.
-                    setUser({id: userIdx, name: name});
+                    setUser({id: userIdx, name: name, email: email});
 
                     localStorage.setItem("jwt-token", jwtToken);
 

@@ -9,7 +9,7 @@ import {CommonResponse} from "../commonResponse";
 const CreateSpace = async (userId: number, spaceName: string, img: string) => {
     try {
 
-        const response = await instances.AUTH_INSTANCE.post(`${SPACE}/${userId}/space`, {
+        const response = await instances.AUTH_INSTANCE.post(`${SPACE}/${userId}`, {
             name: spaceName,
             img: img,
         });
