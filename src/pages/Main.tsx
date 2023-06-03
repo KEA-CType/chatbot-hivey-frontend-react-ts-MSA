@@ -1,10 +1,12 @@
 import "../styles/main.css";
 
 import React from "react";
-import Button from "../components/commons/buttons";
-
 import {Link} from "react-router-dom";
+
+import Button from "../components/commons/buttons";
 import ChatbotForMember from "../components/chatbot/ChatbotForMember";
+
+import bgMainBottom from "../assets/bg_main_bottom.png";
 
 const Main = () => {
 
@@ -24,6 +26,8 @@ const Main = () => {
                 </Link>
 
             </div>
+
+            <img className="main-bottom" src={bgMainBottom} alt="copyright" />
 
             <ChatbotForMember/>
 
