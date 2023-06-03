@@ -133,19 +133,22 @@ const Userbar = () => {
 
             <div className="user-profile">
                 <img className="user-profile-img" src={profile} alt="user profile"/>
-                <div className="username">{user.name}</div>
+                <div className="user-information-container">
+                    <div className="user-name">{user.name}</div>
+                    <div className="user-email">{user.email}</div>
+                </div>
                 <img className="user-profile-setting" src={icSettingGray} alt="setting"/>
             </div>
 
+            <div className="label"><img src={label} alt="label"/>MANAGER</div>
             <div className="user-spaces">
-                <div className="label"><img src={label} alt="label"/>MANAGER</div>
                 <div className="spaces-list">
                     <SpaceListComponent spaces={spaceList} isManager={1}/>
                 </div>
             </div>
 
+            <span className="label"><img src={label} alt="label"/>MEMBER</span>
             <div className="user-spaces">
-                <span className="label"><img src={label} alt="label"/>MEMBER</span>
                 <div className="spaces-list">
                     <SpaceListComponent spaces={spaceList} isManager={0}/>
                 </div>

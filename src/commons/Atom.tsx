@@ -11,7 +11,8 @@ export const userState = atom<User>({
     key: "user",
     default: {
         id: 0,
-        name: ""
+        name: "",
+        email: "",
     },
     effects: [persistAtom]
 });
