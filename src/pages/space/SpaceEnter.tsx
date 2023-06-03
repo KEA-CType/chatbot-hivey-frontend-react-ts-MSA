@@ -1,8 +1,7 @@
 import "../../styles/enterspace.css";
 
-import React, {useState} from "react";
+import React, {useState, MouseEvent} from "react";
 import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
-import {Link} from "react-router-dom";
 
 import Button from "../../components/commons/buttons";
 import Input from "../../components/commons/input";
@@ -14,11 +13,14 @@ import spaceService from "../../services/space/space";
 
 import icLogoHivey from "../../assets/ic_logo_hivey.png";
 import {validateAccessCode} from "../../utils/validationTest";
+import {useNavigate} from "react-router-dom";
 
 /**
  * 스페이스 참여 시 사용하는 입력 양식 컴포넌트
  */
 const EnterSpaceComponent = () => {
+    const navigate = useNavigate();
+
     const user = useRecoilValue(userState);
     const [space, setSpace] = useRecoilState(spaceState);
     const setMemberId = useSetRecoilState(memberIdState);
@@ -94,6 +96,13 @@ const EnterSpaceComponent = () => {
             });
     };
 
+    /**
+     * 참여한 스페이스로 바로 이동하도록 하는 함수
+     */
+    const handleEnterSpace = () => {
+        navigate(`/refresh?destination=/space/member/${space.id}`, {replace: true});
+    }
+
     return (
         <div className="space-enter-container">
 
@@ -129,7 +138,7 @@ const EnterSpaceComponent = () => {
                 <p>{modalMessage}</p>
 
                 {isSuccess
-                    ? <Link to="/space/"><Button className="space-enter-modal-btn" text="Enter"/></Link>
+                    ? <button className="space-enter-modal-btn" onClick={handleEnterSpace}>Enter</button>
                     : <button className="space-enter-modal-btn" onClick={() => setIsModalOpen(false)}>Close</button>}
             </Modal>
 
