@@ -92,7 +92,7 @@ const CreateSpaceComponent = () => {
         setIsValidName(validateSpaceName(value));
 
         if (!isValidName) {
-            setNotValidNameMessage("Please write 4 to 20 characters including Korean, English, and space.");
+            setNotValidNameMessage("Please write 4 to 20 characters including korean, english, and space.");
         } else {
             setNotValidNameMessage("");
         }
@@ -144,10 +144,7 @@ const CreateSpaceComponent = () => {
             console.log(`accessCode: ${accessCode}`);
             navigator.clipboard.writeText(accessCode).then(r => {
                 alert("클립보드에 복사되었습니다.");
-                // navigate("/main");
-                // window.location.replace(`/space/leader/${space.id}`);
-                navigate(`/space/leader/${space.id}`);
-                window.location.reload();
+                navigate(`/space/leader/${space.id}`, {replace: true});
             });
         } catch (error) {
             alert("클립보드 복사에 실패하였습니다.");

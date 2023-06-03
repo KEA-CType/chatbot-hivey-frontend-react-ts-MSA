@@ -24,28 +24,6 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
 
     let spaceListElements = document.getElementsByClassName("space-item");
 
-    // useEffect(() => {
-    //
-    //     const newList = spaces.map(
-    //         (s: any, currentIdx: number) => {
-    //
-    //             console.log(`s.id: ${s.id}, space.id: ${space.id}`);
-    //
-    //             if (s.id === space.id) {
-    //
-    //                 for (let i = 0; i < spaceListElements.length; i++) {
-    //                     spaceListElements[i].classList.remove("space-item-clicked");
-    //                 }
-    //
-    //                 spaceListElements[currentIdx].classList.add("space-item-clicked")
-    //             }
-    //         }
-    //     );
-    //
-    //     setSpaceList(newList);
-    //
-    // }, [spaces, space.id])
-
     useEffect(() => {
 
         if (spaceList) {
@@ -77,11 +55,9 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
                         }
 
                         if (s.isManager) {
-                            navigate(`space/leader/${s.spaceId}`);
-                            // window.location.reload();
+                            navigate(`/refresh?destination=/space/leader/${s.spaceId}`, {replace: true});
                         } else {
-                            navigate(`space/member/${s.spaceId}`);
-                            // window.location.reload();
+                            navigate(`/refresh?destination=/space/member/${s.spaceId}`, {replace: true});
                         }
                     };
 
@@ -96,7 +72,7 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
             setSpaceList(newList);
 
         }
-    }, [spaces]);
+    }, [space, spaces]);
 
     if (!spaceList) {
         return null;
@@ -108,6 +84,9 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
 const Userbar = () => {
     const [spaceList, setSpaceList] = useState([]);
     const user = useRecoilValue(userState);
+    const space = useRecoilValue(spaceState);
+
+    const navigate = useNavigate();
 
     const handleClickLogo = () => {
         window.location.replace("/main");
@@ -121,11 +100,17 @@ const Userbar = () => {
 
                 setSpaceList(response.result);
 
+                const destination = new URLSearchParams(window.location.search).get("destination");
+                if (destination) {
+                    navigate(destination, {replace: true});
+                }
+
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+
+    }, [user, space]);
 
     return (
         <div className="userbar-container">
@@ -163,4 +148,4 @@ Userbar.propTypes = {
     spaces: PropTypes.array,
 };
 
-export default React.memo(Userbar);
+export default Userbar;
