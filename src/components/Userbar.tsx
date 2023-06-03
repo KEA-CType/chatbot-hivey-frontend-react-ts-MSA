@@ -12,7 +12,8 @@ import spaceService from "../services/space/space";
 import profile from "../assets/ic_profile.png";
 import icLogoHiVey from "../assets/ic_logo_hivey.png";
 import label from "../assets/ic_label_white.png";
-import logout from "../assets/ic_logout_gray.png";
+import icLogoutGray from "../assets/ic_logout_gray.png";
+import icLogoutBlack from "../assets/ic_logout_black.png";
 import icSettingGray from "../assets/ic_setting_gray.png";
 
 const SpaceListComponent = ({spaces, isManager}: any) => {
@@ -137,7 +138,11 @@ const Userbar = () => {
                 <div className="spaces-list">
                     <SpaceListComponent spaces={spaceList} isManager={0}/>
                 </div>
-                <img className="logout" src={logout} alt="logout"></img>
+            </div>
+
+            <div className="logout-container">
+                <img className="logout" src={icLogoutGray} alt="logout"/>
+                <img className="logout-active" src={icLogoutBlack} alt="logout"/>
             </div>
         </div>
     );
