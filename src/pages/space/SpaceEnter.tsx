@@ -21,15 +21,18 @@ import {validateAccessCode} from "../../utils/validationTest";
 const EnterSpaceComponent = () => {
     const user = useRecoilValue(userState);
     const [space, setSpace] = useRecoilState(spaceState);
-    const [memberId, setMemberId] = useRecoilState(memberIdState);
+    const setMemberId = useSetRecoilState(memberIdState);
 
     const [accessCode, setAccessCode] = useState("");
 
     const [isValidAccessCode, setIsValidAccessCode] = useState(false);
     const [notValidAccessCodeMessage, setNotValidAccessCodeMessage] = useState("");
 
+    const [isSuccess, setIsSuccess] = useState(false);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [message, setMessage] = useState("");
+    const [modalTitle, setModalTitle] = useState("");
+    const [modalMessage, setModalMessage] = useState("");
 
     /**
      * 스페이스 참여 코드를 입력할 때 호출되는 함수
@@ -53,7 +56,7 @@ const EnterSpaceComponent = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
-        if (notValidAccessCodeMessage) {
+        if (!notValidAccessCodeMessage) {
             return;
         }
 
@@ -61,22 +64,32 @@ const EnterSpaceComponent = () => {
             .EnterSpace(user.id, accessCode)
             .then((response: any) => {
 
-                const {memberId, spaceId} = response.result;
-                setMemberId(memberId);
-                setSpace({
-                    id: spaceId, name: space.name
-                });
+                if (response.code === 1000) {
+                    const {spaceId, memberId} = response.result;
+
+                    setMemberId(memberId);
+                    setSpace({
+                        id: spaceId, name: space.name
+                    });
+
+                    setModalTitle("스페이스 가입 성공");
+                    setModalMessage(`가입하신 스페이스 멤버 아이디는 ${memberId}입니다.`);
+                    setIsSuccess(true);
+
+                } else {
+
+                    setModalTitle("스페이스 가입 실패");
+                    setModalMessage(response.message);
+                    setIsSuccess(false);
+
+                }
 
                 setIsModalOpen(true);
-                setMessage(`스페이스 가입이 완료되었습니다.`);
 
             })
             .catch((error) => {
 
                 console.log(error);
-
-                setIsModalOpen(true);
-                setMessage("스페이스 가입에 실패하였습니다.");
 
             });
     };
@@ -105,18 +118,19 @@ const EnterSpaceComponent = () => {
 
                 {/* 스페이스 참여 버튼 */}
                 <Button
-                    className="space-enter-btn"
+                    className={isValidAccessCode ? "space-enter-btn-active" : "space-enter-btn"}
                     text="Enter Space"
                     onClick={handleSubmit}/>
 
             </form>
 
             {/* 스페이스 참여 완료 혹은 실패 시 올라오는 모달 */}
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={message}>
-                <p>가입하신 스페이스 멤버 아이디는 #{memberId}입니다.</p>
-                <Link to="/space/">
-                    <Button className="enterSpace-button" text="Enter"/>
-                </Link>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} header={modalTitle}>
+                <p>{modalMessage}</p>
+
+                {isSuccess
+                    ? <Link to="/space/"><Button className="space-enter-modal-btn" text="Enter"/></Link>
+                    : <button className="space-enter-modal-btn" onClick={() => setIsModalOpen(false)}>Close</button>}
             </Modal>
 
         </div>
