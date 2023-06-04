@@ -1,7 +1,6 @@
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Login from "./pages/user/Login";
 import SignUp from "./pages/user/SignUp";
-import Home from "./pages/Home";
 import Main from "./pages/Main";
 import SpaceEnter from "./pages/space/SpaceEnter";
 import SpaceCreate from "./pages/space/SpaceCreate";
@@ -11,6 +10,7 @@ import SpaceForLeader from "./pages/space/SpaceForLeader"
 import Userbar from "./components/Userbar";
 import React from "react";
 import Refresh from "./components/Refresh";
+import Home from "./pages/Home";
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
         <RecoilRoot>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Home/>}/>
+                    <Route path="/" element={<Home />}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/signup" element={<SignUp/>}/>
                     <Route
