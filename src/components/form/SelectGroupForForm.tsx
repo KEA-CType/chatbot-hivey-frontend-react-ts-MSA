@@ -1,6 +1,54 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+
+
+const MemberListByGroup = ({groupId, groups}: any) => {
+  const [membersByGroup, setMembersByGroup] = useState(Array);
+  console.log("groupId",groups);
+  useEffect(() => {
+
+      let members = [];
+
+      for (let i = 0; i < groups.length; i++) {
+          if (groups[i].groupId === groupId[i]) {
+              console.log("groups",groups[i]);
+              members = groups[i].members;
+              console.log("memebers",members);
+          }
+      }
+
+      const updatedMembers = members.map(
+          (m: any, i: number) => {
+
+              return (
+                  <div key={m.memberId} className="group-member-container-by-group"
+                       style={{borderBottomWidth: i === members.length - 1 || members.length === 0 ? "0" : "0.05rem"}}>
+
+                      <div className="group-member-profile-wrapper">
+                          {/* <img className="group-member-profile-img" src={icProfile} alt=""/> */}
+                      </div>
+
+                      <div className="group-member-id">#{m.memberId}</div>
+
+                      <div className="group-member-name">{m.name}</div>
+
+                      <div className="group-member-email">{m.email}</div>
+
+                      {/*<div className="group-member-kebab-wrapper">*/}
+                      {/*    <img className="group-member-kebab-img" src={icKebabBlack} alt=""/>*/}
+                      {/*</div>*/}
+
+                  </div>
+              );
+          });
+
+      setMembersByGroup(updatedMembers);
+
+  }, [groupId, groups]);
+
+  return <>{membersByGroup}</>;
+}
 interface GroupListProps {
   groups: any[];
   checkedList: number[];
@@ -53,17 +101,18 @@ GroupList.propTypes = {
 interface SelectGroupForFormProps {
   groups: any[];
   checkedGroupList: (checkedList: number[]) => void;
+  isOpen:(chooseGroupModalIsOpen:boolean)=>void;
 }
 
-const SelectGroupForForm = ({ groups, checkedGroupList }: SelectGroupForFormProps) => {
+const SelectGroupForForm = ({ groups, checkedGroupList,isOpen }: SelectGroupForFormProps) => {
   const [checkedList, setCheckedList] = useState<number[]>([]); // Check된 element 관리
 
   const handleSelectComplete = (e: any) => {
     e.preventDefault();
     checkedGroupList(checkedList);
-    console.log("checkedList", checkedList);
+    console.log("checkedList", checkedList);isOpen(false)
   };
-
+  
   return (
     <div className="group-rectangle-white">
       <div className="group-title">Group & Member</div>
@@ -71,7 +120,9 @@ const SelectGroupForForm = ({ groups, checkedGroupList }: SelectGroupForFormProp
         <div className="group-container">
           <GroupList groups={groups} checkedList={checkedList} setCheckedList={setCheckedList} />
         </div>
-        <div className="group-member-container"></div>
+        <div className="group-member-container">
+          <MemberListByGroup groupId={checkedList} groups={groups}/>
+        </div>
         <div className="group-select-button-container">
           <button className="finish-select" onClick={handleSelectComplete}>
             선택완료

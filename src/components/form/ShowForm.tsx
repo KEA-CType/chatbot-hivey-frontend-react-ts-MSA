@@ -33,8 +33,8 @@ const ShowForm=({forms}: any)=>{
                         Q{questions[index].questionId}
                     </div>
                     <div className="multi-question">
-                        <div className="question-title">{questions[index].title}</div>
-                        <div className="question-explain">{questions[index].content}</div>
+                        <div className="question-answer-title">{questions[index].title}</div>
+                        <div className="question-answer-explain">{questions[index].content}</div>
                     </div>
                     <div className="checkbox-container">
                         {questions[index].options.map((o:any)=>{
@@ -62,8 +62,8 @@ const ShowForm=({forms}: any)=>{
                         Q{questions[index].questionId}
                     </div>
                     <div className="short-question">
-                        <div className="question-title">{questions[index].title}</div>
-                        <div className="question-explain">{questions[index].content}</div>
+                        <div className="question-answer-title">{questions[index].title}</div>
+                        <div className="question-answer-explain">{questions[index].content}</div>
                     </div>
                     <div className="short-question-answer"> 
                         <div className="write-here">
@@ -81,13 +81,13 @@ const ShowForm=({forms}: any)=>{
                 setInputCount(event.target.value.length);
             };
             return(
-                <div className="question-container">
+                <div className="question-answer-container">
                     <div className="question-number">
                         Q{questions[index].questionId}
                     </div>
                     <div className="long-question">
-                        <div className="question-title">{questions[index].title}</div>
-                        <div className="question-explain">{questions[index].content}</div>
+                        <div className="question-answer-title">{questions[index].title}</div>
+                        <div className="question-answer-explain">{questions[index].content}</div>
                     </div>
                     <div className="long-question-answer"> 
                         <div className="write-here">
@@ -105,7 +105,7 @@ const ShowForm=({forms}: any)=>{
 
     return(
         <div>
-        <div className="form-container">
+        <div className="form-answer-container">
             <div className="form-information">
                 <div className="form-title-container">
                     <div className="form-title">{forms?.title}</div>

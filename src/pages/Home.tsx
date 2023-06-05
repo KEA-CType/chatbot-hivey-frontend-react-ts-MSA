@@ -1,7 +1,7 @@
 import "../styles/home.css";
 
-import "../assets/template/bootstrap.min.css";
-import "../assets/template/style.css";
+// import "../assets/template/bootstrap.min.css";
+// import "../assets/template/style.css";
 
 import React from "react";
 

@@ -1,5 +1,5 @@
 
-.form-container {
+.form-answer-container {
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -41,7 +41,7 @@
     font-size: 2.5rem;
     background-color: #B9D3FF;
     text-align: center;
-    font-weight: bold;
+    /* font-weight: bold; */
     
 }
 .form-content{
@@ -88,7 +88,7 @@
     margin-top:3rem;
     margin-bottom: 1rem;
 }
-.question-container{
+.question-answer-container{
     text-align: center;
     align-items: center;
     height: 50%;
@@ -122,10 +122,10 @@
 
 
 
-.question-title{
+.question-answer-title{
     font-size: 2rem;
 }
-.question-explain{
+.question-answer-explain{
     font-size:1rem;
     color: lightgray;
     margin-bottom: 1rem;
