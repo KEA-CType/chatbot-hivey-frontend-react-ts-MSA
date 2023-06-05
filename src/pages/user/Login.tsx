@@ -15,6 +15,7 @@ import Input from "../../components/commons/input";
 import Modal from "../../components/commons/Modal";
 
 import {userState} from "../../commons/Atom";
+import {motion} from "framer-motion";
 
 import authService from "../../services/user/auth";
 
@@ -108,7 +109,7 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
+        <motion.div className="login-container" style={{y: 100}} animate={{y: 0}}>
             <div className="login-box">
                 <img className="login-logo" src={logo} alt="Logo"/>
                 <div className="logo-ment">Log in to your account or Sign up</div>
@@ -163,7 +164,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
