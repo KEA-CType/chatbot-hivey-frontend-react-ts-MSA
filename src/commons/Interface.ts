@@ -60,7 +60,7 @@ export interface TargetGroupListResponse {
     groupName: number
 }
 
-<<<<<<< HEAD
+
 export interface FormCreateRequest{
     title: string,
     content: string,
@@ -84,7 +84,7 @@ export interface FormAnswerResponse{
     questions:object[]
 
 }
-=======
+
 export interface Image {
     file: string,
     url: string
@@ -125,4 +125,4 @@ export interface SubjectiveAnswer {
     name: string,
     answer: string,
 }
->>>>>>> 533077cb2989348d842b270a3ee597630e48cf9f
+

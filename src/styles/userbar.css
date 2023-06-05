@@ -13,16 +13,11 @@
     z-index: 1;
 }
 
-<<<<<<< HEAD
 
-.userbar-logo{
-=======
 .logo {
     width: 10vw;
     height: auto;
-
     cursor: pointer;
->>>>>>> 533077cb2989348d842b270a3ee597630e48cf9f
 
     margin-top: 2rem;
     

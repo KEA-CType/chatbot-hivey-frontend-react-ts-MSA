@@ -47,14 +47,7 @@ const ChatbotForLeader = () => {
         form
             .CreateSurvey(space.id, user.id)
             .then((response) => {
-<<<<<<< HEAD:src/components/chatbot/chatbot.tsx
-                // 위의 함수에서 response.data를 받아온다.
 
-                setFormId(response.result.formId);
-                navigate("/form/create");
-
-                console.log("formIdState.formId: " + formId);
-=======
                 const {isSuccess, code, message} = response;
                 setMessage(message);
 
@@ -70,7 +63,7 @@ const ChatbotForLeader = () => {
                     // FIXME: 이후 남은 예외 처리를 모두 분기 처리해주어야 한다.
                 }
 
->>>>>>> 533077cb2989348d842b270a3ee597630e48cf9f:src/components/chatbot/ChatbotForLeader.tsx
+
             })
             .catch((error) => {
                 // console.log(error);

@@ -2,10 +2,6 @@ import "../styles/main.css";
 
 import React from "react";
 
-
-
-import logo from "../assets/ic_logo_hivey.png";
-
 import {Link} from "react-router-dom";
 
 import Button from "../components/commons/buttons";
