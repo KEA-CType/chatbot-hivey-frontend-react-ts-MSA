@@ -14,7 +14,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {formIdState,userState, spaceState} from "../../commons/Atom";
 import {useRecoilState, useRecoilValue} from "recoil";
-import Modal from  "../../components/commons/modals";
+import Modal from  "../../components/commons/Modal";
 import SelectGroupForForm from "../../components/form/SelectGroupForForm";
 import moment from "moment";
 import ReactDOM from "react-dom";

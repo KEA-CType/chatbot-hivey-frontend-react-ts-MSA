@@ -1,18 +1,24 @@
+import React from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Login from "./pages/user/Login";
-import SignUp from "./pages/user/SignUp";
-import Home from "./pages/Home";
-import Main from "./pages/Main";
-import SpaceEnter from "./pages/space/SpaceEnter";
-import SpaceCreate from "./pages/space/SpaceCreate";
-import Chatbot from "./components/chatbot/chatbot";
-import SpaceForMember from "./pages/space/SpaceForMember";
 import {RecoilRoot} from "recoil";
-import SpaceForLeader from "./pages/space/SpaceForLeader"
 
 import Userbar from "./components/Userbar";
+import Refresh from "./components/Refresh";
+
+import Home from "./pages/Home";
+import Main from "./pages/Main";
+import Login from "./pages/user/Login";
+import SignUp from "./pages/user/SignUp";
+import SpaceEnter from "./pages/space/SpaceEnter";
+import SpaceCreate from "./pages/space/SpaceCreate";
+import SpaceForMember from "./pages/space/SpaceForMember";
+import SpaceForLeader from "./pages/space/SpaceForLeader"
+
 import FormCreate from "./pages/form/FormCreate";
 import FormAnswer from "./pages/form/FormAnswer";
+
+import FormResult from "./pages/form/FormResult";
+
 
 function App() {
 
@@ -29,17 +35,18 @@ function App() {
                         path="/*"
                         element={
                             <div style={{display: "flex"}}>
-                                <Userbar />
+                                <Userbar/>
                                 <div style={{flexGrow: 1, marginLeft: "200px"}}>
                                     <Routes>
                                         <Route path="/space/enter" element={<SpaceEnter/>}/>
                                         <Route path="/space/create" element={<SpaceCreate/>}/>
                                         <Route path="/main" element={<Main/>}/>
-                                        <Route path="/space/member" element={<SpaceForMember/>}/>
-                                        <Route path="/space/leader" element={<SpaceForLeader/>}/>
+                                        <Route path="/space/member/:spaceId" element={<SpaceForMember/>}/>
+                                        <Route path="/space/leader/:spaceId" element={<SpaceForLeader/>}/>
+                                        <Route path="/refresh" element={<Refresh/>}/>
+                                        <Route path="/space/:spaceId/form/:formId/result" element={<FormResult/>}/>
                                     </Routes>
                                 </div>
-                                <Chatbot/>
                             </div>
                         }
                     />

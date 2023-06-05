@@ -9,3 +9,13 @@ module.exports = function(app: any) {
         })
     );
 };
+
+module.exports = function (app: any) {
+    app.use(
+        "/api",
+        createProxyMiddleware({
+            target: "http://localhost:3002/"
+        })
+    );
+};
+

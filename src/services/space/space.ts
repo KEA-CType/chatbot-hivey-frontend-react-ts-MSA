@@ -1,5 +1,5 @@
-import instances from "../../utils";
-import {SPACE} from "../../config/constants";
+import instances from "../axiosInstance";
+import {SPACE} from "../../commons/constants";
 import {Space, SpaceInformationResponse} from "../../commons/Interface";
 import {CommonResponse} from "../commonResponse";
 
@@ -9,7 +9,7 @@ import {CommonResponse} from "../commonResponse";
 const CreateSpace = async (userId: number, spaceName: string, img: string) => {
     try {
 
-        const response = await instances.AUTH_INSTANCE.post(`${SPACE}/${userId}/space`, {
+        const response = await instances.AUTH_INSTANCE.post(`${SPACE}/${userId}`, {
             name: spaceName,
             img: img,
         });
@@ -31,7 +31,7 @@ const GetSpaceList = async (userId: number) => {
     try {
 
         const response = await instances.AUTH_INSTANCE.get(`${SPACE}/${userId}/spaces`);
-        console.log(`GetSpaceList/response.data.message: ${response.data.message}`);
+        // console.log(`GetSpaceList/response.data.message: ${response.data.message}`);
         return response.data;
 
     } catch (error) {
@@ -49,7 +49,7 @@ const GetSpaceListByPosition = async (userId: number, isManager: number) => {
     try {
 
         const response = await instances.AUTH_INSTANCE.get(`${SPACE}/${userId}/spaces/position?isManager=${isManager}`);
-        console.log(`GetSpaceList/response.data.message: ${response.data.message}`);
+        // console.log(`GetSpaceList/response.data.message: ${response.data.message}`);
         return response.data;
 
     } catch (error) {
@@ -63,7 +63,7 @@ const GetSpaceListByPosition = async (userId: number, isManager: number) => {
 /**
  * 3.5 스페이스 조회하기
  */
-const GetSpace = async (userId: number, spaceId: number) => {
+const GetSpace = async (userId: number, spaceId: string) => {
     try {
 
         const response = await instances.AUTH_INSTANCE.get<CommonResponse<SpaceInformationResponse>>(`${SPACE}/${userId}/${spaceId}`);
@@ -90,7 +90,7 @@ export function fetchSpace(userId: number, spaceId: number) {
                     space = response.data;
                 }, 3000);
             } else {
-                console.log("스페이스 조회에 실패하였습니다.");
+                // console.log("스페이스 조회에 실패하였습니다.");
             }
         });
 

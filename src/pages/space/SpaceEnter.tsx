@@ -1,121 +1,168 @@
 import "../../styles/enterspace.css";
 
-import React, { useState } from "react";
+import React, {useState, MouseEvent} from "react";
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+
 import Button from "../../components/commons/buttons";
 import Input from "../../components/commons/input";
-import Modal from "../../components/commons/modals";
-import linkImg from "../../assets/ic_link_brown.png";
-import Chatbot from "../../components/chatbot/chatbot";
+import Modal from "../../components/commons/Modal";
+import ChatbotForMember from "../../components/chatbot/ChatbotForMember";
+
 import {userState, spaceState, memberIdState} from "../../commons/Atom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import spaceService from "../../services/space/space";
 
-import { Link } from "react-router-dom";
+import icLogoHivey from "../../assets/ic_logo_hivey.png";
+import {validateAccessCode} from "../../utils/validationTest";
+import {useNavigate} from "react-router-dom";
 
-import spaces from "../../services/space/space";
-
+/**
+ * 스페이스 참여 시 사용하는 입력 양식 컴포넌트
+ */
 const EnterSpaceComponent = () => {
-  const [link, setLink] = useState("");
-  const [linkError, setLinkError] = useState(""); // 링크가 존재하지 않을 때 출력할 경고문구
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [message, setMessage] = useState("");
-  const [accessCode, setAccessCode] = useState("");
+    const navigate = useNavigate();
 
-  const user = useRecoilValue(userState);
-  const [space, setSpace] = useRecoilState(spaceState);
-  const [memberId, setMemberId] = useRecoilState(memberIdState);
+    const user = useRecoilValue(userState);
+    const [space, setSpace] = useRecoilState(spaceState);
+    const setMemberId = useSetRecoilState(memberIdState);
 
-  /**
-   * 스페이스 초대 링크를 입력했을 때 실행하는 함수인데,
-   * 링크에서 코드로 변경하였으므로 코드를 입력했을 때 실행하는 함수이다.
-   */
-  const handleCodeChange = (e: any) => {
-    const inputCode = e.target.value;
-    setAccessCode(inputCode);
-  };
+    const [accessCode, setAccessCode] = useState("");
 
-  /**
-   * 완료 버튼을 클릭 이벤트 함수
-   */
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+    const [isValidAccessCode, setIsValidAccessCode] = useState(false);
+    const [notValidAccessCodeMessage, setNotValidAccessCodeMessage] = useState("");
 
-    if (linkError) {
-      return;
+    const [isSuccess, setIsSuccess] = useState(false);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalTitle, setModalTitle] = useState("");
+    const [modalMessage, setModalMessage] = useState("");
+
+    /**
+     * 스페이스 참여 코드를 입력할 때 호출되는 함수
+     */
+    const handleCodeChange = (e: any) => {
+        const inputValue = e.target.value;
+        setAccessCode(inputValue);
+
+        setIsValidAccessCode(validateAccessCode(inputValue));
+
+        if (!isValidAccessCode) {
+            setNotValidAccessCodeMessage("The access code should be 10 to 50 characters including only english and number");
+        } else {
+            setNotValidAccessCodeMessage("");
+        }
+    };
+
+    /**
+     * 스페이스 참여 버튼 클릭 시 호출되는 함수
+     */
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+
+        if (!notValidAccessCodeMessage) {
+            return;
+        }
+
+        spaceService
+            .EnterSpace(user.id, accessCode)
+            .then((response: any) => {
+
+                if (response.code === 1000) {
+                    const {spaceId, memberId} = response.result;
+
+                    setMemberId(memberId);
+                    setSpace({
+                        id: spaceId, name: space.name
+                    });
+
+                    setModalTitle("스페이스 가입 성공");
+                    setModalMessage(`가입하신 스페이스 멤버 아이디는 ${memberId}입니다.`);
+                    setIsSuccess(true);
+
+                } else {
+
+                    setModalTitle("스페이스 가입 실패");
+                    setModalMessage(response.message);
+                    setIsSuccess(false);
+
+                }
+
+                setIsModalOpen(true);
+
+            })
+            .catch((error) => {
+
+                console.log(error);
+
+            });
+    };
+
+    /**
+     * 참여한 스페이스로 바로 이동하도록 하는 함수
+     */
+    const handleEnterSpace = () => {
+        navigate(`/refresh?destination=/space/member/${space.id}`, {replace: true});
     }
 
-    // handle login submit
-    spaces
-      .EnterSpace(user.id, accessCode)
-      .then((response: any) => {
-        // 위의 함수에서 response.data를 받아온다.
-        const { isSuccess, code, message } = response;
-        console.log(`response: ${JSON.stringify(response)}`);
-        const { memberId, spaceId } = response.result;
-        console.log(`response: ${JSON.stringify(response.result)}`);
+    return (
+        <div className="space-enter-container">
 
-        if (code === 1000) {
-          var msg = `Space에 ${memberId}로 입장하셨습니다.`;
-          setIsModalOpen(true);
-          setMessage(msg);
-          // handle login success
+            <form className="space-enter-form-container" onSubmit={handleSubmit}>
 
-          setMemberId(memberId);
-          setSpace({
-              id: spaceId, name: space.name
-          });
-        } else if (code === 2020) {
-          setIsModalOpen(true);
-          setMessage(message);
-          // handle login failure
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsModalOpen(true);
-        setMessage("스페이스 가입에 실패하였습니다.");
-      });
-  };
+                {/* 스페이스 참여 코드 입력 */}
+                <div className="space-enter-input-access-code-container">
 
-  return (
-    <div className="enterSpace-container">
-      <form className="enter-space" onSubmit={handleSubmit}>
-        <div className="title">Enter Space</div>
-        <br />
-        <div className="link-text">
-          Access Code
-          <img className="link" src={linkImg} alt="link img" />
+                    Space access code
+
+                    <Input
+                        className="space-enter-input-access-code"
+                        type="text"
+                        placeholder="Enter the space access code you want"
+                        value={accessCode}
+                        onChange={handleCodeChange}/>
+
+                    {!isValidAccessCode &&
+                        <div className="error-message">{notValidAccessCodeMessage}</div>}
+
+                </div>
+
+                {/* 스페이스 참여 버튼 */}
+                <Button
+                    className={isValidAccessCode ? "space-enter-btn-active" : "space-enter-btn"}
+                    text="Enter Space"
+                    onClick={handleSubmit}/>
+
+            </form>
+
+            {/* 스페이스 참여 완료 혹은 실패 시 올라오는 모달 */}
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} header={modalTitle}>
+                <p>{modalMessage}</p>
+
+                {isSuccess
+                    ? <button className="space-enter-modal-btn" onClick={handleEnterSpace}>Enter</button>
+                    : <button className="space-enter-modal-btn" onClick={() => setIsModalOpen(false)}>Close</button>}
+            </Modal>
+
         </div>
-        <Input
-          type="text"
-          placeholder="AccessCode"
-          value={accessCode}
-          onChange={handleCodeChange}
-          className="link-input"
-        />
-        <Button className="enterSpace-button" text="Enter Space" />
-      </form>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <p>{message}</p>
-        <Link to="/part">
-          <Button className="enterSpace-button" text="Enter" />
-        </Link>
-      </Modal>
-      <Chatbot />
-    </div>
-  );
+    );
 };
 
-// <Link to="/space" state={{ spaceId: spaceId, userId: memberId }}>
-// SpaceForMember.jsx, SpaceForLeader.tsx => 스페이스 역할 불러와서 판단후 정보 state로 넘겨주기
-
+/**
+ * 스페이스 참여 페이지 컴포넌트
+ */
 const SpaceEnter = () => {
-  return (
-    <div className="enterpage">
-      <EnterSpaceComponent />
-    </div>
-  );
+    return (
+        <div className="space-enter-rectangle-white">
+
+            <img className="space-enter-logo" src={icLogoHivey} alt=""/>
+
+            <div className="title">Enter to special space!</div>
+
+            <EnterSpaceComponent/>
+
+            <ChatbotForMember/>
+
+        </div>
+    );
 };
 
 export default SpaceEnter;
-
-// space로 userId, spaceId,

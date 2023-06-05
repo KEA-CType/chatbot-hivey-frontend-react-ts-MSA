@@ -4,22 +4,21 @@ import React, {useState} from 'react';
 import {useRecoilState, useRecoilValue} from "recoil";
 import {Link, useNavigate} from "react-router-dom";
 import chatbot from "../../assets/ic_chatbot.png";
-import plusbutton from "../../assets/ic_plus_black.png";
 import Bot from './bot';
 import {botSteps} from "../../contexts/botSteps";
 import {formIdState, spaceState, userState} from "../../commons/Atom";
 
 import form from "../../services/form/form";
 
-const Chatbot = () => {
+const ChatbotForLeader = () => {
     const navigate = useNavigate();
 
-    // isSelectBoxVisible 및 isBotVisible 상태를 관리
     const [isSelectBoxVisible, setIsSelectBoxVisible] = useState(false);
     const [isBotVisible, setIsBotVisible] = useState(false);
 
     const [message, setMessage] = useState("");
     const [formId, setFormId] = useRecoilState(formIdState);
+
     const space = useRecoilValue(spaceState);
     const user = useRecoilValue(userState);
 
@@ -44,22 +43,27 @@ const Chatbot = () => {
         // 기본 동작을 무시하고 사용자 정의한 액션만 수행하도록 한다.
         e.preventDefault();
 
-        // 콘솔로 전역 상태 관리 변수 값이 잘 들어가 있는지 확인하기
-        console.log(`userId: ${user.id}`);
-
-        // API 6.1 설문지 생성하기 (+ 버튼)
         form
             .CreateSurvey(space.id, user.id)
             .then((response) => {
-                // 위의 함수에서 response.data를 받아온다.
+                const {isSuccess, code, message} = response;
+                setMessage(message);
 
-                setFormId(response.result.formId);
-                navigate("/form/create");
+                const {formId} = response.result;
 
-                console.log("formIdState.formId: " + formId);
+                if (code === 1000) {
+                    // 성공적으로 요청이 된 경우
+                    setFormId(formId);
+
+                    // <Link to="/createSurvey" />
+                    navigate("/createSurvey");
+                } else {
+                    // FIXME: 이후 남은 예외 처리를 모두 분기 처리해주어야 한다.
+                }
+
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 setMessage("설문 생성에 실패하였습니다.");
             });
     };
@@ -67,12 +71,6 @@ const Chatbot = () => {
     // 컴포넌트 렌더링
     return (
         <div className="chatbot-container">
-            <img
-                className="plus-button"
-                src={plusbutton}
-                alt="plus button"
-                onClick={handlePlusButtonClick}
-            />
             <img
                 className="chatbot"
                 src={chatbot}
@@ -97,4 +95,4 @@ const Chatbot = () => {
     );
 };
 
-export default Chatbot;
+export default ChatbotForLeader;

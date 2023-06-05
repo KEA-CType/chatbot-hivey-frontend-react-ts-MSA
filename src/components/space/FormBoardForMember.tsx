@@ -2,16 +2,20 @@
  * 스페이스의 모든 설문 목록을 보여주는 부분
  */
 
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useSetRecoilState} from "recoil";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
+
+import * as moment from 'moment';
 
 import icFormboardDone from "../../assets/ic_formboard_done.png";
 import icFormboardInprogress from "../../assets/ic_formboard_inprogress.png";
 import icFormboardNotstarted from "../../assets/ic_formboard_notstarted.png";
 import icCheckCircleGreen from "../../assets/ic_check_circle_green.png";
-import {useSetRecoilState} from "recoil";
-import {formIdState} from "../../commons/Atom";
+import icChartPieSliceGray from "../../assets/ic_chart_pie_slice_gray.png";
+
+import {formIdState, selectedFormIdState} from "../../commons/Atom";
 
 const FormListComponent = ({forms}: any) => {
     const [formsByStatus, setFormsByStatus] = useState(Array);
@@ -34,6 +38,14 @@ const FormListComponent = ({forms}: any) => {
                     navigate("/form");
                 };
 
+                /**
+                 * 설문 결과 보기 아이콘을 클릭했을 때 설문 결과 페이지로 이동한다.
+                 */
+                const handleFormResult = (e: any) => {
+                    e.stopPropagation();
+                    navigate("/form/result");
+                }
+
                 return (
                     <div key={f.formId} className="formboard-form" onClick={onClickForm}>
 
@@ -42,12 +54,17 @@ const FormListComponent = ({forms}: any) => {
                             <img className="formboard-form-icon-img" src={icCheckCircleGreen} alt=""/>
                         </div>
 
-                        <div className="formboard-form-information">
-                            <div className="formboard-form-information-title">설문 제목</div>
-                            <div className="formboard-form-information-date">~ 2023.05.27 (토)</div>
+                        <div className="formboard-form-information" style={{marginLeft: "0.1rem"}}>
+                            <div className="formboard-form-information-title">{f.title}</div>
+                            <div
+                                className="formboard-form-information-date">~{(moment(f.endDate)).format('YYYY.MM.DD')}</div>
                         </div>
-                    </div>
 
+                        <div className="formboard-form-icon-wrapper" onClick={handleFormResult} style={{marginLeft: "0rem"}}>
+                            <img className="formboard-form-right-icon-img" src={icChartPieSliceGray} alt=""/>
+                        </div>
+
+                    </div>
                 );
             });
 
@@ -58,7 +75,7 @@ const FormListComponent = ({forms}: any) => {
     return <>{formsByStatus}</>;
 }
 
-const FormBoardForMember = ({forms}: any) => {
+const FormBoardForLeader = ({forms}: any) => {
 
     const [inProgressForms, setInProgressForms] = useState(Array);
     const [notStartedForms, setNotStartedForms] = useState(Array);
@@ -146,8 +163,8 @@ const FormBoardForMember = ({forms}: any) => {
     );
 }
 
-FormBoardForMember.propTypes = {
+FormBoardForLeader.propTypes = {
     forms: PropTypes.array
 }
 
-export default FormBoardForMember;
+export default FormBoardForLeader;

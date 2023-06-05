@@ -7,55 +7,84 @@
     width: 20%;
     position: fixed;
 
+    border-radius: 2rem;
+
     height: 100%;
     z-index: 1;
 }
 
+<<<<<<< HEAD
 
 .userbar-logo{
+=======
+.logo {
+    width: 10vw;
+    height: auto;
+
+    cursor: pointer;
+>>>>>>> 533077cb2989348d842b270a3ee597630e48cf9f
 
     margin-top: 2rem;
     
 }
 
 .user-profile {
-    width: 75%;
+    width: 80%;
     height: 2.5rem;
 
-    border-radius: 10px;
+    /*border-radius: 0.3rem;*/
+    /*border-width: 0.02rem;*/
+    /*border-style: solid;*/
+    /*border-color: lightgray;*/
+
+    box-shadow: 1px 1px 1px #edeef2;
 
     display: flex;
     position: relative;
     align-items: center;
-    justify-content: space-between;
-    background-color: #D4ECFF;
+    justify-content: flex-start;
+    /*background-color: #D4ECFF;*/
 
 
     cursor: default;
 
-    padding: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 
-    margin: 2rem 2rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .user-profile-img {
     width: 2rem;
     height: 2rem;
 
-    margin-left: 0.3rem;
-    margin-right: 0.3rem;
+    margin-left: 1.5%;
 }
 
-.user-profile .username {
+.user-information-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    margin-left: 1.5rem;
+}
+
+.user-name {
     color: #000000;
 
-    flex: 1;
+    font-size: 1rem;
+    font-family: Pretendard, "sans-serif";
+}
 
-    font-size: 1.1rem;
-    font-weight: bold;
+.user-email {
+    color: gray;
+
+    font-size: 0.8rem;
     font-family: Pretendard, "sans-serif";
 
-    margin-left: 1rem;
+    margin-top: 0.1rem;
 }
 
 .user-profile-setting {
@@ -63,9 +92,10 @@
     height: 1rem;
 
     position: relative;
-    top: 0.3rem;
-    right: 0.3rem;
+    top: 0;
+    right: 1%;
 
+    cursor: pointer;
     margin-bottom: 2rem;
 }
 .set{
@@ -77,19 +107,26 @@
 .user-spaces {
 
     width: 80%;
+    height: 23vh;
 
     background-color: white;
 
     color: aqua;
 
-    flex: 1;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
-    padding: 1rem;
-
+    margin-top: 0.2rem;
     margin-bottom: 1rem;
 }
 
+.user-spaces::-webkit-scrollbar {
+    display: none;
+}
+
 .label {
+    width: 80%;
     height: 2rem;
 
     background-color: #6ABBFA;
@@ -101,11 +138,13 @@
 
     color: white;
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: bolder;
 
     cursor: default;
 
-    padding: 0.3rem;
+    padding: 0.5rem;
+
+    margin-top: 1rem;
 }
 
 .label img {
@@ -121,11 +160,16 @@
     height: 2rem;
 
     background-color: white;
+    background-image: url("../assets/ic_logo_sample.png");
+    background-repeat: no-repeat;
+    background-position: 0.4rem;
 
     border: 0.1rem solid #edeef2;
     border-radius: 0.5rem;
 
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 
     color: gray;
@@ -133,43 +177,72 @@
 
     cursor: pointer;
 
-    padding: 0.2rem;
+    padding-left: 3rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
 
     margin-top: 0.7rem;
-}
-
-.space-item-location {
-    margin: 0.5rem;
 }
 
 .space-item-clicked {
     height: 2rem;
 
     background-color: white;
+    background-image: url("../assets/ic_logo_sample.png"), url("../assets/ic_arrow_blue.png");
+    background-repeat: no-repeat;
+    background-size: 2rem 2rem, 2rem 2rem;
+    background-position: 0.4rem, 90%;
 
-    border: 0.1rem solid #edeef2;
+    border: 0.1rem solid black;
     border-radius: 0.5rem;
 
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+
+    color: black;
+    font-size: 0.8rem;
 
     cursor: pointer;
 
-    padding: 0.2rem;
+    padding-left: 3rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
 
     margin-top: 0.7rem;
 }
 
-.logout {
-    width: 10rem;
+.logout-container {
+    width: 100%;
+    height: auto;
 
-    cursor: pointer;
+    position: relative;
 
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-left: 4rem;
+    margin-top: 0.5rem;
+    margin-bottom: 4rem;
 }
 
-.space-item-name {
-    font-size: 0.8rem;
-    color: black;
+.logout-container img {
+    width: 5.5rem;
+    height: auto;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    cursor: pointer;
+}
+
+.logout-container .logout {
+    display: block;
+}
+
+.logout-container .logout-active {
+    display: none;
+}
+
+.logout-container:hover .logout-active {
+    display: block;
 }

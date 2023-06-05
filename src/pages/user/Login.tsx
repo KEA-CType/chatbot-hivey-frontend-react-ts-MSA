@@ -12,13 +12,13 @@ import {useRecoilState} from "recoil";
 
 import Button from "../../components/commons/buttons";
 import Input from "../../components/commons/input";
-import Modal from "../../components/commons/modals";
+import Modal from "../../components/commons/Modal";
 
 import {userState} from "../../commons/Atom";
 
 import authService from "../../services/user/auth";
 
-import {validateEmail} from "../../utils/validateEmail";
+import {validateEmail} from "../../utils/validationTest";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -83,7 +83,7 @@ const Login = () => {
                     setMessage(message);
 
                     // 받아온 result 값을 파싱해서 전역 상태 관리 변수에 대입한다.
-                    setUser({id: userIdx, name: name});
+                    setUser({id: userIdx, name: name, email: email});
 
                     localStorage.setItem("jwt-token", jwtToken);
 
@@ -101,7 +101,7 @@ const Login = () => {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 setIsModalOpen(true);
                 setMessage("로그인에 실패하였습니다.");
             });

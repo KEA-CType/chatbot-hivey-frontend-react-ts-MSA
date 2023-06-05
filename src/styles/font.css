@@ -1,0 +1,20 @@
+@font-face {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../font/Poppins-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Archivo";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../font/Archivo-Black.ttf");
+}
+
+@font-face {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../font/Pretendard-Regular.otf");
+}

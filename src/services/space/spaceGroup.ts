@@ -1,5 +1,5 @@
-import instances from "../../utils";
-import {SPACE} from "../../config/constants";
+import instances from "../axiosInstance";
+import {SPACE} from "../../commons/constants";
 
 /**
  * 5.4 모든 스페이스 그룹 목록 불러오기

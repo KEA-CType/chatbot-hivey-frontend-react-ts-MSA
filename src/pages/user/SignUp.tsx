@@ -4,10 +4,10 @@ import React, {useState} from "react";
 import Button from "../../components/commons/buttons";
 import Input from "../../components/commons/input";
 import logo from "../../assets/ic_logo_hivey.png";
-import Modal from "../../components/commons/modals";
+import Modal from "../../components/commons/Modal";
 import authService from "../../services/user/auth";
 import {useNavigate} from "react-router-dom";
-import {validateEmail} from "../../utils/validateEmail";
+import {validateEmail} from "../../utils/validationTest";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -85,12 +85,12 @@ const SignUp = () => {
             return;
         }
 
-        console.log("email", email, "name", userName, "password", password);
+        // console.log("email", email, "name", userName, "password", password);
 
         authService
             .Register(email, userName, password)
             .then((response) => {
-                console.log(response);
+                // console.log(response);
 
                 const {isSuccess, message} = response;
 
@@ -114,7 +114,7 @@ const SignUp = () => {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 setMessage("회원 가입에 실패했습니다.");
                 setIsModalOpen(true);
             });

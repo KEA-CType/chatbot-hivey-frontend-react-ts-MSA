@@ -1,7 +1,7 @@
 import "../../styles/formanswer.css"
 import React, {useState, useEffect, ReactElement,useContext} from "react";
 import {useNavigate} from "react-router-dom";
-import Modal from  "../../components/commons/modals";
+import Modal from  "../../components/commons/Modal";
 import {useRecoilValue} from 'recoil';
 import {selectedFormIdState, userState} from '../../commons/Atom';
 import formAnswerService from "../../services/form/formAnswer";

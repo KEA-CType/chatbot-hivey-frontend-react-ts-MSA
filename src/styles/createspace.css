@@ -1,76 +1,347 @@
-.createpage {
+body {
+    background-color: #D4ECFF;
+}
+
+.create-space-rectangle-white {
+    width: 60%;
+    height: 80%;
+
+    background-color: white;
+
+    border-radius: 1rem;
+
+    box-shadow: 1px 2px 4px lightgray;
+
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 10%;
+    left: 30%;
+}
+
+.create-space-logo {
+    width: 10rem;
+    height: auto;
+
+    -webkit-user-drag: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 .title {
-    font-weight: bold;
-    font-size: 4vw;
-    display: inline-block;
-    margin-bottom: 1vh;
+    color: black;
+    font-size: 1rem;
+    font-family: Poppins, sans-serif;
+    font-weight: lighter;
+
+    cursor: default;
+
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+
+    margin-top: 1vh;
 }
 
-.createSpaceBar {
+.create-space-container {
     width: 80%;
-    display: inline-block;
-}
+    height: auto;
 
-.createSpace-container {
-    position: fixed;
-    height: 100%;
-    width: 80vw;
-    background-color: #f9fdff;
     text-align: center;
-}
 
-.space-input {
-    font-size: 3vmax;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1vh;
+
+    margin-top: 2vh;
 }
 
-.space-img {
-    font-weight: bold;
-    font-size: 3vw;
+.create-space-img-container {
+    width: 100%;
+    height: auto;
+
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    margin-bottom: 1vh;
+    align-items: center;
+
+    margin-bottom: 3rem;
 }
 
-.create-space {
-    margin-left: 20%;
-    margin-right: 20%;
-    border: solid;
-    border-radius: 20px;
+.create-space-preview-img {
+    width: 8rem;
+    height: 8rem;
+    aspect-ratio: auto 1/1;
+
+    background-color: transparent;
+    border-radius: 10rem;
+    object-fit: cover;
+
+    box-shadow: 0 0 2px gray;
+
+    -webkit-user-drag: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.create-space-img-btn-container {
+    width: 10rem;
+    height: 8rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    padding-bottom: 2%;
+}
+
+.create-space-img-upload-btn {
+    width: 6rem;
+    height: 2rem;
+    line-height: 2rem;
+
     background-color: white;
-    margin-top: 15vh;
-    padding-top: 5vh;
-    padding-bottom: 7vh;
+
+    border-radius: 0.5rem;
+    border-color: #4E60FF;
+    border-style: solid;
+    border-width: 1px;
+
+    color: #4E60FF;
+    font-size: 12px;
+    text-align: center;
+
+    cursor: pointer;
+
+    display: inline-block;
+
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
-.create-space-input {
-    background-color: #f2f2f2;
-    border-radius: 10px;
+.create-space-img-remove-btn {
+    width: 6rem;
+    height: 2rem;
+
+    background-color: white;
+
+    border-radius: 0.5rem;
+    border-color: #83859C;
+    border-style: solid;
+    border-width: 0.05rem;
+
+    color: #83859C;
+    font-size: 12px;
+
+    cursor: pointer;
+
+    margin-top: 3%;
+
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.create-space-form-container {
+    width: 60%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    font-family: Poppins, sans-serif;
+    text-align: left;
+
+    margin-top: 2%;
+
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.create-space-input-name-container {
+    width: 100%;
+    height: auto;
+
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 2rem;
+}
+
+.create-space-input-name {
+    width: 95%;
+    height: 2rem;
+
+    background-color: white;
+
+    border: 0.05rem solid #A6A6A6;
+    border-radius: 0.3rem;
+
     color: #000000;
-    padding: 10px;
-    border: 2px solid;
-    margin-left: 1vw;
-    margin-bottom: 1vmax;
-    width: 20vmax;
+
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    margin-top: 0.3rem;
+}
+
+.create-space-input-membership-container {
+    width: 100%;
+    height: auto;
+
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 2rem;
+}
+
+.create-space-membership-btn-container {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 0;
+
+    margin-top: 0.1rem;
+    margin-right: 0;
+}
+
+.create-space-membership-btn {
+    height: 2rem;
+
+    background-color: white;
+
+    border: 0.05rem solid #A6A6A6;
+    border-radius: 0.3rem;
+
+    color: #666666;
+    font-size: 11px;
+    font-family: Poppins, sans-serif;
+
+    cursor: pointer;
+
+    flex: 1;
+
+    white-space: nowrap;
+
+    padding: 0.5rem;
+
+    margin-top: 0.3rem;
+    margin-right: 0.5rem;
+}
+
+.create-space-membership-btn-clicked {
+    background-color: #4E60FF;
+
+    border: 0.05rem solid transparent;
+    border-radius: 0.3rem;
+
+    color: white;
+    font-size: 11px;
+    font-family: Poppins, sans-serif;
+
+    cursor: pointer;
+
+    flex: 1;
+
+    padding: 0.5rem;
+
+    margin-top: 0.3rem;
+    margin-right: 0.5rem;
 }
 
 .create-space-btn {
-    background-color: #78a5f0;
-    border-radius: 10px;
+    width: 100%;
+    height: auto;
+
+    background-color: #C2C2C2;
+
+    border-radius: 5rem;
+    border-color: transparent;
+
+    display: block;
+
+    font-size: 14px;
     color: white;
-    padding: 10px 20px;
-    margin-top: 2vmin;
-    width: 10vmax;
-    height: 6vmin;
+    text-align: center;
+    font-family: Poppins, sans-serif;
+
+    cursor: default;
+    pointer-events: none;
+
+    padding: 0.5rem;
+
+    margin-top: 3%;
 }
 
-.link {
-    width: 5vw;
-    margin-left: 2vw;
+.create-space-btn-active {
+    width: 100%;
+    height: auto;
+
+    background-color: #0077FF;
+
+    border-radius: 5rem;
+    border-color: transparent;
+
+    display: block;
+
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    font-family: Poppins, sans-serif;
+
+    cursor: pointer;
+
+    padding: 0.5rem;
+
+    margin-top: 3%;
+}
+
+.create-space-copy-btn {
+    width: 80%;
+    height: 2rem;
+    line-height: 2rem;
+
+    background-color: white;
+
+    border-radius: 0.5rem;
+    border-color: #4E60FF;
+    border-style: solid;
+    border-width: 1px;
+
+    color: #4E60FF;
+    font-size: 14px;
+    text-align: center;
+
+    cursor: pointer;
+
+    display: inline-block;
+
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+
+    padding: 0;
+
+    margin-top: 1rem;
 }

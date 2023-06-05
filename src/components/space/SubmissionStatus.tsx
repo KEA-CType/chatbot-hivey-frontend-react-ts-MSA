@@ -15,11 +15,9 @@ import icProfile from "../../assets/ic_profile.png";
 const MandatoryFormSubmissionList = ({submissions}: any) => {
     const [submissionsByMandatoryForm, setSubmissionsByMandatoryForm] = useState(Array);
 
-    console.log(`submissions.length: ${submissions.length}`);
-
     useEffect(() => {
 
-        const submissionList = submissions.map(
+        const submissionList = Array.isArray(submissions) ? submissions.map(
             (s: any, i: number) => {
 
                 return (
@@ -45,12 +43,9 @@ const MandatoryFormSubmissionList = ({submissions}: any) => {
 
                         </div>
 
-                        {/*{i < (submissions.length - 1) && <div className="submission-members-line"></div>}*/}
-
                     </>
-
                 );
-            });
+            }) : [];
 
         setSubmissionsByMandatoryForm(submissionList);
 
@@ -68,14 +63,11 @@ const SubmissionListByTargetGroup = ({groupId, submissions}: any) => {
     useEffect(() => {
 
         // 1. 그룹 식별 번호를 통해 해당 그룹의 멤버들만 필터링한다.
-        // 2. 해당 멤버들의 참여 현황 목록을 보여준다.
-
         const membersByTargetGroup = Array.isArray(submissions) ? submissions.filter(
             (s: any) => s.groupId === groupId
         ) : [];
 
-        console.log(`membersByTargetGroup: ${membersByTargetGroup}`);
-
+        // 2. 해당 멤버들의 참여 현황 목록을 보여준다.
         const updatedSubmissions = membersByTargetGroup.map(
             (s: any, i: number) => {
 
@@ -83,6 +75,7 @@ const SubmissionListByTargetGroup = ({groupId, submissions}: any) => {
                     <>
                         <div key={s.memberId} className="submission-members-container"
                              style={{borderBottomWidth: i === submissions.length - 1 ? "0rem" : "0.05rem"}}>
+
                             <div className="submission-members-profile-wrapper">
                                 <img className="submission-members-profile-img" src={icProfile} alt=""/>
                             </div>
@@ -100,8 +93,6 @@ const SubmissionListByTargetGroup = ({groupId, submissions}: any) => {
                             </div>
 
                         </div>
-
-                        {i < (submissions.length - 1) && <div className="submission-members-line"></div>}
 
                     </>
                 );
@@ -124,11 +115,16 @@ const NotMandatoryFormSubmissionList = ({targetGroups, submissions, getSelectedG
         getSelectedGroupId(groupId);
     }
 
+    // 선택한 그룹을 초기화한다. 만약 이 부분이 없으면 다른 곳으로 이동했다가 왔을 때 이전에 열었던 그룹 멤버 목록이 그대로 보인다.
+    useEffect(() => {
+        setSelectedGroupId(0);
+    }, [])
+
     useEffect(() => {
 
         let groups = document.getElementsByClassName("submission-groups-box");
 
-        const updatedTargetGroups = targetGroups.map(
+        const updatedTargetGroups = Array.isArray(targetGroups) ? targetGroups.map(
             (t: any) => {
 
                 /**
@@ -158,18 +154,14 @@ const NotMandatoryFormSubmissionList = ({targetGroups, submissions, getSelectedG
 
                 // 1. 설문에 참여해야 하는 타겟 그룹의 목록을 보여준다.
                 // 2. 특정 타겟 그룹을 클릭했을 때 해당 그룹의 멤버들의 참여 현황을 보여준다.
-
                 return (
                     <div key={t.groupId} id="submission-groups-box" className="submission-groups-box"
                          onClick={onClickGroup}>
-
                         {t.groupName}
-                        {/*<div className="submission-groups-box-name">{t.groupName}</div>*/}
-
                     </div>
                 );
 
-            });
+            }) : [];
 
         setTargetGroupsByNotMandatoryForm(updatedTargetGroups);
 
@@ -203,14 +195,10 @@ const SubmissionStatus = () => {
             .then((response) => {
 
                 const result = response.result;
-                console.log(`Mandotory or not: ${JSON.stringify(result)}`);
 
                 if (result.formId === selectedFormId) {
                     setFormTitle(result.title);
                     setIsMandatory(result.isMandatory === "N" ? 0 : 1);
-                    console.log(`isMandatory: ${isMandatory}`);
-                } else {
-                    console.log("잘못된 정보입니다.");
                 }
 
             });
@@ -223,7 +211,6 @@ const SubmissionStatus = () => {
             .then((response) => {
 
                 const result = response.result;
-                console.log(`Submission list: ${JSON.stringify(result)}`);
                 setSubmissions(result);
 
             })
@@ -244,12 +231,12 @@ const SubmissionStatus = () => {
                 .then((response) => {
 
                     const result = response.result;
-                    console.log(`Target group list: ${JSON.stringify(result)}`);
+                    // console.log(`Target group list: ${JSON.stringify(result)}`);
                     setTargetGroups(result);
 
                 })
                 .catch((error) => {
-                    console.log(error);
+                    // console.log(error);
                 });
         }
 
@@ -280,7 +267,7 @@ const SubmissionStatus = () => {
                 </div>
             }
 
-            {/* 만약 필수 설문인 경우 멤버들을 목록만 보여준다. */}
+            {/* 만약 필수 설문인 경우 멤버들의 목록만 보여준다. */}
             {isMandatory === 1 &&
                 <MandatoryFormSubmissionList submissions={submissions}/>
             }
