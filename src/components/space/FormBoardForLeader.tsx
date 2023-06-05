@@ -3,7 +3,7 @@
  */
 
 import React, {useEffect, useState} from "react";
-import {useSetRecoilState} from "recoil";
+import {useRecoilValue, useSetRecoilState} from "recoil";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -17,9 +17,11 @@ import icUsersGray from "../../assets/ic_users_gray.png";
 import icChartPieSliceGray from "../../assets/ic_chart_pie_slice_gray.png";
 
 
-import {formIdState, selectedFormIdState} from "../../commons/Atom";
+import {formIdState, selectedFormIdState, spaceState} from "../../commons/Atom";
 
 const FormListComponent = ({forms}: any) => {
+    const space = useRecoilValue(spaceState);
+
     const [formsByStatus, setFormsByStatus] = useState(Array);
     const setFormId = useSetRecoilState(formIdState);
     const setSelectedFormId = useSetRecoilState(selectedFormIdState);
@@ -55,7 +57,7 @@ const FormListComponent = ({forms}: any) => {
                  */
                 const handleFormResult = (e: any) => {
                     e.stopPropagation();
-                    navigate("/form/result");
+                    navigate(`/space/${space.id}/form/${f.formId}/result`);
                 }
 
                 return (

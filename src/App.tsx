@@ -1,16 +1,19 @@
+import React from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Login from "./pages/user/Login";
-import SignUp from "./pages/user/SignUp";
+import {RecoilRoot} from "recoil";
+
+import Userbar from "./components/Userbar";
+import Refresh from "./components/Refresh";
+
 import Home from "./pages/Home";
 import Main from "./pages/Main";
+import Login from "./pages/user/Login";
+import SignUp from "./pages/user/SignUp";
 import SpaceEnter from "./pages/space/SpaceEnter";
 import SpaceCreate from "./pages/space/SpaceCreate";
 import SpaceForMember from "./pages/space/SpaceForMember";
-import {RecoilRoot} from "recoil";
 import SpaceForLeader from "./pages/space/SpaceForLeader"
-import Userbar from "./components/Userbar";
-import React from "react";
-import Refresh from "./components/Refresh";
+import FormResult from "./pages/form/FormResult";
 
 function App() {
 
@@ -33,7 +36,8 @@ function App() {
                                         <Route path="/main" element={<Main/>}/>
                                         <Route path="/space/member/:spaceId" element={<SpaceForMember/>}/>
                                         <Route path="/space/leader/:spaceId" element={<SpaceForLeader/>}/>
-                                        <Route path="/refresh" element={<Refresh />}/>
+                                        <Route path="/refresh" element={<Refresh/>}/>
+                                        <Route path="/space/:spaceId/form/:formId/result" element={<FormResult/>}/>
                                     </Routes>
                                 </div>
                             </div>
