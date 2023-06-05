@@ -1,12 +1,31 @@
 import "../styles/home.css";
+
 import "../assets/template/bootstrap.min.css";
 import "../assets/template/style.css";
 
 import React from "react";
 
 import icLogo from "../assets/ic_logo.png";
+import {useNavigate} from "react-router-dom";
 
-const Main = () => {
+const Home = () => {
+    const navigate = useNavigate();
+
+    /**
+     * 로그인 혹은 메인 페이지로 이동하는 버튼
+     */
+    const handleStartButton = () => {
+        // FIXME: JWT 토큰 저장 방법이 변경되면 이후 변경해야 하는 부분
+        const jwtToken = localStorage.getItem('jwt-token') || '';
+
+        if (jwtToken !== "" || jwtToken !== null) {
+            // 아직 로그인이 안 되어 있다면 로그인 페이지로 이동한다.
+            navigate("/login");
+        } else {
+            // 만약 로그인이 되어 있다면 메인 페이지로 이동한다.
+            navigate("/main");
+        }
+    }
 
     return (
         <div className="culmn">
@@ -33,7 +52,7 @@ const Main = () => {
                                                 HiVEY와 함께라면 설문 관리의 복잡함을 간소화하여 효율적인 의사 결정과 향상된 조직 문화를 이끌 수 있습니다.</p>
 
                                             <div className="home_btn">
-                                                <button className="btn btn-lg m_t_10">GET STARTED NOW</button>
+                                                <button className="btn btn-lg m_t_10" onClick={handleStartButton}>GET STARTED NOW</button>
                                             </div>
 
                                         </div>
@@ -296,7 +315,8 @@ const Main = () => {
                                         <h2>Let's Get Started Now. <span>It's FREE!</span></h2>
                                         <h4>30 day free trial. Free plan allows up to 2 projects. Pay if you need more.
                                             Cancel anytime. No catches.</h4>
-                                        <a href="" className="btn btn-lg">start free trial</a>
+
+                                        <button className="btn btn-lg" onClick={handleStartButton}>GET STARTED NOW</button>
 
                                     </div>
                                 </div>
@@ -331,4 +351,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export default Home;

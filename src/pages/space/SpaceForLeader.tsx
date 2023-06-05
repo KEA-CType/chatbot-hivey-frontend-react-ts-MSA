@@ -19,7 +19,7 @@ import "../../styles/space.css";
 import icLogoSample from "../../assets/ic_logo_sample.png";
 import icEditGray from "../../assets/ic_edit_gray.png";
 
-import {motion} from "framer-motion"
+import {motion} from "framer-motion";
 
 import {
     SpaceOnly,
