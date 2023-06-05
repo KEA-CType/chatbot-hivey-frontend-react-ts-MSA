@@ -17,9 +17,20 @@ const GetFormSubmissionList = async (formId: number) => {
 
     }
 };
+const GetFormInfomation=async(formId:number)=>{
+    try{
+        const response=await instances.INSTANCE.get(`${FORM}/${formId}`);
+        return response.data;
+    }catch (error){
+        console.error(error);
+        throw new Error("해당 설문의 정보를 불러오지 못하였습니다.");
+    }
+}
+
 
 const formAnswerService = {
-    GetFormSubmissionList
+    GetFormSubmissionList,
+    GetFormInfomation
 }
 
 export default formAnswerService;

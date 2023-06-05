@@ -1,14 +1,14 @@
 import "../../styles/formcreate.css"
 
 
-import form from "../../services/form/form";
+import formService from "../../services/form/form";
 import spaceGroup from "../../services/space/spaceGroup";
 import groupMember from "../../services/space/spaceMember";
 
 import GroupMemberList from "../../components/space/GroupMemberList";
+import { FormCreateRequest } from "../../commons/Interface";
 
-
-import React, {useState, useEffect, ReactElement} from "react";
+import React, {useState, useEffect, ReactElement,useContext} from "react";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
@@ -16,6 +16,7 @@ import {formIdState,userState, spaceState} from "../../commons/Atom";
 import {useRecoilState, useRecoilValue} from "recoil";
 import Modal from  "../../components/commons/modals";
 import SelectGroupForForm from "../../components/form/SelectGroupForForm";
+import moment from "moment";
 import ReactDOM from "react-dom";
 
 
@@ -41,22 +42,22 @@ import shortAnswer from "../../assets/btn_short_answer.png";
 import longAnswer from "../../assets/btn_long_answer.png";
 import remove_btn from "../../assets/btn_remove_question.png";
 import radio_btn from "../../assets/btn_radio.png";
-
-
+import { ListFormat } from "typescript";
 
 
 const FormCreate = () => {
-    const formId=useRecoilValue(formIdState)
+    const formId=useRecoilValue(formIdState);
+    const navigate = useNavigate();
     // console.log(`formId: ${formId}`)
     //api 6.2에 필요한 것
-    const [title,setTitle]=useState("");
+    const [formTitle,setFormTitle]=useState("");
     const [content,setContent]=useState("");
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date);
+    const [endDate, setEndDate] = useState(new Date);
     const [isAnonymous,setIsAnonymous]=useState('N'); //익명 아닌게 디폴트
     const [isMandatory,setIsMandatory]=useState('N');
-    const [questionRequests,setQuestionRequests]=useState([{}]);
-        const [questionGroups,setQuestionGroups]=useState([]);
+    // const [requestBody,setRequestBody]=useState<FormCreateRequest>();
+        //const [questionGroups,setQuestionGroups]=useState([]);
         const [questions,setQuestions]=useState([{}]);
             const [forQuestionId,setForQuestionId]=useState(0);
     //         const [questionType,setQuestionType]=useState("");
@@ -75,26 +76,25 @@ const FormCreate = () => {
     const [requireModalIsOpen, setRequireModalIsOpen] = useState(false);
     const [chooseGroupModalIsOpen, setChooseGroupModalIsOpen]=useState(false);
 
-    const [multiTitle, setMultiTitle] = useState<string[]>([]);
-    const [shortTitle, setShortTitle] = useState<string[]>([]);
-    const [longTitle, setLongTitle] = useState<string[]>([]);
-    const [multiExplain, setMultiExplain] = useState<string[]>([]);
-    const [shortExplain, setShortExplain] = useState<string[]>([]);
-    const [longExplain, setLongExplain] = useState<string[]>([]);
-    const [radioOptions, setRadioOptions] = useState<string[]>([]);
+   
 
     
-    // var optionId=0;
-    const [optionId,setoptionId]=useState(0);
-    
+   
     //그룹 목록 불러오기
     const [groupList,setGroupList]=useState([]);
-    const [selectedGroupId, setSelectedGroupId] = useState(0);
-    
-    const getSelectedGroupId = (groupId: number) => {
-        setSelectedGroupId(groupId);
-    }
-
+    const [selectedGroupId,setSelectedGroupId]=useState<number[]>([]); //useState<number[]>([]);
+    const handleSelectComplete = (groupId: number[]) => {
+        if (Array.isArray(groupId)) { // groupId가 배열인지 확인
+            setSelectedGroupId(prevSelectedGroupId => [...prevSelectedGroupId, ...groupId]);
+            console.log("selectedGroupId:", selectedGroupId);
+          } else {
+            console.error("Invalid groupId:", groupId);
+          }
+        // setSelectedGroupId(updateGroupId);
+       
+        // console.log("selectedGroupId:", selectedGroupId);
+        // You can perform any further actions using the selected groupId here
+      };
     const space=useRecoilValue(spaceState);
     useEffect(()=>{
         spaceGroup
@@ -119,7 +119,7 @@ const FormCreate = () => {
 
        
     },[]);
-
+    
    
      
 
@@ -157,42 +157,34 @@ const FormCreate = () => {
         }
         
     }
-
-//    const showGroupMember=(groupId)=>{
-
-//    }
+    
+    
     
     const MakeMultipleChoiceQuestion=()=>{
         const [radioOptions, setRadioOptions] = useState<string[]>([]);
         const [questionTitle,setQuestionTitle]=useState("");
         const [questionContent,setQuestionContent]=useState("");
-        const [saveOption, setSaveOption] = useState<{ optionId: number; options: string }[]>([]);
-
+        const [saveOption, setSaveOption] = useState<{options: string }[]>([]);
 
         const handleAddRadioOption = () => {
             setRadioOptions((prevOptions) => [...prevOptions, '']);
         };
         const handleRadioOptionChange = (index:number,value: string) => {
             
-            // const updatedOptions = value;
-            // // setRadioOptions(updatedOptions);
-            // console.log(radioOptions);
-            // const updatedSaveOption = [...saveOption];
-            // updatedSaveOption[index] = { optionId: index, options: value };
-            // setSaveOption(updatedSaveOption);
-            // console.log(saveOption);
+            
             const updatedOptions = [...radioOptions];
             updatedOptions[index] = value;
             setRadioOptions(updatedOptions);
 
             const updatedSaveOption = [...saveOption];
-            updatedSaveOption[index] = { optionId: index, options: value };
+            updatedSaveOption[index] = { options: value };
             setSaveOption(updatedSaveOption);
-
-            return(radioOptions)
+            
+            console.log(radioOptions);
+            
+            
         };
         
-        // console.log(saveOption);
           
         return(
             <div className="qusetion-container">
@@ -210,12 +202,13 @@ const FormCreate = () => {
                     value={option}
                     onChange={(event) => handleRadioOptionChange(index, event.target.value)}
                     placeholder="질문 제목을 입력해주세요"
+                    
                     />
                 </div>
                 ))}
-                <div className="add-radio-option" onClick={handleAddRadioOption}>
-                질문 추가
-                </div>
+                    <div className="add-radio-option" onClick={handleAddRadioOption}>
+                    질문 추가
+                    </div>
                 </div>
                 
     </div>
@@ -302,10 +295,16 @@ const FormCreate = () => {
           rootDiv.appendChild(newQuestionNode);
         }
       };
+
+      
+
       const ClickFinishBtn=()=>{
        
         let questionId=0;
         console.log(forQuestionId);
+        var options:string[]|null;
+        var questionTitles:string;
+        var questionContents:string;
         const newQuestions :{ questionId: number; type: string; title: string; content: string; options:string[]|null }[] = []
         // const newOptions :{
 
@@ -313,7 +312,7 @@ const FormCreate = () => {
         const questionContainers = document.querySelectorAll('.qusetion-container');
         questionContainers.forEach((container) => {
             const childDiv = container.querySelector(':scope > div'); // Select the immediate child div
-            //let options= 
+            
             let questionType=" ";
             questionId=questionId+1;
             console.log("childDiv",childDiv)
@@ -321,41 +320,145 @@ const FormCreate = () => {
                 const className = childDiv.className;
                 console.log("classname",className);
                     if (className.includes('multiple')) {
-                        questionType="M";
-                        const questionOptions = Array.from(document.querySelectorAll<HTMLInputElement>('.qusetion-container .radio-option')).map((optionElement) => optionElement.value);
-                    
+                        questionType="M";                                                                                                       //.map((optionElement) => optionElement.value);
+                        const questionOptions = Array.from(document.querySelectorAll<HTMLInputElement>('.qusetion-container .radio-option'))
+                        const options: string[] = [];
+                        questionOptions.forEach((optionElement: HTMLInputElement) => {
+                            
+                            console.log(optionElement);
+                            options.push(optionElement.value);
+                          });
+                        console.log("options",options);
+                        
+                        // const options: string[] = questionOptions.map((optionElement: HTMLInputElement) => optionElement.value);
+                        // console.log("options", options);
+                        
+
+                        const questionTitleElement = container.querySelector<HTMLInputElement>('.title-input')
+                        questionTitles = questionTitleElement ? questionTitleElement.value : '';
+            
+                        const questionContentElement = container.querySelector<HTMLInputElement>('.explain-input');
+                        questionContents = questionContentElement ? questionContentElement.value : '';
+                        
+                        newQuestions.push({
+                            questionId: questionId,
+                            type: questionType,
+                            title: questionTitles || '',
+                            content: questionContents || '',
+                            options:options || null,
+                          });
+
                     } else if (className.includes('short')) {
                         questionType = "S";
+                        options=null;
+                        const questionTitleElement = container.querySelector<HTMLInputElement>('.title-input')
+                        questionTitles = questionTitleElement ? questionTitleElement.value : '';
+            
+                        const questionContentElement = container.querySelector<HTMLInputElement>('.explain-input');
+                        questionContents = questionContentElement ? questionContentElement.value : '';
+                       
+                        newQuestions.push({
+                            questionId: questionId,
+                            type: questionType,
+                            title: questionTitles || '',
+                            content: questionContents || '',
+                            options:options || null,
+                          });
+
                     } else if (className.includes('long')) {
                         questionType = "L";
+                        options=null;
+                        const questionTitleElement = container.querySelector<HTMLInputElement>('.title-input')
+                        questionTitles = questionTitleElement ? questionTitleElement.value : '';
+            
+                        const questionContentElement = container.querySelector<HTMLInputElement>('.explain-input');
+                        questionContents = questionContentElement ? questionContentElement.value : '';
+                        newQuestions.push({
+                            questionId: questionId,
+                            type: questionType,
+                            title: questionTitles || '',
+                            content: questionContents || '',
+                            options:options || null,
+                          });
+                        
                     }
                 }
 
-            const questionTitleElement = container.querySelector<HTMLInputElement>('.title-input')
-            const questionTitles = questionTitleElement ? questionTitleElement.value : '';
+            // const questionTitleElement = container.querySelector<HTMLInputElement>('.title-input')
+            // const questionTitles = questionTitleElement ? questionTitleElement.value : '';
 
-            const questionContentElement = container.querySelector<HTMLInputElement>('.explain-input');
-            const questionContents = questionContentElement ? questionContentElement.value : '';
+            // const questionContentElement = container.querySelector<HTMLInputElement>('.explain-input');
+            // const questionContents = questionContentElement ? questionContentElement.value : '';
             
             // const questionOptionElement=container.querySelector<HTMLInputElement>('.radio-option')
             // const questionOption=questionOptionElement ? questionOptionElement.value:"";
-            const questionOptions = Array.from(document.querySelectorAll<HTMLInputElement>('.qusetion-container .radio-option')).map((optionElement) => optionElement.value);
 
-            newQuestions.push({
-                questionId: questionId,
-                type: questionType,
-                title: questionTitles || '',
-                content: questionContents || '',
-                options:questionOptions || null,
-              });
+
+            
+              
             });
+            options=[];
+            
+            console.log(selectedGroupId);
             
             setQuestions(newQuestions);
-            console.log(questions);
-            console.log(radioOptions);
+            console.log("questions",questions);
+            //console.log(radioOptions);
+            
+            
+            
       };
+      useEffect(()=>{
+        if(questions.length>1){
+            SendRequestBody(questions);
+        }
+        },questions)
 
-      
+      const SendRequestBody=(questions:any)=>{
+        var title:string;
+        //const [requestBody,setRequestBody]=useState<FormCreateRequest>();
+        
+        //const RequestBody :{ title: string; content: string; startDate:Date|string; endDate:Date|string; isAnonymous:string; isMandatory:string; groups:number[]|undefined; questionRequests:object[] }
+        const formContainers = document.querySelectorAll('.form-container');
+        formContainers.forEach((container)=>{
+            const formTitleElement=container.querySelector<HTMLInputElement>('.survey-title-input');
+            title=formTitleElement ? formTitleElement.value: '';
+
+            const requestBody:FormCreateRequest={
+                title: title,
+                content: content,
+                startDate: moment(startDate).format("YYYY-MM-DD"),
+                endDate: moment(endDate).format("YYYY-MM-DD") ,
+                isAnonymous: isAnonymous,
+                isMandatory: isMandatory,
+                groups:selectedGroupId,
+                questionRequests:questions,
+            }
+            console.log(requestBody);
+            formService
+        .CreateDetailedSurvey(formId,requestBody)
+        .then((response)=>{
+            const {isSuccess, message} = response;
+
+            if(isSuccess){
+                
+                console.log("생성에 성공하였습니다")
+                navigate(-1);
+
+            }else{
+                console.log("생성에 실패하였습니다")
+                console.log(message)
+                console.log(requestBody.groups);
+                
+            }
+        })
+
+        })
+        
+       
+        //groups 빈 배열이여도 postman 성공으로 뜸
+        
+      }
 
 
 
@@ -366,7 +469,7 @@ const FormCreate = () => {
                 <img className="form-logo" src={logo} alt="logo"/>
                 <div></div>
                 <div className="title">
-                <span className="title-name"><input className="survey-title-input" placeholder="설문지 제목을 입력하세요" onChange={(e) => {{setTitle(e.target.value);}}}/></span>
+                <span className="title-name"><input className="survey-title-input" placeholder="설문지 제목을 입력하세요" onChange={(e) => {{setFormTitle(e.target.value);}}}/></span>
                 </div>
                 <div className="survey-explain">
                 <input className="survey-explain-input" placeholder="설문지 설명을 입력하세요" onChange={(e) => {{setContent(e.target.value);}}}/>
@@ -390,7 +493,7 @@ const FormCreate = () => {
                             </div>
                         <div className="end-date-container">
                             <img src={end_date} alt="endDate"></img>
-                                <DatePicker className="endDatePicker"
+                            <DatePicker className="endDatePicker"
                                     locale={ko}
                                     dateFormat="yyyy.MM.dd"
                                     selected={endDate}
@@ -417,9 +520,11 @@ const FormCreate = () => {
                         {/* 그룹이름 나오게 하는 건 list 사용할 듯 */}
                         <div className="choose-group">
                                 
-                                <SelectGroupForForm groups={groupList}></SelectGroupForForm>
+                            <SelectGroupForForm groups={groupList} checkedGroupList={handleSelectComplete}/>
+                        
                             
                         </div>
+                       
                         </Modal>
                     </div>
                     
@@ -443,7 +548,7 @@ const FormCreate = () => {
             </div>
             <div className="button-container">
                 <button className="finish-btn" onClick={ClickFinishBtn}>완료</button>
-                <button className="cancel-btn">취소</button>
+                <button className="cancel-btn" onClick={()=>navigate(-1)}>취소</button>
             </div>
         </div>
     )

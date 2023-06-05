@@ -58,3 +58,27 @@ export interface TargetGroupListResponse {
     groupId: number,
     groupName: number
 }
+
+export interface FormCreateRequest{
+    title: string,
+    content: string,
+    startDate:Date|string,
+    endDate:Date|string,
+    isAnonymous:string,
+    isMandatory:string,
+    groups:number[],
+    questionRequests:object[]
+}
+
+export interface FormAnswerResponse{
+    formId:number,
+    title: string,
+    content: string,
+    startDate:Date|string,
+    endDate:Date|string,
+    isAnonymous:string,
+    isMandatory:string,
+    groups:number[],
+    questions:object[]
+
+}

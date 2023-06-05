@@ -12,6 +12,7 @@ import SpaceForLeader from "./pages/space/SpaceForLeader"
 
 import Userbar from "./components/Userbar";
 import FormCreate from "./pages/form/FormCreate";
+import FormAnswer from "./pages/form/FormAnswer";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/signup" element={<SignUp/>}/>
                     <Route path="/form/create" element={<FormCreate/>}/>
+                    <Route path="/form/answer" element={<FormAnswer/>}/>
                     <Route
                         path="/*"
                         element={
