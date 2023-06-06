@@ -18,3 +18,24 @@
     font-weight: normal;
     src: url("../font/Pretendard-Regular.otf");
 }
+
+@font-face {
+    font-family: "Noto Sans KR Medium";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../font/NotoSansKR-Medium.otf");
+}
+
+@font-face {
+    font-family: "Noto Sans KR Regular";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../font/NotoSansKR-Regular.otf");
+}
+
+@font-face {
+    font-family: "Nanum Square Regular";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../font/NanumSquareR.otf");
+}

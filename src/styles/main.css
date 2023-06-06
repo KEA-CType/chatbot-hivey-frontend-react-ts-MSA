@@ -1,5 +1,6 @@
 body {
-    background-color: #D4ECFF;
+    /*background-color: #D4ECFF;*/
+    background: url("../assets/bg_gradient_blue.png");
 }
 
 .main-rectangle-white {
