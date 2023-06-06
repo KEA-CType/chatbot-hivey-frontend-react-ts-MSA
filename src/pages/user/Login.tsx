@@ -7,7 +7,7 @@ import google from "../../assets/btn_signup_google.png";
 import loginEmail from "../../assets/btn_signup_email.png";
 
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useSetRecoilState} from "recoil";
 
 import Button from "../../components/commons/buttons";
@@ -139,9 +139,9 @@ const Login = () => {
                                 <img className="social-login-icon" src={naver} alt="Naver"/>
                             </div>
                             <div className="social-login-icons">
-                                <a href="/src/pages/user/SignUp.tsx"><img className="social-login-icon" src={loginEmail}
-                                                                          alt="Email"/>
-                                </a>
+                                <Link to={"/signup"}>
+                                    <img className="social-login-icon" src={loginEmail} alt="Email"/>
+                                </Link>
                             </div>
                         </div>
                     </div>
