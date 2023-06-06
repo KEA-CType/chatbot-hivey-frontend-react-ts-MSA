@@ -239,10 +239,7 @@ const FormCreate = () => {
             // Find the parent div and remove it
             console.log("remove");
             const questionContainer = document.querySelector('.question-container');
-            // if (questionContainer && questionContainer.parentNode) {
-            //     console.log("removed");
-            //   questionContainer.parentNode.removeChild(questionContainer);
-            // }
+            
 
           };
           const handleSaveQuestions = () => {
