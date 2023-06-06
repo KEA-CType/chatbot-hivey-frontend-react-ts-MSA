@@ -296,7 +296,7 @@ const SpaceCreate = () => {
 
             <img className="create-space-logo" src={icLogoHivey} alt=""/>
 
-            <div className="title">Create your own space!</div>
+            <div className="create-space-title">Create your own space!</div>
 
             <CreateSpaceComponent/>
 

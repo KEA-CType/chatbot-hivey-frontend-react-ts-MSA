@@ -155,7 +155,7 @@ const SpaceEnter = () => {
 
             <img className="space-enter-logo" src={icLogoHivey} alt=""/>
 
-            <div className="title">Enter to special space!</div>
+            <div className="space-enter-title">Enter to special space!</div>
 
             <EnterSpaceComponent/>
 
