@@ -37,6 +37,7 @@ const CreateSpaceComponent = () => {
     const [isValidAll, setIsValidAll] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalHeader, setModalHeader] = useState("");
     const [message, setMessage] = useState("");
     const [accessCode, setAccessCode] = useState("");
 
@@ -123,7 +124,8 @@ const CreateSpaceComponent = () => {
 
                 // 생성이 완료되면 완료되었다는 메시지와 함께 스페이스의 access code를 띄워준다.
                 setIsModalOpen(true);
-                setMessage("스페이스 생성에 성공하였습니다.");
+                setModalHeader("스페이스 생성 성공");
+                setMessage(`참여 코드: ${accessCode}`);
 
             })
             .catch((error) => {
@@ -131,6 +133,7 @@ const CreateSpaceComponent = () => {
                 console.log(error);
 
                 setIsModalOpen(true);
+                setModalHeader("스페이스 생성 실패");
                 setMessage("스페이스 생성에 실패하였습니다.");
 
             });
@@ -278,8 +281,8 @@ const CreateSpaceComponent = () => {
             </form>
 
             {/* 스페이스 생성 완료 혹은 실패 시 올라오는 모달 */}
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} header={message}>
-                <p>참여 코드: {accessCode}</p>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} header={modalHeader}>
+                {message}
                 <button className="create-space-copy-btn" onClick={handleCopyClipBoard}>Copy</button>
             </Modal>
 
