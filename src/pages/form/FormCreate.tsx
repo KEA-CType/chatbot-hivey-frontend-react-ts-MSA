@@ -1,10 +1,7 @@
 import "../../styles/formcreate.css"
 
-
 import formService from "../../services/form/form";
 import spaceGroup from "../../services/space/spaceGroup";
-
-
 
 import { FormCreateRequest } from "../../commons/Interface";
 
@@ -18,8 +15,6 @@ import Modal from  "../../components/commons/Modal";
 import SelectGroupForForm from "../../components/form/SelectGroupForForm";
 import moment from "moment";
 import ReactDOM from "react-dom";
-
-
 
 // 달력을 위해서
 import DatePicker from "react-datepicker";
@@ -43,7 +38,6 @@ import longAnswer from "../../assets/btn_long_answer.png";
 import remove_btn from "../../assets/btn_remove_question.png";
 import radio_btn from "../../assets/btn_radio.png";
 import { ListFormat } from "typescript";
-
 
 const FormCreate = () => {
     // const formId=useRecoilValue(formIdState);
