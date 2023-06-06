@@ -5,13 +5,13 @@ import Button from "../../components/commons/buttons";
 import Input from "../../components/commons/input";
 import logo from "../../assets/ic_logo_hivey.png";
 import Modal from "../../components/commons/Modal";
-import authService from "../../services/user/auth";
+import userService from "../../apis/services/userService";
 import {useNavigate} from "react-router-dom";
 import {validateEmail} from "../../utils/validationTest";
 
 import {motion} from "framer-motion";
 import imgSampleWhite from "../../assets/img_sample_white.png";
-import uploadImgService from "../../services/file/uploadFileService";
+import uploadImgService from "../../apis/services/uploadFileService";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -30,7 +30,9 @@ const SignUp = () => {
     const [notValidPasswordMessage, setNotValidPasswordMessage] = useState("");
     const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(false);
     const [notValidConfirmPasswordMessage, setNotValidConfirmPasswordMessage] = useState("");
+
     const [isValidAll, setIsValidAll] = useState(false);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalHeader, setModalHeader] = useState("");
     const [modalMessage, setModalMessage] = useState("");
@@ -127,7 +129,7 @@ const SignUp = () => {
             return;
         }
 
-        authService
+        userService
             .Register(email, name, password)
             .then((response) => {
                 const {isSuccess, message} = response;

@@ -8,7 +8,7 @@ import Bot from './bot';
 import {botSteps} from "../../contexts/botSteps";
 import {formIdState, spaceState, userState} from "../../commons/Atom";
 
-import form from "../../services/form/form";
+import sformService from "../../apis/services/sformService";
 
 const ChatbotForLeader = () => {
     const navigate = useNavigate();
@@ -43,7 +43,7 @@ const ChatbotForLeader = () => {
         // 기본 동작을 무시하고 사용자 정의한 액션만 수행하도록 한다.
         e.preventDefault();
 
-        form
+        sformService
             .CreateSurvey(space.id, user.id)
             .then((response) => {
                 const {isSuccess, code, message} = response;

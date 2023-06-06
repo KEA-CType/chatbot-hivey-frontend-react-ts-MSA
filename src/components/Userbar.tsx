@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import {userState, spaceState} from "../commons/Atom";
 import {useRecoilState, useRecoilValue} from "recoil";
 
-import spaceService from "../services/space/space";
+import spaceService from "../apis/services/sformService";
 import setting from "../assets/ic_setting_gray.png";
 import profile from "../assets/ic_profile.png";
 import icLogoHiVey from "../assets/ic_logo_hivey.png";
@@ -39,32 +39,32 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
             const newList = filteredList.map(
                 (s: any) => {
                     
-                        s.spaceId === space.id ? setStyle("space-item active") : setStyle("space-item");
+                        s.spaceId === space.id ? setStyle("sform-item active") : setStyle("sform-item");
 
                     // 목록에 있는 각 스페이스를 클릭했을 때 해당 스페이스로 이동하도록 한다.
 
                     const onClickSpace = (e: any) => {
                         e.preventDefault();
 
-                        if (e.target.classList[0] === "space-item-clicked") {
+                        if (e.target.classList[0] === "sform-item-clicked") {
 
-                            e.target.classList.add("space-item-clicked")
+                            e.target.classList.add("sform-item-clicked")
                             setSpace({id: 0, name: ""});
 
                         } else {
 
                             for (let i = 0; i < spaceListElements.length; i++) {
-                                spaceListElements[i].classList.remove("space-item-clicked");
+                                spaceListElements[i].classList.remove("sform-item-clicked");
                             }
 
-                            e.target.classList.add("space-item-clicked");
+                            e.target.classList.add("sform-item-clicked");
                             setSpace({id: s.spaceId, name: s.name});
                         }
 
                         setSpace({
                             id: s.spaceId, name: s.name
                         });
-                        s.spaceId === space.id ? setStyle("space-item active") : setStyle("space-item");
+                        s.spaceId === space.id ? setStyle("sform-item active") : setStyle("sform-item");
                         if (s.isManager) {
 
                             navigate(`/refresh?destination=/space/leader/${s.spaceId}`, {replace: true});

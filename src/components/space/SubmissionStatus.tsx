@@ -2,8 +2,8 @@ import {useEffect, useState} from "react";
 import {useRecoilValue} from "recoil";
 
 import {selectedFormIdState} from "../../commons/Atom";
-import formService from "../../services/form/form";
-import {SubmissionListResponse, TargetGroupListResponse} from "../../commons/Interface";
+import sformService from "../../apis/services/sformService";
+import {SubmissionListResponse, TargetGroupListResponse} from "../../commons/interfaces/Interface";
 
 import icCheckCircleGreen from "../../assets/ic_check_circle_green.png";
 import icCheckNotCircleRed from "../../assets/ic_check_not_circle_red.png";
@@ -190,7 +190,7 @@ const SubmissionStatus = () => {
         /**
          * 특정 설문의 필수 여부 정보 가져오기
          */
-        formService
+        sformService
             .GetMandatoryOrNotByForm(selectedFormId)
             .then((response) => {
 
@@ -206,7 +206,7 @@ const SubmissionStatus = () => {
         /**
          * 특정 설문의 참여 현황 목록 불러오기
          */
-        formService
+        sformService
             .GetSubmissionListByForm(selectedFormId)
             .then((response) => {
 
@@ -226,7 +226,7 @@ const SubmissionStatus = () => {
             /**
              * 특정 설문의 타겟 그룹 목록 불러오기
              */
-            formService
+            sformService
                 .GetTargetGroupsByForm(selectedFormId)
                 .then((response) => {
 

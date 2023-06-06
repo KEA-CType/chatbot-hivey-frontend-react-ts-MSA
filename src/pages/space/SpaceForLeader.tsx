@@ -6,7 +6,7 @@ import {useEffect, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 import {useNavigate, useParams} from "react-router-dom";
 
-import spaceService from "../../services/space/space";
+import sformService from "../../apis/services/sformService";
 import {selectedFormIdState, spaceState, userState} from '../../commons/Atom';
 import PropTypes from "prop-types";
 
@@ -25,7 +25,7 @@ import {
     SpaceOnly,
     FormListResponse,
     GroupListResponse
-} from "../../commons/Interface";
+} from "../../commons/interfaces/Interface";
 
 const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
     const navigate = useNavigate();
@@ -80,7 +80,34 @@ const SpaceForLeader = () => {
 
     useEffect(() => {
 
-        spaceService
+        /**
+         * 스페이스 참여하기
+         *
+         * {
+         *     "isSuccess": true,
+         *     "code": 1000,
+         *     "message": "요청에 성공하였습니다.",
+         *     "result": {
+         *         "name": "Space2",
+         *         "img": null,
+         *         "forms": [],
+         *         "memberCount": 1,
+         *         "groups": [
+         *             {
+         *                 "name": "Default",
+         *                 "members": [
+         *                     {
+         *                         "memberId": 1,
+         *                         "name": null,
+         *                         "position": "M"
+         *                     }
+         *                 ]
+         *             }
+         *         ]
+         *     }
+         * }
+         */
+        sformService
             .GetSpace(user.id, spaceId !== undefined ? spaceId : (space.id).toString())
             .then((response) => {
 

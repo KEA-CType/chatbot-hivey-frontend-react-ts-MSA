@@ -1,4 +1,4 @@
-import instances from "../axiosInstance";
+import instances from "../instance";
 
 /**
  * File 업로드를 위한 axios 인스턴스 (multer)
