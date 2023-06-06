@@ -1,0 +1,922 @@
+/* Space */
+
+/* 스페이스 전체 컨테이너 */
+.space-container {
+    width: 80%;
+    height: 100vh;
+
+    position: fixed;
+    top: 1rem;
+    left: 20%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* 스페이스에 대한 정보(아이콘, 이름, 인원수 등)를 보여주는 박스 */
+.space-rectangle-white {
+    width: 79%;
+    height: 5rem;
+
+    background-color: #ffffff;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    position: relative;
+    left: 10%;
+
+    margin-top: 2rem;
+
+    padding: 0;
+}
+
+.space-rectangle-white:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    z-index: 1;
+}
+
+.space-rectangle-white .space-img-wrapper {
+    height: 50%;
+    width: auto;
+    overflow: hidden;
+
+    display: block;
+
+    margin-left: 2%;
+}
+
+.space-img-wrapper .space-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}
+
+.space-title {
+    height: auto;
+    width: fit-content;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    font-size: 1.5rem;
+    font-weight: bolder;
+    font-family: "Noto Sans KR", sans-serif;
+
+    cursor: default;
+
+    margin-left: 2%;
+}
+
+.space-membercount {
+    height: auto;
+    overflow: hidden;
+    width: fit-content;
+
+    box-sizing: border-box;
+
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: darkgray;
+    font-family: "Noto Sans KR", sans-serif;
+
+    margin-left: 2%;
+}
+
+.space-edit-wrapper {
+    height: 35%;
+    width: auto;
+    overflow: hidden;
+
+    display: block;
+
+    margin-left: 2%;
+}
+
+.space-edit-wrapper .space-edit-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+
+    cursor: pointer;
+}
+
+/* 스페이스 안의 컴포넌트들을 담는 컨테이너 */
+.space-content-container {
+    width: 100%;
+    height: 100vh;
+
+    position: relative;
+    top: 1rem;
+    left: 10%;
+
+    border-radius: 0.5rem;
+
+    overflow-y: scroll;
+
+    padding-bottom: 3rem;
+}
+
+/* Formboard */
+.formboard-rectangle-white {
+    width: 80%;
+    height: 31rem;
+
+    background-color: #ffffff;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    padding-bottom: 2rem;
+
+    margin-top: 1rem;
+}
+
+.formboard-rectangle-white:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    /*z-index: 1;*/
+}
+
+.formboard-rectangle-white .formboard-title {
+    height: 1.5rem;
+    width: fit-content;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    /*overflow: hidden;*/
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: Archivo, sans-serif;
+
+    cursor: default;
+
+    margin-top: 3%;
+    margin-left: 3%;
+}
+
+.formboard-rectangle-white .formboard-box {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    font-family: Pretendard, sans-serif;
+}
+
+.formboard-box .formboard-status-container {
+    height: auto;
+    width: auto;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0;
+
+    margin-top: 3%;
+}
+
+.formboard-status-container .formboard-status-title-wrapper {
+    width: auto;
+    height: auto;
+
+    margin-bottom: 1.5%;
+
+    display: block;
+}
+
+.formboard-status-container .formboard-status-title {
+    width: 60%;
+    height: auto;
+    aspect-ratio: auto;
+
+    margin-left: 20%;
+    margin-right: 20%;
+
+    display: block;
+}
+
+.formboard-status-container .formboard-status-box {
+    width: 100%;
+    height: 20rem;
+
+    background-color: #E8EFFA;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    /*overflow-x: hidden;*/
+
+    border-radius: 0.15rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-bottom: 2rem;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.formboard-status-box::-webkit-scrollbar {
+    display: none;
+}
+
+.formboard-form {
+    width: 90%;
+    height: 50px;
+
+    background-color: #ffffff;
+
+    border-radius: 1rem;
+    box-shadow: 0.1rem 0.1rem gainsboro;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    cursor: pointer;
+
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.formboard-form .formboard-form-icon-wrapper {
+    width: auto;
+    height: 1rem;
+
+    display: block;
+
+    margin-left: 5%;
+}
+
+.formboard-form-icon-wrapper .formboard-form-icon-img {
+    width: auto;
+    height: 100%;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}
+
+.formboard-form .formboard-form-information {
+    width: auto;
+    height: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    flex: 1;
+
+    margin-left: 5%;
+}
+
+.formboard-form-information-title {
+    font-size: 16px;
+    font-family: Pretendard, sans-serif;
+
+    margin-bottom: 0.1rem;
+}
+
+.formboard-form-information-date {
+    font-size: 4px;
+}
+
+.formboard-form-icon-wrapper {
+    width: auto;
+    height: 28%;
+    overflow: visible;
+
+    background-color: #ffffff;
+    border-radius: 10rem;
+
+    display: block;
+
+    cursor: auto;
+
+    padding: 1% 3%;
+    margin-right: 3%;
+}
+
+.formboard-form-icon-wrapper:hover {
+    background-color: #edeef2;
+}
+
+.formboard-form-icon-wrapper .formboard-form-right-icon-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto 1/1;
+
+    pointer-events: none;
+
+    display: block;
+}
+
+.formboard-form-kebab-menu {
+    width: 6rem;
+    height: auto;
+
+    display: none;
+
+    overflow: hidden;
+
+    background-color: #ffffff;
+
+    border: 0.03rem solid #edeef2;
+    border-radius: 0.6rem;
+}
+
+.formboard-form-kebab-menu .formboard-form-kebab-menu-item {
+    display: block;
+
+    /*overflow: hidden;*/
+
+    font-size: 12px;
+    text-decoration: none;
+
+    padding: 0.8rem;
+}
+
+.formboard-form-kebab-menu .formboard-form-kebab-menu-item:hover {
+    background-color: #edeef2;
+
+    color: black;
+    text-decoration: none;
+}
+
+/* Submission list */
+
+.submission-rectangle-white {
+    width: 80%;
+    height: 15rem;
+
+    background-color: #ffffff;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    padding: 0;
+
+    margin-top: 1rem;
+}
+
+.submission-rectangle-white:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    z-index: 1;
+}
+
+.submission-rectangle-white .submission-title {
+    height: 1.5rem;
+    width: fit-content;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: Archivo, sans-serif;
+
+    cursor: default;
+
+    margin-top: 3%;
+    margin-left: 3%;
+    margin-bottom: 3%;
+}
+
+.submission-rectangle-white .submission-members-container {
+    height: auto;
+    width: 80%;
+
+    border-bottom-width: 0;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    cursor: default;
+
+    /*margin-top: 1%;*/
+    margin-left: 3%;
+    margin-bottom: 1%;
+    margin-right: 5%;
+
+    padding-bottom: 0.3rem;
+}
+
+.submission-members-container .submission-members-profile-wrapper {
+    height: auto;
+    width: 2rem;
+    overflow: hidden;
+
+    display: block;
+}
+
+.submission-members-profile-wrapper .submission-members-profile-img {
+    width: auto;
+    height: 1.5rem;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}
+
+.submission-members-container .submission-members-id {
+    height: auto;
+    width: 3rem;
+
+    box-sizing: border-box;
+
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 2%;
+}
+
+.submission-members-container .submission-members-name {
+    height: auto;
+    width: 4rem;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 2%;
+}
+
+.submission-members-container .submission-members-email {
+    height: auto;
+    width: 15rem;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    color: gray;
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 2%;
+}
+
+.submission-members-container .submission-members-status-wrapper {
+    height: auto;
+    width: 2rem;
+    overflow: hidden;
+
+    display: block;
+
+    margin-left: 2%;
+}
+
+.submission-members-status-wrapper .submission-members-status-img {
+    width: auto;
+    height: 1rem;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}
+
+.submission-rectangle-white .submission-members-line {
+    width: auto;
+    height: 0.05rem;
+
+    background-color: lightgray;
+
+    margin: 0.5% 5%;
+}
+
+.submission-rectangle-white .submission-groups-and-members-container {
+    width: auto;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    cursor: default;
+}
+
+.submission-groups-and-members-container .submission-groups-container {
+    width: 43%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-left: 2%;
+    margin-top: 1%;
+}
+
+.submission-groups-and-members-container .submission-members-container-by-group {
+    width: 60%;
+    height: auto;
+
+    /*border-style: solid;*/
+    /*border-color: black;*/
+    /*border-radius: 0.5rem;*/
+    /*border-width: 0.01rem;*/
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    /*padding-left: 5%;*/
+    /*padding-top: 1%;*/
+    /*padding-bottom: 1%;*/
+
+    padding: 0;
+
+    margin-left: 3%;
+    margin-right: 5%;
+}
+
+.submission-groups-container .submission-groups-box {
+    width: 100%;
+    height: auto;
+
+    background-color: white;
+
+    border-style: solid;
+    border-color: #EDEEF2;
+    border-radius: 0.5rem;
+    border-width: 0.01rem;
+
+    color: black;
+    font-size: 0.9rem;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    font-family: Pretendard, sans-serif;
+}
+
+.submission-groups-container .submission-groups-box-clicked {
+    width: 100%;
+    height: auto;
+
+    background-color: #4BC86E;
+
+    border-radius: 0.5rem;
+    border-width: 0.01rem;
+
+    color: white;
+    font-size: 0.9rem;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 3%;
+
+    font-family: Pretendard, sans-serif;
+}
+
+.submission-members-container-by-group .submission-members-container {
+    height: auto;
+    width: 80%;
+
+    border-bottom-width: 0;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-bottom: 0.3rem;
+
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.group-rectangle-white {
+    width: 80%;
+    height: 15rem;
+
+    background-color: #ffffff;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin-top: 1rem;
+
+    padding: 0;
+}
+
+.group-rectangle-white:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    z-index: 1;
+}
+
+.group-rectangle-white .group-top-bar {
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-top: 3%;
+    margin-bottom: 1rem;
+}
+
+.group-title {
+    height: 1.5rem;
+    width: fit-content;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: Archivo, sans-serif;
+
+    cursor: default;
+
+    margin-left: 3%;
+}
+
+.group-edit-wrapper {
+    height: 70%;
+    width: auto;
+    overflow: hidden;
+
+    display: block;
+
+    margin-left: 2%;
+}
+
+.group-edit-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+
+    cursor: pointer;
+}
+
+.group-rectangle-white .groups-members-container {
+    width: auto;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    cursor: default;
+}
+
+.groups-members-container .group-container {
+    width: 40%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    padding-right: 3%;
+
+    margin-left: 3%;
+}
+
+.group-container::-webkit-scrollbar {
+    display: none;
+}
+
+.groups-members-container .group-member-container {
+    width: 60%;
+    height: 10rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    margin-left: 2%;
+    margin-right: 3%;
+    margin-top: 1%;
+}
+
+.group-member-container::-webkit-scrollbar {
+    display: none;
+}
+
+.group-container .group-box {
+    width: 100%;
+    height: auto;
+
+    background-color: white;
+
+    border-style: solid;
+    border-color: #EDEEF2;
+    border-radius: 0.5rem;
+    border-width: 0.01rem;
+
+    color: black;
+    font-size: 0.9rem;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 5%;
+
+    margin-top: 3%;
+
+    font-family: Pretendard, sans-serif;
+}
+
+.group-container .group-box-clicked {
+    width: 100%;
+    height: auto;
+
+    background-color: #0077FF;
+
+    border-radius: 0.5rem;
+    border-width: 0.01rem;
+
+    color: white;
+    font-size: 0.9rem;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 5%;
+
+    margin-top: 3%;
+}
+
+.group-member-container .group-member-container-by-group {
+    height: auto;
+    width: 80%;
+
+    border-bottom-width: 0;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-bottom: 0.3rem;
+
+    margin-bottom: 1%;
+}
+
+.group-member-container-by-group .group-member-profile-wrapper {
+    height: auto;
+    width: 2rem;
+    overflow: hidden;
+
+    display: block;
+}
+
+.group-member-profile-wrapper .group-member-profile-img {
+    width: auto;
+    height: 1.5rem;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}
+
+.group-member-container-by-group .group-member-id {
+    height: auto;
+    width: 3rem;
+
+    box-sizing: border-box;
+
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 2%;
+}
+
+.group-member-container-by-group .group-member-name {
+    height: auto;
+    width: 4rem;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 2%;
+}
+
+.group-member-container-by-group .group-member-email {
+    height: auto;
+    width: 15rem;
+
+    box-sizing: border-box;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+
+    color: gray;
+    font-size: 0.9rem;
+    font-family: Pretendard, sans-serif;
+
+    margin-left: 2%;
+}
+
+.group-member-container-by-group .group-member-kebab-wrapper {
+    height: auto;
+    width: 2rem;
+    overflow: hidden;
+
+    display: block;
+}
+
+.group-member-kebab-wrapper .group-member-kebab-img {
+    width: auto;
+    height: 1rem;
+    aspect-ratio: auto 1/1;
+
+    display: block;
+}

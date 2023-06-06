@@ -60,7 +60,69 @@ export interface TargetGroupListResponse {
     groupName: number
 }
 
+
+export interface FormCreateRequest{
+    title: string,
+    content: string,
+    startDate:Date|string,
+    endDate:Date|string,
+    isAnonymous:string,
+    isMandatory:string,
+    groups:number[],
+    questionRequests:object[]
+}
+
+export interface FormAnswerResponse{
+    formId:number,
+    title: string,
+    content: string,
+    startDate:Date|string,
+    endDate:Date|string,
+    isAnonymous:string,
+    isMandatory:string,
+    groups:number[],
+    questions:object[]
+
+}
+
 export interface Image {
     file: string,
     url: string
 }
+
+export interface FormResultInformationProps {
+    formInformation: FormInformation;
+    answers: Answer[];
+}
+
+export interface FormInformation {
+    formId: number,
+    title: string,
+    content: string,
+    formLink: string,
+    creator: string,
+    startDate: Date,
+    endDate: Date,
+    isAnonymous: boolean,
+}
+
+export interface Answer {
+    questionId: number,
+    title: string,
+    content: string,
+    multipleAnswer: MultipleAnswer[],
+    subjectiveAnswer: SubjectiveAnswer[],
+}
+
+export interface MultipleAnswer {
+    optionId: number,
+    optionContent: string,
+    count: number,
+}
+
+export interface SubjectiveAnswer {
+    answerId: number,
+    name: string,
+    answer: string,
+}
+

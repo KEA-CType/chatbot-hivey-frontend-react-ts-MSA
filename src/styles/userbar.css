@@ -1,0 +1,248 @@
+.userbar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: white;
+
+    margin: 3rem;
+    width: 20%;
+    position: fixed;
+
+    border-radius: 2rem;
+
+    height: 100%;
+    z-index: 1;
+
+    font-family: Pretendard, sans-serif;
+}
+
+.logo {
+    width: 10vw;
+    height: auto;
+    cursor: pointer;
+
+    margin-top: 2rem;
+    
+}
+
+.user-profile {
+    width: 80%;
+    height: 2.5rem;
+
+    /*border-radius: 0.3rem;*/
+    /*border-width: 0.02rem;*/
+    /*border-style: solid;*/
+    /*border-color: lightgray;*/
+
+    box-shadow: 1px 1px 1px #edeef2;
+
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-start;
+    /*background-color: #D4ECFF;*/
+
+
+    cursor: default;
+
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.user-profile-img {
+    width: 2rem;
+    height: 2rem;
+
+    margin-left: 1.5%;
+}
+
+.user-information-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    margin-left: 1.5rem;
+}
+
+.user-name {
+    color: #000000;
+
+    font-size: 1rem;
+    font-family: Pretendard, "sans-serif";
+}
+
+.user-email {
+    color: gray;
+
+    font-size: 0.8rem;
+    font-family: Pretendard, "sans-serif";
+
+    margin-top: 0.1rem;
+}
+
+.user-profile-setting {
+    width: 1rem;
+    height: 1rem;
+
+    position: relative;
+    top: 0;
+    right: 1%;
+
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+.set{
+    position:absolute;
+    right: 3%;
+    top: 10%;
+}
+
+.user-spaces {
+
+    width: 80%;
+    height: 23vh;
+
+    background-color: white;
+
+    color: aqua;
+
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.user-spaces::-webkit-scrollbar {
+    display: none;
+}
+
+.label {
+    width: 80%;
+    height: 2rem;
+
+    /*background-color: #6ABBFA;*/
+    background-color: #338fff;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    font-family: "Noto Sans KR", sans-serif;
+
+    cursor: default;
+
+    padding: 0.5rem;
+
+    margin-top: 1rem;
+}
+
+.label img {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.spaces-list {
+    align-items: center;
+}
+
+.space-item {
+    height: 2rem;
+
+    background-color: white;
+    background-image: url("../assets/ic_logo_sample.png");
+    background-repeat: no-repeat;
+    background-position: 0.4rem;
+
+    border: 0.1rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    color: gray;
+    font-size: 0.8rem;
+
+    cursor: pointer;
+
+    padding-left: 3rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+
+    margin-top: 0.7rem;
+}
+
+.space-item-clicked {
+    height: 2rem;
+
+    background-color: white;
+    background-image: url("../assets/ic_logo_sample.png"), url("../assets/ic_arrow_blue.png");
+    background-repeat: no-repeat;
+    background-size: 2rem 2rem, 2rem 2rem;
+    background-position: 0.4rem, 90%;
+
+    border: 0.1rem solid black;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    color: black;
+    font-size: 0.8rem;
+
+    cursor: pointer;
+
+    padding-left: 3rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+
+    margin-top: 0.7rem;
+}
+
+.logout-container {
+    width: 100%;
+    height: auto;
+
+    position: relative;
+
+    margin-left: 4rem;
+    margin-top: 0.5rem;
+    margin-bottom: 4rem;
+}
+
+.logout-container img {
+    width: 5.5rem;
+    height: auto;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    cursor: pointer;
+}
+
+.logout-container .logout {
+    display: block;
+}
+
+.logout-container .logout-active {
+    display: none;
+}
+
+.logout-container:hover .logout-active {
+    display: block;
+}

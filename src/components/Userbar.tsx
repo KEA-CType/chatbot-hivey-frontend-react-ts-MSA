@@ -3,21 +3,24 @@ import "../styles/userbar.css";
 import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
-
+import {Link} from "react-router-dom";
 import {userState, spaceState} from "../commons/Atom";
 import {useRecoilState, useRecoilValue} from "recoil";
 
 import spaceService from "../services/space/space";
-
+import setting from "../assets/ic_setting_gray.png";
 import profile from "../assets/ic_profile.png";
 import icLogoHiVey from "../assets/ic_logo_hivey.png";
 import label from "../assets/ic_label_white.png";
+
 import icLogoutGray from "../assets/ic_logout_gray.png";
 import icLogoutBlack from "../assets/ic_logout_black.png";
 import icSettingGray from "../assets/ic_setting_gray.png";
 
+
 const SpaceListComponent = ({spaces, isManager}: any) => {
     const [space, setSpace] = useRecoilState(spaceState);
+    const [style,setStyle]=useState("");
 
     const [spaceList, setSpaceList] = useState(Array);
 
@@ -35,8 +38,11 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
 
             const newList = filteredList.map(
                 (s: any) => {
+                    
+                        s.spaceId === space.id ? setStyle("space-item active") : setStyle("space-item");
 
                     // 목록에 있는 각 스페이스를 클릭했을 때 해당 스페이스로 이동하도록 한다.
+
                     const onClickSpace = (e: any) => {
                         e.preventDefault();
 
@@ -55,14 +61,21 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
                             setSpace({id: s.spaceId, name: s.name});
                         }
 
+                        setSpace({
+                            id: s.spaceId, name: s.name
+                        });
+                        s.spaceId === space.id ? setStyle("space-item active") : setStyle("space-item");
                         if (s.isManager) {
+
                             navigate(`/refresh?destination=/space/leader/${s.spaceId}`, {replace: true});
                         } else {
                             navigate(`/refresh?destination=/space/member/${s.spaceId}`, {replace: true});
                         }
+
                     };
 
                     return (
+
 
                         <div key={s.spaceId} className="space-item" onClick={onClickSpace}>
                             {s.name}
@@ -94,22 +107,25 @@ const Userbar = () => {
     }
 
     useEffect(() => {
-
         spaceService
             .GetSpaceList(user.id)
             .then((response) => {
+                const {code} = response;
 
                 setSpaceList(response.result);
+
 
                 const destination = new URLSearchParams(window.location.search).get("destination");
                 if (destination) {
                     navigate(destination, {replace: true});
+
                 }
 
             })
             .catch((error) => {
                 console.log(error);
             });
+
 
     }, [user, space]);
 
@@ -127,15 +143,18 @@ const Userbar = () => {
             </div>
 
             <div className="label"><img src={label} alt="label"/>MANAGER</div>
+
             <div className="user-spaces">
                 <div className="spaces-list">
                     <SpaceListComponent spaces={spaceList} isManager={1}/>
                 </div>
             </div>
 
+
             <span className="label"><img src={label} alt="label"/>MEMBER</span>
             <div className="user-spaces">
                 <div className="spaces-list">
+
                     <SpaceListComponent spaces={spaceList} isManager={0}/>
                 </div>
             </div>
@@ -154,3 +173,4 @@ Userbar.propTypes = {
 };
 
 export default Userbar;
+

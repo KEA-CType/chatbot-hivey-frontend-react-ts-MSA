@@ -20,7 +20,6 @@ const ChatbotForLeader = () => {
 
     const [message, setMessage] = useState("");
     const [formId, setFormId] = useRecoilState(formIdState);
-
     const space = useRecoilValue(spaceState);
     const user = useRecoilValue(userState);
 
@@ -48,6 +47,7 @@ const ChatbotForLeader = () => {
         form
             .CreateSurvey(space.id, user.id)
             .then((response) => {
+
                 const {isSuccess, code, message} = response;
                 setMessage(message);
 
@@ -62,6 +62,7 @@ const ChatbotForLeader = () => {
                 } else {
                     // FIXME: 이후 남은 예외 처리를 모두 분기 처리해주어야 한다.
                 }
+
 
             })
             .catch((error) => {

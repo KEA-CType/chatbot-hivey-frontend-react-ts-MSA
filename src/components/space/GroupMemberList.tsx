@@ -104,6 +104,7 @@ const GroupList = ({groups, getSelectedGroupId}: any) => {
 }
 
 const GroupMemberList = ({groups}: any) => {
+    console.log("groups",groups);
     const [selectedGroupId, setSelectedGroupId] = useState(0);
 
     const getSelectedGroupId = (groupId: number) => {

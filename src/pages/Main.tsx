@@ -1,6 +1,7 @@
 import "../styles/main.css";
 
 import React from "react";
+
 import {Link} from "react-router-dom";
 
 import Button from "../components/commons/buttons";
@@ -27,7 +28,7 @@ const Main = () => {
 
             </div>
 
-            <img className="main-bottom" src={bgMainBottom} alt="copyright" />
+            <img className="main-bottom" src={bgMainBottom} alt="copyright"/>
 
             <ChatbotForMember/>
 
