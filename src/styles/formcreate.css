@@ -1,0 +1,357 @@
+body{
+    background-color: #D4ECFF;
+    font-family: Archivo, sans-serif;
+    
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    background-color: white;
+    margin-top: 3rem;
+    /* height: 70vh; */
+    margin-left: 17%;
+    margin-right: 17%;
+ 
+
+
+}
+.form-logo{
+    margin-top: 2rem;
+    width: 20%;
+    margin-bottom: 2rem;
+}
+.title{
+    background-color: #B9D3FF;
+    width: 80%;
+    border: black solid;
+    align-items: center;
+}
+.survey-title-input{
+  border-style: none;
+  width: 80%;
+  font-size: 4rem;
+  background-color: #B9D3FF;
+  text-align: center;
+  font-family: Archivo,sans-serif;
+}
+.survey-title-input::placeholder{
+  font-size: 3rem;
+  font-style: bold;
+}
+.survey-explain{
+    margin-top: 1rem;
+    width: 40%;
+    border-bottom: solid gray;
+    font-size: 2rem;
+    color: gray;
+}
+.survey-explain-input{
+  border-style: none;
+  width: 80%;
+  font-size: 1.5rem;
+  background-color: white;
+  text-align: center;
+}
+.survey-explain-input::placeholder{
+  font-size: 1rem;
+  font-style: bold;
+}
+.option-container{
+    width: 100%;
+    display: flex;
+    margin-top: 1rem;
+}
+.left-option{
+    flex: 1;
+    display: block;
+    text-align: left;
+    align-items: center;
+    margin-left: 1rem;
+ 
+}
+
+.start-date-container{
+    width: 50%;
+    display: flex;
+    align-items: center; 
+    margin-top: 1rem;
+    
+    /*align-items- 가로 요소들 줄 안 맞을 떄 */
+}
+.endDatePicker{
+    box-shadow:0px 8px 5px -2px ;
+}
+.end-date-container{
+    width: 30%;
+    display: flex;
+    align-items: center; 
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    /*align-items- 가로 요소들 줄 안 맞을 떄 */
+}
+
+.startDatePicker{
+    box-shadow:0px 8px 5px -2px;
+}
+.right-option{
+    flex: 1;
+}
+.check-participant{
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.choose-group{
+    display: flex;
+}
+
+  .question-create-container{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    margin-top:3rem;
+    margin-left: 19%;
+    margin-bottom: 1rem;
+ 
+  }
+  .questions{
+    flex: 1;
+    
+  }
+  .qusetion-container{
+  
+    text-align: center;
+    align-items: center;
+    height: 50%;
+    margin-bottom: 3rem;
+    
+  }
+  .question-title-containter-multiple{
+    background-color: #C4E3FB;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: left;
+  }
+  .question-title-containter-short{
+    background-color: #C4E3FB;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: left;
+  }
+  .question-title-containter-long{
+    background-color: #C4E3FB;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: left;
+  }
+  .question-title{
+    padding-top: 1.5rem;
+    padding-left: 2rem;
+    
+  }
+  .title-input{
+    border-style: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    background-color: #C4E3FB;
+  }
+  .title-input::placeholder{
+    font-size: 1.2rem;
+    
+  }
+.question-explain{
+  padding-left: 2rem;
+  padding-bottom: 0.5rem;
+
+}
+.explain-input{
+  border-style: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: gray;
+  background-color: #C4E3FB;
+}
+.radio-container{
+  background-color: white;
+  align-content: center;
+  align-items: center;
+  text-align: left;
+  padding-left: 2rem;
+}
+.radio-line{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-content: flex-start;
+  text-align: left;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.radio-option{
+  /* margin-top: 1rem; */
+  
+  font-size: 1rem;
+  border-bottom: solid black;
+}
+.radio-line input{
+  border-style: none;
+}
+.add-radio-option{
+  color: gray;
+  text-align: right;
+  padding-right: 1rem;
+  font-family: Pretendard sans-serif;
+}
+  .text-answer{
+    position: relative;
+    text-align: center;
+    background-color: lightgray;
+  }
+  .text-answer img{
+    position: absolute;
+    width: 25px;
+    height: 30px;
+    right: 3%;
+    bottom: 10%;
+   }
+  .write-here{
+    text-align: center;
+    height: 8rem;
+    background-color: white;
+  }
+  .text-answer-input{
+    text-align: center;
+    background-color: lightgray;
+    border-style: none;
+    width: 80%;
+    height: 50%;
+    margin-top: 1.3rem;
+  }
+  .long-text-answer-input{
+    text-align: center;
+    background-color: lightgray;
+    border-style: none;
+    width: 80%;
+    height: 50%;
+    margin-top: 1.3rem;
+  }
+  .text-counter{
+ 
+    color: gray;
+    text-align: right;
+    margin-right: 2.9rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
+ }
+ .save-question{
+    border-style: none;
+    border-radius: 5px;
+    background-color: #D4ECFF;
+ }
+
+  .create-menu-container{
+    flex: 1;
+    width: 20%;
+    top:30%;
+    bottom: 10%;
+    position: sticky;
+    
+  }
+  .create-menu{
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    background-color: #C4E3FB;
+    width: 15%;
+    margin-top: 1rem;
+    margin-left: 5rem;
+    
+  }
+  .button-container{
+    text-align: center;
+  }
+  
+  .finish-btn{
+    margin-right: 2rem;
+    margin-bottom: 3rem;
+    background-color: #78A5F0;
+    border-style: none;
+    border-radius: 20px;
+    color: white;
+    width: 15%;
+    height: 2.5rem;
+  }
+  .cancel-btn{
+    margin-bottom: 3rem;
+    background-color: lightgray;
+    border-style: none;
+    border-radius: 20px;
+    color: white;
+    width: 15%;
+    height: 2.5rem;
+  }
+  
+
+
+
+
+
+
+
+/* 모달 그룹선택 */
+.choose-group .group-rectangle-white{
+  width: 500px;
+}
+.groups-members-container{
+  height: auto;
+  width: 80%;
+  border-bottom-width: 0;
+  border-bottom-style: solid;
+  border-bottom-color: lightgray;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding-bottom: 0.3rem;
+  margin-bottom: 1%;
+}
+.choose-group .group-member-container{
+  width: 60%;
+  height: 10rem;
+  display: block;
+}
+
+
+
+
+
+
+ 
+.group-select-button-container{
+
+  display: block;
+  text-align: center;
+  padding-top: 10rem;
+  width: 6rem;
+  
+
+ 
+  
+}
+.finish-select{
+
+  background-color: #0077FF;
+  border-style: none;
+  border-radius: 100px;
+  font-family: Archivo, sans-serif;
+  
+}

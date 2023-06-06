@@ -1,7 +1,14 @@
 import "../styles/home.css";
 
+<<<<<<< HEAD
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+=======
+// import "../assets/template/bootstrap.min.css";
+// import "../assets/template/style.css";
+
+import React from "react";
+>>>>>>> upstream/develop
 
 import icLogo from "../assets/ic_logo.png";
 import bgSample from "../assets/bg_sample.jpg";

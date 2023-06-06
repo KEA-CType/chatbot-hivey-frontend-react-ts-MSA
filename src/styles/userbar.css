@@ -13,13 +13,14 @@
     z-index: 1;
 }
 
+
 .logo {
     width: 10vw;
     height: auto;
-
     cursor: pointer;
 
     margin-top: 2rem;
+    
 }
 
 .user-profile {
@@ -34,9 +35,11 @@
     box-shadow: 1px 1px 1px #edeef2;
 
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: flex-start;
     /*background-color: #D4ECFF;*/
+
 
     cursor: default;
 
@@ -90,8 +93,14 @@
     cursor: pointer;
     margin-bottom: 2rem;
 }
+.set{
+    position:absolute;
+    right: 3%;
+    top: 10%;
+}
 
 .user-spaces {
+
     width: 80%;
     height: 23vh;
 

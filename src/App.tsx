@@ -13,7 +13,12 @@ import SpaceEnter from "./pages/space/SpaceEnter";
 import SpaceCreate from "./pages/space/SpaceCreate";
 import SpaceForMember from "./pages/space/SpaceForMember";
 import SpaceForLeader from "./pages/space/SpaceForLeader"
+
+import FormCreate from "./pages/form/FormCreate";
+import FormAnswer from "./pages/form/FormAnswer";
+
 import FormResult from "./pages/form/FormResult";
+
 
 function App() {
 
@@ -24,6 +29,8 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/signup" element={<SignUp/>}/>
+                    <Route path="/form/create" element={<FormCreate/>}/>
+                    <Route path="/form/answer" element={<FormAnswer/>}/>
                     <Route
                         path="/*"
                         element={
