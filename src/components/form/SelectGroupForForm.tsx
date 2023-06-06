@@ -22,22 +22,12 @@ const MemberListByGroup = ({groupId, groups}: any) => {
           (m: any, i: number) => {
 
               return (
-                  <div key={m.memberId} className="group-member-container-by-group"
+                  <div key={m.memberId} className="group-member-container"
                        style={{borderBottomWidth: i === members.length - 1 || members.length === 0 ? "0" : "0.05rem"}}>
 
-                      <div className="group-member-profile-wrapper">
-                          {/* <img className="group-member-profile-img" src={icProfile} alt=""/> */}
-                      </div>
+                      <div className="group-member-id">#{m.memberId}    {m.name}</div>
 
-                      <div className="group-member-id">#{m.memberId}</div>
-
-                      <div className="group-member-name">{m.name}</div>
-
-                      <div className="group-member-email">{m.email}</div>
-
-                      {/*<div className="group-member-kebab-wrapper">*/}
-                      {/*    <img className="group-member-kebab-img" src={icKebabBlack} alt=""/>*/}
-                      {/*</div>*/}
+                      
 
                   </div>
               );

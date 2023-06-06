@@ -149,7 +149,17 @@ const FormCreate = () => {
         }
         
     }
-    
+    const [timeModal,setTimeModal]=useState(false)
+    const checkDate=()=>{
+       
+        if(endDate<=startDate){
+            setTimeModal(true);
+            console.log("안됨 start, end", startDate,endDate);
+        }else{
+            console.log("됨 start, end", startDate,endDate);
+            ClickFinishBtn(questionRequests);
+        }
+    }
     
     
     const MakeMultipleChoiceQuestion=()=>{
@@ -196,25 +206,27 @@ const FormCreate = () => {
                         <div className="question-explain"><input className="explain-input" placeholder="질문 설명을 입력해주세요" value={questionContent} onChange={(e)=>{{setQuestionContent(e.target.value)}}}/></div>
                     </div>
                     <div className="radio-container">
-                {radioOptions.map((option, index) => (
-                <div className="radio-line" key={index}>
-                    <img src={radio_btn} className="radio-btn" alt="radio" />
-                    <input
-                    className="radio-option"
-                    type="text"
-                    value={option}
-                    onChange={(event) => handleRadioOptionChange(index, event.target.value)}
-                    placeholder="질문 제목을 입력해주세요"
+                        {radioOptions.map((option, index) => (
+                        <div className="radio-line" key={index}>
+                            <img src={radio_btn} className="radio-btn" alt="radio" />
+                            <input
+                            className="radio-option"
+                            type="text"
+                            value={option}
+                            onChange={(event) => handleRadioOptionChange(index, event.target.value)}
+                            placeholder="질문 제목을 입력해주세요"
+                            
+                            />
+                        </div>
+                        ))}
+                        <div className="radio-button-container">
+                        <button className="add-radio-option" onClick={handleAddRadioOption}>질문 추가</button> 
+                        {showButton&&<button className="save-question" onClick={handleSaveQuestions}>질문 저장</button>}
+                        </div>
                     
-                    />
-                </div>
-                ))}
-                    <div className="add-radio-option" onClick={handleAddRadioOption}>
-                    질문 추가
                     </div>
-                    {showButton&&<button className="save-question" onClick={handleSaveQuestions}>질문 저장</button>}
-                </div>
                 
+
     </div>
             
         )
@@ -233,10 +245,7 @@ const FormCreate = () => {
             // Find the parent div and remove it
             console.log("remove");
             const questionContainer = document.querySelector('.question-container');
-            // if (questionContainer && questionContainer.parentNode) {
-            //     console.log("removed");
-            //   questionContainer.parentNode.removeChild(questionContainer);
-            // }
+            
 
           };
           const handleSaveQuestions = () => {
@@ -308,7 +317,6 @@ const FormCreate = () => {
                         <input className="long-text-answer-input" type="text" onChange={onInputHandler} maxLength={500}/>
                         <div className="text-counter">{inputCount}/500</div>{showButton&&<button className="save-question" onClick={handleSaveQuestions}>질문 저장</button>}
                         </div>
-                        {showButton&&<button className="save-question" onClick={handleSaveQuestions}>질문 저장</button>}
 
                     </div>
                     
@@ -352,7 +360,7 @@ const SendRequestBody = (questionRequests: any) => {
     if (isSuccess) {
       console.log("생성에 성공하였습니다");
       // navigate("/space/leader" + space.id);
-      // navigate("/space/leader/" + 1);
+      navigate("/space/leader/" + 1);
     } else {
       console.log("생성에 실패하였습니다");
       console.log(message);
@@ -409,7 +417,7 @@ const ClickFinishBtn = (questionRequests: any) => {
                                     locale={ko}
                                     dateFormat="yyyy.MM.dd"
                                     selected={endDate}
-                                    startDate={startDate}
+                                    startDate={startDate ? new Date(startDate.getTime() + 24 * 60 * 60 * 1000) : null}
                                     onChange={(date:Date) => setEndDate(date)}
                                     selectsEnd
                                     minDate={startDate ? new Date(startDate.getTime() + 24 * 60 * 60 * 1000) : null}
@@ -417,7 +425,9 @@ const ClickFinishBtn = (questionRequests: any) => {
                                     endDate={endDate}  
                                 />
                         </div>
-                        
+                        <Modal isOpen={timeModal} onClose={()=>setTimeModal(false)} >
+                            설문 시작시간과 종료시간을 확인해주세요
+                        </Modal>
                     </div>
                     <div className="right-option">
                         
@@ -451,14 +461,14 @@ const ClickFinishBtn = (questionRequests: any) => {
                 </div>
                 <div className="create-menu-container">
                     <div className="create-menu">
-                        <img src={multipleChoice} alt="multipleChoice" onClick={()=>handleAddQuestion(<MakeMultipleChoiceQuestion />)}/>
-                        <img src={shortAnswer} alt="short" onClick={()=>handleAddQuestion(<MakeShortAnswerQuestion />)} />
-                        <img src={longAnswer} alt="long" onClick={()=>handleAddQuestion(<MakeLongAnswerQuestion />)} />
+                        <img className="multiple_choice_img" src={multipleChoice} alt="multipleChoice" onClick={()=>handleAddQuestion(<MakeMultipleChoiceQuestion />)}/>
+                        <img className="short_answer_img" src={shortAnswer} alt="short" onClick={()=>handleAddQuestion(<MakeShortAnswerQuestion />)} />
+                        <img className="long_answer_img"src={longAnswer} alt="long" onClick={()=>handleAddQuestion(<MakeLongAnswerQuestion />)} />
                     </div>
                 </div>
             </div>
             <div className="button-container">
-                <button className="finish-btn" onClick={()=>ClickFinishBtn(questionRequests)}>완료</button>
+                <button className="finish-btn" onClick={checkDate}>완료</button>
                 <button className="cancel-btn" onClick={()=>navigate(-1)}>취소</button>
             </div>
         </div>
