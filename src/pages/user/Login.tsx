@@ -33,7 +33,8 @@ const Login = () => {
     const [isValidAll, setIsValidAll] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [message, setMessage] = useState("");
+    const [modalHeader, setModalHeader] = useState("");
+    const [modalMessage, setModalMessage] = useState("");
 
     const setUser = useSetRecoilState(userState);
 
@@ -89,7 +90,6 @@ const Login = () => {
 
                 if (isSuccess) {
                     // 요청이 성공한 경우
-                    setMessage("로그인에 성공하였습니다.");
 
                     // 받아온 result 값을 파싱해서 전역 상태 관리 변수에 대입한다.
                     setUser({id: userIdx, name: name, email: email});
@@ -97,6 +97,8 @@ const Login = () => {
                     localStorage.setItem("jwt-token", jwtToken);
 
                     setIsModalOpen(true);
+                    setModalHeader("로그인 성공");
+                    setModalMessage("로그인에 성공하였습니다.");
 
                     setTimeout(() => {
                         setIsModalOpen(false);
@@ -106,13 +108,15 @@ const Login = () => {
                 } else {
                     // 요청이 실패한 경우
                     setIsModalOpen(true);
-                    setMessage(message);
+                    setModalHeader("로그인 실패");
+                    setModalMessage("로그인에 실패하였습니다.");
                 }
             })
             .catch((error) => {
                 // console.log(error);
                 setIsModalOpen(true);
-                setMessage("로그인에 실패하였습니다.");
+                setModalHeader("로그인 실패");
+                setModalMessage("로그인에 실패하였습니다.");
             });
     };
 
@@ -180,9 +184,9 @@ const Login = () => {
                             <Modal
                                 isOpen={isModalOpen}
                                 onClose={() => setIsModalOpen(false)}
-                                header={"로그인 성공"}>
+                                header={modalHeader}>
 
-                                <p>{message}</p>
+                                <p>{modalMessage}</p>
 
                             </Modal>
 

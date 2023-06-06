@@ -176,7 +176,11 @@ const SignUp = () => {
                     <Button className="register-form__button" text="Create an account" shape="rounded"/>
                 </form>
             </div>
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                header={""}>
                 <p>{message}</p>
             </Modal>
         </div>
