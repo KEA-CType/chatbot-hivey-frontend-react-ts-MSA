@@ -8,6 +8,8 @@
     justify-content: center;
     align-items: center;
 
+    font-family: Pretendard, sans-serif;
+
     background: url("../assets/bg_gradient_skyblue.png");
 }
 
@@ -16,7 +18,7 @@
     height: 550px;
     background-color: #fff;
     border-radius: 16px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,7 +81,23 @@
     text-decoration: underline;
     padding: 0.6em;
     text-align: right;
+    font-size: 12px;
+    margin-bottom: 1rem;
+}
 
+.login-forgot a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    text-align: right;
+}
+
+.login-forgot a:hover {
+    display: inline-flex;
+    align-items: center;
+    color: #6ABBFA;
+    text-decoration: underline #6ABBFA;
+    text-align: right;
 }
 
 .social-login-container {
@@ -100,7 +118,6 @@
 .social-login-icon-gather {
     margin-top: 20px;
     margin-bottom: 10px;
-
 }
 
 .social-box {
@@ -117,7 +134,6 @@
     height: 80%;
     object-fit: contain;
     border-radius: 8px;
-    /* border: 1px solid transparent; */
     transition: border-color 0.2s ease-in-out;
     display: block;
     margin: auto auto 20px;
@@ -133,4 +149,32 @@
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 8px;
+}
+
+.home-btn {
+    background-color: #C2C2C2;
+    border-radius: 32px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    width: 30%;
+    height: 60%;
+    margin: auto;
+    display: block;
+
+    cursor: pointer;
+}
+
+.home-btn-active {
+    background-color: #0077FF;
+    border-radius: 32px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    width: 30%;
+    height: 60%;
+    margin: auto;
+    display: block;
+
+    cursor: pointer;
 }
