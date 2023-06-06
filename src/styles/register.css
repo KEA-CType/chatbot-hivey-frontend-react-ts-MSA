@@ -5,12 +5,21 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #D4ECFF;
+
+    /*background-color: #D4ECFF;*/
+    background: url("../assets/bg_gradient_skyblue.png");
+
     display: flex;
     justify-content: center;
     align-items: center;
 
     font-family: Pretendard, sans-serif;
+
+    -webkit-user-drag: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 input::placeholder {
@@ -24,7 +33,7 @@ input::placeholder {
     background-color: #fff;
 
     border-radius: 16px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,6 +46,14 @@ input::placeholder {
 .register-logo {
     width: 20%;
     height: 7%;
+
+    cursor: pointer;
+
+    -webkit-user-drag: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 .register-ment {
@@ -69,6 +86,7 @@ a:hover {
     justify-content: center;
     align-items: center;
 
+    margin-top: 1rem;
     margin-bottom: 1rem;
 }
 

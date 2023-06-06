@@ -35,6 +35,9 @@ const SignUp = () => {
     const [modalHeader, setModalHeader] = useState("");
     const [modalMessage, setModalMessage] = useState("");
 
+    /**
+     * 입력이 완료된 후 버튼 활성화를 위한 부분
+     */
     useEffect(() => {
 
         if (isValidEmail && isValidName && isValidPassword && isValidConfirmPassword) {
@@ -44,6 +47,13 @@ const SignUp = () => {
         }
 
     }, [isValidEmail, isValidName, isValidPassword, isValidConfirmPassword]);
+
+    /**
+     * 로고 이미지를 클릭했을 때 로그인 페이지로 이동하도록 한다.
+     */
+    const handleClickLogo = () => {
+        navigate("/login");
+    }
 
     /**
      * 이메일을 입력받을 때 사용한다.
@@ -122,6 +132,8 @@ const SignUp = () => {
             .then((response) => {
                 const {isSuccess, message} = response;
 
+                console.log(`message: ${message}`);
+
                 if (isSuccess) {
 
                     setIsModalOpen(true);
@@ -139,6 +151,10 @@ const SignUp = () => {
                     setEmail("");
                     setPassword("");
                     setConfirmPassword("");
+
+                    setIsModalOpen(true);
+                    setModalHeader("회원 가입 실패");
+                    setModalMessage(message);
 
                 }
             })
@@ -193,7 +209,7 @@ const SignUp = () => {
     return (
         <motion.div className="register-container" style={{y: 100}} animate={{y: 0}}>
             <div className="register-box">
-                <img className="register-logo" src={logo} alt="Logo"/>
+                <img className="register-logo" src={logo} alt="Logo" onClick={handleClickLogo}/>
                 <div className="logo-ment">Create an account</div>
                 <div className="register-ment">Already have an account? <a href="/user/Login">Log in</a></div>
 

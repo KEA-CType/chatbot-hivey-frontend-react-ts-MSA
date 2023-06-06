@@ -7,7 +7,7 @@ import {AUTH} from "../../commons/constants";
 const Register = async (email: string, userName: string, password: string) => {
     try {
 
-        const response = await instances.INSTANCE.post(`${AUTH}`, {
+        const response = await instances.INSTANCE.post(`${AUTH}/register`, {
             email: email,
             name: userName,
             password: password,
