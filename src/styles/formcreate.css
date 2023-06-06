@@ -1,6 +1,6 @@
 body{
     background-color: #D4ECFF;
-    font-family: Archivo, sans-serif;
+   
     
 }
 .form-container {
@@ -27,6 +27,7 @@ body{
     width: 80%;
     border: black solid;
     align-items: center;
+    font-family: Archivo, sans-serif;
 }
 .survey-title-input{
   border-style: none;
@@ -53,6 +54,7 @@ body{
   font-size: 1.5rem;
   background-color: white;
   text-align: center;
+  font-family: Pretendard, sans-serif;
 }
 .survey-explain-input::placeholder{
   font-size: 1rem;
@@ -203,11 +205,21 @@ body{
 .radio-line input{
   border-style: none;
 }
-.add-radio-option{
-  color: gray;
+.radio-button-container{
   text-align: right;
+  justify-content: right;
+  display: flex;
+  flex-direction: column;
+  padding-left: 80%;
+  margin-bottom: 1rem;
+}
+.add-radio-option{
+  background-color: white;
+  border-style: none;
+  color: gray;
+  font-weight: 400;
   padding-right: 1rem;
-  font-family: Pretendard sans-serif;
+  font-family: Pretendard, sans-serif;
 }
   .text-answer{
     position: relative;
@@ -252,8 +264,13 @@ body{
  }
  .save-question{
     border-style: none;
-    border-radius: 5px;
+    border-radius: 7px;
     background-color: #D4ECFF;
+    float: right;
+    margin-right: 1rem;
+    width: 103px;
+    font-family: Pretendard, sans-serif;
+    
  }
 
   .create-menu-container{
@@ -268,12 +285,18 @@ body{
     text-align: center;
     display:flex;
     flex-direction: column;
-    background-color: #C4E3FB;
-    width: 15%;
+    width: 10%;
     margin-top: 1rem;
     margin-left: 5rem;
     
   }
+.multiple_choice_img{
+  border-bottom: #D4ECFF solid;
+}
+.short_answer_img{
+  border-bottom: #D4ECFF solid;
+}
+
   .button-container{
     text-align: center;
   }
@@ -285,8 +308,9 @@ body{
     border-style: none;
     border-radius: 20px;
     color: white;
-    width: 15%;
+    width: 13%;
     height: 2.5rem;
+    font-family: Pretendard, sans-serif;
   }
   .cancel-btn{
     margin-bottom: 3rem;
@@ -294,8 +318,9 @@ body{
     border-style: none;
     border-radius: 20px;
     color: white;
-    width: 15%;
+    width: 13%;
     height: 2.5rem;
+    font-family: Pretendard, sans-serif;
   }
   
 
@@ -327,7 +352,7 @@ body{
 .choose-group .group-member-container{
   width: 60%;
   height: 10rem;
-  display: block;
+
 }
 
 
@@ -352,6 +377,5 @@ body{
   background-color: #0077FF;
   border-style: none;
   border-radius: 100px;
-  font-family: Archivo, sans-serif;
   
 }
