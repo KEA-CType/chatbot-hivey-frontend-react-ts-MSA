@@ -21,6 +21,7 @@ import {
     FormListResponse
 } from "../../commons/interfaces/commonInterface";
 import FormBoardForMember from "../../components/space/FormBoardForMember";
+import ChatbotForMember from "../../components/chatbot/ChatbotForMember";
 
 const SpaceInformationComponent = ({spaceOnly, forms}: any) => {
     const navigate = useNavigate();
@@ -30,15 +31,18 @@ const SpaceInformationComponent = ({spaceOnly, forms}: any) => {
         return <></>;
     }
 
+    console.log(`spaceOnly.img: ${spaceOnly.img}`);
+
     return (
         <div id="space-container" className="space-container">
             {/* 스페이스에 대한 정보 */}
             <motion.div className="space-rectangle-white" style={{y: 100}} animate={{y: 0}}>
                 <div className="space-img-wrapper">
-                    <img className="space-img" src={icLogoSample} alt=""/>
+                    <img className="space-img" src={spaceOnly.img === null || `${spaceOnly.img}` === "" || `${spaceOnly.img}` === "null" ? icLogoSample : spaceOnly.img} alt=""/>
+                    {/*<img className="space-img" src={icLogoSample} alt=""/>*/}
                 </div>
                 <div className="space-title">{spaceOnly.name}</div>
-                <div className="space-membercount">{spaceOnly.memberCount} / 50</div>
+                {/*<div className="space-membercount">{spaceOnly.memberCount} / 50</div>*/}
             </motion.div>
 
             <motion.div className="space-content-container" style={{y: 100}} animate={{y: 0}}>
@@ -70,9 +74,12 @@ const SpaceForMember = () => {
 
                 const result = JSON.parse(response).result;
 
+                const file = `${process.env.PUBLIC_URL}${result.img}`;
+
                 setSpaceOnly({
-                    name: result.name, img: result.img, memberCount: result.memberCount
+                    name: result.name, img: file, memberCount: result.memberCount
                 });
+
                 setForms(result.forms);
 
             })
@@ -84,6 +91,8 @@ const SpaceForMember = () => {
     return (
         <div>
             <SpaceInformationComponent spaceOnly={spaceOnly} forms={forms}/>
+
+            <ChatbotForMember/>
         </div>
     );
 };

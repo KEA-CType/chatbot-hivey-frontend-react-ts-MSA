@@ -85,7 +85,7 @@ const EnterSpace = async (userId: number, accessCode: string) => {
 const GetAllGroupList = async (spaceId: number) => {
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups`);
         return response.data;
 
     } catch (error) {
@@ -102,7 +102,7 @@ const GetAllGroupList = async (spaceId: number) => {
 const GetAllGroupAndMemberList = async (spaceId: number) => {
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups/members`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups/members`);
         return response.data;
 
     } catch (error) {
@@ -118,7 +118,7 @@ const GetAllGroupAndMemberList = async (spaceId: number) => {
 const GetMemberListByGroup = async (spaceId: number, groupId: number) => {
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups/${groupId}`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups/${groupId}`);
         return response.data;
 
     } catch (error) {
@@ -152,7 +152,7 @@ const CreateSurvey = async (spaceId: number, userId: number) => {
 const CreateDetailedSurvey = async (formId: number, requestBody: any) => {
     try {
 
-        const response = await instances.INSTANCE.patch(`${SFORM}/forms/${formId}`, {
+        const response = await instances.AUTH_INSTANCE.patch(`${SFORM}/forms/${formId}`, {
             title: requestBody.title,
             content: requestBody.content,
             startDate: requestBody.startDate,
@@ -195,7 +195,7 @@ const GetFormList = async (spaceId: number, userId: number) => {
 const GetSubmissionListByForm = async (formId: number) => {
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/forms/${formId}/members`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}/members`);
         return response.data;
 
     } catch (error) {
@@ -212,7 +212,7 @@ const GetSubmissionListByForm = async (formId: number) => {
 const GetTargetGroupsByForm = async (formId: number) => {
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/forms/${formId}/groups`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}/groups`);
         return response.data;
 
     } catch (error) {
@@ -229,7 +229,7 @@ const GetTargetGroupsByForm = async (formId: number) => {
 const GetMandatoryOrNotByForm = async (formId: number) => {
     try {
 
-        const response = await instances.INSTANCE(`${SFORM}/forms/${formId}/option`);
+        const response = await instances.AUTH_INSTANCE(`${SFORM}/forms/${formId}/option`);
         return response.data;
 
     } catch (error) {
@@ -245,7 +245,7 @@ const GetMandatoryOrNotByForm = async (formId: number) => {
  */
 const GetFormInfomation = async (formId: number) => {
     try {
-        const response = await instances.INSTANCE.get(`${SFORM}/forms/${formId}`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}`);
         return response.data;
     } catch (error) {
         console.error(error);
@@ -272,6 +272,25 @@ const GetFormResult = async (formId: string) => {
 
 }
 
+/**
+ *
+ */
+const GetSubmissionByUser = async (formId: number, userId: number) => {
+
+    try {
+
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}/${userId}/submission`);
+        return response.data;
+
+    } catch (error) {
+
+        console.error(error);
+        throw new Error("해당 설문의 참여 여부를 불러오지 못하였습니다.");
+
+    }
+
+}
+
 const sformService = {
     CreateSpace,
     GetSpaceList,
@@ -288,6 +307,7 @@ const sformService = {
     GetMandatoryOrNotByForm,
     GetFormInfomation,
     GetFormResult,
+    GetSubmissionByUser,
 }
 
 export default sformService;

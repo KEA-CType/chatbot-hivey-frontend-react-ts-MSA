@@ -1,6 +1,6 @@
 .chatbot {
     cursor: pointer;
-    bottom: 1rem;
+    bottom: 2rem;
     right: 1rem;
     width: 5rem;
     position: fixed;
@@ -10,7 +10,7 @@
     cursor: pointer;
     right: 2rem;
     width: 3rem;
-    bottom: 7rem;
+    bottom: 8rem;
     position: fixed;
 }
 
@@ -24,7 +24,6 @@
     right: 7rem;
     bottom: 7rem;
 }
-
 
 .option {
     cursor: pointer;

@@ -287,8 +287,8 @@
 
 .form-result-answer-title {
     color: black;
-    font-family: Archivo, sans-serif;
-    font-size: 36px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 24px;
     font-weight: bolder;
 
     margin-top: 1rem;
@@ -297,12 +297,12 @@
 
 .form-result-answer-content {
     color: lightgray;
-    font-family: Archivo, sans-serif;
-    font-size: 18px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 16px;
     font-weight: bold;
 
     margin-top: 0.5rem;
-    margin-left: 5rem;
+    margin-left: 6rem;
 }
 
 .multiple-answer-container {

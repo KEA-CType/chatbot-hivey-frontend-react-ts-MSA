@@ -30,6 +30,8 @@ export interface FormListResponse {
     title: string;
     startDate: Date;
     endDate: Date;
+    target: boolean;
+    submit: boolean;
 }
 
 export interface GroupListResponse {
