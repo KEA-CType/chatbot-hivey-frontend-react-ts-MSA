@@ -31,8 +31,6 @@ const SpaceInformationComponent = ({spaceOnly, forms}: any) => {
         return <></>;
     }
 
-    console.log(`spaceOnly.img: ${spaceOnly.img}`);
-
     return (
         <div id="space-container" className="space-container">
             {/* 스페이스에 대한 정보 */}

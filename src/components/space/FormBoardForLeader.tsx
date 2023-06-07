@@ -25,7 +25,6 @@ const FormListComponent = ({forms}: any) => {
     const space = useRecoilValue(spaceState);
 
     const [formsByStatus, setFormsByStatus] = useState(Array);
-    const [isTarget, setIsTarget] = useState(false);
 
     const setFormId = useSetRecoilState(formIdState);
     const setSelectedFormId = useSetRecoilState(selectedFormIdState);
@@ -108,16 +107,6 @@ const FormListComponent = ({forms}: any) => {
                                 <div className="formboard-form-information-title">{f.title}</div>
                                 <div
                                     className="formboard-form-information-date">~{(moment(f.endDate)).format('YYYY.MM.DD')}</div>
-                            </div>
-
-                            <div className="formboard-form-icon-wrapper"
-                                 style={{marginLeft: "1rem"}}>
-                                <img className="formboard-form-right-icon-img" src={icUsersGray} alt=""/>
-                            </div>
-
-                            <div className="formboard-form-icon-wrapper"
-                                 style={{marginLeft: "0rem"}}>
-                                <img className="formboard-form-right-icon-img" src={icChartPieSliceGray} alt=""/>
                             </div>
 
                         </div>
