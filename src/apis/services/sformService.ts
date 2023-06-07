@@ -1,8 +1,8 @@
 import instances from "../instance";
 import {SFORM} from "../../commons/constants";
-import {SpaceInformationResponse} from "../../commons/interfaces/Interface";
+import {SpaceInformationResponse} from "../../commons/interfaces/commonInterface";
 
-import {CommonResponse} from "../interfaces/commonResponse";
+import {CommonResponse} from "../../commons/interfaces/commonResponse";
 
 /**
  * 스페이스 생성하기
@@ -256,11 +256,11 @@ const GetFormInfomation = async (formId: number) => {
 /**
  * 설문 결과 보기
  */
-const GetFormResult = async (formId: number) => {
+const GetFormResult = async (formId: string) => {
 
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/forms/${formId}/result`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}/result`);
         return response.data;
 
     } catch (error) {

@@ -3,7 +3,7 @@ import {useRecoilValue} from "recoil";
 
 import {selectedFormIdState} from "../../commons/Atom";
 import sformService from "../../apis/services/sformService";
-import {SubmissionListResponse, TargetGroupListResponse} from "../../commons/interfaces/Interface";
+import {SubmissionListResponse, TargetGroupListResponse} from "../../commons/interfaces/commonInterface";
 
 import icCheckCircleGreen from "../../assets/ic_check_circle_green.png";
 import icCheckNotCircleRed from "../../assets/ic_check_not_circle_red.png";

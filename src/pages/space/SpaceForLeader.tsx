@@ -25,7 +25,7 @@ import {
     SpaceOnly,
     FormListResponse,
     GroupListResponse
-} from "../../commons/interfaces/Interface";
+} from "../../commons/interfaces/commonInterface";
 
 const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
     const navigate = useNavigate();

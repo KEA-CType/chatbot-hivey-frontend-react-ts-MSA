@@ -29,16 +29,6 @@ const storage = multer.diskStorage({
     },
 });
 
-// fileFilter: (req, file, callback) => {
-//     const ext = path.extname(file.originalname);
-//
-//     if (ext !== ".png" && ext !== ".jpg" && ext !== ".jpeg") {
-//         return callback(new Error("Only .png, .jpg and .jpeg format allowed!"));
-//     }
-//
-//     callback(null, true);
-// }
-
 const upload = multer({ storage: storage }).single("file");
 
 /**

@@ -57,6 +57,7 @@ const FormListComponent = ({forms}: any) => {
                  */
                 const handleFormResult = (e: any) => {
                     e.stopPropagation();
+                    console.log(`spaceId: ${space.id}, formId: ${f.formId}`);
                     navigate(`/space/${space.id}/form/${f.formId}/result`);
                 }
 
