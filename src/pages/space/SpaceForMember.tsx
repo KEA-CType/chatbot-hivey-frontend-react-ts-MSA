@@ -19,7 +19,7 @@ import {motion} from "framer-motion"
 import {
     SpaceOnly,
     FormListResponse
-} from "../../commons/interfaces/Interface";
+} from "../../commons/interfaces/commonInterface";
 import FormBoardForMember from "../../components/space/FormBoardForMember";
 
 const SpaceInformationComponent = ({spaceOnly, forms}: any) => {

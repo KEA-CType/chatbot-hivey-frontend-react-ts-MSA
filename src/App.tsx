@@ -30,6 +30,7 @@ function App() {
                     <Route path="/signup" element={<SignUp/>}/>
                     <Route path="/form/create" element={<FormCreate/>}/>
                     <Route path="/form/answer" element={<FormAnswer/>}/>
+                    <Route path="/space/:spaceId/form/:formId/result" element={<FormResult/>}/>
                     <Route
                         path="/*"
                         element={
@@ -43,7 +44,6 @@ function App() {
                                         <Route path="/space/member/:spaceId" element={<SpaceForMember/>}/>
                                         <Route path="/space/leader/:spaceId" element={<SpaceForLeader/>}/>
                                         <Route path="/refresh" element={<Refresh/>}/>
-                                        <Route path="/space/:spaceId/form/:formId/result" element={<FormResult spaceId={0} formId={0}/>}/>
                                     </Routes>
                                 </div>
                             </div>

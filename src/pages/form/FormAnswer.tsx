@@ -7,7 +7,7 @@ import Modal from "../../components/commons/Modal";
 import ShowForm from "../../components/form/ShowForm";
 
 import {selectedFormIdState, userState} from '../../commons/Atom';
-import {FormAnswerResponse} from "../../commons/interfaces/Interface";
+import {FormAnswerResponse} from "../../commons/interfaces/commonInterface";
 
 import {json} from "stream/consumers";
 

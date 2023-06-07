@@ -1,6 +1,6 @@
 import "../../styles/formcreate.css"
 
-import {FormCreateRequest} from "../../commons/interfaces/Interface";
+import {FormCreateRequest} from "../../commons/interfaces/commonInterface";
 
 import React, {useState, useEffect, ReactElement} from "react";
 import {useNavigate} from "react-router-dom";
