@@ -6,7 +6,7 @@ import {useEffect, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 import {useNavigate, useParams} from "react-router-dom";
 
-import spaceService from "../../services/space/space";
+import sformService from "../../apis/services/sformService";
 import {spaceState, userState} from '../../commons/Atom';
 import PropTypes from "prop-types";
 
@@ -19,7 +19,7 @@ import {motion} from "framer-motion"
 import {
     SpaceOnly,
     FormListResponse
-} from "../../commons/Interface";
+} from "../../commons/interfaces/Interface";
 import FormBoardForMember from "../../components/space/FormBoardForMember";
 
 const SpaceInformationComponent = ({spaceOnly, forms}: any) => {
@@ -63,7 +63,8 @@ const SpaceForMember = () => {
     const [forms, setForms] = useState<FormListResponse | null>(null);
 
     useEffect(() => {
-        spaceService
+
+        sformService
             .GetSpace(user.id, spaceId !== undefined ? spaceId : (space.id).toString())
             .then((response) => {
 

@@ -1,15 +1,15 @@
 export const botSteps = [
     {
         id: '1',
-        message: 'Welcome to our survey space website. Our chatbot is here to help you with any questions or concerns you may have. How can we assist you?',
+        message: 'Welcome to our survey sform website. Our chatbot is here to help you with any questions or concerns you may have. How can we assist you?',
         trigger: 'assist_options',
     },
     {
         id: 'assist_options',
         options: [
             {value: 'about_site', label: 'What this site is about?', trigger: 'about_site'},
-            {value: 'make_space', label: 'How to make new space?', trigger: 'make_space'},
-            {value: 'invite_member', label: 'How to invite member to my space?', trigger: 'invite_member'},
+            {value: 'make_space', label: 'How to make new sform?', trigger: 'make_space'},
+            {value: 'invite_member', label: 'How to invite member to my sform?', trigger: 'invite_member'},
             {value: 'make_survey', label: 'How to make survey?', trigger: 'make_survey'},
             {value: 'call_developer', label: 'I have another question', trigger: 'call_developer'},
         ],
@@ -21,22 +21,22 @@ export const botSteps = [
     },
     {
         id: 'make_space',
-        message: 'To make a new space, go to the main page and click the "Add Space" button. From there, you can customize your space and invite members to join.',
+        message: 'To make a new sform, go to the main page and click the "Add Space" button. From there, you can customize your sform and invite members to join.',
         trigger: 'assist_options',
     },
     {
         id: 'invite_member',
-        message: 'To invite members to your space, go to your space and click the "Invite Members" button. From there, you can enter their email addresses and send out invitations.',
+        message: 'To invite members to your sform, go to your sform and click the "Invite Members" button. From there, you can enter their email addresses and send out invitations.',
         trigger: 'assist_options',
     },
     {
         id: 'make_survey',
-        message: 'To create a survey, go to your space and click the "Create Survey" button. From there, you can customize your survey and send it out to members.',
+        message: 'To create a survey, go to your sform and click the "Create Survey" button. From there, you can customize your survey and send it out to members.',
         trigger: 'assist_options',
     },
     {
         id: 'survey_results',
-        message: 'To check survey results, go to your space and click the "View Results" button. From there, you can see responses and analyze data.',
+        message: 'To check survey results, go to your sform and click the "View Results" button. From there, you can see responses and analyze data.',
         trigger: 'assist_options',
     },
     {

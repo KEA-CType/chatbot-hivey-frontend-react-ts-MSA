@@ -13,11 +13,11 @@ import {useSetRecoilState} from "recoil";
 import Button from "../../components/commons/buttons";
 import Input from "../../components/commons/input";
 import Modal from "../../components/commons/Modal";
-
 import {userState} from "../../commons/Atom";
+
 import {motion} from "framer-motion";
 
-import authService from "../../services/user/auth";
+import userService from "../../apis/services/userService";
 
 import {validateEmail} from "../../utils/validationTest";
 
@@ -80,40 +80,34 @@ const Login = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
-        authService
+        userService
             .Login(email, password)
             .then((response) => {
 
+                console.log(`headers: ${response.headers}`);
+
                 // 위의 함수에서 response.data를 받아온다.
-                const {isSuccess, message} = response;
-                const {userIdx, name, jwtToken} = response.result;
+                const token = response.headers["token"];
+                const userId = response.headers["userid"];
 
-                if (isSuccess) {
-                    // 요청이 성공한 경우
+                console.log(`token: ${token}, userId: ${userId}`);
 
-                    // 받아온 result 값을 파싱해서 전역 상태 관리 변수에 대입한다.
-                    setUser({id: userIdx, name: name, email: email});
+                // 받아온 result 값을 파싱해서 전역 상태 관리 변수에 대입한다.
+                setUser({id: userId, name: "", email: email});
 
-                    localStorage.setItem("jwt-token", jwtToken);
+                localStorage.setItem("jwt-token", token);
 
-                    setIsModalOpen(true);
-                    setModalHeader("로그인 성공");
-                    setModalMessage("로그인에 성공하였습니다.");
+                setIsModalOpen(true);
+                setModalHeader("로그인 성공");
+                setModalMessage("로그인에 성공하였습니다.");
 
-                    setTimeout(() => {
-                        setIsModalOpen(false);
-                        navigate("/main");
-                    }, 2000);
+                setTimeout(() => {
+                    setIsModalOpen(false);
+                    navigate("/main");
+                }, 2000);
 
-                } else {
-                    // 요청이 실패한 경우
-                    setIsModalOpen(true);
-                    setModalHeader("로그인 실패");
-                    setModalMessage("로그인에 실패하였습니다.");
-                }
             })
             .catch((error) => {
-                // console.log(error);
                 setIsModalOpen(true);
                 setModalHeader("로그인 실패");
                 setModalMessage("로그인에 실패하였습니다.");

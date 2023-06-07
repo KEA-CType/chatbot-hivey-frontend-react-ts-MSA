@@ -1,5 +1,5 @@
 import {atom} from "recoil";
-import {User, Space} from "./Interface";
+import {User, Space} from "./interfaces/Interface";
 import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();

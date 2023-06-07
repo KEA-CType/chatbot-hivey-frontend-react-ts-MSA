@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-
-
 const MemberListByGroup = ({groupId, groups}: any) => {
   const [membersByGroup, setMembersByGroup] = useState(Array);
   console.log("groupId",groups);

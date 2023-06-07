@@ -1,6 +1,6 @@
 import "../../styles/enterspace.css";
 
-import React, {useState, MouseEvent} from "react";
+import React, {useState} from "react";
 import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 
 import Button from "../../components/commons/buttons";
@@ -9,7 +9,7 @@ import Modal from "../../components/commons/Modal";
 import ChatbotForMember from "../../components/chatbot/ChatbotForMember";
 
 import {userState, spaceState, memberIdState} from "../../commons/Atom";
-import spaceService from "../../services/space/space";
+import sformService from "../../apis/services/sformService";
 
 import icLogoHivey from "../../assets/ic_logo_hivey.png";
 import {validateAccessCode} from "../../utils/validationTest";
@@ -62,7 +62,20 @@ const EnterSpaceComponent = () => {
             return;
         }
 
-        spaceService
+        /**
+         * 스페이스 참여하기
+         *
+         * {
+         *     "isSuccess": true,
+         *     "code": 1000,
+         *     "message": "요청에 성공하였습니다.",
+         *     "result": {
+         *         "spaceId": 1,
+         *         "memberId": 2
+         *     }
+         * }
+         */
+        sformService
             .EnterSpace(user.id, accessCode)
             .then((response: any) => {
 

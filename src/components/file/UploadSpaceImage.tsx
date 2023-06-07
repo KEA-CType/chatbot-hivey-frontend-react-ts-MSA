@@ -7,7 +7,7 @@ import imgSampleWhite from "../../assets/img_sample_white.png";
  */
 const UploadSpaceImage = () => {
     const imgInputRef = useRef<HTMLInputElement | null>(null);
-    const previewImgContainer = document.querySelector(".create-space-preview-img") as HTMLElement;
+    const previewImgContainer = document.querySelector(".create-sform-preview-img") as HTMLElement;
     const [imgFileUrl, setImgFileUrl] = useState("");
 
     const fileTypes = [

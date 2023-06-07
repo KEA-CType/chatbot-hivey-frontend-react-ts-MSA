@@ -1,13 +1,13 @@
-import instances from "../axiosInstance";
-import {AUTH} from "../../commons/constants";
+import instances from "../instance";
+import {USER} from "../../commons/constants";
 
 /**
- * 2.1 회원가입
+ * 회원 가입
  */
 const Register = async (email: string, userName: string, password: string) => {
     try {
 
-        const response = await instances.INSTANCE.post(`${AUTH}/register`, {
+        const response = await instances.INSTANCE.post(`${USER}/auth`, {
             email: email,
             name: userName,
             password: password,
@@ -24,16 +24,15 @@ const Register = async (email: string, userName: string, password: string) => {
 };
 
 /**
- * 2.2 로그인
+ * 로그인
  */
 const Login = async (email: string, password: string) => {
     try {
-        const response = await instances.INSTANCE.post(`${AUTH}/login`, {
+
+        return await instances.INSTANCE.post(`/user-service/login`, {
             email: email,
             password: password,
         });
-
-        return response.data;
 
     } catch (error) {
 
@@ -43,9 +42,9 @@ const Login = async (email: string, password: string) => {
     }
 };
 
-const authService = {
+const userService = {
     Register,
     Login
 }
 
-export default authService;
+export default userService;

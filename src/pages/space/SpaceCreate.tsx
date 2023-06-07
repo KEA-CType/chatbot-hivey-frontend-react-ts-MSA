@@ -2,9 +2,9 @@ import "../../styles/createspace.css";
 
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useRecoilState, useRecoilValue} from "recoil";
 
 import {userState, spaceState} from "../../commons/Atom";
-import {useRecoilState, useRecoilValue} from "recoil";
 
 import Button from "../../components/commons/buttons";
 import Input from "../../components/commons/input";
@@ -14,8 +14,8 @@ import ChatbotForMember from "../../components/chatbot/ChatbotForMember";
 import icLogoHivey from "../../assets/ic_logo_hivey.png";
 import imgSampleWhite from "../../assets/img_sample_white.png";
 
-import uploadImgService from "../../services/file/uploadFileService";
-import spaceService from "../../services/space/space";
+import uploadImgService from "../../apis/services/uploadFileService";
+import sformService from "../../apis/services/sformService";
 import {validateSpaceName} from "../../utils/validationTest";
 
 /**
@@ -93,7 +93,7 @@ const CreateSpaceComponent = () => {
         setIsValidName(validateSpaceName(value));
 
         if (!isValidName) {
-            setNotValidNameMessage("Please write 4 to 20 characters including korean, english, and space.");
+            setNotValidNameMessage("Please write 4 to 20 characters including korean, english, and sform.");
         } else {
             setNotValidNameMessage("");
         }
@@ -114,11 +114,24 @@ const CreateSpaceComponent = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
-        spaceService
+        /**
+         * 스페이스 생성하기
+         * {
+         *     "isSuccess": true,
+         *     "code": 1000,
+         *     "message": "요청에 성공하였습니다.",
+         *     "result": {
+         *         "spaceId": 1,
+         *         "accessCode": "2cG1ScrcVy"
+         *     }
+         * }
+         */
+        sformService
             .CreateSpace(user.id, spaceName, spaceImgUrl)
             .then((response) => {
 
                 const {spaceId, accessCode} = response.result;
+
                 setSpace({id: spaceId, name: spaceName});
                 setAccessCode(accessCode);
 

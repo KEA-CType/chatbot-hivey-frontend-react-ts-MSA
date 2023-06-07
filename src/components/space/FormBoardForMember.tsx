@@ -15,7 +15,7 @@ import icFormboardNotstarted from "../../assets/ic_formboard_notstarted.png";
 import icCheckCircleGreen from "../../assets/ic_check_circle_green.png";
 import icChartPieSliceGray from "../../assets/ic_chart_pie_slice_gray.png";
 
-import {formIdState, selectedFormIdState} from "../../commons/Atom";
+import {formIdState} from "../../commons/Atom";
 
 const FormListComponent = ({forms}: any) => {
     const [formsByStatus, setFormsByStatus] = useState(Array);
