@@ -11,6 +11,12 @@ import profile3 from "../assets/profile_maseunghee.png";
 import profile4 from "../assets/profile_leejiyeon.png";
 import profile5 from "../assets/profile_choiminji.png";
 
+import screenshot1 from "../assets/screenshot_createspace.png";
+import screenshot2 from "../assets/screenshot_sidebar.png";
+import screenshot3 from "../assets/screenshot_createsurvey.png";
+import screenshot4 from "../assets/screenshot_kanbanboard.png";
+import screenshot5 from "../assets/screenshot_formresult.png";
+
 const Home = () => {
     const navigate = useNavigate();
 
@@ -196,7 +202,7 @@ const Home = () => {
 
                                     </div>
 
-                                    <img className="home-service-img" style={{marginLeft: "3rem"}} src={bgSample}
+                                    <img className="home-service-img" style={{marginLeft: "3rem"}} src={screenshot1}
                                          alt="service"/>
 
                                 </div>
@@ -204,7 +210,7 @@ const Home = () => {
                                 {/* #2 */}
                                 <div className={`home-service-row-reverse ${scroll >= 4 ? "visible" : "invisible"}`}>
 
-                                    <img className="home-service-img" style={{marginRight: "5rem"}} src={bgSample}
+                                    <img className="home-service-img" style={{marginRight: "5rem"}} src={screenshot2}
                                          alt="service"/>
 
                                     <div className="home-service-column">
@@ -241,7 +247,7 @@ const Home = () => {
 
                                     </div>
 
-                                    <img className="home-service-img" style={{marginLeft: "3rem"}} src={bgSample}
+                                    <img className="home-service-img" style={{marginLeft: "3rem"}} src={screenshot3}
                                          alt="service"/>
 
                                 </div>
@@ -249,7 +255,7 @@ const Home = () => {
                                 {/* #4 */}
                                 <div className={`home-service-row-reverse ${scroll >= 6 ? "visible" : "invisible"}`}>
 
-                                    <img className="home-service-img" style={{marginRight: "5rem"}} src={bgSample}
+                                    <img className="home-service-img" style={{marginRight: "5rem"}} src={screenshot4}
                                          alt="service"/>
 
                                     <div className="home-service-column">
@@ -285,7 +291,7 @@ const Home = () => {
 
                                     </div>
 
-                                    <img className="home-service-img" style={{marginLeft: "3rem"}} src={bgSample}
+                                    <img className="home-service-img" style={{marginLeft: "3rem"}} src={screenshot5}
                                          alt="service"/>
 
                                 </div>
