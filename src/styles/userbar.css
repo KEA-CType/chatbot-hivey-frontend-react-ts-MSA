@@ -14,9 +14,10 @@
 
     font-family: Pretendard, sans-serif;
 
+    margin-top: 3rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
     padding-bottom: 2rem;
-
-    margin: 3rem;
 }
 
 .logo {

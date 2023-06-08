@@ -17,7 +17,6 @@ import imgSampleWhite from "../../assets/img_sample_white.png";
 import uploadImgService from "../../apis/services/uploadFileService";
 import sformService from "../../apis/services/sformService";
 import {validateSpaceName} from "../../utils/validationTest";
-import {m} from "framer-motion";
 
 /**
  * 스페이스 생성 시 사용하는 입력 양식 컴포넌트

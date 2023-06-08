@@ -2,26 +2,24 @@ import "../styles/userbar.css";
 
 import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
-import {userState, spaceState} from "../commons/Atom";
 import {useRecoilState, useRecoilValue} from "recoil";
 
+import PropTypes from "prop-types";
+
+import Modal from "./commons/Modal";
+import {userState, spaceState} from "../commons/Atom";
+import {UserInfoResponse} from "../commons/interfaces/userResponse";
+
 import spaceService from "../apis/services/sformService";
-import setting from "../assets/ic_setting_gray.png";
+import userService from "../apis/services/userService";
+
 import profile from "../assets/ic_profile.png";
 import icLogoHiVey from "../assets/ic_logo_hivey.png";
 import label from "../assets/ic_label_white.png";
 import icLogoSample from "../assets/ic_logo_sample.png";
-
 import icLogoutGray from "../assets/ic_logout_gray.png";
 import icLogoutBlack from "../assets/ic_logout_black.png";
 import icSettingGray from "../assets/ic_setting_gray.png";
-import userService from "../apis/services/userService";
-
-import {UserInfoResponse} from "../commons/interfaces/userResponse";
-import Modal from "./commons/Modal";
-
 
 const SpaceListComponent = ({spaces, isManager}: any) => {
     const [space, setSpace] = useRecoilState(spaceState);
@@ -43,8 +41,6 @@ const SpaceListComponent = ({spaces, isManager}: any) => {
 
             const newList = filteredList.map(
                 (s: any) => {
-
-                    // s.spaceId === space.id ? setStyle("space-item-container-clicked") : setStyle("space-item-container");
 
                     // 목록에 있는 각 스페이스를 클릭했을 때 해당 스페이스로 이동하도록 한다.
 
@@ -135,6 +131,10 @@ const Userbar = () => {
         navigate("/login");
     }
 
+    const handleClickSetting = () => {
+        navigate("/user/setting");
+    }
+
     useEffect(() => {
 
         userService
@@ -158,7 +158,6 @@ const Userbar = () => {
         spaceService
             .GetSpaceList(user.id)
             .then((response) => {
-                const {code} = response;
 
                 setSpaceList(response.result);
 
@@ -188,7 +187,7 @@ const Userbar = () => {
                     <div className="user-name">{userInfo?.name}</div>
                     <div className="user-email">{userInfo?.email}</div>
                 </div>
-                <img className="user-profile-setting" src={icSettingGray} alt="setting"/>
+                <img className="user-profile-setting" src={icSettingGray} alt="setting" onClick={handleClickSetting}/>
             </div>
 
             <div className="label"><img src={label} alt="label"/>MANAGER</div>
