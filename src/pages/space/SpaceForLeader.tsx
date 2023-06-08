@@ -7,7 +7,7 @@ import {useRecoilValue} from 'recoil';
 import {useNavigate, useParams} from "react-router-dom";
 
 import sformService from "../../apis/services/sformService";
-import {selectedFormIdState, spaceState, userState} from '../../commons/Atom';
+import {formIdState, selectedFormIdState, spaceState, userState} from '../../commons/Atom';
 import PropTypes from "prop-types";
 
 import FormBoardForLeader from "../../components/space/FormBoardForLeader";
@@ -26,6 +26,7 @@ import {
     FormListResponse,
     GroupListResponse
 } from "../../commons/interfaces/commonInterface";
+import ChatbotForLeader from "../../components/chatbot/ChatbotForLeader";
 
 const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
     const navigate = useNavigate();
@@ -129,6 +130,8 @@ const SpaceForLeader = () => {
     return (
         <div>
             <SpaceInformationComponent spaceOnly={spaceOnly} forms={forms} groups={groups}/>
+
+            <ChatbotForLeader/>
         </div>
     );
 };

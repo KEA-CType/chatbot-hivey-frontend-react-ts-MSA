@@ -155,7 +155,7 @@ const CreateDetailedSurvey = async (formId: number, requestBody: any) => {
     try {
 
 
-        const response = await instances.AUTH_INSTANCE.patch(`${SFORM}/forms/${formId}`, {
+        const response = await instances.AUTH_INSTANCE.post(`${SFORM}/forms/${formId}`, {
 
             title: requestBody.title,
             content: requestBody.content,

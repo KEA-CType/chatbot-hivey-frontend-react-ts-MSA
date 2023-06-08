@@ -68,46 +68,49 @@ export interface TargetGroupListResponse {
 }
 
 
-export interface FormCreateRequest{
+export interface FormCreateRequest {
     title: string,
     content: string,
-    startDate:Date|string,
-    endDate:Date|string,
-    isAnonymous:string,
-    isMandatory:string,
-    groups:number[],
-    questionRequests:object[]
+    startDate: Date | string,
+    endDate: Date | string,
+    isAnonymous: string,
+    isMandatory: string,
+    groups: number[],
+    questionRequests: object[]
 }
 
-export interface FormResponse{
-    formId:number,
+export interface FormResponse {
+    formId: number,
     title: string,
     content: string,
-    startDate:Date|string,
-    endDate:Date|string,
-    isAnonymous:string,
-    isMandatory:string,
-    groups:number[],
-    questionsRequests:object[]
-
+    creator: string,
+    formLink: string,
+    startDate: Date | string,
+    endDate: Date | string,
+    isAnonymous: string,
+    isMandatory: string,
+    groups: number[],
+    questions: object[]
 }
 
 export interface Image {
     file: string,
     url: string
 }
-export interface FormAnswer{
-    multipleChoiceAnswers:MultiAnswer[],
-    shortAnswerResponses:TextAnswer[]
-   
-}
-export interface MultiAnswer{
-    questionId:number,
-    optionIds:number[]
+
+export interface FormAnswer {
+    multipleChoiceAnswers: MultiAnswer[],
+    shortAnswerResponses: TextAnswer[]
+
 }
 
-export interface TextAnswer{
-    questionId:number,
-    answer:string
+export interface MultiAnswer {
+    questionId: number,
+    optionIds: number[]
+}
+
+export interface TextAnswer {
+    questionId: number,
+    answer: string
 
 }

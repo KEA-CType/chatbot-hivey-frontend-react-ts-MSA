@@ -43,7 +43,7 @@ const FormListComponent = ({forms}: any) => {
                     e.preventDefault();
 
                     setFormId(f.formId);
-                    navigate("/form");
+                    navigate("/form/answer");
                 };
 
                 /**

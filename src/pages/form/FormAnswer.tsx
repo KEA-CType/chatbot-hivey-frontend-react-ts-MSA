@@ -1,60 +1,52 @@
 import "../../styles/formanswer.css"
-import React, {useState, useEffect, ReactElement, useContext} from "react";
+import React, {useState, useEffect} from "react";
 import {useRecoilValue} from 'recoil';
 
-import {useNavigate} from "react-router-dom";
-import Modal from "../../components/commons/Modal";
 import ShowAndAnswerForm from "../../components/form/ShowAndAnswerForm";
 
-
-import {formIdState, selectedFormIdState, userState} from '../../commons/Atom';
-
-
+import {formIdState, userState} from '../../commons/Atom';
 import {FormResponse} from "../../commons/interfaces/commonInterface";
-
-
-
-import {json} from "stream/consumers";
 
 import sformService from "../../apis/services/sformService";
 
 const FormAnswer = () => {
     const user = useRecoilValue(userState);
     const formId = useRecoilValue(formIdState);
-    const [forms, setForms] = useState<FormResponse| null>(null);
+    const [forms, setForms] = useState<FormResponse | undefined>();
 
     useEffect(() => {
 
         sformService
-            .GetFormInfomation(4)//formId
+            .GetFormInfomation(formId)
             .then((response) => {
-                console.log(response);
+
                 const result = response.result;
+
                 setForms({
                     formId: result.formId,
                     title: result.title,
                     content: result.content,
+                    creator: result.creator,
+                    formLink: result.formLink,
                     startDate: result.startDate,
                     endDate: result.endDate,
                     isAnonymous: result.isAnonymous,
                     isMandatory: result.isMandatory,
                     groups: result.groups,
-                    questionsRequests: result.questionsRequests
-                })
-                // setForms(result);
-                //console.log(result);
-                // // console.log(forms);
-            }) //시간
+                    questions: result.questions
+                });
+
+            })
             .catch((error) => {
                 console.log(error);
             });
 
-    }, [forms]);
-    //forms&&console.log(forms);
+    }, [formId]);
+
     return (
-        <>
+        <div className="form-overall-container">
             {forms && <ShowAndAnswerForm forms={forms}/>}
-        </>
+        </div>
     );
 }
 

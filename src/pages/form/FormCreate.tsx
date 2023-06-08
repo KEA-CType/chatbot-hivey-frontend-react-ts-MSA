@@ -163,7 +163,6 @@ const FormCreate = () => {
 
         const handleRadioOptionChange = (index: number, value: string) => {
 
-
             const updatedOptions = [...radioOptions];
             updatedOptions[index] = value;
             setRadioOptions(updatedOptions);
@@ -190,12 +189,14 @@ const FormCreate = () => {
 
                     <div className="question-title">
                         <input className="title-input" placeholder="질문 제목을 입력해 주세요."
-                                                           value={questionTitle}
-                                                           onChange={e => setQuestionTitle(e.target.value)}/></div>
+                               value={questionTitle}
+                               onChange={e => setQuestionTitle(e.target.value)}/></div>
 
                     <div className="question-explain">
                         <input className="explain-input" placeholder="질문 설명을 입력해 주세요."
-                                                             value={questionContent} onChange={(e) => {setQuestionContent(e.target.value)}}/></div>
+                               value={questionContent} onChange={(e) => {
+                            setQuestionContent(e.target.value)
+                        }}/></div>
 
                 </div>
                 <div className="radio-container">
@@ -257,13 +258,18 @@ const FormCreate = () => {
                 <div className="question-title-containter-short">
 
                     <div className="question-title">
-                        <input className="title-input" placeholder="질문 제목을 입력해 주세요." value={questionTitle} onChange={(e) => {setQuestionTitle(e.target.value)}}/>
+                        <input className="title-input" placeholder="질문 제목을 입력해 주세요." value={questionTitle}
+                               onChange={(e) => {
+                                   setQuestionTitle(e.target.value)
+                               }}/>
                     </div>
 
                     <div className="question-explain">
                         <input className="explain-input"
                                placeholder="질문 설명을 입력해 주세요."
-                               value={questionContent} onChange={(e) => {setQuestionContent(e.target.value)}}/>
+                               value={questionContent} onChange={(e) => {
+                            setQuestionContent(e.target.value)
+                        }}/>
                     </div>
 
                 </div>
@@ -352,6 +358,7 @@ const FormCreate = () => {
 
 
     const SendRequestBody = (questionRequests: any) => {
+
         const requestBody: FormCreateRequest = {
             title: formTitle,
             content: content,
@@ -370,9 +377,8 @@ const FormCreate = () => {
 
             if (isSuccess) {
                 console.log("생성에 성공하였습니다");
-                // navigate("/sform/leader" + sform.id);
                 console.log(formId);
-                navigate("/sform/leader/" + 1);
+                navigate(`/space/leader/${space.id}`);
             } else {
                 console.log("생성에 실패하였습니다");
                 console.log(message);
@@ -382,11 +388,6 @@ const FormCreate = () => {
     };
 
     const ClickFinishBtn = (questionRequests: any) => {
-//   useEffect(() => {
-//     if (questionRequests.length > 1) {
-//       SendRequestBody(questionRequests);
-//     }
-//   }, [questionRequests]);
         if (questionRequests.length > 1) {
 
             SendRequestBody(questionRequests);
@@ -429,7 +430,8 @@ const FormCreate = () => {
                              alt="require_member"
                              onClick={() => setRequireModalIsOpen(true)}/>
 
-                        <Modal isOpen={requireModalIsOpen} onClose={() => setRequireModalIsOpen(false)} header={"설문 필수 여부"}>
+                        <Modal isOpen={requireModalIsOpen} onClose={() => setRequireModalIsOpen(false)}
+                               header={"설문 필수 여부"}>
                             <div className="check-participant">
 
                                 <img className="must" src={must_btn} onClick={() => {
@@ -446,7 +448,8 @@ const FormCreate = () => {
                             </div>
                         </Modal>
 
-                        <Modal isOpen={chooseGroupModalIsOpen} onClose={() => setChooseGroupModalIsOpen(false)} header={"설문 선택 참여"}>
+                        <Modal isOpen={chooseGroupModalIsOpen} onClose={() => setChooseGroupModalIsOpen(false)}
+                               header={"설문 선택 참여"}>
                             <div className="choose-group">
                                 <SelectGroupForForm groups={groupList} checkedGroupList={handleSelectComplete}
                                                     isOpen={setChooseGroupModalIsOpen}/>

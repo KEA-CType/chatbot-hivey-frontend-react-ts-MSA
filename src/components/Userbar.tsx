@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 
 import Modal from "./commons/Modal";
 import {userState, spaceState, userInfoState} from "../commons/Atom";
-import {UserInfoResponse} from "../commons/interfaces/userResponse";
 
 import spaceService from "../apis/services/sformService";
 import userService from "../apis/services/userService";
@@ -164,7 +163,6 @@ const Userbar = () => {
                 const destination = new URLSearchParams(window.location.search).get("destination");
                 if (destination) {
                     navigate(destination, {replace: true});
-
                 }
 
             })
@@ -181,7 +179,7 @@ const Userbar = () => {
 
             <div className="user-profile">
                 <img className="user-profile-img"
-                     src={userInfo?.img === "/images/null" ? profile : userInfo?.img}
+                     src={userInfo?.img === "/images/null" || userInfo?.img === "" || userInfo?.img === null ? profile : userInfo?.img}
                      alt="user"/>
                 <div className="user-information-container">
                     <div className="user-name">{userInfo?.name}</div>
