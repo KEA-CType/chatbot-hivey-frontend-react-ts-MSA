@@ -1,28 +1,24 @@
 import "../../styles/formcreate.css"
 
-
-
-import {FormCreateRequest} from "../../commons/interfaces/commonInterface";
-
-
 import React, {useState, useEffect, ReactElement} from "react";
+import ReactDOM from "react-dom";
 import {useNavigate} from "react-router-dom";
-import {formIdState, userState, spaceState} from "../../commons/Atom";
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilValue} from "recoil";
+
+import {formIdState, spaceState} from "../../commons/Atom";
+import {FormCreateRequest} from "../../commons/interfaces/commonInterface";
 import Modal from "../../components/commons/Modal";
 import SelectGroupForForm from "../../components/form/SelectGroupForForm";
 
 import sformService from "../../apis/services/sformService";
 
 import moment from "moment";
-import ReactDOM from "react-dom";
+import {motion} from "framer-motion";
 
-// 달력을 위해서
 import DatePicker from "react-datepicker";
 import {ko} from 'date-fns/esm/locale';
 import "react-datepicker/dist/react-datepicker.css"
 
-//img
 import logo from "../../assets/ic_logo_hivey.png"
 import before from "../../assets/btn_anonymous_before_click.png";
 import after from "../../assets/btn_anonymous_after_click.png";
@@ -39,12 +35,8 @@ import longAnswer from "../../assets/btn_long_answer.png";
 import radio_btn from "../../assets/btn_radio.png";
 
 const FormCreate = () => {
-    
-    const formId=useRecoilValue(formIdState);
+    const formId = useRecoilValue(formIdState);
     const navigate = useNavigate();
-    console.log("formId",formId);
-    // console.log(`formId: ${formId}`)
-    //apis 6.2에 필요한 것
 
     const [formTitle, setFormTitle] = useState("");
     const [content, setContent] = useState("");
@@ -59,15 +51,18 @@ const FormCreate = () => {
     const dateNow = new Date();
     const today = dateNow.toISOString().slice(0, 10);
 
-
     const [participationStatus, setParticipationStatus] = useState(0);
     const [requireModalIsOpen, setRequireModalIsOpen] = useState(false);
     const [chooseGroupModalIsOpen, setChooseGroupModalIsOpen] = useState(false);
 
-
-    //그룹 목록 불러오기
     const [groupList, setGroupList] = useState([]);
     const [selectedGroupId, setSelectedGroupId] = useState<number[]>([]); //useState<number[]>([]);
+
+    // Modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalHeader, setModalHeader] = useState("");
+    const [modalMessage, setModalMessage] = useState("");
+
     const handleSelectComplete = (groupId: number[]) => {
         if (Array.isArray(groupId)) {
             groupId.forEach((id) => {
@@ -86,7 +81,7 @@ const FormCreate = () => {
     };
     const space = useRecoilValue(spaceState);
     useEffect(() => {
-        console.log("spaceId",space.id);
+        console.log("spaceId", space.id);
         sformService
             .GetAllGroupAndMemberList(space.id)//sform.id
             .then((response) => {
@@ -161,9 +156,11 @@ const FormCreate = () => {
         const [questionContent, setQuestionContent] = useState("");
         const [saveOption, setSaveOption] = useState<string []>([]);
         const [showButton, setShowButton] = useState(true);
+
         const handleAddRadioOption = () => {
             setRadioOptions((prevOptions) => [...prevOptions, '']);
         };
+
         const handleRadioOptionChange = (index: number, value: string) => {
 
 
@@ -174,10 +171,6 @@ const FormCreate = () => {
             const updatedSaveOption = [...saveOption];
             updatedSaveOption[index] = value;
             setSaveOption(updatedSaveOption);
-
-            console.log(radioOptions);
-
-
         };
 
         const handleSaveQuestions = () => {
@@ -187,7 +180,6 @@ const FormCreate = () => {
                 content: questionContent,
                 options: saveOption
             };
-            console.log(questionData);
             setQuestionRequests((prevRequests) => [...prevRequests, questionData]);
             setShowButton(false);
         };
@@ -195,15 +187,16 @@ const FormCreate = () => {
         return (
             <div className="qusetion-container">
                 <div className="question-title-containter-multiple">
-                    <div className="question-title"><input className="title-input" placeholder="질문 제목을 입력해주세요"
+
+                    <div className="question-title">
+                        <input className="title-input" placeholder="질문 제목을 입력해 주세요."
                                                            value={questionTitle}
                                                            onChange={e => setQuestionTitle(e.target.value)}/></div>
-                    <div className="question-explain"><input className="explain-input" placeholder="질문 설명을 입력해주세요"
-                                                             value={questionContent} onChange={(e) => {
-                        {
-                            setQuestionContent(e.target.value)
-                        }
-                    }}/></div>
+
+                    <div className="question-explain">
+                        <input className="explain-input" placeholder="질문 설명을 입력해 주세요."
+                                                             value={questionContent} onChange={(e) => {setQuestionContent(e.target.value)}}/></div>
+
                 </div>
                 <div className="radio-container">
                     {radioOptions.map((option, index) => (
@@ -214,7 +207,7 @@ const FormCreate = () => {
                                 type="text"
                                 value={option}
                                 onChange={(event) => handleRadioOptionChange(index, event.target.value)}
-                                placeholder="질문 제목을 입력해주세요"
+                                placeholder="질문 제목을 입력해 주세요."
 
                             />
                         </div>
@@ -245,45 +238,44 @@ const FormCreate = () => {
             // Find the parent div and remove it
             console.log("remove");
             const questionContainer = document.querySelector('.question-container');
-
-
         };
+
         const handleSaveQuestions = () => {
             const questionData = {
                 type: "S",
                 title: questionTitle,
                 content: questionContent,
-
             };
-            console.log(questionData);
+
             setQuestionRequests([questionData]);
             setShowButton(false);
         };
-
 
         return (
 
             <div className="qusetion-container">
                 <div className="question-title-containter-short">
-                    <div className="question-title"><input className="title-input" placeholder="질문 제목을 입력해주세요"
-                                                           value={questionTitle} onChange={(e) => {
-                        {
-                            setQuestionTitle(e.target.value)
-                        }
-                    }}/></div>
-                    <div className="question-explain"><input className="explain-input" placeholder="질문 설명을 입력해주세요"
-                                                             value={questionContent} onChange={(e) => {
-                        {
-                            setQuestionContent(e.target.value)
-                        }
-                    }}/></div>
+
+                    <div className="question-title">
+                        <input className="title-input" placeholder="질문 제목을 입력해 주세요." value={questionTitle} onChange={(e) => {setQuestionTitle(e.target.value)}}/>
+                    </div>
+
+                    <div className="question-explain">
+                        <input className="explain-input"
+                               placeholder="질문 설명을 입력해 주세요."
+                               value={questionContent} onChange={(e) => {setQuestionContent(e.target.value)}}/>
+                    </div>
 
                 </div>
+
                 <div className="text-answer">
+
                     <div className="write-here">
 
                         <input className="text-answer-input" type="text" onChange={onInputHandler} maxLength={50}/>
+
                         <div className="text-counter">{inputCount}/50</div>
+
                         {showButton && <button className="save-question" onClick={handleSaveQuestions}>질문 저장</button>}
 
                     </div>
@@ -359,8 +351,6 @@ const FormCreate = () => {
     };
 
 
-   
-
     const SendRequestBody = (questionRequests: any) => {
         const requestBody: FormCreateRequest = {
             title: formTitle,
@@ -374,7 +364,7 @@ const FormCreate = () => {
         };
 
         console.log(requestBody);
-        
+
         sformService.CreateDetailedSurvey(formId, requestBody).then((response) => {
             const {isSuccess, message} = response;
 
@@ -398,38 +388,77 @@ const FormCreate = () => {
 //     }
 //   }, [questionRequests]);
         if (questionRequests.length > 1) {
-            
+
             SendRequestBody(questionRequests);
         }
     };
 
-
     return (
-        <div>
-            <div className="form-container">
+        <div className="form-overall-container">
+            <motion.div className="form-container" style={{y: 100}} animate={{y: 0}}>
+
                 <img className="form-logo" src={logo} alt="logo"/>
                 <div></div>
+
+                {/* 설문 제목 */}
                 <div className="title">
-                    <span className="title-name"><input className="survey-title-input" placeholder="설문지 제목을 입력하세요"
-                                                        onChange={(e) => {
-                                                            {
-                                                                setFormTitle(e.target.value);
-                                                            }
-                                                        }}/></span>
+                    <span className="title-name">
+                        <input className="survey-title-input"
+                               placeholder="설문지 제목을 입력하세요."
+                               onChange={(e) => {
+                                   setFormTitle(e.target.value)
+                               }}/>
+                    </span>
                 </div>
+
+                {/* 설문 설명 */}
                 <div className="survey-explain">
                     <input className="survey-explain-input" placeholder="설문지 설명을 입력하세요" onChange={(e) => {
-                        {
-                            setContent(e.target.value);
-                        }
+                        setContent(e.target.value);
                     }}/>
                 </div>
+
+                {/* 설문 옵션 */}
                 <div className="option-container">
 
-                    <div className="left-option">
+                    <div className="top-option">
                         <img className="anoy" src={imgSrc} onClick={anoyClick} alt="anoy"/>
+
+                        <img className="check-participant-img"
+                             src={checkParticipationStatus(participationStatus)}
+                             alt="require_member"
+                             onClick={() => setRequireModalIsOpen(true)}/>
+
+                        <Modal isOpen={requireModalIsOpen} onClose={() => setRequireModalIsOpen(false)} header={"설문 필수 여부"}>
+                            <div className="check-participant">
+
+                                <img className="must" src={must_btn} onClick={() => {
+                                    setParticipationStatus(1);
+                                    setRequireModalIsOpen(false);
+                                    setIsMandatory('Y');
+                                }}/>
+
+                                <img className="check" src={check_btn} onClick={() => {
+                                    setParticipationStatus(2);
+                                    setChooseGroupModalIsOpen(true)
+                                }}/>
+
+                            </div>
+                        </Modal>
+
+                        <Modal isOpen={chooseGroupModalIsOpen} onClose={() => setChooseGroupModalIsOpen(false)} header={"설문 선택 참여"}>
+                            <div className="choose-group">
+                                <SelectGroupForForm groups={groupList} checkedGroupList={handleSelectComplete}
+                                                    isOpen={setChooseGroupModalIsOpen}/>
+                            </div>
+                        </Modal>
+
+                    </div>
+
+                    <div className="left-option">
+
                         <div className="start-date-container">
-                            <img src={start_date} alt="startDate"></img>
+                            <img className="start-date-img" src={start_date} alt="startDate"></img>
                             <DatePicker className="startDatePicker"
                                         locale={ko}
                                         dateFormat="yyyy.MM.dd"
@@ -438,11 +467,11 @@ const FormCreate = () => {
                                         selectsStart
                                         minDate={new Date()}
                                         startDate={startDate}
-                                        endDate={endDate}
-                            />
+                                        endDate={endDate}/>
                         </div>
+
                         <div className="end-date-container">
-                            <img src={end_date} alt="endDate"></img>
+                            <img className="end-date-img" src={end_date} alt="endDate"></img>
                             <DatePicker className="endDatePicker"
                                         locale={ko}
                                         dateFormat="yyyy.MM.dd"
@@ -451,53 +480,27 @@ const FormCreate = () => {
                                         onChange={(date: Date) => setEndDate(date)}
                                         selectsEnd
                                         minDate={startDate ? new Date(startDate.getTime() + 24 * 60 * 60 * 1000) : null}
-
-                                        endDate={endDate}
-                            />
+                                        endDate={endDate}/>
                         </div>
-                        <Modal isOpen={timeModal} onClose={() => setTimeModal(false)}>
-                            설문 시작시간과 종료시간을 확인해주세요
+
+                        <Modal isOpen={timeModal} onClose={() => setTimeModal(false)} header={"설문 날짜 확인"}>
+                            설문 시작 시간과 종료 시간을 확인해 주세요.
                         </Modal>
+
                     </div>
-                    <div className="right-option">
-
-                        <img src={checkParticipationStatus(participationStatus)} alt="require_member"
-                             onClick={() => setRequireModalIsOpen(true)}/>
-                        <Modal isOpen={requireModalIsOpen} onClose={() => setRequireModalIsOpen(false)}>
-                            <div className="check-participant">
-                                <img className="must" src={must_btn} onClick={() => {
-                                    setParticipationStatus(1);
-                                    setRequireModalIsOpen(false);
-                                    setIsMandatory('Y');
-                                }}/>
-                                <img className="check" src={check_btn} onClick={() => {
-                                    setParticipationStatus(2);
-                                    setChooseGroupModalIsOpen(true)
-                                }}/>
-                            </div>
-                        </Modal>
-                        <Modal isOpen={chooseGroupModalIsOpen} onClose={() => setChooseGroupModalIsOpen(false)}>
-                            <div className="choose-group">
-
-                                <SelectGroupForForm groups={groupList} checkedGroupList={handleSelectComplete}
-                                                    isOpen={setChooseGroupModalIsOpen}/>
-
-
-                            </div>
-
-                        </Modal>
-                    </div>
-
 
                 </div>
 
+            </motion.div>
 
-            </div>
+            {/* 설문 질문 생성 */}
             <div className="question-create-container">
+
                 <div className="questions">
                     {MakeShortAnswerQuestion()}
                     {MakeMultipleChoiceQuestion()}
                 </div>
+
                 <div className="create-menu-container">
                     <div className="create-menu">
                         <img className="multiple_choice_img" src={multipleChoice} alt="multipleChoice"
@@ -508,15 +511,16 @@ const FormCreate = () => {
                              onClick={() => handleAddQuestion(<MakeLongAnswerQuestion/>)}/>
                     </div>
                 </div>
+
             </div>
+
             <div className="button-container">
                 <button className="finish-btn" onClick={checkDate}>완료</button>
                 <button className="cancel-btn" onClick={() => navigate(-1)}>취소</button>
             </div>
+
         </div>
     );
 };
-//startdate enddate 비교해서 경고 날리기
 
 export default FormCreate;
-
