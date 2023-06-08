@@ -10,6 +10,28 @@ export interface Space {
     name: String;
 }
 
+export interface Form{
+    title: string,
+    content: string,
+    startDate:Date|string,
+    endDate:Date|string,
+    isAnonymous:string,
+    isMandatory:string,
+    groups:number[],
+    questionRequests:object[]
+}
+export interface FormResponse{
+    formId:number
+    title: string,
+    content: string,
+    startDate:Date|string,
+    endDate:Date|string,
+    isAnonymous:string,
+    isMandatory:string,
+    groups:number[],
+    questionRequests:object[]
+}
+
 export interface SpaceOnly {
     name: string;
     img: string;
@@ -61,31 +83,23 @@ export interface TargetGroupListResponse {
 }
 
 
-export interface FormCreateRequest{
-    title: string,
-    content: string,
-    startDate:Date|string,
-    endDate:Date|string,
-    isAnonymous:string,
-    isMandatory:string,
-    groups:number[],
-    questionRequests:object[]
-}
-
-export interface FormAnswerResponse{
-    formId:number,
-    title: string,
-    content: string,
-    startDate:Date|string,
-    endDate:Date|string,
-    isAnonymous:string,
-    isMandatory:string,
-    groups:number[],
-    questions:object[]
-
-}
-
 export interface Image {
     file: string,
     url: string
+}
+
+export interface FormAnswer{
+    multipleChoiceAnswers:MultiAnswer[],
+    shortAnswerResponses:TextAnswer[]
+   
+}
+export interface MultiAnswer{
+    questionId:number,
+    optionIds:number[]
+}
+
+export interface TextAnswer{
+    questionId:number,
+    answer:string
+
 }

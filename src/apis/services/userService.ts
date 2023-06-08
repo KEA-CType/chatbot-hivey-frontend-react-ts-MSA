@@ -29,7 +29,7 @@ const Register = async (email: string, userName: string, password: string) => {
 const Login = async (email: string, password: string) => {
     try {
 
-        return await instances.INSTANCE.post(`/user-service/login`, {
+        return await instances.AUTH_INSTANCE.post(`/user-service/login`, {
             email: email,
             password: password,
         });

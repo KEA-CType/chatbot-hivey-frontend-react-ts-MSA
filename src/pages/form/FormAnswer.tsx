@@ -4,25 +4,26 @@ import {useRecoilValue} from 'recoil';
 
 import {useNavigate} from "react-router-dom";
 import Modal from "../../components/commons/Modal";
-import ShowForm from "../../components/form/ShowForm";
+import ShowAndAnswerForm from "../../components/form/ShowAndAnswerForm";
 
-import {selectedFormIdState, userState} from '../../commons/Atom';
-import {FormAnswerResponse} from "../../commons/interfaces/Interface";
+import {formIdState, selectedFormIdState, userState} from '../../commons/Atom';
 
+import {Form, FormResponse} from "../../commons/interfaces/Interface";
 import {json} from "stream/consumers";
 
 import sformService from "../../apis/services/sformService";
 
 const FormAnswer = () => {
     const user = useRecoilValue(userState);
-    const [forms, setForms] = useState<FormAnswerResponse | null>(null);
+    const formId = useRecoilValue(formIdState);
+    const [forms, setForms] = useState<FormResponse| null>(null);
 
     useEffect(() => {
 
         sformService
-            .GetFormInfomation(1)
+            .GetFormInfomation(4)//formId
             .then((response) => {
-
+                console.log(response);
                 const result = response.result;
                 setForms({
                     formId: result.formId,
@@ -33,20 +34,21 @@ const FormAnswer = () => {
                     isAnonymous: result.isAnonymous,
                     isMandatory: result.isMandatory,
                     groups: result.groups,
-                    questions: result.questions
+                    questionRequests: result.questions
                 })
-                console.log(result);
-                console.log(forms);
+                // setForms(result);
+                //console.log(result);
+                // // console.log(forms);
             }) //시간
             .catch((error) => {
                 console.log(error);
             });
 
-    }, []);
-
+    }, [forms]);
+    //forms&&console.log(forms);
     return (
         <>
-            {forms && <ShowForm forms={forms}/>}
+            {forms && <ShowAndAnswerForm forms={forms}/>}
         </>
     );
 }

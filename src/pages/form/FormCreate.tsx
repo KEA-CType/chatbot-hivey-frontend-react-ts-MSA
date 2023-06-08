@@ -1,6 +1,6 @@
 import "../../styles/formcreate.css"
 
-import {FormCreateRequest} from "../../commons/interfaces/Interface";
+import {Form} from "../../commons/interfaces/Interface";
 
 import React, {useState, useEffect, ReactElement} from "react";
 import {useNavigate} from "react-router-dom";
@@ -36,10 +36,10 @@ import longAnswer from "../../assets/btn_long_answer.png";
 import radio_btn from "../../assets/btn_radio.png";
 
 const FormCreate = () => {
-    // const formId=useRecoilValue(formIdState);
-    const formId = 50;
+    
+    const formId=useRecoilValue(formIdState);
     const navigate = useNavigate();
-
+    console.log("formId",formId);
     // console.log(`formId: ${formId}`)
     //apis 6.2에 필요한 것
 
@@ -49,6 +49,7 @@ const FormCreate = () => {
     const [endDate, setEndDate] = useState(new Date());
     const [isAnonymous, setIsAnonymous] = useState('N'); //익명 아닌게 디폴트
     const [isMandatory, setIsMandatory] = useState('N');
+    const [questionRequests, setQuestionRequests] = useState([{}]);
 
     const [imgSrc, setImgSrc] = useState(before);
     const [isClicked, setIsClicked] = useState(false);
@@ -82,9 +83,9 @@ const FormCreate = () => {
     };
     const space = useRecoilValue(spaceState);
     useEffect(() => {
-
+        console.log("spaceId",space.id);
         sformService
-            .GetAllGroupAndMemberList(1)//sform.id
+            .GetAllGroupAndMemberList(space.id)//sform.id
             .then((response) => {
                 const {code} = response;
 
@@ -183,7 +184,7 @@ const FormCreate = () => {
                 content: questionContent,
                 options: saveOption
             };
-
+            console.log(questionData);
             setQuestionRequests((prevRequests) => [...prevRequests, questionData]);
             setShowButton(false);
         };
@@ -249,10 +250,9 @@ const FormCreate = () => {
                 type: "S",
                 title: questionTitle,
                 content: questionContent,
-                options: null
 
             };
-
+            console.log(questionData);
             setQuestionRequests([questionData]);
             setShowButton(false);
         };
@@ -305,9 +305,9 @@ const FormCreate = () => {
                 type: "L",
                 title: questionTitle,
                 content: questionContent,
-                options: null
-            };
 
+            };
+            console.log(questionData);
             setQuestionRequests((prevRequests) => [...prevRequests, questionData]);
             setShowButton(false);
         };
@@ -356,10 +356,10 @@ const FormCreate = () => {
     };
 
 
-    const [questionRequests, setQuestionRequests] = useState([{}]);
+   
 
     const SendRequestBody = (questionRequests: any) => {
-        const requestBody: FormCreateRequest = {
+        const requestBody: Form = {
             title: formTitle,
             content: content,
             startDate: moment(startDate).format("YYYY-MM-DD"),
@@ -369,13 +369,16 @@ const FormCreate = () => {
             groups: selectedGroupId,
             questionRequests: questionRequests,
         };
+
         console.log(requestBody);
+        
         sformService.CreateDetailedSurvey(formId, requestBody).then((response) => {
             const {isSuccess, message} = response;
 
             if (isSuccess) {
                 console.log("생성에 성공하였습니다");
                 // navigate("/sform/leader" + sform.id);
+                console.log(formId);
                 navigate("/sform/leader/" + 1);
             } else {
                 console.log("생성에 실패하였습니다");
@@ -392,6 +395,7 @@ const FormCreate = () => {
 //     }
 //   }, [questionRequests]);
         if (questionRequests.length > 1) {
+            
             SendRequestBody(questionRequests);
         }
     };

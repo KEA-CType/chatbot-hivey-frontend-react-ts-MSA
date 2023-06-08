@@ -10,7 +10,7 @@ import {formIdState, spaceState, userState} from "../../commons/Atom";
 
 import sformService from "../../apis/services/sformService";
 
-const ChatbotForLeader = () => {
+const ChatbotForMember = () => {
     const navigate = useNavigate();
 
     const [isSelectBoxVisible, setIsSelectBoxVisible] = useState(false);
@@ -95,4 +95,4 @@ const ChatbotForLeader = () => {
     );
 };
 
-export default ChatbotForLeader;
+export default ChatbotForMember;

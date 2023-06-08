@@ -1,6 +1,6 @@
 import instances from "../instance";
 import {SFORM} from "../../commons/constants";
-import {SpaceInformationResponse} from "../../commons/interfaces/Interface";
+import {SpaceInformationResponse,MultiAnswer,TextAnswer} from "../../commons/interfaces/Interface";
 
 import {CommonResponse} from "../interfaces/commonResponse";
 
@@ -102,7 +102,7 @@ const GetAllGroupList = async (spaceId: number) => {
 const GetAllGroupAndMemberList = async (spaceId: number) => {
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups/members`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups/members`);
         return response.data;
 
     } catch (error) {
@@ -152,7 +152,9 @@ const CreateSurvey = async (spaceId: number, userId: number) => {
 const CreateDetailedSurvey = async (formId: number, requestBody: any) => {
     try {
 
-        const response = await instances.INSTANCE.patch(`${SFORM}/forms/${formId}`, {
+        console.log(`formId: ${formId}`);
+
+        const response = await instances.AUTH_INSTANCE.post(`${SFORM}/forms/${formId}`, {
             title: requestBody.title,
             content: requestBody.content,
             startDate: requestBody.startDate,
@@ -162,6 +164,7 @@ const CreateDetailedSurvey = async (formId: number, requestBody: any) => {
             groups: requestBody.groups,
             questionRequests: requestBody.questionRequests,
         });
+
         return response.data;
 
     } catch (error) {
@@ -171,6 +174,32 @@ const CreateDetailedSurvey = async (formId: number, requestBody: any) => {
 
     }
 };
+
+/**
+ * 설문 응답하기
+ */
+
+const AnswerForm=async (formId:number, userId:number,requestBody:any)=>{
+    try{
+
+        console.log(`multipleChoiceAnswers: ${JSON.stringify(requestBody.multipleChoiceAnswers)}`);
+        console.log(`shortAnswerResponses: ${JSON.stringify(requestBody.shortAnswerResponses)}`);
+        const response=await instances.AUTH_INSTANCE.post(`${SFORM}/forms/answer/${formId}/${userId}`,{
+            multipleChoiceAnswers:requestBody.multipleChoiceAnswers,
+            shortAnswerResponses:requestBody.shortAnswerResponses
+            
+        });
+        console.log(requestBody);
+        
+        return response.data;
+    }
+    catch(error){
+
+        console.error(error);
+        throw new Error("설문 응답에 실패하였습니다.");
+    }
+}
+
 
 /**
  * 스페이스의 모든 설문 불러오기
@@ -245,7 +274,7 @@ const GetMandatoryOrNotByForm = async (formId: number) => {
  */
 const GetFormInfomation = async (formId: number) => {
     try {
-        const response = await instances.INSTANCE.get(`${SFORM}/forms/${formId}`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}`);
         return response.data;
     } catch (error) {
         console.error(error);
@@ -282,6 +311,7 @@ const sformService = {
     GetMemberListByGroup,
     CreateSurvey,
     CreateDetailedSurvey,
+    AnswerForm,
     GetFormList,
     GetSubmissionListByForm,
     GetTargetGroupsByForm,
