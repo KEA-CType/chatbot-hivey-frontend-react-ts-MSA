@@ -477,6 +477,8 @@
     margin-bottom: 1%;
     margin-right: 5%;
 
+    overflow: hidden;
+
     padding-bottom: 0.3rem;
 }
 
@@ -502,15 +504,15 @@
 
     box-sizing: border-box;
 
-    font-size: 0.9rem;
-    font-family: Pretendard, sans-serif;
+    font-size: 12px;
+    font-family: Poppins, sans-serif;
 
     margin-left: 2%;
 }
 
 .submission-members-container .submission-members-name {
     height: auto;
-    width: 4rem;
+    width: 10rem;
 
     box-sizing: border-box;
 
@@ -519,7 +521,7 @@
     -webkit-line-clamp: 1;
     overflow: hidden;
 
-    font-size: 0.9rem;
+    font-size: 12px;
     font-family: Pretendard, sans-serif;
 
     margin-left: 2%;
@@ -537,7 +539,7 @@
     overflow: hidden;
 
     color: gray;
-    font-size: 0.9rem;
+    font-size: 12px;
     font-family: Pretendard, sans-serif;
 
     margin-left: 2%;
@@ -892,15 +894,15 @@
 
     box-sizing: border-box;
 
-    font-size: 0.9rem;
-    font-family: Pretendard, sans-serif;
+    font-size: 12px;
+    font-family: Poppins, sans-serif;
 
     margin-left: 2%;
 }
 
 .group-member-container-by-group .group-member-name {
     height: auto;
-    width: 4rem;
+    width: 10rem;
 
     box-sizing: border-box;
 
@@ -909,7 +911,7 @@
     -webkit-line-clamp: 1;
     overflow: hidden;
 
-    font-size: 0.9rem;
+    font-size: 12px;
     font-family: Pretendard, sans-serif;
 
     margin-left: 2%;
@@ -927,7 +929,7 @@
     overflow: hidden;
 
     color: gray;
-    font-size: 0.9rem;
+    font-size: 12px;
     font-family: Pretendard, sans-serif;
 
     margin-left: 2%;
