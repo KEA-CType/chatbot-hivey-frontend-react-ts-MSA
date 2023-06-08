@@ -10,7 +10,7 @@ export interface FormInformation {
     formLink: string,
     startDate: Date,
     endDate: Date,
-    isAnonymous: boolean,
+    isAnonymous: string,
 }
 
 export interface Answer {

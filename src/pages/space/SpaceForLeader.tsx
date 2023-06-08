@@ -25,8 +25,7 @@ import {
     SpaceOnly,
     FormListResponse,
     GroupListResponse
-} from "../../commons/interfaces/Interface";
-import ChatbotForLeader from '../../components/chatbot/ChatbotForLeader';
+} from "../../commons/interfaces/commonInterface";
 
 const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
     const navigate = useNavigate();
@@ -130,8 +129,6 @@ const SpaceForLeader = () => {
     return (
         <div>
             <SpaceInformationComponent spaceOnly={spaceOnly} forms={forms} groups={groups}/>
-
-            <ChatbotForLeader />
         </div>
     );
 };

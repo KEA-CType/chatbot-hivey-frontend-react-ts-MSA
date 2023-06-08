@@ -3,7 +3,7 @@ import {useRecoilValue} from "recoil";
 
 import {selectedFormIdState} from "../../commons/Atom";
 import sformService from "../../apis/services/sformService";
-import {SubmissionListResponse, TargetGroupListResponse} from "../../commons/interfaces/Interface";
+import {SubmissionListResponse, TargetGroupListResponse} from "../../commons/interfaces/commonInterface";
 
 import icCheckCircleGreen from "../../assets/ic_check_circle_green.png";
 import icCheckNotCircleRed from "../../assets/ic_check_not_circle_red.png";
@@ -20,6 +20,8 @@ const MandatoryFormSubmissionList = ({submissions}: any) => {
         const submissionList = Array.isArray(submissions) ? submissions.map(
             (s: any, i: number) => {
 
+                console.log(`email: ${s.getUserRes.email}, name: ${s.getUserRes.name}`);
+
                 return (
                     <>
                         <div key={s.memberId} className="submission-members-container"
@@ -31,9 +33,9 @@ const MandatoryFormSubmissionList = ({submissions}: any) => {
 
                             <div className="submission-members-id">#{s.memberId}</div>
 
-                            <div className="submission-members-name">{s.name}</div>
+                            <div className="submission-members-name">{s.getUserRes.name}</div>
 
-                            <div className="submission-members-email">{s.email}</div>
+                            <div className="submission-members-email">{s.getUserRes.email}</div>
 
                             <div className="submission-members-status-wrapper">
                                 {s.submit === false
@@ -82,9 +84,9 @@ const SubmissionListByTargetGroup = ({groupId, submissions}: any) => {
 
                             <div className="submission-members-id">#{s.memberId}</div>
 
-                            <div className="submission-members-name">{s.name}</div>
+                            <div className="submission-members-name">{s.getUserRes.name}</div>
 
-                            <div className="submission-members-email">{s.email}</div>
+                            <div className="submission-members-email">{s.getUserRes.email}</div>
 
                             <div className="submission-members-status-wrapper">
                                 {s.submit === false

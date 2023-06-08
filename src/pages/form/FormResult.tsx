@@ -5,15 +5,23 @@
 import "../../styles/formresult.css";
 
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 import PropTypes from "prop-types";
 import {motion} from "framer-motion";
 
-import {FormResultInformationProps, GetFormResultProps} from "../../commons/interfaces/propsInterface";
-import {Answer, FormInformation} from "../../apis/interfaces/sformResponse";
+import {
+    FormAnswerListProps,
+    FormResultInformationProps, MultipleAnswerResponseProps, PieChartData,
+    SubjectiveAnswerResponseProps
+} from "../../commons/interfaces/propsInterface";
+import {Answer, FormInformation} from "../../commons/interfaces/sformResponse";
 
 import sformService from "../../apis/services/sformService";
+
+import icFormResultLogo from "../../assets/ic_form_result_logo.png";
+import * as moment from "moment/moment";
+import {MyResponsivePie} from "./Chart";
 
 /**
  * 설문에 대한 기본 정보를 보여주는 컴포넌트
@@ -29,22 +37,26 @@ const FormResultInformation = ({formInformation, answers}: FormResultInformation
     return (
         <div className="form-result-container">
 
+            {/* 로고 */}
             <div className="form-result-icon-wrapper">
 
-                <img className="form-result-icon-img" alt="logo"/>
-                <img className="form-result-icon-red-img" alt="form"/>
+                <img className="form-result-icon-img" src={icFormResultLogo} alt="logo"/>
 
             </div>
 
+            {/* 설문 정보 */}
             <motion.div className="form-result-rectangle-white" style={{y: 100}} animate={{y: 0}}>
 
+                {/* 설문 제목, 설명 */}
                 <div className="form-result-title-container">
 
-                    <div className="form-result-title"></div>
-                    <div className="form-result-content"></div>
+                    <div className="form-result-title">{formInformation.title}</div>
+                    <div className="form-result-title-separator"></div>
+                    <div className="form-result-content">{formInformation.content}</div>
 
                 </div>
 
+                {/* 설문 생성자, 마감 날짜, 익명 여부, 링크 */}
                 <div className="form-result-information-container">
 
                     <div className="form-result-information-table-container">
@@ -52,16 +64,19 @@ const FormResultInformation = ({formInformation, answers}: FormResultInformation
                         <table className="form-result-information-table">
                             <tbody>
                             <tr>
-                                <td></td>
-                                <td></td>
+                                <td className="form-result-information-td-header">제작자</td>
+                                <td style={{color: "gray"}}>|</td>
+                                <td className="form-result-information-td-content">{formInformation.creator}</td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td></td>
+                                <td className="form-result-information-td-header">설문 기간</td>
+                                <td style={{color: "gray"}}>|</td>
+                                <td className="form-result-information-td-content">{(moment(formInformation.startDate)).format('YYYY.MM.DD')} ~ {(moment(formInformation.endDate)).format('YYYY.MM.DD')}</td>
                             </tr>
                             <tr>
-                                <td></td>
-                                <td></td>
+                                <td className="form-result-information-td-header">익명 여부</td>
+                                <td style={{color: "gray"}}>|</td>
+                                <td className="form-result-information-td-content">{formInformation.isAnonymous === "Y" ? "익명" : "실명"}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -70,8 +85,9 @@ const FormResultInformation = ({formInformation, answers}: FormResultInformation
 
                     <div className="form-result-information-link-container">
 
-                        <div className="form-result-information-link"></div>
-                        <button className="form-result-information-link-btn"></button>
+                        <div className="form-result-information-link">{formInformation.formLink}</div>
+                        <div style={{color: "gray", cursor: "default", marginLeft: "1rem"}}>|</div>
+                        <button className="form-result-information-link-btn">Copy</button>
 
                     </div>
 
@@ -79,11 +95,11 @@ const FormResultInformation = ({formInformation, answers}: FormResultInformation
 
             </motion.div>
 
-            <motion.div className="form-result-content-container"  style={{y: 100}} animate={{y: 0}}>
+            <div className="form-result-content-container">
 
-                <FormAnswerList />
+                <FormAnswerList answers={answers}/>
 
-            </motion.div>
+            </div>
 
         </div>
     );
@@ -97,70 +113,120 @@ FormResultInformation.propTypes = {
 /**
  * 설문에 대한 답변 내용을 담는 컨테이너 역할의 컴포넌트
  */
-const FormAnswerList = () => {
+const FormAnswerList = ({answers}: FormAnswerListProps) => {
 
-    return (
-        <div className="form-result-answer-container">
+    const [allAnswers, setAllAnswers] = useState(Array);
 
-            <div className="form-result-answer-rectangle-white">
+    useEffect(() => {
 
-                <div className="form-result-answer-title-container">
+        // 질문을 questionId에 맞게 정렬한다.
+        answers.sort((a, b) => a.questionId > b.questionId ? 1 : -1);
 
-                    <div className="form-result-answer-number">
+        const updatedAnswers = answers.map(
+            (a: any, i: number) => {
 
-                    </div>
+                return (
+                    <motion.div className="form-result-answer-rectangle-white" style={{y: 100}} animate={{y: 0}}>
 
-                    <div className="form-result-answer-title">
+                        {/* 객관식 질문/주관식 질문 공통 */}
+                        <div className="form-result-answer-title-container">
 
-                    </div>
+                            <div className="form-result-answer-number">Q{i + 1}.</div>
 
-                    <div className="form-result-answer-content">
+                            <div className="form-result-answer-title">{a.title}</div>
 
-                    </div>
+                            <div className="form-result-answer-content">{a.content}</div>
 
-                </div>
+                        </div>
 
-                {/* 이 부분을 useEffect 등을 이용하여 안에 넣어야 한다. (분기 처리) */}
+                        {/* a.answerResults가 null이면 객관식 질문, 값이 있다면 주관식 질문에 대한 응답 */}
+                        {a.answerResults === null
+                            ? <MultipleAnswerResponse answers={a.multipleAnswerResults}/>
+                            : <SubjectiveAnswerResponse answers={a.answerResults}/>}
 
-                <MultipleAnswer />
+                    </motion.div>
+                );
+            });
 
-                <SubjectiveAnswer />
+        setAllAnswers(updatedAnswers);
 
-            </div>
+    }, [answers])
 
-        </div>
-    );
+    return <>{allAnswers}</>;
 }
 
 /**
  * 객관식 답변에 대한 컴포넌트
  */
-const MultipleAnswer = () => {
+const MultipleAnswerResponse = ({answers}: MultipleAnswerResponseProps) => {
+
+    const [datas, setDatas] = useState<PieChartData[]>([]);
+
+    useEffect(() => {
+
+        const updatedDatas: PieChartData[] = answers.map(
+            (a: any) => {
+
+                const id = a.optionId;
+                const label = a.optionContent;
+                const value = a.count;
+
+                return {
+                    "id": id.toString(),
+                    "label": label.toString(),
+                    "value": value.toString(),
+                    "color": "hsl(147, 70%, 50%)"
+                };
+            }
+        );
+
+        setDatas(updatedDatas);
+
+    }, []);
 
     return (
-        <div className="form-result-answer-multiple-type">
-
-        </div>
+        <>
+            {datas.length === 0 ? (
+                <div className="multiple-answer-error">데이터가 없습니다.</div>
+            ) : (
+                <div className="multiple-answer-container">
+                    <MyResponsivePie data={datas}/>
+                </div>
+            )}
+        </>
     );
 }
 
 /**
  * 주관식 답변에 대한 컴포넌트
  */
-const SubjectiveAnswer = () => {
+const SubjectiveAnswerResponse = ({answers}: SubjectiveAnswerResponseProps) => {
 
-    return (
-        <div className="form-result-answer-subjective-type">
+    const [subjectiveAnswers, setSubjectiveAnswers] = useState(Array);
 
-        </div>
-    );
+    useEffect(() => {
+
+        const updatedAnswers = answers.map(
+            (a: any, i: number) => {
+
+                return (
+                    <div className="subjective-answer-container">
+                        <div className="subjective-answer-name">{a.name}</div>
+                        <div className="subjective-answer-content">{a.answer}</div>
+                    </div>
+                );
+            });
+
+        setSubjectiveAnswers(updatedAnswers);
+
+    }, [answers]);
+
+    return <>{subjectiveAnswers}</>
 }
 
-/**
- *
- */
-const FormResult = ({spaceId, formId}: GetFormResultProps) => {
-    const navigate = useNavigate();
+const FormResult = () => {
+
+    const {formId} = useParams();
 
     const [formInformation, setFormInformation] = useState<FormInformation>({} as FormInformation);
     const [answers, setAnswers] = useState<Answer[]>([]);
@@ -221,7 +287,7 @@ const FormResult = ({spaceId, formId}: GetFormResultProps) => {
          * }
          */
         sformService
-            .GetFormResult(formId)
+            .GetFormResult(formId !== undefined ? formId.toString() : "")
             .then((response) => {
 
                 const result = response.result;
@@ -243,16 +309,11 @@ const FormResult = ({spaceId, formId}: GetFormResultProps) => {
                     // 답변
                     setAnswers(result.getQuestionResults);
 
-                    console.log(`result.getQuestionResults: ${result.getQuestionResults}`);
-
                 }
 
             })
             .catch((error) => {
                 console.log(`error: ${error}`);
-
-                // 데이터를 불러오지 못했을 경우 이전 페이지로 이동한다.
-                navigate(-1);
             });
 
     }, [formId]);

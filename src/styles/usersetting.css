@@ -1,43 +1,44 @@
-body {
-    /*background-color: #D4ECFF;*/
-    background: url("../assets/bg_gradient_blue.png");
-    /*overflow: hidden;*/
-}
+.user-setting-container {
+    width: 80%;
+    height: 100vh;
 
-.create-space-rectangle-white {
-    width: 60%;
-    height: 80%;
-
-    background-color: white;
-
-    border-radius: 1rem;
-
-    box-shadow: 1px 2px 4px lightgray;
+    position: fixed;
+    top: 1rem;
+    left: 20%;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.user-setting-title-rectangle-white {
+    width: 80%;
+    height: 5rem;
+
+    background-color: #ffffff;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
 
-    position: fixed;
-    top: 10%;
-    left: 30%;
+    position: relative;
+    left: 10%;
+
+    margin-top: 2rem;
+
+    padding: 0;
 }
 
-.create-space-logo {
-    width: 10rem;
-    height: auto;
-
-    -webkit-user-drag: none;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-}
-
-.create-space-title {
+.user-setting-title {
     color: black;
-    font-size: 1rem;
+    font-size: 22px;
     font-family: Poppins, sans-serif;
     font-weight: lighter;
 
@@ -48,42 +49,74 @@ body {
     -ms-user-select:none;
     user-select:none;
 
-    margin-top: 1vh;
+    margin-left: 2%;
 }
 
-.create-space-container {
+.user-setting-rectangle-white {
     width: 80%;
     height: auto;
 
-    text-align: center;
+    background-color: white;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    margin-top: 2vh;
+    position: relative;
+    left: 10%;
+
+    margin-top: 2rem;
+
+    padding: 0;
 }
 
-.create-space-img-container {
+.user-setting-content-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding: 5rem;
+
+    margin-left: 10rem;
+}
+
+.user-setting-content-title {
+    color: black;
+    font-family: Archivo, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+
+    margin-bottom: 2rem;
+}
+
+.user-setting-img-container {
     width: 100%;
     height: auto;
 
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     margin-bottom: 3rem;
 }
 
-.create-space-preview-img {
+.user-setting-preview-img {
     width: 8rem;
     height: 8rem;
     aspect-ratio: auto 1/1;
 
     background-color: transparent;
-    border-radius: 10rem;
+    border-radius: 1rem;
     object-fit: cover;
 
     box-shadow: 0 0 2px gray;
@@ -95,7 +128,7 @@ body {
     user-select:none;
 }
 
-.create-space-img-btn-container {
+.user-setting-img-btn-container {
     width: 10rem;
     height: 8rem;
 
@@ -107,7 +140,7 @@ body {
     padding-bottom: 2%;
 }
 
-.create-space-img-upload-btn {
+.user-setting-img-upload-btn {
     width: 6rem;
     height: 2rem;
     line-height: 2rem;
@@ -133,7 +166,7 @@ body {
     user-select:none;
 }
 
-.create-space-img-remove-btn {
+.user-setting-img-remove-btn {
     width: 6rem;
     height: 2rem;
 
@@ -157,7 +190,7 @@ body {
     user-select:none;
 }
 
-.create-space-form-container {
+.user-setting-form-container {
     width: 60%;
     height: auto;
 
@@ -177,7 +210,7 @@ body {
     user-select:none;
 }
 
-.create-space-input-name-container {
+.user-setting-input-name-container {
     width: 100%;
     height: auto;
 
@@ -186,7 +219,7 @@ body {
     margin-bottom: 2rem;
 }
 
-.create-space-input-name {
+.user-setting-input-name {
     width: 95%;
     height: 2rem;
 
@@ -203,75 +236,7 @@ body {
     margin-top: 0.3rem;
 }
 
-.create-space-input-membership-container {
-    width: 100%;
-    height: auto;
-
-    font-size: 12px;
-    color: #666666;
-    margin-bottom: 2rem;
-}
-
-.create-space-membership-btn-container {
-    width: 100%;
-    height: auto;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    padding: 0;
-
-    margin-top: 0.1rem;
-    margin-right: 0;
-}
-
-.create-space-membership-btn {
-    height: 2rem;
-
-    background-color: white;
-
-    border: 0.05rem solid #A6A6A6;
-    border-radius: 0.3rem;
-
-    color: #666666;
-    font-size: 11px;
-    font-family: Poppins, sans-serif;
-
-    cursor: pointer;
-
-    flex: 1;
-
-    white-space: nowrap;
-
-    padding: 0.5rem;
-
-    margin-top: 0.3rem;
-    margin-right: 0.5rem;
-}
-
-.create-space-membership-btn-clicked {
-    background-color: #4E60FF;
-
-    border: 0.05rem solid transparent;
-    border-radius: 0.3rem;
-
-    color: white;
-    font-size: 11px;
-    font-family: Poppins, sans-serif;
-
-    cursor: pointer;
-
-    flex: 1;
-
-    padding: 0.5rem;
-
-    margin-top: 0.3rem;
-    margin-right: 0.5rem;
-}
-
-.create-space-btn {
+.user-setting-btn {
     width: 100%;
     height: auto;
 
@@ -295,7 +260,7 @@ body {
     margin-top: 3%;
 }
 
-.create-space-btn-active {
+.user-setting-btn-active {
     width: 100%;
     height: auto;
 
@@ -311,39 +276,10 @@ body {
     text-align: center;
     font-family: Poppins, sans-serif;
 
-    cursor: pointer;
+    cursor: default;
+    pointer-events: none;
 
     padding: 0.5rem;
 
     margin-top: 3%;
-}
-
-.create-space-copy-btn {
-    width: 80%;
-    height: 2rem;
-    line-height: 2rem;
-
-    background-color: white;
-
-    border-radius: 0.5rem;
-    border-color: #4E60FF;
-    border-style: solid;
-    border-width: 1px;
-
-    color: #4E60FF;
-    font-size: 14px;
-    text-align: center;
-
-    cursor: pointer;
-
-    display: inline-block;
-
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-
-    padding: 0;
-
-    margin-top: 2rem;
 }

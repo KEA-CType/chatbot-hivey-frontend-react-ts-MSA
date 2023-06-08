@@ -17,7 +17,7 @@
 
 /* 스페이스에 대한 정보(아이콘, 이름, 인원수 등)를 보여주는 박스 */
 .space-rectangle-white {
-    width: 79%;
+    width: 80%;
     height: 5rem;
 
     background-color: #ffffff;
@@ -47,8 +47,8 @@
 }
 
 .space-rectangle-white .space-img-wrapper {
-    height: 50%;
-    width: auto;
+    height: 35px;
+    width: 35px;
     overflow: hidden;
 
     display: block;
@@ -60,6 +60,10 @@
     width: 100%;
     height: 100%;
     aspect-ratio: auto 1/1;
+
+    background-color: transparent;
+    border-radius: 10rem;
+    object-fit: cover;
 
     display: block;
 }
@@ -276,6 +280,29 @@
     margin-right: 1rem;
 }
 
+.formboard-form-notclicked {
+    width: 90%;
+    height: 50px;
+
+    background-color: #ffffff;
+
+    border-radius: 1rem;
+    box-shadow: 0.1rem 0.1rem gainsboro;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    cursor: pointer;
+
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    pointer-events: none;
+}
+
 .formboard-form .formboard-form-icon-wrapper {
     width: auto;
     height: 1rem;
@@ -308,7 +335,7 @@
 }
 
 .formboard-form-information-title {
-    font-size: 16px;
+    font-size: 14px;
     font-family: Pretendard, sans-serif;
 
     margin-bottom: 0.1rem;
@@ -420,8 +447,8 @@
     overflow: hidden;
 
     font-size: 1.1rem;
-    font-weight: bold;
-    font-family: Archivo, sans-serif;
+    font-weight: bolder;
+    font-family: "Noto Sans KR", sans-serif;
 
     cursor: default;
 
@@ -450,6 +477,8 @@
     margin-bottom: 1%;
     margin-right: 5%;
 
+    overflow: hidden;
+
     padding-bottom: 0.3rem;
 }
 
@@ -475,15 +504,15 @@
 
     box-sizing: border-box;
 
-    font-size: 0.9rem;
-    font-family: Pretendard, sans-serif;
+    font-size: 12px;
+    font-family: Poppins, sans-serif;
 
     margin-left: 2%;
 }
 
 .submission-members-container .submission-members-name {
     height: auto;
-    width: 4rem;
+    width: 10rem;
 
     box-sizing: border-box;
 
@@ -492,7 +521,7 @@
     -webkit-line-clamp: 1;
     overflow: hidden;
 
-    font-size: 0.9rem;
+    font-size: 12px;
     font-family: Pretendard, sans-serif;
 
     margin-left: 2%;
@@ -510,7 +539,7 @@
     overflow: hidden;
 
     color: gray;
-    font-size: 0.9rem;
+    font-size: 12px;
     font-family: Pretendard, sans-serif;
 
     margin-left: 2%;
@@ -556,7 +585,7 @@
 }
 
 .submission-groups-and-members-container .submission-groups-container {
-    width: 43%;
+    width: 40%;
     height: auto;
 
     display: flex;
@@ -564,8 +593,8 @@
     justify-content: center;
     align-items: flex-start;
 
-    margin-left: 2%;
-    margin-top: 1%;
+    margin-left: 3%;
+    /*margin-top: 1%;*/
 }
 
 .submission-groups-and-members-container .submission-members-container-by-group {
@@ -583,10 +612,8 @@
     align-items: flex-start;
 
     /*padding-left: 5%;*/
-    /*padding-top: 1%;*/
+    padding-top: 1%;
     /*padding-bottom: 1%;*/
-
-    padding: 0;
 
     margin-left: 3%;
     margin-right: 5%;
@@ -606,8 +633,11 @@
     color: black;
     font-size: 0.9rem;
 
+    padding-left: 5%;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+
+    margin-top: 3%;
 
     font-family: Pretendard, sans-serif;
 }
@@ -626,7 +656,7 @@
 
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    padding-left: 3%;
+    padding-left: 5%;
 
     font-family: Pretendard, sans-serif;
 }
@@ -864,15 +894,15 @@
 
     box-sizing: border-box;
 
-    font-size: 0.9rem;
-    font-family: Pretendard, sans-serif;
+    font-size: 12px;
+    font-family: Poppins, sans-serif;
 
     margin-left: 2%;
 }
 
 .group-member-container-by-group .group-member-name {
     height: auto;
-    width: 4rem;
+    width: 10rem;
 
     box-sizing: border-box;
 
@@ -881,7 +911,7 @@
     -webkit-line-clamp: 1;
     overflow: hidden;
 
-    font-size: 0.9rem;
+    font-size: 12px;
     font-family: Pretendard, sans-serif;
 
     margin-left: 2%;
@@ -899,7 +929,7 @@
     overflow: hidden;
 
     color: gray;
-    font-size: 0.9rem;
+    font-size: 12px;
     font-family: Pretendard, sans-serif;
 
     margin-left: 2%;

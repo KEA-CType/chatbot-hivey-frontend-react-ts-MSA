@@ -30,8 +30,8 @@ const chatbot = ({steps, isVisible}: any) => (
     <ThemeProvider theme={theme}>
         <div style={{
             position: 'fixed',
-            bottom: '-20rem',
-            right: '30rem',
+            bottom: '-7rem',
+            right: '16rem',
             width: '5rem',
             transform: 'translate(-50%, -50%)',
             zIndex: 9999

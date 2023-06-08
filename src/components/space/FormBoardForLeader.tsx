@@ -13,6 +13,8 @@ import icFormboardDone from "../../assets/ic_formboard_done.png";
 import icFormboardInprogress from "../../assets/ic_formboard_inprogress.png";
 import icFormboardNotstarted from "../../assets/ic_formboard_notstarted.png";
 import icCheckCircleGreen from "../../assets/ic_check_circle_green.png";
+import icCheckNotCircleRed from "../../assets/ic_check_not_circle_red.png";
+import icCancelGray from "../../assets/ic_cancel_gray.png";
 import icUsersGray from "../../assets/ic_users_gray.png";
 import icChartPieSliceGray from "../../assets/ic_chart_pie_slice_gray.png";
 
@@ -23,6 +25,7 @@ const FormListComponent = ({forms}: any) => {
     const space = useRecoilValue(spaceState);
 
     const [formsByStatus, setFormsByStatus] = useState(Array);
+
     const setFormId = useSetRecoilState(formIdState);
     const setSelectedFormId = useSetRecoilState(selectedFormIdState);
 
@@ -57,33 +60,58 @@ const FormListComponent = ({forms}: any) => {
                  */
                 const handleFormResult = (e: any) => {
                     e.stopPropagation();
+                    console.log(`spaceId: ${space.id}, formId: ${f.formId}`);
                     navigate(`/space/${space.id}/form/${f.formId}/result`);
                 }
 
-                return (
-                    <div key={f.formId} className="formboard-form" onClick={onClickForm}>
+                if (f.target) {
+                    return (
+                        // <div key={f.formId} className={f.checkJoin ? "formboard-form" : "formboard-form-notclicked"} onClick={onClickForm}>
 
-                        {/* FIXME: 나중에 (참여 여부, 타겟 여부에 따라서) 분기 처리 추가하기 */}
-                        <div className="formboard-form-icon-wrapper">
-                            <img className="formboard-form-icon-img" src={icCheckCircleGreen} alt=""/>
+                        <div key={f.formId} className="formboard-form" onClick={onClickForm}>
+
+                            {/* FIXME: 나중에 (참여 여부, 타겟 여부에 따라서) 분기 처리 추가하기 */}
+                            <div className="formboard-form-icon-wrapper">
+                                <img className="formboard-form-icon-img"
+                                     src={f.submit ? icCheckCircleGreen : icCheckNotCircleRed} alt=""/>
+                            </div>
+
+                            <div className="formboard-form-information" style={{marginLeft: "0.1rem"}}>
+                                <div className="formboard-form-information-title">{f.title}</div>
+                                <div
+                                    className="formboard-form-information-date">~{(moment(f.endDate)).format('YYYY.MM.DD')}</div>
+                            </div>
+
+                            <div className="formboard-form-icon-wrapper" onClick={handleSubmissionList}
+                                 style={{marginLeft: "1rem"}}>
+                                <img className="formboard-form-right-icon-img" src={icUsersGray} alt=""/>
+                            </div>
+
+                            <div className="formboard-form-icon-wrapper" onClick={handleFormResult}
+                                 style={{marginLeft: "0rem"}}>
+                                <img className="formboard-form-right-icon-img" src={icChartPieSliceGray} alt=""/>
+                            </div>
+
                         </div>
 
-                        <div className="formboard-form-information" style={{marginLeft: "0.1rem"}}>
-                            <div className="formboard-form-information-title">{f.title}</div>
-                            <div
-                                className="formboard-form-information-date">~{(moment(f.endDate)).format('YYYY.MM.DD')}</div>
-                        </div>
+                    );
+                } else {
+                    return (
+                        <div key={f.formId} className="formboard-form">
 
-                        <div className="formboard-form-icon-wrapper" onClick={handleSubmissionList} style={{marginLeft: "1rem"}}>
-                            <img className="formboard-form-right-icon-img" src={icUsersGray} alt=""/>
-                        </div>
+                            <div className="formboard-form-icon-wrapper">
+                                <img className="formboard-form-icon-img" src={icCancelGray} alt=""/>
+                            </div>
 
-                        <div className="formboard-form-icon-wrapper" onClick={handleFormResult} style={{marginLeft: "0rem"}}>
-                            <img className="formboard-form-right-icon-img" src={icChartPieSliceGray} alt=""/>
-                        </div>
+                            <div className="formboard-form-information" style={{marginLeft: "0.1rem", color: "gray"}}>
+                                <div className="formboard-form-information-title">{f.title}</div>
+                                <div
+                                    className="formboard-form-information-date">~{(moment(f.endDate)).format('YYYY.MM.DD')}</div>
+                            </div>
 
-                    </div>
-                );
+                        </div>
+                    );
+                }
             });
 
         setFormsByStatus(formList);
@@ -100,6 +128,8 @@ const FormBoardForLeader = ({forms}: any) => {
     const [doneForms, setDoneForms] = useState(Array);
 
     useEffect(() => {
+
+        console.log(`forms: ${JSON.stringify(forms)}`);
 
         // 현재 날짜를 구한 후 in progress, not started, done으로 구분하여 저장한다.
         let today = new Date();

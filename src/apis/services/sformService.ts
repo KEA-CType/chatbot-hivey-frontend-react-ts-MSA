@@ -1,8 +1,10 @@
 import instances from "../instance";
 import {SFORM} from "../../commons/constants";
-import {SpaceInformationResponse,MultiAnswer,TextAnswer} from "../../commons/interfaces/Interface";
 
-import {CommonResponse} from "../interfaces/commonResponse";
+import {SpaceInformationResponse} from "../../commons/interfaces/commonInterface";
+
+
+import {CommonResponse} from "../../commons/interfaces/commonResponse";
 
 /**
  * 스페이스 생성하기
@@ -85,7 +87,7 @@ const EnterSpace = async (userId: number, accessCode: string) => {
 const GetAllGroupList = async (spaceId: number) => {
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups`);
         return response.data;
 
     } catch (error) {
@@ -118,7 +120,7 @@ const GetAllGroupAndMemberList = async (spaceId: number) => {
 const GetMemberListByGroup = async (spaceId: number, groupId: number) => {
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups/${groupId}`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/spaces/${spaceId}/groups/${groupId}`);
         return response.data;
 
     } catch (error) {
@@ -152,9 +154,9 @@ const CreateSurvey = async (spaceId: number, userId: number) => {
 const CreateDetailedSurvey = async (formId: number, requestBody: any) => {
     try {
 
-        console.log(`formId: ${formId}`);
 
-        const response = await instances.AUTH_INSTANCE.post(`${SFORM}/forms/${formId}`, {
+        const response = await instances.AUTH_INSTANCE.patch(`${SFORM}/forms/${formId}`, {
+
             title: requestBody.title,
             content: requestBody.content,
             startDate: requestBody.startDate,
@@ -224,7 +226,7 @@ const GetFormList = async (spaceId: number, userId: number) => {
 const GetSubmissionListByForm = async (formId: number) => {
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/forms/${formId}/members`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}/members`);
         return response.data;
 
     } catch (error) {
@@ -241,7 +243,7 @@ const GetSubmissionListByForm = async (formId: number) => {
 const GetTargetGroupsByForm = async (formId: number) => {
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/forms/${formId}/groups`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}/groups`);
         return response.data;
 
     } catch (error) {
@@ -258,7 +260,7 @@ const GetTargetGroupsByForm = async (formId: number) => {
 const GetMandatoryOrNotByForm = async (formId: number) => {
     try {
 
-        const response = await instances.INSTANCE(`${SFORM}/forms/${formId}/option`);
+        const response = await instances.AUTH_INSTANCE(`${SFORM}/forms/${formId}/option`);
         return response.data;
 
     } catch (error) {
@@ -285,17 +287,36 @@ const GetFormInfomation = async (formId: number) => {
 /**
  * 설문 결과 보기
  */
-const GetFormResult = async (formId: number) => {
+const GetFormResult = async (formId: string) => {
 
     try {
 
-        const response = await instances.INSTANCE.get(`${SFORM}/forms/${formId}/result`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}/result`);
         return response.data;
 
     } catch (error) {
 
         console.error(error);
         throw new Error("해당 설문의 결과를 불러오지 못하였습니다.");
+
+    }
+
+}
+
+/**
+ *
+ */
+const GetSubmissionByUser = async (formId: number, userId: number) => {
+
+    try {
+
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}/${userId}/submission`);
+        return response.data;
+
+    } catch (error) {
+
+        console.error(error);
+        throw new Error("해당 설문의 참여 여부를 불러오지 못하였습니다.");
 
     }
 
@@ -318,6 +339,7 @@ const sformService = {
     GetMandatoryOrNotByForm,
     GetFormInfomation,
     GetFormResult,
+    GetSubmissionByUser,
 }
 
 export default sformService;

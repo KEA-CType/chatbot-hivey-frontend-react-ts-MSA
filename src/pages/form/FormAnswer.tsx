@@ -6,9 +6,14 @@ import {useNavigate} from "react-router-dom";
 import Modal from "../../components/commons/Modal";
 import ShowAndAnswerForm from "../../components/form/ShowAndAnswerForm";
 
+
 import {formIdState, selectedFormIdState, userState} from '../../commons/Atom';
 
-import {Form, FormResponse} from "../../commons/interfaces/Interface";
+
+import {FormResponse} from "../../commons/interfaces/commonInterface";
+
+
+
 import {json} from "stream/consumers";
 
 import sformService from "../../apis/services/sformService";

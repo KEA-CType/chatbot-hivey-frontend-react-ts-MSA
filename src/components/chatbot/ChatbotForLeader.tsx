@@ -3,8 +3,10 @@ import "../../styles/chatbot.css";
 import React, {useState} from 'react';
 import {useRecoilState, useRecoilValue} from "recoil";
 import {Link, useNavigate} from "react-router-dom";
-import chatbot from "../../assets/ic_chatbot.png";
-import plusbutton from "../../assets/ic_plus_black.png";
+
+import plusbutton from "../../assets/btn_plus_blue.png";
+import chatbot from "../../assets/ic_chatbot_blue.png";
+
 import Bot from './bot';
 import {botSteps} from "../../contexts/botSteps";
 import {formIdState, spaceState, userState} from "../../commons/Atom";
@@ -77,7 +79,7 @@ const ChatbotForLeader = () => {
                 className="plus-button"
                 src={plusbutton}
                 alt="plus button"
-                onClick={handlePlusButtonClick}
+                onClick={handleCreateSurvey}
             />
             <img
                 className="chatbot"
@@ -85,18 +87,20 @@ const ChatbotForLeader = () => {
                 alt="chatbot btn"
                 onClick={handleChatbotClick}
             />
-            {isSelectBoxVisible && (
-                <div className="select-box">
-                    {/* 스페이스 추가 main page로 이동 */}
-                    <Link to="/main">
-                        <div className="option">add Space</div>
-                    </Link>
-                    {/* 설문 페이지로 이동 */}
-                    <div className="option" onClick={(e) => handleCreateSurvey(e)}>
-                        create Survey
-                    </div>
-                </div>
-            )}
+
+            {/*{isSelectBoxVisible && (*/}
+            {/*    <div className="select-box">*/}
+            {/*        /!* 스페이스 추가 main page로 이동 *!/*/}
+            {/*        <Link to="/main">*/}
+            {/*            <div className="option">add Space</div>*/}
+            {/*        </Link>*/}
+            {/*        /!* 설문 페이지로 이동 *!/*/}
+            {/*        <div className="option" onClick={(e) => handleCreateSurvey(e)}>*/}
+            {/*            create Survey*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*)}*/}
+
             {/* Bot 컴포넌트를 렌더링하고 botSteps와 isVisible 속성을 전달 */}
             <Bot steps={botSteps} isVisible={isBotVisible}/>
         </div>
