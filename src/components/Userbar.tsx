@@ -7,7 +7,7 @@ import {useRecoilState, useRecoilValue} from "recoil";
 import PropTypes from "prop-types";
 
 import Modal from "./commons/Modal";
-import {userState, spaceState} from "../commons/Atom";
+import {userState, spaceState, userInfoState} from "../commons/Atom";
 import {UserInfoResponse} from "../commons/interfaces/userResponse";
 
 import spaceService from "../apis/services/sformService";
@@ -108,9 +108,9 @@ const Userbar = () => {
 
     const user = useRecoilValue(userState);
     const space = useRecoilValue(spaceState);
+    const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
     const [spaceList, setSpaceList] = useState([]);
-    const [userInfo, setUserInfo] = useState<UserInfoResponse>();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalHeader, setModalHeader] = useState("");
     const [modalMessage, setModalMessage] = useState("");

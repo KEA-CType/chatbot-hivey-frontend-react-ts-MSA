@@ -1,53 +1,44 @@
+.user-setting-container {
+    width: 80%;
+    height: 100vh;
+
+    position: fixed;
+    top: 1rem;
+    left: 20%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
 .user-setting-title-rectangle-white {
-    width: 60%;
+    width: 80%;
     height: 5rem;
 
     background-color: #ffffff;
 
-    border-radius: 1rem;
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
 
-    box-shadow: 1px 2px 4px lightgray;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
 
-    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    position: relative;
+    left: 10%;
 
     margin-top: 2rem;
 
     padding: 0;
 }
 
-.user-setting-rectangle-white {
-    width: 60%;
-    height: auto;
-
-    background-color: white;
-
-    border-radius: 1rem;
-
-    box-shadow: 1px 2px 4px lightgray;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.user-setting-container {
-    width: 80%;
-    height: auto;
-
-    text-align: center;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    margin-top: 2vh;
-}
-
 .user-setting-title {
     color: black;
-    font-size: 1rem;
+    font-size: 22px;
     font-family: Poppins, sans-serif;
     font-weight: lighter;
 
@@ -58,7 +49,53 @@
     -ms-user-select:none;
     user-select:none;
 
-    margin-top: 1vh;
+    margin-left: 2%;
+}
+
+.user-setting-rectangle-white {
+    width: 80%;
+    height: auto;
+
+    background-color: white;
+
+    border: 0.05rem solid #edeef2;
+    border-radius: 0.5rem;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    left: 10%;
+
+    margin-top: 2rem;
+
+    padding: 0;
+}
+
+.user-setting-content-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding: 5rem;
+
+    margin-left: 10rem;
+}
+
+.user-setting-content-title {
+    color: black;
+    font-family: Archivo, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+
+    margin-bottom: 2rem;
 }
 
 .user-setting-img-container {
@@ -67,7 +104,7 @@
 
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     margin-bottom: 3rem;
@@ -79,7 +116,7 @@
     aspect-ratio: auto 1/1;
 
     background-color: transparent;
-    border-radius: 10rem;
+    border-radius: 1rem;
     object-fit: cover;
 
     box-shadow: 0 0 2px gray;
@@ -204,6 +241,30 @@
     height: auto;
 
     background-color: #C2C2C2;
+
+    border-radius: 5rem;
+    border-color: transparent;
+
+    display: block;
+
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    font-family: Poppins, sans-serif;
+
+    cursor: default;
+    pointer-events: none;
+
+    padding: 0.5rem;
+
+    margin-top: 3%;
+}
+
+.user-setting-btn-active {
+    width: 100%;
+    height: auto;
+
+    background-color: #0077FF;
 
     border-radius: 5rem;
     border-color: transparent;

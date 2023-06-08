@@ -51,6 +51,9 @@ const GetUserInformation = async (userId: number) => {
     try {
 
         const response = await instances.AUTH_INSTANCE.get(`${USER}/users/${userId}`);
+
+        console.log(`response: ${JSON.stringify(response.data)}`);
+
         return response.data;
 
     } catch (error) {

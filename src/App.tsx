@@ -42,11 +42,11 @@ function App() {
                                     <Routes>
                                         <Route path="/space/enter" element={<SpaceEnter/>}/>
                                         <Route path="/space/create" element={<SpaceCreate/>}/>
+                                        <Route path="/user/setting" element={<UserSetting/>}/>
                                         <Route path="/main" element={<Main/>}/>
                                         <Route path="/space/member/:spaceId" element={<SpaceForMember/>}/>
                                         <Route path="/space/leader/:spaceId" element={<SpaceForLeader/>}/>
                                         <Route path="/refresh" element={<Refresh/>}/>
-                                        <Route path="/user/setting" element={<UserSetting/>}/>
                                     </Routes>
                                 </div>
                             </div>

@@ -1,7 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Input = ({type, placeholder, value, onChange, isValid, errorMessage, className}: any) => {
+const Input = ({type, placeholder, value, onChange, isValid, errorMessage, className, isReadOnly}: any) => {
+    if (isReadOnly) {
+        return (
+            <div>
+                <input
+                    type={type}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={onChange}
+                    className={className}
+                    readOnly
+                />
+                {!isValid !== null && (
+                    <div style={{color: 'red', fontSize: '12px'}}>{errorMessage}</div>
+                )}
+            </div>
+        );
+    }
+
     return (
         <div>
             <input
@@ -26,7 +44,8 @@ Input.propTypes = {
     onChange: PropTypes.func,
     isValid: PropTypes.bool,         // 검증 결과
     errorMessage: PropTypes.string,  // 경고 문구
-    className: PropTypes.string      // add className prop type
+    className: PropTypes.string,     // add className prop type
+    isReadOnly: PropTypes.bool
 };
 
 export default Input;

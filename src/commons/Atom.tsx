@@ -1,6 +1,7 @@
 import {atom} from "recoil";
 import {User, Space} from "./interfaces/commonInterface";
 import {recoilPersist} from "recoil-persist";
+import {UserInfoResponse} from "./interfaces/userResponse";
 
 const {persistAtom} = recoilPersist();
 
@@ -13,6 +14,17 @@ export const userState = atom<User>({
         id: 0,
         name: "",
         email: "",
+    },
+    effects: [persistAtom]
+});
+
+export const userInfoState = atom<UserInfoResponse> ({
+    key: "userInfo",
+    default: {
+        userId: 0,
+        name: "",
+        email: "",
+        img: "",
     },
     effects: [persistAtom]
 });

@@ -8,24 +8,33 @@ import Modal from "../../components/commons/Modal";
 import ChatbotForMember from "../../components/chatbot/ChatbotForMember";
 
 import imgSampleWhite from "../../assets/img_sample_white.png";
-import {useNavigate} from "react-router-dom";
 import {useRecoilState, useRecoilValue} from "recoil";
-import {spaceState, userState} from "../../commons/Atom";
+import {userInfoState, userState} from "../../commons/Atom";
 import uploadImgService from "../../apis/services/uploadFileService";
 import userService from "../../apis/services/userService";
 
-const UserSettingComponent = () => {
-    const navigate = useNavigate();
+import {motion} from "framer-motion";
 
+const UserSettingComponent = () => {
     const user = useRecoilValue(userState);
-    const [space, setSpace] = useRecoilState(spaceState);
+    const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
     const [userProfileUrl, setUserProfileUrl] = useState("");
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+
+    const [isValidName, setIsValidName] = useState(false);
+    const [notValidNameMessage, setNotValidNameMessage] = useState(""); // 이메일 형식이 잘못되었을 때 출력할 경고 문구
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalHeader, setModalHeader] = useState("");
     const [modalMessage, setModalMessage] = useState("");
+
+    useEffect(() => {
+
+        setUserProfileUrl(userInfo.img);
+
+    }, [userInfo.img]);
 
     /**
      * 스페이스 이미지 업로드 업데이트
@@ -34,7 +43,7 @@ const UserSettingComponent = () => {
 
         console.log(`userProfileUrl: ${userProfileUrl}`);
 
-    }, [userProfileUrl])
+    }, [userProfileUrl]);
 
     /**
      * 하위 컴포넌트로부터 설정한 이미지 URL을 가져온다.
@@ -46,10 +55,17 @@ const UserSettingComponent = () => {
     /**
      * 사용자 이름 작성에 대한 이벤트 함수
      */
-    const handleSpaceNameChange = (e: any) => {
+    const handleNameChange = (e: any) => {
         const value = e.target.value;
         setName(value);
+
+        setIsValidName(true);
     };
+
+    const handleEmailChange = (e: any) => {
+        const value = e.target.value;
+        setEmail(value);
+    }
 
     /**
      * 스페이스 생성에 대한 이벤트 함수
@@ -108,7 +124,11 @@ const UserSettingComponent = () => {
     }
 
     return (
-        <div className="user-setting-container">
+        <div className="user-setting-content-container">
+
+            <div className="user-setting-content-title">
+                User Information
+            </div>
 
             {/* 스페이스 이름과 옵션(멤버십)을 지정하는 부분 */}
             <form encType="multipart/form-data" className="user-setting-form-container" onSubmit={handleSubmit}>
@@ -147,22 +167,37 @@ const UserSettingComponent = () => {
 
                 </div>
 
-                {/* 스페이스 이름 입력 */}
+                {/* 이름 입력 */}
                 <div className="user-setting-input-name-container">
 
                     Name
 
                     <Input
                         className="create-space-input-name"
-                        placeholder="Enter your space name"
+                        placeholder={`${userInfo.name}`}
                         value={name}
-                        onChange={handleSpaceNameChange}/>
+                        onChange={handleNameChange}
+                        isReadOnly={false}/>
+
+                </div>
+
+                {/* 이메일 입력 */}
+                <div className="user-setting-input-name-container">
+
+                    Email address
+
+                    <Input
+                        className="create-space-input-name"
+                        placeholder={`${user.email}`}
+                        value={email}
+                        onChange={handleEmailChange}
+                        isReadOnly={true}/>
 
                 </div>
 
                 {/* 스페이스 생성 버튼 */}
                 <Button
-                    className="user-setting-btn"
+                    className={(isValidName) ? "user-setting-btn-active" : "user-setting-btn"}
                     text="Save changes"
                     onClick={handleSubmit}/>
 
@@ -177,20 +212,23 @@ const UserSettingComponent = () => {
     );
 }
 
+/**
+ * User setting page component
+ */
 const UserSetting = () => {
 
     return (
-        <>
-            <div className="user-setting-title-rectangle-white">
+        <div className="user-setting-container">
+            <motion.div className="user-setting-title-rectangle-white" style={{y: 100}} animate={{y: 0}}>
                 <div className="user-setting-title">Personal Information</div>
-            </div>
+            </motion.div>
 
-            <div className="user-setting-rectangle-white">
+            <motion.div className="user-setting-rectangle-white" style={{y: 100}} animate={{y: 0}}>
                 <UserSettingComponent/>
-            </div>
+            </motion.div>
 
             <ChatbotForMember/>
-        </>
+        </div>
     );
 
 }
