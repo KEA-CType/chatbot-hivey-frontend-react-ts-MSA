@@ -39,7 +39,7 @@ const FormAnswer = () => {
                     isAnonymous: result.isAnonymous,
                     isMandatory: result.isMandatory,
                     groups: result.groups,
-                    questionRequests: result.questions
+                    questionsRequests: result.questionsRequests
                 })
                 // setForms(result);
                 //console.log(result);

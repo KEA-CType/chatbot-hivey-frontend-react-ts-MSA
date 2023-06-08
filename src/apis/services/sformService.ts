@@ -260,7 +260,7 @@ const GetTargetGroupsByForm = async (formId: number) => {
 const GetMandatoryOrNotByForm = async (formId: number) => {
     try {
 
-        const response = await instances.AUTH_INSTANCE(`${SFORM}/forms/${formId}/option`);
+        const response = await instances.AUTH_INSTANCE.get(`${SFORM}/forms/${formId}/option`);
         return response.data;
 
     } catch (error) {

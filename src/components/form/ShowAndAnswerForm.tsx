@@ -1,7 +1,7 @@
 import React, {useState, useEffect, ReactElement,useContext} from "react";
 
 
-import {MultiAnswer, TextAnswer,FormAnswer} from "../../commons/interfaces/Interface";
+import {MultiAnswer, TextAnswer,FormAnswer} from "../../commons/interfaces/commonInterface";
 import sformService from "../../apis/services/sformService";
 const ShowAndAnswerForm=({forms}: any)=>{
     //console.log(forms);

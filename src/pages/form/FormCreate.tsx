@@ -1,10 +1,9 @@
 import "../../styles/formcreate.css"
 
-<<<<<<< HEAD
-import {Form} from "../../commons/interfaces/Interface";
-=======
+
+
 import {FormCreateRequest} from "../../commons/interfaces/commonInterface";
->>>>>>> 8d6bfa5536b4a3e34b74391f738a89501c52cc7b
+
 
 import React, {useState, useEffect, ReactElement} from "react";
 import {useNavigate} from "react-router-dom";
@@ -363,7 +362,7 @@ const FormCreate = () => {
    
 
     const SendRequestBody = (questionRequests: any) => {
-        const requestBody: Form = {
+        const requestBody: FormCreateRequest = {
             title: formTitle,
             content: content,
             startDate: moment(startDate).format("YYYY-MM-DD"),

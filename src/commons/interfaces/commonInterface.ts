@@ -1,4 +1,3 @@
-
 export interface User {
     id: number;
     name: String;
@@ -8,28 +7,6 @@ export interface User {
 export interface Space {
     id: number;
     name: String;
-}
-
-export interface Form{
-    title: string,
-    content: string,
-    startDate:Date|string,
-    endDate:Date|string,
-    isAnonymous:string,
-    isMandatory:string,
-    groups:number[],
-    questionRequests:object[]
-}
-export interface FormResponse{
-    formId:number
-    title: string,
-    content: string,
-    startDate:Date|string,
-    endDate:Date|string,
-    isAnonymous:string,
-    isMandatory:string,
-    groups:number[],
-    questionRequests:object[]
 }
 
 export interface SpaceOnly {
@@ -91,11 +68,34 @@ export interface TargetGroupListResponse {
 }
 
 
+export interface FormCreateRequest{
+    title: string,
+    content: string,
+    startDate:Date|string,
+    endDate:Date|string,
+    isAnonymous:string,
+    isMandatory:string,
+    groups:number[],
+    questionRequests:object[]
+}
+
+export interface FormResponse{
+    formId:number,
+    title: string,
+    content: string,
+    startDate:Date|string,
+    endDate:Date|string,
+    isAnonymous:string,
+    isMandatory:string,
+    groups:number[],
+    questionsRequests:object[]
+
+}
+
 export interface Image {
     file: string,
     url: string
 }
-
 export interface FormAnswer{
     multipleChoiceAnswers:MultiAnswer[],
     shortAnswerResponses:TextAnswer[]
