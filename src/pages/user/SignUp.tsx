@@ -130,7 +130,7 @@ const SignUp = () => {
         }
 
         userService
-            .Register(email, name, password)
+            .Register(email, name, password, profileImg)
             .then((response) => {
                 const {isSuccess, message} = response;
 
@@ -140,7 +140,7 @@ const SignUp = () => {
 
                     setIsModalOpen(true);
                     setModalHeader("회원 가입 성공");
-                    setModalMessage("회원 가입이 완료되었습니다.\n5초 후에 자동으로 로그인 페이지로 이동합니다.");
+                    setModalMessage("회원 가입이 완료되었습니다.");
 
                     setTimeout(() => {
                         setIsModalOpen(false);

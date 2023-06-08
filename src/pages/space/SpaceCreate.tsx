@@ -130,7 +130,7 @@ const CreateSpaceComponent = () => {
             .CreateSpace(user.id, spaceName, spaceImgUrl)
             .then((response) => {
 
-                const {spaceId, accessCode} = response.result;
+                const {spaceId, accessCode, memberId} = response.result;
 
                 setSpace({id: spaceId, name: spaceName});
                 setAccessCode(accessCode);
@@ -160,7 +160,8 @@ const CreateSpaceComponent = () => {
             console.log(`accessCode: ${accessCode}`);
             navigator.clipboard.writeText(accessCode).then(r => {
                 alert("클립보드에 복사되었습니다.");
-                navigate(`/refresh?destination=/space/leader/${space.id}`, {replace: true});
+                // navigate(`/refresh?destination=/space/leader/${space.id}`, {replace: true});
+                navigate("/main");
             });
         } catch (error) {
             alert("클립보드 복사에 실패하였습니다.");
@@ -181,6 +182,7 @@ const CreateSpaceComponent = () => {
 
                     const file = `${process.env.PUBLIC_URL}/images/${response.data.fileName}`;
                     console.log(`file: ${file}`);
+
                     setSpaceImgUrl(file);
                     getSpaceImgUrl(file);
 

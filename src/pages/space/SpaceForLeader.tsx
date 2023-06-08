@@ -26,6 +26,7 @@ import {
     FormListResponse,
     GroupListResponse
 } from "../../commons/interfaces/commonInterface";
+import ChatbotForLeader from "../../components/chatbot/ChatbotForLeader";
 
 const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
     const navigate = useNavigate();
@@ -41,7 +42,8 @@ const SpaceInformationComponent = ({spaceOnly, forms, groups}: any) => {
             {/* 스페이스에 대한 정보 */}
             <motion.div className="space-rectangle-white" style={{y: 100}} animate={{y: 0}}>
                 <div className="space-img-wrapper">
-                    <img className="space-img" src={icLogoSample} alt=""/>
+                    {/*<img className="space-img" src={icLogoSample} alt=""/>*/}
+                    <img className="space-img" src={spaceOnly.img === null || `${spaceOnly.img}` === "" || `${spaceOnly.img}` === "null" ? icLogoSample : spaceOnly.img} alt=""/>
                 </div>
                 <div className="space-title">{spaceOnly.name}</div>
                 <div className="space-membercount">{spaceOnly.memberCount} / 50</div>
@@ -129,6 +131,8 @@ const SpaceForLeader = () => {
     return (
         <div>
             <SpaceInformationComponent spaceOnly={spaceOnly} forms={forms} groups={groups}/>
+
+            <ChatbotForLeader/>
         </div>
     );
 };

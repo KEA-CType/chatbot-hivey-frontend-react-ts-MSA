@@ -3,7 +3,9 @@ import "../../styles/chatbot.css";
 import React, {useState} from 'react';
 import {useRecoilState, useRecoilValue} from "recoil";
 import {Link, useNavigate} from "react-router-dom";
-import chatbot from "../../assets/ic_chatbot.png";
+
+import chatbot from "../../assets/ic_chatbot_blue.png";
+
 import Bot from './bot';
 import {botSteps} from "../../contexts/botSteps";
 import {formIdState, spaceState, userState} from "../../commons/Atom";

@@ -30,6 +30,8 @@ export interface FormListResponse {
     title: string;
     startDate: Date;
     endDate: Date;
+    target: boolean;
+    submit: boolean;
 }
 
 export interface GroupListResponse {
@@ -47,11 +49,17 @@ export interface GroupMemberListResponse {
 export interface SubmissionListResponse {
     formId: number,
     memberId: number,
-    email: string,
-    name: string,
+    getUserRes: UserResponse,
     groupId: number,
     submit: boolean,
     mandatory: boolean
+}
+
+export interface UserResponse {
+    userId: number,
+    img: string,
+    email: string,
+    name: string,
 }
 
 export interface TargetGroupListResponse {

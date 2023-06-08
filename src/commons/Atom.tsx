@@ -1,8 +1,9 @@
 import {atom} from "recoil";
 import {User, Space} from "./interfaces/commonInterface";
-import { recoilPersist } from "recoil-persist";
+import {recoilPersist} from "recoil-persist";
+import {UserInfoResponse} from "./interfaces/userResponse";
 
-const { persistAtom } = recoilPersist();
+const {persistAtom} = recoilPersist();
 
 /**
  * 사용자
@@ -17,15 +18,26 @@ export const userState = atom<User>({
     effects: [persistAtom]
 });
 
+export const userInfoState = atom<UserInfoResponse> ({
+    key: "userInfo",
+    default: {
+        userId: 0,
+        name: "",
+        email: "",
+        img: "",
+    },
+    effects: [persistAtom]
+});
+
 /**
  * 스페이스
  */
 export const spaceState = atom<Space>({
-  key: "space",
-  default: {
-    id: 0,
-    name: ""
-  }
+    key: "space",
+    default: {
+        id: 0,
+        name: "",
+    }
 });
 
 /**
@@ -60,7 +72,7 @@ export const selectedFormIdState = atom<number>({
  * - 1: 챗봇만 띄우는 상태
  * - 2: 챗봇과 스페이스 생성 버튼까지 같이 띄우는 상태
  */
-export const floatingTypeWithChatbotState = atom<number>( {
+export const floatingTypeWithChatbotState = atom<number>({
     key: "floatingType",
     default: 2,
 });

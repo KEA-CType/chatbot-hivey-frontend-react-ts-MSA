@@ -18,6 +18,14 @@
     padding-bottom: 5rem;
 }
 
+.form-result-container img {
+    -webkit-user-drag: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
 .form-result-container::-webkit-scrollbar {
     display: none;
 }
@@ -56,7 +64,13 @@
 
     padding: 1rem;
 
-    margin-top: 2rem;
+    margin-top: 1rem;
+
+    -webkit-user-drag: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 .form-result-title-container {
@@ -273,8 +287,8 @@
 
 .form-result-answer-title {
     color: black;
-    font-family: Archivo, sans-serif;
-    font-size: 36px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 24px;
     font-weight: bolder;
 
     margin-top: 1rem;
@@ -283,12 +297,12 @@
 
 .form-result-answer-content {
     color: lightgray;
-    font-family: Archivo, sans-serif;
-    font-size: 18px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 16px;
     font-weight: bold;
 
     margin-top: 0.5rem;
-    margin-left: 5rem;
+    margin-left: 6rem;
 }
 
 .multiple-answer-container {
